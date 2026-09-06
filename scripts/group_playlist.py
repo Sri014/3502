@@ -1,22 +1,14 @@
 #!/usr/bin/env python3
 
-import os
-import re
-import sys
-import glob
 import argparse
+import re
+from pathlib import Path
+from urllib.parse import urlparse
 
 
 # ============================================================
-# CONFIG
+# FINAL GROUPS
 # ============================================================
-
-EXCLUDED_GROUPS = {
-    "regional",
-    "devotional",
-    "education",
-    "spiritual",
-}
 
 ALLOWED_CATEGORIES = {
     "News",
@@ -31,421 +23,219 @@ ALLOWED_CATEGORIES = {
     "Sports",
 }
 
-
-# ============================================================
-# FOREIGN COUNTRY MARKERS
-# ============================================================
-
-FOREIGN_MARKERS = {
-    "usa",
-    "united states",
-    "america",
-
-    "uk",
-    "united kingdom",
-    "england",
-
-    "canada",
-
-    "australia",
-    "new zealand",
-
-    "pakistan",
-    "pak",
-
-    "bangladesh",
-    "bd",
-
-    "nepal",
-
-    "sri lanka",
-    "srilanka",
-
-    "uae",
-    "dubai",
-
-    "qatar",
-    "saudi",
-    "saudi arabia",
-
-    "singapore",
-    "malaysia",
-
-    "indonesia",
-    "thailand",
-    "philippines",
-
-    "japan",
-    "china",
-    "south korea",
-    "korea",
-
-    "france",
-    "germany",
-    "italy",
-    "spain",
-    "portugal",
-    "netherlands",
-    "belgium",
-    "ireland",
-
-    "south africa",
-
-    "brazil",
-    "mexico",
-    "argentina",
+EXCLUDED_GROUPS = {
+    "regional",
+    "devotional",
+    "education",
+    "spiritual",
 }
 
 
 # ============================================================
-# CHANNEL NAME -> CATEGORY
+# CHANNEL CATEGORY MAP
 # ============================================================
 
 CHANNEL_MAP = {
 
-    # ========================================================
-    # NEWS
-    # ========================================================
-
+    # ---------------- NEWS ----------------
     "aaj tak": "News",
-    "abp news": "News",
-    "india tv": "News",
+    "aajtak": "News",
+    "india today": "News",
     "ndtv india": "News",
-    "ndtv 24x7": "News",
-    "ndtv 24 x 7": "News",
+    "ndtv": "News",
     "news18 india": "News",
     "news18": "News",
     "zee news": "News",
+    "zee business": "Business",
     "times now": "News",
     "times now navbharat": "News",
     "republic tv": "News",
     "republic bharat": "News",
-    "india today": "News",
-    "cnn": "News",
-    "cnn international": "News",
-    "bbc news": "News",
-    "bbc world news": "News",
-    "bbc world": "News",
-    "al jazeera": "News",
+    "tv9 bharatvarsh": "News",
+    "tv9 telugu": "News",
+    "tv9 kannada": "News",
+    "abp news": "News",
+    "abp ananda": "News",
+    "abp asmita": "News",
+    "abp majha": "News",
+    "abp ganga": "News",
+    "news24": "News",
+    "india news": "News",
+    "good news today": "News",
+    "bharat express": "News",
+    "firstpost": "News",
+    "the lallantop": "News",
     "wion": "News",
-    "mirror now": "News",
-    "et now": "News",
-    "et now swadesh": "News",
 
-    # ========================================================
-    # BUSINESS
-    # ========================================================
-
-    "cnbc": "Business",
-    "cnbc tv18": "Business",
-    "cnbc tv18 prime": "Business",
-    "cnbc awaaz": "Business",
-    "ndtv profit": "Business",
-    "ndtv profit prime": "Business",
-    "bloomberg": "Business",
-    "bloomberg tv": "Business",
-    "business today": "Business",
-    "business news": "Business",
-
-    # ========================================================
-    # MOVIES
-    # ========================================================
-
-    "zee cinema": "Movies",
-    "zee cinema hd": "Movies",
-
-    "star gold": "Movies",
-    "star gold hd": "Movies",
-    "star gold 2": "Movies",
-    "star gold select": "Movies",
-    "star gold romance": "Movies",
-    "star gold thrills": "Movies",
-
-    "star movies": "Movies",
-    "star movies hd": "Movies",
-    "star movies select": "Movies",
-
-    "movies now": "Movies",
-    "movies now hd": "Movies",
-
-    "mnx": "Movies",
-    "mn+": "Movies",
-    "romedy now": "Movies",
-
-    "&pictures": "Movies",
-    "colors cineplex": "Movies",
-
+    # ---------------- ENTERTAINMENT ----------------
+    "sony sab": "Entertainment",
+    "sony pal": "Entertainment",
+    "sony entertainment": "Entertainment",
+    "sony tv": "Entertainment",
     "sony max": "Movies",
-    "sony max 2": "Movies",
     "sony wah": "Movies",
+    "sony max 2": "Movies",
+    "sony aath": "Entertainment",
 
-    "b4u movies": "Movies",
-    "b4u kadak": "Movies",
-
-    "goldmines": "Movies",
-    "goldmines movies": "Movies",
-
-    "action cinema": "Movies",
-    "anmol cinema": "Movies",
-    "anmol cinema 2": "Movies",
-
-    "star utsav movies": "Movies",
-
-    "zee biskope": "Movies",
-
-    "epic bhojpuri": "Movies",
-    "bhojpuri cinema": "Movies",
-
-    # ========================================================
-    # ENTERTAINMENT
-    # ========================================================
-
-    "zee tv": "Entertainment",
     "star plus": "Entertainment",
+    "star utsav": "Entertainment",
     "star bharat": "Entertainment",
+    "star pravah": "Entertainment",
+    "star jalsha": "Entertainment",
+    "star vijay": "Entertainment",
+    "star maa": "Entertainment",
+    "star suvarna": "Entertainment",
+    "star kiran": "Entertainment",
+    "star sports": "Sports",
 
     "colors": "Entertainment",
-    "colors hd": "Entertainment",
+    "colors hindi": "Entertainment",
+    "colors rishtey": "Entertainment",
+    "colors cineplex": "Movies",
+    "colors cineplex superhits": "Movies",
+    "colors bangla": "Entertainment",
+    "colors kannada": "Entertainment",
+    "colors marathi": "Entertainment",
+    "colors gujarati": "Entertainment",
+    "colors tamil": "Entertainment",
+    "colors odia": "Entertainment",
 
-    "&tv": "Entertainment",
+    "zee tv": "Entertainment",
+    "zee anmol": "Entertainment",
+    "zee anmol cinema": "Movies",
+    "zee cinema": "Movies",
+    "zee cinema hd": "Movies",
+    "zee classic": "Movies",
+    "zee bangla": "Entertainment",
+    "zee marathi": "Entertainment",
+    "zee kannada": "Entertainment",
+    "zee tamil": "Entertainment",
+    "zee telugu": "Entertainment",
+    "zee sarthak": "Entertainment",
+    "zee ganga": "Entertainment",
+    "zee zindagi": "Entertainment",
 
-    "sony entertainment television": "Entertainment",
-    "sony sab": "Entertainment",
-    "sab tv": "Entertainment",
-    "sony pal": "Entertainment",
+    "sony marathi": "Entertainment",
+    "sony yay": "Kids",
+    "sony aath": "Entertainment",
 
-    "star utsav": "Entertainment",
-
-    "anmol tv": "Entertainment",
-
-    "big magic": "Entertainment",
     "dangal": "Entertainment",
     "dangal 2": "Entertainment",
+    "dangal cinema": "Movies",
+    "b4u entertainment": "Entertainment",
 
-    "epic bharat": "Entertainment",
+    # ---------------- MOVIES ----------------
+    "b4u movies": "Movies",
+    "b4u cinema": "Movies",
+    "b4u kadak": "Movies",
+    "mastiii": "Music",
+    "goldmines": "Movies",
+    "goldmines bollywood": "Movies",
+    "goldmines movies": "Movies",
+    "bollywood": "Movies",
+    "manoranjan tv": "Movies",
+    "manoranjan grand": "Movies",
+    "wow cinema": "Movies",
+    "dhamaal tv": "Movies",
+    "filamchi": "Movies",
+    "sheemaroo": "Movies",
+    "sheemaroo tv": "Movies",
+    "sheemaroo umang": "Entertainment",
 
-    "ishara": "Entertainment",
-    "utv bindass": "Entertainment",
-
-    # ========================================================
-    # MUSIC
-    # ========================================================
-
-    "mtv": "Music",
-    "mtv hd": "Music",
-
+    # ---------------- MUSIC ----------------
+    "b4u music": "Music",
     "9xm": "Music",
     "9x music": "Music",
     "9x jhakaas": "Music",
-
-    "b4u music": "Music",
-
-    "zoom": "Music",
-    "mastiii": "Music",
-
-    "music india": "Music",
-    "music zone": "Music",
-
-    "vh1": "Music",
-    "vh1 hd": "Music",
-
+    "9x tashan": "Music",
+    "mtv": "Music",
+    "mtv beats": "Music",
     "zing": "Music",
-    "dhamaka music": "Music",
-    "epic music": "Music",
+    "zoom": "Music",
+    "music india": "Music",
+    "mastiii": "Music",
+    "songs": "Music",
 
-    "sun music": "Music",
-    "sun music hd": "Music",
-
-    "sun gemini music": "Music",
-    "sun surya music": "Music",
-    "sun udaya music": "Music",
-
-    "star maa music": "Music",
-    "star maa music hd": "Music",
-
-    # ========================================================
-    # KIDS
-    # ========================================================
-
+    # ---------------- KIDS ----------------
     "cartoon network": "Kids",
     "pogo": "Kids",
-    "nick": "Kids",
-    "nick jr": "Kids",
-    "nickelodeon": "Kids",
-    "sonic": "Kids",
-
-    "disney": "Kids",
-    "disney junior": "Kids",
-    "disney channel": "Kids",
-
     "hungama": "Kids",
+    "hungama tv": "Kids",
+    "discovery kids": "Kids",
+    "sony yay": "Kids",
+    "nick": "Kids",
+    "nick hd+": "Kids",
+    "sonic": "Kids",
     "super hungama": "Kids",
 
-    "discovery kids": "Kids",
-    "epic kids": "Kids",
+    # ---------------- BUSINESS ----------------
+    "cnbc tv18": "Business",
+    "cnbc awaaz": "Business",
+    "cnbc": "Business",
+    "ndtv profit": "Business",
+    "business today": "Business",
+    "zee business": "Business",
+    "et now": "Business",
+    "et now swadesh": "Business",
 
-    "etv bal bharat": "Kids",
-    "cbeebies": "Kids",
-
-    "unique tv": "Kids",
-    "kushi tv": "Kids",
-
-    # ========================================================
-    # SCIENCE
-    # ========================================================
-
-    "discovery science": "Science",
-    "science channel": "Science",
-    "nasa tv": "Science",
-    "nasa": "Science",
-    "pbs science": "Science",
-
-    # ========================================================
-    # LIFESTYLE
-    # ========================================================
-
-    "tlc": "Lifestyle",
-    "travelxp": "Lifestyle",
-    "travel xp": "Lifestyle",
-
-    "good times": "Lifestyle",
-    "food food": "Lifestyle",
-
-    "fashion tv": "Lifestyle",
-    "fashiontv": "Lifestyle",
-    "fmc": "Lifestyle",
-
-    # ========================================================
-    # INFOTAINMENT
-    # ========================================================
-
-    "discovery channel": "Infotainment",
-    "animal planet": "Infotainment",
-
-    "history tv": "Infotainment",
-    "history": "Infotainment",
-
-    "discovery turbo": "Infotainment",
-    "discovery civilization": "Infotainment",
-
-    "nat geo": "Infotainment",
-    "national geographic": "Infotainment",
-    "natgeo": "Infotainment",
-
-    "sony bbc earth": "Infotainment",
-    "bbc earth": "Infotainment",
-
-    "wild": "Infotainment",
-    "epic": "Infotainment",
-    "epic channel": "Infotainment",
-
-    "investigation discovery": "Infotainment",
-
-    # ========================================================
-    # CRICKET / SPORTS
-    # ========================================================
-
+    # ---------------- SPORTS ----------------
+    "star sports": "Sports",
     "star sports 1": "Sports",
-    "star sports 1 hd": "Sports",
-    "star sports 1 hindi": "Sports",
-    "star sports 1 hindi hd": "Sports",
-
     "star sports 2": "Sports",
-    "star sports 2 hd": "Sports",
-
     "star sports 3": "Sports",
-    "star sports 3 hd": "Sports",
-
-    "star sports first": "Sports",
-    "star sports khel": "Sports",
-    "star sports khel hd": "Sports",
-
+    "star sports 1 hindi": "Sports",
+    "star sports 2 hindi": "Sports",
+    "star sports select": "Sports",
+    "star sports select 1": "Sports",
+    "star sports select 2": "Sports",
     "star sports tamil": "Sports",
     "star sports telugu": "Sports",
     "star sports kannada": "Sports",
-    "star sports bangla": "Sports",
-
+    "star sports hindi": "Sports",
+    "sony sports": "Sports",
     "sony sports ten 1": "Sports",
-    "sony ten 1": "Sports",
-
     "sony sports ten 2": "Sports",
-    "sony ten 2": "Sports",
-
     "sony sports ten 3": "Sports",
-    "sony ten 3": "Sports",
-
     "sony sports ten 4": "Sports",
-    "sony ten 4": "Sports",
-
     "sony sports ten 5": "Sports",
+    "sony ten 1": "Sports",
+    "sony ten 2": "Sports",
+    "sony ten 3": "Sports",
+    "sony ten 4": "Sports",
     "sony ten 5": "Sports",
-
-    "willow": "Sports",
-    "willow cricket": "Sports",
-
+    "sports18": "Sports",
+    "sports18 1": "Sports",
+    "sports18 2": "Sports",
+    "sports18 khel": "Sports",
+    "sports18 hindi": "Sports",
     "dd sports": "Sports",
-
-    "football": "Sports",
-    "football hd": "Sports",
-    "soccer": "Sports",
-
-    "bein sports": "Sports",
-    "beinsports": "Sports",
-
-    "euro sport": "Sports",
     "eurosport": "Sports",
 
-    "hockey": "Sports",
-    "hockey india": "Sports",
-    "star sports hockey": "Sports",
+    # ---------------- INFOTAINMENT ----------------
+    "discovery": "Infotainment",
+    "discovery channel": "Infotainment",
+    "discovery hd": "Infotainment",
+    "animal planet": "Infotainment",
+    "history tv": "Infotainment",
+    "history tv18": "Infotainment",
+    "epic": "Infotainment",
+    "epic tv": "Infotainment",
+    "travel xp": "Lifestyle",
+    "travelxp": "Lifestyle",
 
-    "tennis": "Sports",
-    "tennis channel": "Sports",
+    # ---------------- SCIENCE ----------------
+    "nat geo": "Science",
+    "national geographic": "Science",
+    "nat geo hd": "Science",
+    "science": "Science",
 
-    # ========================================================
-    # INDIAN LANGUAGE CHANNELS
-    # ========================================================
-
-    # Bengali
-    "zee 24 ghanta": "News",
-    "abp ananda": "News",
-
-    # Tamil
-    "sun tv": "Entertainment",
-    "sun news": "News",
-    "sun music": "Music",
-    "kalaignar": "Entertainment",
-
-    # Telugu
-    "etv telugu": "Entertainment",
-    "sakshi tv": "News",
-
-    # Kannada
-    "udaya": "Entertainment",
-    "suvarna": "Entertainment",
-    "public tv": "News",
-
-    # Malayalam
-    "asianet": "Entertainment",
-    "surya tv": "Entertainment",
-    "mazhavil": "Entertainment",
-
-    # Marathi
-    "zee 24 taas": "News",
-    "abp majha": "News",
-
-    # Punjabi
-    "zee punjabi": "Entertainment",
-    "ptc": "Entertainment",
-    "chardikla": "Entertainment",
-
-    # Gujarati
-    "abp asmita": "News",
-    "sandesh": "News",
-
-    # Odia
-    "otv": "News",
-    "kanak news": "News",
+    # ---------------- LIFESTYLE ----------------
+    "food food": "Lifestyle",
+    "living foodz": "Lifestyle",
+    "fashion tv": "Lifestyle",
+    "fbt": "Lifestyle",
+    "travel xp": "Lifestyle",
+    "travelxp": "Lifestyle",
 }
 
 
@@ -454,101 +244,94 @@ CHANNEL_MAP = {
 # ============================================================
 
 LANGUAGE_WORDS = {
+    "hindi": "Hindi",
+    "hin": "Hindi",
 
-    "Hindi": [
-        "hindi",
-        "hind",
-        "bharat",
-        "navbharat",
-    ],
+    "english": "English",
+    "eng": "English",
 
-    "English": [
-        "english",
-        "bbc",
-        "cnn",
-        "bloomberg",
-        "discovery",
-        "national geographic",
-        "animal planet",
-        "tlc",
-        "travelxp",
-        "eurosport",
-    ],
+    "bhojpuri": "Bhojpuri",
 
-    "Bhojpuri": [
-        "bhojpuri",
-        "bhojpuriya",
-        "epic bhojpuri",
-        "zee biskope",
-    ],
+    "bengali": "Bengali",
+    "bangla": "Bengali",
 
-    "Bengali": [
-        "bangla",
-        "bengali",
-        "zee 24 ghanta",
-        "abp ananda",
-    ],
+    "tamil": "Tamil",
+    "telugu": "Telugu",
+    "kannada": "Kannada",
+    "malayalam": "Malayalam",
+    "marathi": "Marathi",
+    "punjabi": "Punjabi",
+    "gujarati": "Gujarati",
+    "odia": "Odia",
+    "oriya": "Odia",
+    "assamese": "Assamese",
+}
 
-    "Tamil": [
-        "tamil",
-        "sun tv",
-        "sun music",
-        "sun news",
-        "kalaignar",
-    ],
 
-    "Telugu": [
-        "telugu",
-        "gemini",
-        "etv telugu",
-        "sakshi tv",
-    ],
+# ============================================================
+# FOREIGN COUNTRY / CHANNEL MARKERS
+#
+# Non-cricket foreign sources are removed.
+# Cricket from these sources is allowed.
+# ============================================================
 
-    "Kannada": [
-        "kannada",
-        "udaya",
-        "suvarna",
-        "public tv",
-    ],
+FOREIGN_MARKERS = {
+    "uk",
+    "united kingdom",
+    "britain",
+    "england",
+    "usa",
+    "us",
+    "united states",
+    "america",
+    "australia",
+    "new zealand",
+    "south africa",
+    "pakistan",
+    "bangladesh",
+    "sri lanka",
+    "afghanistan",
+    "west indies",
+    "ireland",
+    "zimbabwe",
+    "scotland",
+    "wales",
+    "canada",
+    "uae",
+    "united arab emirates",
+    "qatar",
+    "saudi",
+    "singapore",
+    "malaysia",
+    "nepal",
+}
 
-    "Malayalam": [
-        "malayalam",
-        "asianet",
-        "surya tv",
-        "mazhavil",
-    ],
 
-    "Marathi": [
-        "marathi",
-        "zee 24 taas",
-        "abp majha",
-    ],
-
-    "Punjabi": [
-        "punjabi",
-        "zee punjabi",
-        "ptc",
-        "chardikla",
-    ],
-
-    "Gujarati": [
-        "gujarati",
-        "abp asmita",
-        "sandesh",
-    ],
-
-    "Odia": [
-        "odia",
-        "oriya",
-        "otv",
-        "kanak news",
-    ],
-
-    "Assamese": [
-        "assamese",
-        "assam",
-        "pratidin",
-    ],
+# Explicit international channel names.
+# These are rejected unless the stream is Cricket.
+FOREIGN_CHANNEL_MARKERS = {
+    "bbc news",
+    "bbc world",
+    "bbc world news",
+    "cnn international",
+    "cnn international hd",
+    "al jazeera",
+    "aljazeera",
+    "sky news",
+    "fox news",
+    "france 24",
+    "dw english",
+    "dw news",
+    "euronews",
+    "trt world",
+    "cgtn",
+    "nhk world",
+    "abc australia",
+    "rt news",
+    "rt international",
+    "sky sports",
+    "bein sports",
+    "willow",
 }
 
 
@@ -557,868 +340,454 @@ LANGUAGE_WORDS = {
 # ============================================================
 
 def clean(value):
-    if not value:
+    if value is None:
         return ""
 
-    value = value.lower().strip()
+    value = str(value)
 
-    value = re.sub(
-        r"\[[^\]]*\]",
-        " ",
-        value
-    )
+    value = value.replace("&amp;", "&")
+    value = value.replace("&quot;", '"')
+    value = value.replace("&#39;", "'")
 
-    value = re.sub(
-        r"\([^)]*\)",
-        " ",
-        value
-    )
-
-    value = re.sub(
-        r"\{[^}]*\}",
-        " ",
-        value
-    )
-
-    value = value.replace("_", " ")
-    value = value.replace("-", " ")
-
-    value = re.sub(
-        r"\s+",
-        " ",
-        value
-    )
+    value = re.sub(r"\s+", " ", value)
 
     return value.strip()
+
+
+def lower(value):
+    return clean(value).lower()
 
 
 def parse_extinf(line):
     attrs = {}
 
-    if "," in line:
-        info = line.split(",", 1)[1].strip()
-    else:
-        info = ""
+    match = re.match(r"#EXTINF:[^ ]*(?:\s+(.*))?,(.*)$", line)
 
-    for key, value in re.findall(
-        r'([\w-]+)="([^"]*)"',
-        line
+    if not match:
+        return attrs, ""
+
+    attribute_text = match.group(1) or ""
+    name = clean(match.group(2))
+
+    pattern = re.compile(r'([\w-]+)="([^"]*)"')
+
+    for key, value in pattern.findall(attribute_text):
+        attrs[key.lower()] = clean(value)
+
+    return attrs, name
+
+
+def get_channel_name(attrs, name):
+    for key in (
+        "tvg-name",
+        "tvg-name",
+        "channel-name",
+        "name",
     ):
-        attrs[key.lower()] = value
+        if attrs.get(key):
+            return clean(attrs[key])
 
-    attrs["_name"] = info
+    return clean(name)
 
-    return attrs
-
-
-def get_channel_name(attrs):
-    return (
-        attrs.get("tvg-name")
-        or attrs.get("_name")
-        or attrs.get("name")
-        or ""
-    ).strip()
-
-
-# ============================================================
-# FOREIGN STREAM DETECTION
-# ============================================================
-
-def is_foreign_stream(
-    attrs,
-    name="",
-    group="",
-    url=""
-):
-    """
-    Removes streams which are explicitly identified
-    as belonging to another country.
-
-    IMPORTANT:
-    Unknown streams are NOT removed.
-
-    This means Indian streams without country metadata
-    are retained.
-    """
-
-    # --------------------------------------------------------
-    # Country metadata
-    # --------------------------------------------------------
-
-    country_fields = [
-        attrs.get("tvg-country", ""),
-        attrs.get("country", ""),
-        attrs.get("region", ""),
-        attrs.get("geo", ""),
-        attrs.get("country-code", ""),
-        attrs.get("country_code", ""),
-    ]
-
-    country_text = clean(
-        " ".join(country_fields)
-    )
-
-    if country_text:
-
-        # Explicit India
-        if (
-            country_text == "india"
-            or country_text == "in"
-            or "india" in country_text
-        ):
-            return False
-
-        # Explicit foreign country
-        for marker in FOREIGN_MARKERS:
-
-            marker_clean = clean(marker)
-
-            if marker_clean in {
-                "us",
-                "uk",
-                "in",
-                "bd",
-                "pak",
-            }:
-                continue
-
-            if marker_clean in country_text:
-                return True
-
-    # --------------------------------------------------------
-    # Name + group
-    # --------------------------------------------------------
-
-    text = clean(
-        " ".join([
-            name,
-            group,
-        ])
-    )
-
-    # Explicit foreign country names.
-    # Avoid tiny ambiguous words such as "us".
-    for marker in FOREIGN_MARKERS:
-
-        marker_clean = clean(marker)
-
-        if marker_clean in {
-            "us",
-            "uk",
-            "in",
-            "bd",
-            "pak",
-        }:
-            continue
-
-        if marker_clean in text:
-            return True
-
-    # --------------------------------------------------------
-    # URL/domain hints
-    # --------------------------------------------------------
-
-    u = url.lower()
-
-    foreign_domains = [
-        ".pk/",
-        ".pk:",
-        ".bd/",
-        ".bd:",
-        ".lk/",
-        ".lk:",
-        ".np/",
-        ".np:",
-        ".uk/",
-        ".uk:",
-        ".ca/",
-        ".ca:",
-        ".au/",
-        ".au:",
-        ".nz/",
-        ".nz:",
-        ".za/",
-        ".za:",
-        ".sg/",
-        ".sg:",
-        ".my/",
-        ".my:",
-    ]
-
-    if any(
-        x in u
-        for x in foreign_domains
-    ):
-        return True
-
-    return False
-
-
-# ============================================================
-# CHANNEL MAPPING
-# ============================================================
 
 def find_exact_mapping(name):
+    n = lower(name)
 
-    n = clean(name)
-
-    if not n:
-        return None
-
-    # Exact
     if n in CHANNEL_MAP:
         return CHANNEL_MAP[n]
 
-    # Longest match first
-    matches = []
-
-    for key, category in CHANNEL_MAP.items():
-
-        k = clean(key)
-
-        if k and k in n:
-            matches.append(
-                (
-                    len(k),
-                    category
-                )
-            )
-
-    if matches:
-        matches.sort(
-            key=lambda x: x[0],
-            reverse=True
-        )
-
-        return matches[0][1]
+    # Longest mapping first.
+    for key in sorted(CHANNEL_MAP, key=len, reverse=True):
+        if key in n:
+            return CHANNEL_MAP[key]
 
     return None
 
 
-# ============================================================
-# SPORTS
-# ============================================================
+def detect_sport(attrs, name, group, url):
+    text = " ".join([
+        lower(attrs.get("group-title", "")),
+        lower(attrs.get("tvg-name", "")),
+        lower(attrs.get("tvg-language", "")),
+        lower(name),
+        lower(group),
+        lower(url),
+    ])
 
-def detect_sport(
-    name,
-    group=""
-):
-
-    text = clean(
-        name + " " + group
-    )
-
-    cricket_words = [
+    sport_words = (
+        "sport",
+        "sports",
         "cricket",
-        "star sports",
-        "sony sports",
-        "sony ten",
-        "willow",
-        "dd sports",
-    ]
-
-    football_words = [
         "football",
         "soccer",
-        "premier league",
-        "uefa",
-        "champions league",
-        "la liga",
-        "bundesliga",
-        "fifa",
-        "bein sports",
-    ]
-
-    hockey_words = [
         "hockey",
-        "hockey india",
-    ]
-
-    tennis_words = [
         "tennis",
-        "atp",
-        "wta",
-        "roland garros",
-        "wimbledon",
-        "us open tennis",
-        "australian open tennis",
-    ]
-
-    if any(
-        x in text
-        for x in cricket_words
-    ):
-        return "Sports"
-
-    if any(
-        x in text
-        for x in football_words
-    ):
-        return "Sports"
-
-    if any(
-        x in text
-        for x in hockey_words
-    ):
-        return "Sports"
-
-    if any(
-        x in text
-        for x in tennis_words
-    ):
-        return "Sports"
-
-    return None
-
-
-# ============================================================
-# LANGUAGE
-# ============================================================
-
-def detect_language(
-    name,
-    group="",
-    attrs=None
-):
-
-    attrs = attrs or {}
-
-    text = clean(
-        " ".join([
-            name,
-            group,
-            attrs.get(
-                "tvg-language",
-                ""
-            ),
-            attrs.get(
-                "language",
-                ""
-            ),
-        ])
+        "badminton",
+        "wwe",
+        "kabaddi",
+        "basketball",
+        "baseball",
+        "f1",
+        "formula 1",
+        "motogp",
+        "golf",
+        "boxing",
+        "wrestling",
     )
 
-    for language, words in LANGUAGE_WORDS.items():
+    return any(word in text for word in sport_words)
 
-        for word in words:
 
-            if clean(word) in text:
+def is_cricket(attrs, name, group, url):
+    text = " ".join([
+        lower(attrs.get("group-title", "")),
+        lower(attrs.get("tvg-name", "")),
+        lower(name),
+        lower(group),
+        lower(url),
+    ])
+
+    return "cricket" in text
+
+
+def detect_language(attrs, name, group):
+    explicit = lower(attrs.get("tvg-language", ""))
+
+    if explicit:
+        for word, language in LANGUAGE_WORDS.items():
+            if word in explicit:
                 return language
 
-    return "Unknown"
+    text = " ".join([
+        lower(name),
+        lower(group),
+    ])
 
+    for word, language in LANGUAGE_WORDS.items():
+        if re.search(r"\b" + re.escape(word) + r"\b", text):
+            return language
 
-# ============================================================
-# OLD GROUP -> NEW GROUP
-# ============================================================
+    return ""
+
 
 def category_from_old_group(group):
-
-    g = clean(group)
+    g = lower(group)
 
     if not g:
         return None
 
-    # Explicit exclusions
-    if any(
-        x in g
-        for x in EXCLUDED_GROUPS
-    ):
+    if any(x in g for x in EXCLUDED_GROUPS):
         return None
 
-    aliases = {
+    if g in {
+        "news",
+        "entertainment",
+        "movies",
+        "movie",
+        "music",
+        "kids",
+        "infotainment",
+        "science",
+        "lifestyle",
+        "business",
+        "sports",
+    }:
+        mapping = {
+            "movie": "Movies",
+        }
 
+        return mapping.get(g, g.title())
+
+    return None
+
+
+def keyword_category(attrs, name, group):
+    text = " ".join([
+        lower(attrs.get("group-title", "")),
+        lower(name),
+        lower(group),
+    ])
+
+    # Sports gets highest priority.
+    if detect_sport(attrs, name, group, ""):
+        return "Sports"
+
+    keywords = {
         "news": "News",
-
+        "breaking news": "News",
         "entertainment": "Entertainment",
-
-        "movies": "Movies",
+        "serial": "Entertainment",
         "movie": "Movies",
-
+        "movies": "Movies",
+        "cinema": "Movies",
         "music": "Music",
-
         "kids": "Kids",
-        "children": "Kids",
-
-        "infotainment": "Infotainment",
-        "knowledge": "Infotainment",
-
-        "lifestyle": "Lifestyle",
-
+        "cartoon": "Kids",
         "business": "Business",
-
-        "sports": "Sports",
-        "sport": "Sports",
+        "finance": "Business",
+        "infotainment": "Infotainment",
+        "science": "Science",
+        "nature": "Science",
+        "lifestyle": "Lifestyle",
+        "travel": "Lifestyle",
+        "food": "Lifestyle",
     }
 
-    for key, category in aliases.items():
-
-        if key in g:
+    for word, category in sorted(
+        keywords.items(),
+        key=lambda x: len(x[0]),
+        reverse=True,
+    ):
+        if word in text:
             return category
 
     return None
 
 
-# ============================================================
-# KEYWORD CATEGORY
-# ============================================================
+def classify(attrs, name, url, source_file=""):
+    group = attrs.get("group-title", "")
 
-def keyword_category(
-    name,
-    old_group
-):
-
-    text = clean(
-        name + " " + old_group
-    )
-
-    # --------------------------------------------------------
-    # Exclusions
-    # --------------------------------------------------------
-
-    excluded_words = [
-        "devotional",
-        "bhakti",
-        "spiritual",
-        "education",
-        "educational",
-        "learning",
-        "regional",
-    ]
-
-    if any(
-        x in text
-        for x in excluded_words
-    ):
+    # Explicitly excluded groups.
+    if any(x in lower(group) for x in EXCLUDED_GROUPS):
         return None
 
-    # --------------------------------------------------------
-    # Sports first
-    # --------------------------------------------------------
+    # Sports always goes to one group.
+    if detect_sport(attrs, name, group, url):
+        return "Sports"
 
-    sport = detect_sport(
-        name,
-        old_group
-    )
+    mapped = find_exact_mapping(name)
 
-    if sport:
-        return sport
+    if mapped in ALLOWED_CATEGORIES:
+        return mapped
 
-    # --------------------------------------------------------
-    # News
-    # --------------------------------------------------------
+    old_group = category_from_old_group(group)
 
-    if any(
-        x in text
-        for x in [
-            "news",
-            "breaking news",
-            "times now",
-            "republic",
-            "ndtv",
-            "abp news",
-            "aaj tak",
-            "zee news",
-            "cnn",
-            "bbc news",
-            "al jazeera",
-        ]
-    ):
-        return "News"
+    if old_group in ALLOWED_CATEGORIES:
+        return old_group
 
-    # --------------------------------------------------------
-    # Business
-    # --------------------------------------------------------
+    category = keyword_category(attrs, name, group)
 
-    if any(
-        x in text
-        for x in [
-            "business",
-            "cnbc",
-            "bloomberg",
-            "profit",
-            "market",
-            "money",
-        ]
-    ):
-        return "Business"
+    if category in ALLOWED_CATEGORIES:
+        return category
 
-    # --------------------------------------------------------
-    # Kids
-    # --------------------------------------------------------
-
-    if any(
-        x in text
-        for x in [
-            "kids",
-            "cartoon",
-            "nick",
-            "disney junior",
-            "pogo",
-            "hungama",
-            "sonic",
-            "cbeebies",
-        ]
-    ):
-        return "Kids"
-
-    # --------------------------------------------------------
-    # Music
-    # --------------------------------------------------------
-
-    if any(
-        x in text
-        for x in [
-            "music",
-            "mtv",
-            "9xm",
-            "b4u music",
-            "vh1",
-            "mastiii",
-            "zoom",
-        ]
-    ):
-        return "Music"
-
-    # --------------------------------------------------------
-    # Movies
-    # --------------------------------------------------------
-
-    if any(
-        x in text
-        for x in [
-            "movie",
-            "movies",
-            "cinema",
-            "pictures",
-            "film",
-            "filmy",
-            "max",
-            "gold",
-            "cineplex",
-        ]
-    ):
-        return "Movies"
-
-    # --------------------------------------------------------
-    # Science
-    # --------------------------------------------------------
-
-    if any(
-        x in text
-        for x in [
-            "science",
-            "nasa",
-        ]
-    ):
-        return "Science"
-
-    # --------------------------------------------------------
-    # Lifestyle
-    # --------------------------------------------------------
-
-    if any(
-        x in text
-        for x in [
-            "lifestyle",
-            "travel",
-            "food",
-            "fashion",
-            "tlc",
-        ]
-    ):
-        return "Lifestyle"
-
-    # --------------------------------------------------------
-    # Infotainment
-    # --------------------------------------------------------
-
-    if any(
-        x in text
-        for x in [
-            "discovery",
-            "animal planet",
-            "history",
-            "nat geo",
-            "national geographic",
-            "earth",
-            "documentary",
-            "wild",
-        ]
-    ):
-        return "Infotainment"
-
-    # --------------------------------------------------------
-    # Existing source group
-    # --------------------------------------------------------
-
-    return category_from_old_group(
-        old_group
-    )
+    return None
 
 
 # ============================================================
-# CLASSIFICATION
+# FOREIGN FILTER
 # ============================================================
 
-def classify(
-    attrs,
-    url=""
-):
+def contains_foreign_marker(text):
+    text = lower(text)
 
-    name = get_channel_name(
-        attrs
+    for marker in FOREIGN_MARKERS:
+        if re.search(r"\b" + re.escape(marker) + r"\b", text):
+            return True
+
+    return False
+
+
+def contains_foreign_channel_marker(text):
+    text = lower(text)
+
+    for marker in FOREIGN_CHANNEL_MARKERS:
+        if marker in text:
+            return True
+
+    return False
+
+
+def source_is_international(source_file):
+    filename = lower(Path(source_file).name)
+
+    markers = (
+        "intl",
+        "international",
+        "foreign",
+        "world",
+        "global",
     )
 
-    old_group = (
-        attrs.get("group-title")
-        or attrs.get("group")
-        or ""
-    )
+    return any(x in filename for x in markers)
 
-    # --------------------------------------------------------
-    # Foreign filter
-    # --------------------------------------------------------
 
-    if is_foreign_stream(
-        attrs,
-        name,
-        old_group,
-        url
-    ):
-        return None, None
+def is_indian_or_allowed_cricket(attrs, name, group, url, source_file):
+    """
+    Final filtering rule:
 
-    # --------------------------------------------------------
-    # Channel mapping
-    # --------------------------------------------------------
+    Indian channels:
+        ALLOW
 
-    category = find_exact_mapping(
-        name
-    )
+    Foreign cricket:
+        ALLOW
 
-    # --------------------------------------------------------
-    # Sports
-    # --------------------------------------------------------
+    Foreign non-cricket:
+        REMOVE
+    """
 
-    sport = detect_sport(
-        name,
-        old_group
-    )
+    cricket = is_cricket(attrs, name, group, url)
 
-    if sport:
-        category = sport
+    # Cricket from any country is allowed.
+    if cricket:
+        return True
 
-    # --------------------------------------------------------
-    # Keyword/source group
-    # --------------------------------------------------------
+    text = " ".join([
+        lower(attrs.get("tvg-country", "")),
+        lower(attrs.get("country", "")),
+        lower(attrs.get("country-code", "")),
+        lower(attrs.get("tvg-name", "")),
+        lower(name),
+        lower(group),
+        lower(url),
+    ])
 
-    if not category:
+    # Explicit international source = foreign unless Cricket.
+    if source_is_international(source_file):
+        return False
 
-        category = keyword_category(
-            name,
-            old_group
+    # Explicit foreign country/channel markers.
+    if contains_foreign_marker(text):
+        return False
+
+    if contains_foreign_channel_marker(text):
+        return False
+
+    # Foreign ccTLDs in stream host.
+    try:
+        host = urlparse(url).hostname or ""
+        host = host.lower()
+
+        foreign_tlds = (
+            ".uk",
+            ".au",
+            ".nz",
+            ".za",
+            ".pk",
+            ".bd",
+            ".lk",
+            ".np",
+            ".ca",
+            ".sg",
+            ".my",
+            ".qa",
+            ".ae",
         )
 
-    # --------------------------------------------------------
-    # Excluded
-    # --------------------------------------------------------
+        if host.endswith(foreign_tlds):
+            return False
 
-    if category:
+    except Exception:
+        pass
 
-        if clean(category) in EXCLUDED_GROUPS:
-            category = None
-
-    # --------------------------------------------------------
-    # Safe fallback
-    # --------------------------------------------------------
-
-    if not category:
-        category = "Entertainment"
-
-    # --------------------------------------------------------
-    # Normalize sports
-    # --------------------------------------------------------
-
-    if category == "Sports":
-        category = "Sports"
-
-    # --------------------------------------------------------
-    # Safety: only allowed groups
-    # --------------------------------------------------------
-
-    if category not in ALLOWED_CATEGORIES:
-        category = "Entertainment"
-
-    language = detect_language(
-        name,
-        old_group,
-        attrs
-    )
-
-    return language, category
+    return True
 
 
 # ============================================================
-# GROUP NAME
+# BUILD EXTINF
 # ============================================================
 
-def build_group(
-    language,
-    category
-):
-
-    # Language is metadata only.
-    #
-    # NEVER:
-    # Hindi - News
-    # Tata Play - News
-    # JioTV - News
-    #
-    # ONLY:
-    # News
-    # Sports
-    # Movies
-    # etc.
-
+def build_group(category):
     return category
 
 
+def rewrite_extinf(line, attrs, name, category, language):
+    new_attrs = dict(attrs)
+
+    new_attrs["group-title"] = build_group(category)
+
+    if language:
+        new_attrs["tvg-language"] = language
+
+    # Rebuild attributes.
+    prefix = "#EXTINF:-1"
+
+    preferred = [
+        "tvg-id",
+        "tvg-name",
+        "tvg-logo",
+        "tvg-language",
+        "tvg-country",
+        "group-title",
+    ]
+
+    used = set()
+
+    parts = []
+
+    for key in preferred:
+        if key in new_attrs and new_attrs[key] != "":
+            parts.append(
+                f'{key}="{new_attrs[key]}"'
+            )
+            used.add(key)
+
+    for key, value in new_attrs.items():
+        if key in used:
+            continue
+
+        if value == "":
+            continue
+
+        parts.append(
+            f'{key}="{value}"'
+        )
+
+    return prefix + " " + " ".join(parts) + "," + name
+
+
 # ============================================================
-# PARSE M3U
+# PARSE PLAYLIST
 # ============================================================
 
 def parse_m3u(path):
-
     entries = []
 
     try:
-
-        with open(
-            path,
-            "r",
+        lines = Path(path).read_text(
             encoding="utf-8",
-            errors="ignore"
-        ) as f:
-
-            lines = [
-                x.rstrip("\n")
-                for x in f
-            ]
-
+            errors="ignore",
+        ).splitlines()
     except Exception as e:
-
-        print(
-            "ERROR reading:",
-            path,
-            e
-        )
-
+        print(f"WARNING: cannot read {path}: {e}")
         return entries
 
-    current = None
+    pending_extinf = None
+    pending_attrs = None
+    pending_name = None
 
-    for line in lines:
+    for raw in lines:
+        line = raw.strip()
 
-        if line.startswith(
-            "#EXTINF:"
-        ):
+        if not line:
+            continue
 
-            current = {
-                "extinf": line,
-                "attrs": parse_extinf(
-                    line
-                ),
-                "url": "",
-            }
+        if line.startswith("#EXTINF:"):
+            pending_extinf = line
 
-        elif (
-            current
-            and line.strip()
-            and not line.startswith("#")
-        ):
+            pending_attrs, pending_name = parse_extinf(line)
 
-            current["url"] = (
-                line.strip()
-            )
+            continue
 
-            entries.append(
-                current
-            )
+        if line.startswith("#"):
+            continue
 
-            current = None
+        # URL line.
+        if pending_extinf:
+            url = clean(line)
+
+            if url.startswith(("http://", "https://")):
+                entries.append({
+                    "attrs": pending_attrs or {},
+                    "name": pending_name or "",
+                    "url": url,
+                    "source": str(path),
+                })
+
+            pending_extinf = None
+            pending_attrs = None
+            pending_name = None
 
     return entries
-
-
-# ============================================================
-# REWRITE EXTINF
-# ============================================================
-
-def rewrite_extinf(entry):
-
-    line = entry["extinf"]
-
-    attrs = entry["attrs"]
-
-    url = entry["url"]
-
-    language, category = classify(
-        attrs,
-        url
-    )
-
-    # Foreign/rejected stream
-    if not category:
-        return None
-
-    group = build_group(
-        language,
-        category
-    )
-
-    # --------------------------------------------------------
-    # Remove old group-title
-    # --------------------------------------------------------
-
-    line = re.sub(
-        r'\s*group-title="[^"]*"',
-        "",
-        line,
-        flags=re.I
-    )
-
-    # --------------------------------------------------------
-    # Remove old tvg-language
-    # --------------------------------------------------------
-
-    line = re.sub(
-        r'\s*tvg-language="[^"]*"',
-        "",
-        line,
-        flags=re.I
-    )
-
-    # --------------------------------------------------------
-    # Add group
-    # --------------------------------------------------------
-
-    line = (
-        line.rstrip()
-        + f' group-title="{group}"'
-    )
-
-    # --------------------------------------------------------
-    # Add language
-    # --------------------------------------------------------
-
-    if language != "Unknown":
-
-        line = (
-            line.rstrip()
-            + f' tvg-language="{language}"'
-        )
-
-    return line
 
 
 # ============================================================
@@ -1426,430 +795,231 @@ def rewrite_extinf(entry):
 # ============================================================
 
 def main():
-
     parser = argparse.ArgumentParser(
-        description=(
-            "Build grouped Indian IPTV playlist"
-        )
+        description="Build Indian IPTV playlist with foreign Cricket allowed."
     )
 
     parser.add_argument(
         "source",
-        help="Directory containing M3U files"
+        help="Source directory containing M3U files",
     )
 
     parser.add_argument(
         "-o",
         "--output",
         default="playlist.m3u",
-        help="Output playlist"
+        help="Output playlist",
     )
 
     args = parser.parse_args()
 
-    source = os.path.abspath(
-        args.source
-    )
+    source_dir = Path(args.source)
 
-    if not os.path.isdir(source):
-
-        print(
-            "ERROR: source directory not found:",
-            source
+    if not source_dir.exists():
+        raise SystemExit(
+            f"ERROR: source directory not found: {source_dir}"
         )
-
-        sys.exit(1)
-
-    # --------------------------------------------------------
-    # Find M3U/M3U8
-    # --------------------------------------------------------
-
-    files = []
-
-    files.extend(
-        glob.glob(
-            os.path.join(
-                source,
-                "**",
-                "*.m3u"
-            ),
-            recursive=True
-        )
-    )
-
-    files.extend(
-        glob.glob(
-            os.path.join(
-                source,
-                "**",
-                "*.m3u8"
-            ),
-            recursive=True
-        )
-    )
 
     files = sorted(
-        set(files)
+        list(source_dir.glob("*.m3u"))
+        + list(source_dir.glob("*.m3u8"))
     )
 
     if not files:
-
-        print(
-            "ERROR: No M3U/M3U8 files found"
+        raise SystemExit(
+            "ERROR: no M3U/M3U8 files found."
         )
 
-        sys.exit(1)
+    print("========================================")
+    print(" IPTV PLAYLIST GENERATOR")
+    print("========================================")
+    print("Sources:")
 
-    # --------------------------------------------------------
-    # Header
-    # --------------------------------------------------------
-
-    print()
-    print(
-        "=========================================="
-    )
-    print(
-        " IPTV GROUP BUILDER"
-    )
-    print(
-        "=========================================="
-    )
-
-    print(
-        "Source:",
-        source
-    )
-
-    print(
-        "M3U files:",
-        len(files)
-    )
-
-    print()
-
-    # --------------------------------------------------------
-    # Read all entries
-    # --------------------------------------------------------
+    for f in files:
+        print(" -", f)
 
     all_entries = []
 
     for path in files:
+        entries = parse_m3u(path)
 
         print(
-            "Reading:",
-            path
+            f"{path.name}: {len(entries)} entries"
         )
 
-        entries = parse_m3u(
-            path
-        )
-
-        all_entries.extend(
-            entries
-        )
-
-        print(
-            "  channels:",
-            len(entries)
-        )
-
-    print()
+        all_entries.extend(entries)
 
     print(
-        "Total source streams:",
-        len(all_entries)
+        f"TOTAL SOURCE ENTRIES: {len(all_entries)}"
     )
 
-    # --------------------------------------------------------
-    # Output
-    # --------------------------------------------------------
+    # ========================================================
+    # FILTER + EXACT URL DEDUP
+    # ========================================================
 
-    output = os.path.abspath(
-        args.output
-    )
+    final_entries = []
 
     seen_urls = set()
 
-    written = 0
+    removed_foreign = 0
+    removed_excluded = 0
+    removed_uncategorized = 0
+    duplicate_urls = 0
 
-    skipped_foreign = 0
+    for entry in all_entries:
+        attrs = entry["attrs"]
+        name = entry["name"]
+        url = entry["url"]
+        source = entry["source"]
 
-    skipped_duplicate = 0
+        group = attrs.get("group-title", "")
 
-    skipped_empty = 0
+        # First foreign filtering.
+        if not is_indian_or_allowed_cricket(
+            attrs,
+            name,
+            group,
+            url,
+            source,
+        ):
+            removed_foreign += 1
+            continue
 
-    group_counts = {}
+        category = classify(
+            attrs,
+            name,
+            url,
+            source,
+        )
 
-    language_counts = {}
+        if not category:
+            removed_uncategorized += 1
+            continue
 
-    with open(
-        output,
+        if category not in ALLOWED_CATEGORIES:
+            removed_excluded += 1
+            continue
+
+        # Exact stream URL duplicate only.
+        if url in seen_urls:
+            duplicate_urls += 1
+            continue
+
+        seen_urls.add(url)
+
+        language = detect_language(
+            attrs,
+            name,
+            group,
+        )
+
+        new_extinf = rewrite_extinf(
+            entry.get("raw_extinf", ""),
+            attrs,
+            name,
+            category,
+            language,
+        )
+
+        final_entries.append({
+            "extinf": new_extinf,
+            "url": url,
+            "category": category,
+            "name": name,
+            "language": language,
+        })
+
+    # ========================================================
+    # SORT
+    # ========================================================
+
+    category_order = {
+        "News": 1,
+        "Entertainment": 2,
+        "Movies": 3,
+        "Music": 4,
+        "Kids": 5,
+        "Infotainment": 6,
+        "Science": 7,
+        "Lifestyle": 8,
+        "Business": 9,
+        "Sports": 10,
+    }
+
+    final_entries.sort(
+        key=lambda x: (
+            category_order.get(x["category"], 999),
+            x["language"],
+            x["name"].lower(),
+            x["url"],
+        )
+    )
+
+    # ========================================================
+    # WRITE PLAYLIST
+    # ========================================================
+
+    output = Path(args.output)
+
+    with output.open(
         "w",
-        encoding="utf-8"
+        encoding="utf-8",
+        newline="\n",
     ) as f:
 
         f.write(
             '#EXTM3U '
-            'x-tvg-url="guide.xml.gz"\n'
+            'x-tvg-url="https://raw.githubusercontent.com/Sri014/3502/main/epg.xml"\n'
         )
 
-        for entry in all_entries:
-
-            url = (
-                entry["url"]
-                .strip()
-            )
-
-            # ------------------------------------------------
-            # Empty URL
-            # ------------------------------------------------
-
-            if not url:
-
-                skipped_empty += 1
-
-                continue
-
-            # ------------------------------------------------
-            # Exact URL duplicate
-            # ------------------------------------------------
-
-            if url in seen_urls:
-
-                skipped_duplicate += 1
-
-                continue
-
-            # ------------------------------------------------
-            # Classify
-            # ------------------------------------------------
-
-            extinf = rewrite_extinf(
-                entry
-            )
-
-            # ------------------------------------------------
-            # Foreign/rejected
-            # ------------------------------------------------
-
-            if not extinf:
-
-                skipped_foreign += 1
-
-                continue
-
-            # ------------------------------------------------
-            # Mark URL as used
-            # ------------------------------------------------
-
-            seen_urls.add(
-                url
-            )
-
-            # ------------------------------------------------
-            # Write
-            # ------------------------------------------------
-
-            f.write(
-                extinf + "\n"
-            )
-
-            f.write(
-                url + "\n"
-            )
-
-            written += 1
-
-            # ------------------------------------------------
-            # Statistics
-            # ------------------------------------------------
-
-            attrs = entry["attrs"]
-
-            name = get_channel_name(
-                attrs
-            )
-
-            old_group = (
-                attrs.get(
-                    "group-title",
-                    ""
-                )
-            )
-
-            language, category = classify(
-                attrs,
-                url
-            )
-
-            if category:
-
-                group_counts[
-                    category
-                ] = (
-                    group_counts.get(
-                        category,
-                        0
-                    ) + 1
-                )
-
-            if language:
-
-                language_counts[
-                    language
-                ] = (
-                    language_counts.get(
-                        language,
-                        0
-                    ) + 1
-                )
+        for entry in final_entries:
+            f.write(entry["extinf"] + "\n")
+            f.write(entry["url"] + "\n")
 
     # ========================================================
-    # FINAL REPORT
+    # STATS
     # ========================================================
 
+    counts = {}
+
+    for entry in final_entries:
+        cat = entry["category"]
+        counts[cat] = counts.get(cat, 0) + 1
+
     print()
+    print("========================================")
+    print(" RESULT")
+    print("========================================")
 
     print(
-        "=========================================="
+        f"FINAL CHANNELS: {len(final_entries)}"
     )
 
     print(
-        " DONE"
+        f"FOREIGN REMOVED: {removed_foreign}"
     )
 
     print(
-        "=========================================="
+        f"UNCATEGORIZED REMOVED: {removed_uncategorized}"
     )
 
     print(
-        "Output:",
-        output
-    )
-
-    print(
-        "Written streams:",
-        written
-    )
-
-    print(
-        "Foreign/rejected:",
-        skipped_foreign
-    )
-
-    print(
-        "Exact duplicate URLs:",
-        skipped_duplicate
-    )
-
-    print(
-        "Empty URLs:",
-        skipped_empty
+        f"DUPLICATE URL REMOVED: {duplicate_urls}"
     )
 
     print()
+    print("GROUPS:")
 
-    # --------------------------------------------------------
-    # Groups
-    # --------------------------------------------------------
-
-    print(
-        "GROUP COUNTS:"
-    )
-
-    group_order = [
-        "News",
-        "Entertainment",
-        "Movies",
-        "Music",
-        "Kids",
-        "Infotainment",
-        "Science",
-        "Lifestyle",
-        "Business",
-        "Sports",
-    ]
-
-    for group in group_order:
-
+    for category in ALLOWED_CATEGORIES:
         print(
-            f"  {group}: "
-            f"{group_counts.get(group, 0)}"
+            f"  {category}: {counts.get(category, 0)}"
         )
 
     print()
-
-    # --------------------------------------------------------
-    # Languages
-    # --------------------------------------------------------
-
     print(
-        "LANGUAGES:"
+        f"OUTPUT: {output}"
     )
 
-    for language in sorted(
-        language_counts
-    ):
-
-        print(
-            f"  {language}: "
-            f"{language_counts[language]}"
-        )
-
-    print()
-
-    print(
-        "Excluded:"
-    )
-
-    print(
-        "  Regional"
-    )
-
-    print(
-        "  Devotional"
-    )
-
-    print(
-        "  Education"
-    )
-
-    print(
-        "  Spiritual"
-    )
-
-    print()
-
-    print(
-        "Duplicate policy:"
-    )
-
-    print(
-        "  Same URL      = REMOVE"
-    )
-
-    print(
-        "  Different URL = KEEP"
-    )
-
-    print()
-
-    print(
-        "Sports:"
-    )
-
-    print(
-        "  All sports -> Sports"
-    )
-
-    print(
-        "=========================================="
-    )
-
-
-# ============================================================
-# ENTRY POINT
-# ============================================================
 
 if __name__ == "__main__":
     main()
