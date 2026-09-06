@@ -8,16 +8,12 @@ on:
 permissions:
   contents: write
 
-concurrency:
-  group: playlist-update
-  cancel-in-progress: false
-
 jobs:
-  update:
+  update-playlist:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout playlist repo
         uses: actions/checkout@v4
 
       - name: Setup Python
@@ -25,83 +21,49 @@ jobs:
         with:
           python-version: "3.x"
 
-      - name: Install dependencies
+      - name: Fetch wizakorhd IPTV source
         run: |
-          python -m pip install --upgrade pip
-          if [ -f requirements.txt ]; then
-            pip install -r requirements.txt
-          fi
-
-      # Get the current public playlist data used by wizakorhd/iptv.
-      - name: Fetch wizakorhd source
-        run: |
-          set -e
-
           rm -rf source_repo
-          git clone --depth 1 \
-            https://github.com/wizakorhd/iptv.git \
-            source_repo
+          git clone --depth 1 https://github.com/wizakorhd/iptv.git source_repo
 
+      - name: Prepare source playlists
+        run: |
+          rm -rf sources
           mkdir -p sources
 
-          # Copy the source playlists.
-          cp source_repo/playlist.m3u sources/wizakorhd.m3u
+          find source_repo -maxdepth 1 -type f \
+            \( -name "*.m3u" -o -name "*.m3u8" \) \
+            -exec cp {} sources/ \;
 
-          # Keep the separate language playlists too.
-          for file in \
-            playlist-hindi.m3u \
-            playlist-english-india.m3u \
-            playlist-english-intl.m3u \
-            playlist-anime.m3u
-          do
-            if [ -f "source_repo/$file" ]; then
-              cp "source_repo/$file" "sources/$file"
-            fi
-          done
+          echo "Source playlists:"
+          ls -lh sources
 
-          echo "Sources:"
-          ls -lh sources/
-
-      # Our grouping engine:
-      # - no duplicate removal
-      # - preserves every stream
-      # - normalizes categories
-      # - keeps Hindi/English/Bhojpuri etc.
-      # - keeps worldwide streams when present
-      - name: Build grouped playlist
+      - name: Generate grouped playlist
         run: |
-          python scripts/group_playlist.py \
-            sources \
-            --output playlist.m3u
+          python scripts/group_playlist.py sources -o playlist.m3u
 
       - name: Validate playlist
         run: |
-          set -e
-
           test -s playlist.m3u
           grep -q '^#EXTM3U' playlist.m3u
+          echo "Playlist generated successfully"
+          echo "Entries:"
+          grep -c '^#EXTINF:' playlist.m3u || true
+          echo "Groups:"
+          grep '^#EXTINF:' playlist.m3u \
+            | sed -n 's/.*group-title="\([^"]*\)".*/\1/p' \
+            | sort | uniq -c | sort -nr
 
-          CHANNELS=$(grep -c '^#EXTINF:' playlist.m3u || true)
-
-          echo "Total channels: $CHANNELS"
-
-          if [ "$CHANNELS" -le 0 ]; then
-            echo "No channels generated."
-            exit 1
-          fi
-
-      - name: Commit update
+      - name: Commit updated playlist
         run: |
           git config user.name "github-actions[bot]"
-          git config user.email \
-            "41898282+github-actions[bot]@users.noreply.github.com"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
           git add playlist.m3u
 
           if git diff --cached --quiet; then
-            echo "No changes."
-            exit 0
+            echo "No playlist changes."
+          else
+            git commit -m "Update IPTV playlist"
+            git push
           fi
-
-          git commit -m "Auto update IPTV playlist"
-          git push
