@@ -66,6 +66,13 @@ FOREIGN_CRICKET_WORDS = (
     "icc",
 )
 
+# Foreign sports exceptions.
+# These are allowed in Sports even without JioTV/Tata Play matching.
+SPECIAL_FOREIGN_SPORTS_PATTERNS = (
+    r"\bsky\s*sports\b",
+    r"\bwillow\b",
+)
+
 GENRE_MAP = {
     "news": "News",
 
@@ -822,11 +829,41 @@ def is_foreign_cricket(entry):
     )
 
 
+def is_special_foreign_sports(entry):
+    name = source_name(entry).lower()
+
+    if not name:
+        return False
+
+    if has_bad_language(name):
+        return False
+
+    return any(
+        re.search(
+            pattern,
+            name,
+            re.IGNORECASE,
+        )
+        for pattern in SPECIAL_FOREIGN_SPORTS_PATTERNS
+    )
+
+
 def resolve_channel(entry, index):
     name = source_name(entry)
 
     if not name:
         return None
+
+    # Sky Sports + all Willow variants.
+    # These are explicitly allowed as foreign Sports channels.
+    if is_special_foreign_sports(entry):
+        return {
+            "indian": False,
+            "group": "Sports",
+            "language": "English",
+            "ref": None,
+            "score": 0,
+        }
 
     if has_bad_language(name):
         return None
@@ -1040,6 +1077,7 @@ def main():
         "source": len(source_entries),
         "indian": 0,
         "foreign_cricket": 0,
+        "foreign_special_sports": 0,
         "rejected": 0,
     }
 
@@ -1066,9 +1104,14 @@ def main():
         if result["indian"]:
             stats["indian"] += 1
             priority = 0
+
+        elif is_special_foreign_sports(entry):
+            stats["foreign_special_sports"] += 1
+            priority = 1
+
         else:
             stats["foreign_cricket"] += 1
-            priority = 1
+            priority = 2
 
         resolved.append(
             (
@@ -1079,7 +1122,8 @@ def main():
             )
         )
 
-    # Indian first, foreign cricket after.
+    # Indian first, special foreign sports next,
+    # foreign cricket after that.
     resolved.sort(
         key=lambda item: (
             item[0],
@@ -1183,22 +1227,32 @@ def main():
     print("PLAYLIST COMPLETE")
     print("========================================")
     print(
-        f"Source entries       : {stats['source']}"
+        f"Source entries          : "
+        f"{stats['source']}"
     )
     print(
-        f"Indian matched       : {stats['indian']}"
+        f"Indian matched          : "
+        f"{stats['indian']}"
     )
     print(
-        f"Foreign cricket      : {stats['foreign_cricket']}"
+        f"Foreign special Sports : "
+        f"{stats['foreign_special_sports']}"
     )
     print(
-        f"Rejected              : {stats['rejected']}"
+        f"Foreign cricket         : "
+        f"{stats['foreign_cricket']}"
     )
     print(
-        f"Final unique streams  : {total}"
+        f"Rejected                : "
+        f"{stats['rejected']}"
     )
     print(
-        f"Output                : {output}"
+        f"Final unique streams    : "
+        f"{total}"
+    )
+    print(
+        f"Output                  : "
+        f"{output}"
     )
     print()
 
