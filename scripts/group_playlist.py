@@ -1,20 +1,23 @@
 #!/usr/bin/env python3
 
-import argparse
-import html
 import re
-import ssl
+import sys
 import urllib.request
-from difflib import SequenceMatcher
 from pathlib import Path
-from urllib.parse import urlparse
-
+from urllib.parse import urlsplit
 
 # ============================================================
-# FINAL CONFIG
+# CONFIG
 # ============================================================
 
-ALLOWED_CATEGORIES = [
+SOURCE_URLS = [
+    "https://raw.githubusercontent.com/wizakorhd/iptv/refs/heads/main/playlist-hindi.m3u",
+    "https://raw.githubusercontent.com/wizakorhd/iptv/refs/heads/main/playlist-english-india.m3u",
+    "https://raw.githubusercontent.com/wizakorhd/iptv/refs/heads/main/playlist-top.m3u",
+    "https://raw.githubusercontent.com/wizakorhd/iptv/refs/heads/main/playlist.m3u",
+]
+
+ALLOWED_GROUPS = [
     "News",
     "Entertainment",
     "Movies",
@@ -27,24 +30,11 @@ ALLOWED_CATEGORIES = [
     "Sports",
 ]
 
-EXCLUDED_WORDS = (
-    "regional",
-    "devotional",
-    "spiritual",
-    "education",
-)
+ALLOWED_LANGUAGES = {"hindi", "english", "bhojpuri"}
 
-ALLOWED_LANGUAGES = {
-    "hindi": "Hindi",
-    "hin": "Hindi",
-    "english": "English",
-    "eng": "English",
-    "bhojpuri": "Bhojpuri",
-}
-
-REGIONAL_LANGUAGES = {
-    "bengali",
-    "bangla",
+# Explicitly unwanted regional languages.
+OTHER_REGIONAL_LANGUAGES = {
+    "bengali", "bangla",
     "tamil",
     "telugu",
     "kannada",
@@ -52,43 +42,279 @@ REGIONAL_LANGUAGES = {
     "marathi",
     "punjabi",
     "gujarati",
-    "odia",
-    "oriya",
+    "odia", "oriya",
     "assamese",
     "nepali",
     "sinhala",
+    "urdu",
+    "konkani",
+    "manipuri",
+    "meitei",
+    "sindhi",
+    "kashmiri",
+    "dogri",
+    "maithili",
+    "rajasthani",
+    "haryanvi",
+    "chhattisgarhi",
 }
 
-SPORT_WORDS = (
-    "sport",
-    "sports",
-    "cricket",
-    "football",
-    "soccer",
-    "hockey",
-    "tennis",
-    "badminton",
-    "wwe",
-    "kabaddi",
-    "basketball",
-    "baseball",
-    "formula 1",
-    "f1",
-    "motogp",
-    "golf",
-    "boxing",
-    "wrestling",
+# ============================================================
+# CHANNEL -> JioTV STYLE GROUP
+# Source repo group-title is NEVER trusted.
+# ============================================================
+
+CHANNEL_GROUPS = {
+    # ---------------- NEWS ----------------
+    "aaj tak": "News",
+    "abp news": "News",
+    "abp ananda": "News",
+    "bbc news": "News",
+    "bbc news hd": "News",
+    "cnn": "News",
+    "cnn news18": "News",
+    "cnn-news18": "News",
+    "news18": "News",
+    "news18 india": "News",
+    "news18 delhi": "News",
+    "news18 bihar": "News",
+    "news18 up": "News",
+    "news18 rajasthan": "News",
+    "news18 mp": "News",
+    "news18 urdu": "News",
+    "ndtv": "News",
+    "ndtv india": "News",
+    "ndtv 24x7": "News",
+    "india today": "News",
+    "india tv": "News",
+    "times now": "News",
+    "times now navbharat": "News",
+    "mirror now": "News",
+    "news nation": "News",
+    "news24": "News",
+    "news 24": "News",
+    "republic bharat": "News",
+    "republic tv": "News",
+    "republic world": "News",
+    "zee news": "News",
+    "zee business": "Business",
+    "zee media": "News",
+    "zee news hd": "News",
+    "tezz": "News",
+    "good news today": "News",
+    "firstpost": "News",
+    "newsx": "News",
+    "wion": "News",
+    "al jazeera": "News",
+    "dw": "News",
+    "euronews": "News",
+    "nhk world": "News",
+
+    # ---------------- BUSINESS ----------------
+    "cnbc tv18": "Business",
+    "cnbc tv18 prime": "Business",
+    "cnbc awaaz": "Business",
+    "cnbc": "Business",
+    "et now": "Business",
+    "et now swadesh": "Business",
+    "bloomberg": "Business",
+    "business today": "Business",
+    "moneycontrol": "Business",
+    "zee business": "Business",
+
+    # ---------------- ENTERTAINMENT ----------------
+    "star plus": "Entertainment",
+    "star bharat": "Entertainment",
+    "star utsav": "Entertainment",
+    "star utsav movies": "Movies",
+    "sony entertainment television": "Entertainment",
+    "sony entertainment": "Entertainment",
+    "sony sab": "Entertainment",
+    "sony pal": "Entertainment",
+    "sony aath": "Entertainment",
+    "colors": "Entertainment",
+    "colors tv": "Entertainment",
+    "colors rishtey": "Entertainment",
+    "colors cineplex": "Movies",
+    "colors cineplex superhits": "Movies",
+    "zee tv": "Entertainment",
+    "zee anmol": "Entertainment",
+    "zee anmol cinema": "Movies",
+    "&tv": "Entertainment",
+    "and tv": "Entertainment",
+    "and picture": "Movies",
+    "&pictures": "Movies",
+    "andpictures": "Movies",
+    "sahara one": "Entertainment",
+    "dangal": "Entertainment",
+    "dangal 2": "Entertainment",
+    "big magic": "Entertainment",
+    "shemaaroo tv": "Entertainment",
+    "shemaroo tv": "Entertainment",
+    "dd national": "Entertainment",
+    "dd national hd": "Entertainment",
+    "dd kisan": "Infotainment",
+    "dd bharati": "Entertainment",
+    "dd india": "News",
+    "dd urdu": "Entertainment",
+
+    # ---------------- MOVIES ----------------
+    "zee cinema": "Movies",
+    "zee cinema hd": "Movies",
+    "sony max": "Movies",
+    "sony max 2": "Movies",
+    "sony wah": "Movies",
+    "star gold": "Movies",
+    "star gold hd": "Movies",
+    "star gold select": "Movies",
+    "star gold select hd": "Movies",
+    "star gold 2": "Movies",
+    "b4u movies": "Movies",
+    "b4u movies hd": "Movies",
+    "bollywood 4u": "Movies",
+    "bollywood 4u hd": "Movies",
+    "shemaroo bollywood": "Movies",
+    "shemaroo bollywood hd": "Movies",
+    "shemaroo me": "Movies",
+    "filmy": "Movies",
+    "wow cinema": "Movies",
+    "mastiii": "Movies",
+    "manoranjan tv": "Movies",
+    "manoranjan grand": "Movies",
+    "movie plus": "Movies",
+    "goldmines": "Movies",
+    "goldmines bollywood": "Movies",
+    "goldmines movies": "Movies",
+    "raj digital plus": "Movies",
+    "raj tv": "Movies",
+
+    # ---------------- MUSIC ----------------
+    "mtv": "Music",
+    "mtv beats": "Music",
+    "9xm": "Music",
+    "9x music": "Music",
+    "9x jhakaas": "Music",
+    "music india": "Music",
+    "b4u music": "Music",
+    "zoom": "Music",
+    "mastiii": "Music",
+    "e24": "Music",
+    "9x tashan": "Music",
+    "9x jalwa": "Music",
+    "dhoom music": "Music",
+
+    # ---------------- KIDS ----------------
+    "cartoon network": "Kids",
+    "cartoon network hd": "Kids",
+    "pogo": "Kids",
+    "discovery kids": "Kids",
+    "nick": "Kids",
+    "nick hd+": "Kids",
+    "nickelodeon": "Kids",
+    "sonic": "Kids",
+    "hungama": "Kids",
+    "hungama tv": "Kids",
+    "super hungama": "Kids",
+    "disney channel": "Kids",
+    "disney junior": "Kids",
+    "disney xd": "Kids",
+
+    # ---------------- SCIENCE ----------------
+    "discovery science": "Science",
+    "discovery science hd": "Science",
+    "nat geo": "Science",
+    "natgeo": "Science",
+    "national geographic": "Science",
+    "national geographic hd": "Science",
+    "history tv18": "Science",
+    "history tv18 hd": "Science",
+    "history": "Science",
+    "animal planet": "Science",
+    "animal planet hd": "Science",
+    "nasa tv": "Science",
+
+    # ---------------- INFOTAINMENT ----------------
+    "discovery": "Infotainment",
+    "discovery hd": "Infotainment",
+    "discovery channel": "Infotainment",
+    "discovery turbo": "Infotainment",
+    "discovery world": "Infotainment",
+    "discovery hd world": "Infotainment",
+    "tlc": "Infotainment",
+    "tlc hd": "Infotainment",
+    "travelxp": "Lifestyle",
+    "travelxp hd": "Lifestyle",
+    "food food": "Lifestyle",
+    "epic": "Infotainment",
+    "epic tv": "Infotainment",
+    "sony bbc earth": "Science",
+    "sony bbc earth hd": "Science",
+    "good times": "Lifestyle",
+    "fashion tv": "Lifestyle",
+    "ftv": "Lifestyle",
+
+    # ---------------- SPORTS ----------------
+    "star sports": "Sports",
+    "star sports 1": "Sports",
+    "star sports 1 hd": "Sports",
+    "star sports 2": "Sports",
+    "star sports 2 hd": "Sports",
+    "star sports 3": "Sports",
+    "star sports 3 hd": "Sports",
+    "star sports 1 hindi": "Sports",
+    "star sports hindi": "Sports",
+    "star sports select 1": "Sports",
+    "star sports select 1 hd": "Sports",
+    "star sports select 2": "Sports",
+    "star sports select 2 hd": "Sports",
+    "star sports first": "Sports",
+    "sony sports ten 1": "Sports",
+    "sony sports ten 2": "Sports",
+    "sony sports ten 3": "Sports",
+    "sony ten 1": "Sports",
+    "sony ten 2": "Sports",
+    "sony ten 3": "Sports",
+    "sony ten 4": "Sports",
+    "sony ten 5": "Sports",
+    "sony sports": "Sports",
+    "eurosport": "Sports",
+    "eurosport hd": "Sports",
+    "dd sports": "Sports",
+    "sports18": "Sports",
+    "sports18 1": "Sports",
+    "sports18 2": "Sports",
+    "sports18 khel": "Sports",
+    "jio sports": "Sports",
+    "jio sports 1": "Sports",
+    "jio sports 2": "Sports",
+    "jio cricket": "Sports",
+    "jio football": "Sports",
+    "willow": "Sports",
+    "willow cricket": "Sports",
+    "ten cricket": "Sports",
+    "fox cricket": "Sports",
+}
+
+# Channels where keyword matching is safe.
+KEYWORD_GROUPS = [
+    (("news", "samachar"), "News"),
+    (("business", "cnbc", "bloomberg", "et now"), "Business"),
+    (("cricket", "sports", "sport", "football", "hockey", "tennis"), "Sports"),
+    (("cartoon", "kids", "nick", "pogo", "hungama", "sonic", "disney"), "Kids"),
+    (("movie", "cinema", "bollywood", "filmy", "goldmines"), "Movies"),
+    (("music", "beats", "9xm", "zoom"), "Music"),
+    (("science", "discovery science", "nat geo", "national geographic"), "Science"),
+    (("travel", "food food", "fashion"), "Lifestyle"),
+    (("discovery", "history", "animal planet", "tlc", "epic"), "Infotainment"),
+]
+
+# Foreign cricket is explicitly allowed.
+FOREIGN_CRICKET_WORDS = (
+    "cricket", "willow", "fox cricket", "ten cricket",
+    "sky sports cricket", "supersport cricket"
 )
 
-CRICKET_WORDS = (
-    "cricket",
-    "ipl",
-    "t20",
-    "test cricket",
-    "odi cricket",
-)
-
-# Names that are too generic for fuzzy matching.
+# Generic names are too dangerous for fuzzy matching.
 GENERIC_NAMES = {
     "news",
     "music",
@@ -98,621 +324,151 @@ GENERIC_NAMES = {
     "live",
     "channel",
     "tv",
+    "india",
 }
 
-
 # ============================================================
-# WEB REFERENCE SOURCES
-#
-# Streams NEVER come from these websites.
-# They are ONLY used to identify Indian channel names.
+# HELPERS
 # ============================================================
 
-REFERENCE_URLS = [
-    # Tata Play official
-    "https://www.tataplay.com/channels/tv-channel-number-list",
-
-    # Airtel official
-    "https://www.airtel.in/plans/dth/all-channel-list",
-
-    # JioTV public channel list
-    "https://www.ytechb.com/jiotv-plus-channel-list-numbers-plans/",
-]
+def norm(value):
+    value = value or ""
+    value = value.lower()
+    value = value.replace("&", "and")
+    value = re.sub(r"[|:_\-./]+", " ", value)
+    value = re.sub(r"\s+", " ", value).strip()
+    return value
 
 
-# ============================================================
-# FALLBACK REFERENCE CHANNELS
-#
-# Used if one of the websites changes its HTML.
-# ============================================================
-
-FALLBACK_CHANNELS = {
-    # NEWS
-    "aaj tak",
-    "aaj tak hd",
-    "india today",
-    "ndtv india",
-    "ndtv",
-    "ndtv 24x7",
-    "news18 india",
-    "news 18 india",
-    "cnn news18",
-    "zee news",
-    "zee hindustan",
-    "india tv",
-    "news24",
-    "news 24",
-    "republic tv",
-    "republic bharat",
-    "tv9 bharatvarsh",
-    "abp news",
-    "good news today",
-    "india news",
-    "bharat 24",
-    "bharat express",
-    "news nation",
-    "times now",
-    "times now navbharat",
-    "wion",
-    "firstpost",
-    "sansad tv",
-    "dd news",
-    "dd india",
-    "cnbc awaaz",
-    "zee business",
-    "et now",
-    "et now swadesh",
-
-    # ENTERTAINMENT
-    "star plus",
-    "star plus hd",
-    "star bharat",
-    "star utsav",
-    "sony",
-    "sony hd",
-    "sony entertainment",
-    "sony entertainment television",
-    "sony sab",
-    "sony sab hd",
-    "sony pal",
-    "&tv",
-    "&tv hd",
-    "colors",
-    "colors hd",
-    "zee tv",
-    "zee tv hd",
-    "zee anmol",
-    "dangal",
-    "big magic",
-    "shemaroo tv",
-    "shemaroo umang",
-    "sony aath",
-    "zee zindagi",
-    "and tv",
-
-    # MOVIES
-    "sony max",
-    "sony max hd",
-    "sony max 2",
-    "sony wah",
-    "zee cinema",
-    "zee cinema hd",
-    "zee classic",
-    "zee bollywood",
-    "zee anmol cinema",
-    "star gold",
-    "star gold hd",
-    "star gold select",
-    "colors cineplex",
-    "colors cineplex hd",
-    "colors cineplex superhit",
-    "colors cineplex superhits",
-    "&pictures",
-    "&pictures hd",
-    "b4u movies",
-    "b4u cinema",
-    "b4u kadak",
-    "goldmines",
-    "goldmines bollywood",
-    "manoranjan tv",
-    "manoranjan grand",
-    "filamchi",
-    "wow cinema",
-    "dhamaal tv",
-
-    # MUSIC
-    "b4u music",
-    "9xm",
-    "9x music",
-    "9x jhakaas",
-    "9x tashan",
-    "mtv",
-    "mtv hd",
-    "mtv beats",
-    "zoom",
-    "mastiii",
-    "music india",
-    "zing",
-    "vh1",
-    "sony mix",
-
-    # KIDS
-    "cartoon network",
-    "cartoon network hindi",
-    "pogo",
-    "hungama",
-    "hungama tv",
-    "discovery kids",
-    "sony yay",
-    "nick",
-    "nick hd",
-    "nick jr",
-    "sonic",
-    "super hungama",
-    "disney channel",
-    "disney junior",
-
-    # BUSINESS
-    "cnbc tv18",
-    "cnbc tv18 hd",
-    "cnbc awaaz",
-    "ndtv profit",
-    "business today",
-    "zee business",
-    "et now",
-    "et now swadesh",
-
-    # SPORTS
-    "star sports",
-    "star sports 1",
-    "star sports 2",
-    "star sports 1 hindi",
-    "star sports 2 hindi",
-    "star sports select 1",
-    "star sports select 2",
-    "star sports select 1 hd",
-    "star sports select 2 hd",
-    "sony sports",
-    "sony sports ten 1",
-    "sony sports ten 2",
-    "sony sports ten 3",
-    "sony sports ten 4",
-    "sony sports ten 5",
-    "sony ten 1",
-    "sony ten 2",
-    "sony ten 3",
-    "sony ten 4",
-    "sony ten 5",
-    "sports18",
-    "sports18 1",
-    "sports18 2",
-    "sports18 khel",
-    "dd sports",
-    "eurosport",
-
-    # INFOTAINMENT / SCIENCE
-    "discovery",
-    "discovery channel",
-    "discovery hd",
-    "discovery hd world",
-    "animal planet",
-    "animal planet hd",
-    "history tv18",
-    "history tv 18",
-    "history tv18 hd",
-    "epic",
-    "epic tv",
-    "national geographic",
-    "national geographic channel",
-    "nat geo",
-    "nat geo hd",
-    "nat geo wild",
-    "nat geo wild hd",
-    "discovery science",
-    "discovery turbo",
-
-    # LIFESTYLE
-    "travel xp",
-    "travelxp",
-    "food food",
-    "living foodz",
-    "fashion tv",
-    "tlc",
-}
-
-
-# ============================================================
-# CATEGORY MAP
-# ============================================================
-
-CATEGORY_KEYWORDS = {
-    "Sports": (
-        "sports",
-        "sport",
-        "cricket",
-        "football",
-        "soccer",
-        "hockey",
-        "tennis",
-        "badminton",
-        "wwe",
-        "kabaddi",
-        "basketball",
-        "baseball",
-        "f1",
-        "formula 1",
-        "motogp",
-        "golf",
-        "boxing",
-        "wrestling",
-    ),
-
-    "News": (
-        "news",
-        "aaj tak",
-        "ndtv",
-        "abp",
-        "republic",
-        "india news",
-        "news18",
-        "times now",
-        "wion",
-        "firstpost",
-        "bharat express",
-        "bharat 24",
-        "sansad",
-    ),
-
-    "Business": (
-        "cnbc",
-        "business",
-        "profit",
-        "et now",
-        "finance",
-        "bloomberg",
-    ),
-
-    "Movies": (
-        "movie",
-        "movies",
-        "cinema",
-        "cineplex",
-        "max",
-        "pictures",
-        "bollywood",
-        "goldmines",
-        "filamchi",
-        "manoranjan",
-        "shemaroo",
-        "b4u movies",
-    ),
-
-    "Music": (
-        "music",
-        "mtv",
-        "9xm",
-        "9x",
-        "mastiii",
-        "zoom",
-        "zing",
-        "vh1",
-        "sony mix",
-    ),
-
-    "Kids": (
-        "cartoon",
-        "kids",
-        "pogo",
-        "hungama",
-        "nick",
-        "sonic",
-        "sony yay",
-        "disney junior",
-        "disney channel",
-        "super hungama",
-    ),
-
-    "Science": (
-        "science",
-        "nat geo",
-        "national geographic",
-        "discovery science",
-        "discovery turbo",
-    ),
-
-    "Infotainment": (
-        "discovery",
-        "animal planet",
-        "history tv",
-        "history",
-        "epic",
-        "documentary",
-    ),
-
-    "Lifestyle": (
-        "travel",
-        "travelxp",
-        "travel xp",
-        "food food",
-        "food",
-        "living foodz",
-        "fashion tv",
-        "tlc",
-        "lifestyle",
-    ),
-
-    "Entertainment": (
-        "star plus",
-        "star bharat",
-        "star utsav",
-        "sony",
-        "sab",
-        "zee tv",
-        "zee anmol",
-        "colors",
-        "dangal",
-        "big magic",
-        "entertainment",
-        "&tv",
-    ),
-}
-
-
-# ============================================================
-# HTTP
-# ============================================================
-
-def fetch_url(url):
-    try:
-        req = urllib.request.Request(
-            url,
-            headers={
-                "User-Agent": (
-                    "Mozilla/5.0 "
-                    "(X11; Linux x86_64) "
-                    "AppleWebKit/537.36 "
-                    "Chrome/130 Safari/537.36"
-                ),
-                "Accept": "text/html,application/xhtml+xml",
-            },
-        )
-
-        context = ssl.create_default_context()
-
-        with urllib.request.urlopen(
-            req,
-            timeout=30,
-            context=context,
-        ) as response:
-            return response.read().decode(
-                "utf-8",
-                errors="ignore",
-            )
-
-    except Exception as e:
-        print(f"REFERENCE WARNING: {url}")
-        print(f"  {e}")
-        return ""
-
-
-# ============================================================
-# TEXT NORMALIZATION
-# ============================================================
-
-def clean(value):
-    if value is None:
-        return ""
-
-    value = html.unescape(str(value))
-
-    value = value.replace("&amp;", "&")
-
-    value = re.sub(
-        r"\b(HD|SD|FHD|UHD|4K|2K|PLUS)\b",
-        " ",
-        value,
+def clean_name(name):
+    name = name or ""
+    name = re.sub(r"\s*\[[^\]]+\]\s*", " ", name)
+    name = re.sub(r"\s*\([^)]+\)\s*", " ", name)
+    name = re.sub(
+        r"\b(hd|fhd|uhd|4k|sd|hevc|h265|h264|1080p|720p|576p|480p)\b",
+        "",
+        name,
         flags=re.I,
     )
-
-    value = re.sub(
-        r"[^a-zA-Z0-9&]+",
-        " ",
-        value,
-    )
-
-    value = re.sub(
-        r"\s+",
-        " ",
-        value,
-    )
-
-    return value.strip()
+    name = re.sub(r"\s+", " ", name)
+    return name.strip(" -|")
 
 
-def normalize(value):
-    value = clean(value).lower()
-
-    replacements = {
-        "sony entertainment television": "sony",
-        "sony entertainment": "sony",
-        "zee tv hd": "zee tv",
-        "sony sab hd": "sony sab",
-        "star plus hd": "star plus",
-        "colors hd": "colors",
-        "star bharat hd": "star bharat",
-        "history tv 18": "history tv18",
-        "cnn news 18": "cnn news18",
-        "news 18": "news18",
-    }
-
-    for old, new in replacements.items():
-        value = value.replace(old, new)
-
-    value = re.sub(
-        r"\s+",
-        " ",
-        value,
-    )
-
-    return value.strip()
-
-
-def tokens(value):
-    return {
-        x
-        for x in normalize(value).split()
-        if len(x) > 1
-    }
-
-
-# ============================================================
-# REFERENCE NAME EXTRACTION
-# ============================================================
-
-def extract_reference_names(page):
-    names = set()
-
-    if not page:
-        return names
-
-    page = html.unescape(page)
-
-    # Table cells / headings / common channel-name fields.
-    patterns = [
-        r"<td[^>]*>\s*([^<]{2,100})\s*</td>",
-        r"<th[^>]*>\s*([^<]{2,100})\s*</th>",
-        r"<h[1-6][^>]*>\s*([^<]{2,100})\s*</h[1-6]>",
-        r'"channelName"\s*:\s*"([^"]{2,100})"',
-        r'"channel_name"\s*:\s*"([^"]{2,100})"',
-        r'"name"\s*:\s*"([^"]{2,100})"',
-    ]
-
-    for pattern in patterns:
-        for match in re.findall(
-            pattern,
-            page,
-            flags=re.I,
-        ):
-            value = clean(match)
-
-            if not value:
-                continue
-
-            n = normalize(value)
-
-            if len(n) < 3:
-                continue
-
-            if n in GENERIC_NAMES:
-                continue
-
-            if any(
-                word in n
-                for word in (
-                    "channel number",
-                    "channel name",
-                    "price",
-                    "language",
-                    "quality",
-                    "monthly",
-                    "subscription",
-                    "search for",
-                    "load more",
-                )
-            ):
-                continue
-
-            # Ignore obvious UI text.
-            if len(n.split()) > 10:
-                continue
-
-            names.add(n)
-
-    return names
-
-
-def load_reference_channels():
-    references = set()
-
-    print()
-    print("========================================")
-    print(" BUILDING INDIAN CHANNEL REFERENCE")
-    print("========================================")
-
-    for url in REFERENCE_URLS:
-        page = fetch_url(url)
-
-        found = extract_reference_names(page)
-
-        print(
-            f"REFERENCE: {url}"
-        )
-        print(
-            f"  CHANNEL NAMES FOUND: {len(found)}"
-        )
-
-        references.update(found)
-
-    # Always keep fallback names.
-    for name in FALLBACK_CHANNELS:
-        references.add(normalize(name))
-
-    print(
-        f"TOTAL REFERENCE NAMES: {len(references)}"
-    )
-
-    return references
-
-
-# ============================================================
-# M3U PARSER
-# ============================================================
-
-def parse_extinf(line):
+def parse_attrs(line):
     attrs = {}
 
-    match = re.match(
-        r"#EXTINF:[^ ]*(?:\s+(.*))?,(.*)$",
-        line,
-    )
+    for key, value in re.findall(r'([\w-]+)="([^"]*)"', line):
+        attrs[key.lower()] = value
 
-    if not match:
-        return attrs, ""
-
-    attribute_text = match.group(1) or ""
-    name = clean(match.group(2))
-
-    pattern = re.compile(
-        r'([\w-]+)="([^"]*)"'
-    )
-
-    for key, value in pattern.findall(
-        attribute_text
-    ):
-        attrs[key.lower()] = html.unescape(
-            value.strip()
-        )
-
-    return attrs, name
+    return attrs
 
 
-def parse_m3u(path):
+def get_language(info, name, source_name):
+    attrs = parse_attrs(info)
+
+    candidates = [
+        attrs.get("tvg-language", ""),
+        attrs.get("language", ""),
+        attrs.get("group-title", ""),
+        name,
+        source_name,
+    ]
+
+    text = " ".join(candidates).lower()
+
+    # Explicit language has highest priority.
+    if re.search(r"\bbhojpuri\b", text):
+        return "Bhojpuri"
+
+    if re.search(r"\bhindi\b", text):
+        return "Hindi"
+
+    if re.search(r"\benglish\b", text):
+        return "English"
+
+    # Source playlist itself is a language hint.
+    source = source_name.lower()
+
+    if "playlist-hindi" in source:
+        return "Hindi"
+
+    if "playlist-english-india" in source:
+        return "English"
+
+    # If an unwanted regional language is explicitly present,
+    # reject it instead of guessing.
+    for lang in OTHER_REGIONAL_LANGUAGES:
+        if re.search(r"\b" + re.escape(lang) + r"\b", text):
+            return None
+
+    return None
+
+
+def is_foreign_cricket(name, info):
+    text = norm(name + " " + info)
+    return any(word in text for word in FOREIGN_CRICKET_WORDS)
+
+
+def exact_channel_group(name):
+    n = norm(clean_name(name))
+
+    if not n or n in GENERIC_NAMES:
+        return None
+
+    # Exact first.
+    for channel, group in CHANNEL_GROUPS.items():
+        if n == norm(channel):
+            return group
+
+    return None
+
+
+def classify_channel(name, info):
+    """
+    Source group-title is deliberately ignored.
+
+    Classification follows known JioTV-style channel names,
+    then conservative channel-name keywords.
+    """
+
+    exact = exact_channel_group(name)
+    if exact:
+        return exact
+
+    n = norm(clean_name(name))
+
+    # Sports first so e.g. "Star Sports Cricket" never becomes
+    # Entertainment/Infotainment.
+    for words, group in KEYWORD_GROUPS:
+        for word in words:
+            if word in n:
+                return group
+
+    return None
+
+
+def is_allowed_language(language):
+    if not language:
+        return False
+    return language.lower() in ALLOWED_LANGUAGES
+
+
+def canonical_url(url):
+    """
+    Exact URL deduplication.
+
+    Do not alter query parameters because different parameters
+    may represent different streams.
+    """
+    return url.strip()
+
+
+def parse_m3u(text, source_name):
     entries = []
 
-    try:
-        lines = Path(path).read_text(
-            encoding="utf-8",
-            errors="ignore",
-        ).splitlines()
-
-    except Exception as e:
-        print(
-            f"WARNING: cannot read {path}: {e}"
-        )
-        return entries
-
-    pending_attrs = None
-    pending_name = None
+    lines = text.splitlines()
+    current_info = None
+    current_name = None
 
     for raw in lines:
         line = raw.strip()
@@ -720,537 +476,79 @@ def parse_m3u(path):
         if not line:
             continue
 
-        if line.startswith("#EXTINF:"):
-            pending_attrs, pending_name = (
-                parse_extinf(line)
-            )
+        if line.startswith("#EXTINF"):
+            current_info = line
+            current_name = line.split(",", 1)[1].strip() if "," in line else ""
             continue
 
         if line.startswith("#"):
             continue
 
-        if pending_attrs is None:
+        if current_info is None:
             continue
 
         url = line.strip()
 
-        if url.startswith(
-            ("http://", "https://")
-        ):
-            entries.append({
-                "attrs": pending_attrs,
-                "name": pending_name or "",
-                "url": url,
-                "source": str(path),
-            })
+        if not url:
+            continue
 
-        pending_attrs = None
-        pending_name = None
+        entries.append({
+            "info": current_info,
+            "name": current_name or "",
+            "url": url,
+            "source": source_name,
+        })
+
+        current_info = None
+        current_name = None
 
     return entries
 
 
-# ============================================================
-# CHANNEL NAME MATCHING
-# ============================================================
-
-def similarity(a, b):
-    a = normalize(a)
-    b = normalize(b)
-
-    if not a or not b:
-        return 0.0
-
-    if a == b:
-        return 1.0
-
-    # One is exact token subset of the other.
-    ta = tokens(a)
-    tb = tokens(b)
-
-    if ta and tb:
-        common = len(ta & tb)
-        union = len(ta | tb)
-
-        if common >= 2:
-            score = common / union
-
-            if score >= 0.70:
-                return max(
-                    score,
-                    SequenceMatcher(
-                        None,
-                        a,
-                        b,
-                    ).ratio(),
-                )
-
-    return SequenceMatcher(
-        None,
-        a,
-        b,
-    ).ratio()
-
-
-def find_reference_match(name, references):
-    n = normalize(name)
-
-    if not n:
-        return False, "", 0.0
-
-    if n in references:
-        return True, n, 1.0
-
-    # Strong substring match.
-    for ref in references:
-        if len(ref) < 5:
-            continue
-
-        if n == ref:
-            return True, ref, 1.0
-
-        if (
-            len(n) >= 7
-            and (
-                n in ref
-                or ref in n
-            )
-        ):
-            return True, ref, 0.94
-
-    # Fuzzy matching.
-    best_ref = ""
-    best_score = 0.0
-
-    for ref in references:
-        if len(ref) < 5:
-            continue
-
-        score = similarity(
-            n,
-            ref,
-        )
-
-        if score > best_score:
-            best_score = score
-            best_ref = ref
-
-    # Conservative threshold.
-    if best_score >= 0.88:
-        return True, best_ref, best_score
-
-    return False, best_ref, best_score
-
-
-# ============================================================
-# LANGUAGE
-# ============================================================
-
-def detect_language(
-    attrs,
-    name,
-    group,
-    source,
-):
-    values = [
-        attrs.get("tvg-language", ""),
-        attrs.get("language", ""),
-        name,
-        group,
-        Path(source).name,
-    ]
-
-    text = " ".join(
-        normalize(x)
-        for x in values
-    )
-
-    # Explicit regional language = reject.
-    for lang in REGIONAL_LANGUAGES:
-        if re.search(
-            r"\b" + re.escape(lang) + r"\b",
-            text,
-        ):
-            return "REGIONAL"
-
-    # Hindi.
-    if re.search(
-        r"\bhindi\b|\bhin\b",
-        text,
-    ):
-        return "Hindi"
-
-    # Bhojpuri.
-    if "bhojpuri" in text:
-        return "Bhojpuri"
-
-    # English.
-    if re.search(
-        r"\benglish\b|\beng\b",
-        text,
-    ):
-        return "English"
-
-    # Source playlist itself is a useful language hint.
-    filename = Path(source).name.lower()
-
-    if "hindi" in filename:
-        return "Hindi"
-
-    if "english" in filename:
-        return "English"
-
-    # Known Indian channels where language is obvious.
-    n = normalize(name)
-
-    hindi_indicators = (
-        "aaj tak",
-        "zee hindi",
-        "star plus",
-        "star bharat",
-        "sony sab",
-        "zee tv",
-        "colors",
-        "dangal",
-        "sony pal",
-        "zee anmol",
-        "b4u kadak",
-        "b4u movies",
-        "star gold",
-        "zee cinema",
-        "sony max",
-    )
-
-    if any(
-        x in n
-        for x in hindi_indicators
-    ):
-        return "Hindi"
-
-    # English Indian feeds.
-    english_indicators = (
-        "ndtv 24x7",
-        "ndtv",
-        "cnbc tv18",
-        "cnbc",
-        "india today",
-        "cnn news18",
-        "firstpost",
-        "wion",
-        "et now",
-        "discovery",
-        "animal planet",
-        "national geographic",
-        "nat geo",
-        "history tv",
-        "travel xp",
-        "fashion tv",
-        "tlc",
-    )
-
-    if any(
-        x in n
-        for x in english_indicators
-    ):
-        return "English"
-
-    return ""
-
-
-# ============================================================
-# SPORT
-# ============================================================
-
-def is_sport(
-    attrs,
-    name,
-    group,
-    url,
-):
-    text = " ".join([
-        normalize(
-            attrs.get(
-                "group-title",
-                "",
-            )
-        ),
-        normalize(
-            attrs.get(
-                "tvg-name",
-                "",
-            )
-        ),
-        normalize(name),
-        normalize(group),
-        normalize(url),
-    ])
-
-    return any(
-        word in text
-        for word in SPORT_WORDS
-    )
-
-
-def is_cricket(
-    attrs,
-    name,
-    group,
-    url,
-):
-    text = " ".join([
-        normalize(
-            attrs.get(
-                "group-title",
-                "",
-            )
-        ),
-        normalize(name),
-        normalize(group),
-        normalize(url),
-    ])
-
-    return any(
-        word in text
-        for word in CRICKET_WORDS
-    )
-
-
-# ============================================================
-# CATEGORY
-# ============================================================
-
-def category_from_text(
-    attrs,
-    name,
-    group,
-):
-    text = " ".join([
-        normalize(
-            attrs.get(
-                "group-title",
-                "",
-            )
-        ),
-        normalize(name),
-        normalize(group),
-    ])
-
-    # Sports first.
-    if any(
-        x in text
-        for x in CATEGORY_KEYWORDS["Sports"]
-    ):
-        return "Sports"
-
-    # Exact group from source.
-    group_lower = normalize(group)
-
-    for category in ALLOWED_CATEGORIES:
-        if group_lower == category.lower():
-            return category
-
-    # Keyword category.
-    for category in ALLOWED_CATEGORIES:
-        if category == "Sports":
-            continue
-
-        for keyword in CATEGORY_KEYWORDS[
-            category
-        ]:
-            if keyword in text:
-                return category
-
-    return None
-
-
-def classify(
-    attrs,
-    name,
-    group,
-):
-    # Never allow excluded source groups.
-    g = normalize(group)
-
-    if any(
-        x in g
-        for x in EXCLUDED_WORDS
-    ):
-        return None
-
-    return category_from_text(
-        attrs,
-        name,
-        group,
-    )
-
-
-# ============================================================
-# INDIAN / CRICKET FILTER
-# ============================================================
-
-def allowed_entry(
-    entry,
-    references,
-):
-    attrs = entry["attrs"]
-    name = entry["name"]
-    url = entry["url"]
-    source = entry["source"]
-
-    group = attrs.get(
-        "group-title",
-        "",
-    )
-
-    sport = is_sport(
-        attrs,
-        name,
-        group,
+def download(url):
+    req = urllib.request.Request(
         url,
+        headers={
+            "User-Agent": "Mozilla/5.0 IPTV-Playlist-Generator",
+            "Accept": "*/*",
+        },
     )
 
-    cricket = is_cricket(
-        attrs,
-        name,
-        group,
-        url,
-    )
-
-    # --------------------------------------------------------
-    # CRICKET FROM ANY COUNTRY IS ALLOWED
-    # --------------------------------------------------------
-
-    if cricket:
-        return True, "CRICKET"
-
-    # --------------------------------------------------------
-    # MATCH CHANNEL AGAINST JIO / TATA / AIRTEL
-    # --------------------------------------------------------
-
-    matched, matched_name, score = (
-        find_reference_match(
-            name,
-            references,
-        )
-    )
-
-    if not matched:
-        # Try tvg-name.
-        tvg_name = attrs.get(
-            "tvg-name",
-            "",
-        )
-
-        if tvg_name:
-            matched, matched_name, score = (
-                find_reference_match(
-                    tvg_name,
-                    references,
-                )
-            )
-
-    if not matched:
-        return False, "NOT_IN_INDIAN_REFERENCE"
-
-    # --------------------------------------------------------
-    # LANGUAGE FILTER
-    # --------------------------------------------------------
-
-    language = detect_language(
-        attrs,
-        name,
-        group,
-        source,
-    )
-
-    if language == "REGIONAL":
-        return False, "REGIONAL_LANGUAGE"
-
-    # If explicitly known language, enforce it.
-    if language:
-        if language not in (
-            "Hindi",
-            "English",
-            "Bhojpuri",
-        ):
-            return False, "OTHER_LANGUAGE"
-
-    # --------------------------------------------------------
-    # INDIAN CHANNEL MATCHED
-    #
-    # Country of stream DOES NOT MATTER.
-    # USA / UK / Middle East / Australia etc. allowed.
-    # --------------------------------------------------------
-
-    return True, (
-        f"INDIAN_MATCH:{matched_name}:{score:.3f}"
-    )
+    with urllib.request.urlopen(req, timeout=60) as response:
+        return response.read().decode("utf-8", errors="replace")
 
 
-# ============================================================
-# EXTINF
-# ============================================================
+def rebuild_extinf(entry, group, language):
+    attrs = parse_attrs(entry["info"])
 
-def rewrite_extinf(
-    attrs,
-    name,
-    category,
-    language,
-):
-    new_attrs = dict(attrs)
+    # Remove old group/language so the generated playlist has
+    # only our own metadata.
+    attrs["group-title"] = group
+    attrs["tvg-language"] = language
 
-    new_attrs["group-title"] = category
-
-    if language in (
-        "Hindi",
-        "English",
-        "Bhojpuri",
-    ):
-        new_attrs[
-            "tvg-language"
-        ] = language
+    # Preserve useful existing attributes.
+    ordered = []
 
     preferred = [
         "tvg-id",
         "tvg-name",
         "tvg-logo",
         "tvg-language",
-        "tvg-country",
         "group-title",
     ]
 
-    parts = []
     used = set()
 
     for key in preferred:
-        value = new_attrs.get(
-            key,
-            "",
-        )
-
-        if value:
-            parts.append(
-                f'{key}="{value}"'
-            )
+        if key in attrs:
+            ordered.append(f'{key}="{attrs[key]}"')
             used.add(key)
 
-    for key, value in new_attrs.items():
-        if key in used:
-            continue
+    for key, value in attrs.items():
+        if key not in used:
+            ordered.append(f'{key}="{value}"')
 
-        if not value:
-            continue
-
-        parts.append(
-            f'{key}="{value}"'
-        )
-
-    return (
-        "#EXTINF:-1 "
-        + " ".join(parts)
-        + ","
-        + name
-    )
+    return "#EXTINF:-1 " + " ".join(ordered) + "," + entry["name"]
 
 
 # ============================================================
@@ -1258,362 +556,174 @@ def rewrite_extinf(
 # ============================================================
 
 def main():
-    parser = argparse.ArgumentParser(
-        description=(
-            "Indian IPTV playlist builder "
-            "using JioTV/Tata Play/Airtel "
-            "channel-name matching."
-        )
-    )
+    output = "playlist.m3u"
 
-    parser.add_argument(
-        "source",
-        help="Directory containing M3U/M3U8 files",
-    )
+    if "-o" in sys.argv:
+        try:
+            output = sys.argv[sys.argv.index("-o") + 1]
+        except IndexError:
+            pass
 
-    parser.add_argument(
-        "-o",
-        "--output",
-        default="playlist.m3u",
-    )
-
-    args = parser.parse_args()
-
-    source_dir = Path(
-        args.source
-    )
-
-    if not source_dir.exists():
-        raise SystemExit(
-            f"ERROR: source directory not found: "
-            f"{source_dir}"
-        )
-
-    # Recursive scan.
-    files = sorted(
-        p
-        for p in source_dir.rglob("*")
-        if p.is_file()
-        and p.suffix.lower()
-        in (
-            ".m3u",
-            ".m3u8",
-        )
-    )
-
-    if not files:
-        raise SystemExit(
-            "ERROR: no M3U/M3U8 files found."
-        )
-
-    print(
-        "========================================"
-    )
-    print(
-        " IPTV PLAYLIST GENERATOR"
-    )
-    print(
-        "========================================"
-    )
-
-    print(
-        f"M3U FILES FOUND: {len(files)}"
-    )
-
-    for path in files:
-        print(
-            " -",
-            path,
-        )
-
-    # --------------------------------------------------------
-    # BUILD REFERENCE
-    # --------------------------------------------------------
-
-    references = (
-        load_reference_channels()
-    )
-
-    # --------------------------------------------------------
-    # READ ALL PLAYLISTS
-    # --------------------------------------------------------
+    print("==============================================")
+    print(" JioTV-style Indian Channel Playlist Builder")
+    print("==============================================")
+    print("Sources:", len(SOURCE_URLS))
 
     all_entries = []
 
-    for path in files:
-        entries = parse_m3u(path)
+    for source_url in SOURCE_URLS:
+        source_name = Path(urlsplit(source_url).path).name
 
-        print(
-            f"{path.name}: "
-            f"{len(entries)} entries"
-        )
+        print(f"\nFetching: {source_name}")
 
-        all_entries.extend(
-            entries
-        )
+        try:
+            text = download(source_url)
+            entries = parse_m3u(text, source_name)
 
-    print()
-    print(
-        f"TOTAL SOURCE ENTRIES: "
-        f"{len(all_entries)}"
-    )
+            print(f"  Entries: {len(entries)}")
+            all_entries.extend(entries)
 
-    # --------------------------------------------------------
-    # FILTER
-    # --------------------------------------------------------
+        except Exception as exc:
+            print(f"  ERROR: {exc}")
 
-    final_entries = []
+    print(f"\nTotal source entries: {len(all_entries)}")
 
+    final = []
+
+    # Exact URL is globally unique.
+    # This automatically removes:
+    #   same channel + same URL
+    #   different channel + same URL
     seen_urls = set()
 
-    stats = {
-        "cricket": 0,
-        "indian": 0,
-        "not_reference": 0,
-        "regional": 0,
-        "other_language": 0,
-        "uncategorized": 0,
-        "duplicate": 0,
-    }
+    rejected_language = 0
+    rejected_group = 0
+    rejected_foreign = 0
 
     for entry in all_entries:
-        attrs = entry["attrs"]
-        name = entry["name"]
-        url = entry["url"]
-        source = entry["source"]
+        name = clean_name(entry["name"])
+        info = entry["info"]
+        url = canonical_url(entry["url"])
 
-        group = attrs.get(
-            "group-title",
-            "",
-        )
-
-        # Exact URL duplicate.
-        if url in seen_urls:
-            stats["duplicate"] += 1
+        if not url:
             continue
 
-        allowed, reason = allowed_entry(
-            entry,
-            references,
+        # ----------------------------------------------------
+        # LANGUAGE
+        # ----------------------------------------------------
+        language = get_language(
+            info,
+            name,
+            entry["source"],
         )
 
-        if not allowed:
-            if (
-                reason
-                == "NOT_IN_INDIAN_REFERENCE"
-            ):
-                stats["not_reference"] += 1
+        # Foreign cricket is the one explicit foreign exception.
+        foreign_cricket = is_foreign_cricket(name, info)
 
-            elif (
-                reason
-                == "REGIONAL_LANGUAGE"
-            ):
-                stats["regional"] += 1
-
-            elif (
-                reason
-                == "OTHER_LANGUAGE"
-            ):
-                stats["other_language"] += 1
-
-            continue
-
-        if reason == "CRICKET":
-            stats["cricket"] += 1
+        if not foreign_cricket:
+            if not is_allowed_language(language):
+                rejected_language += 1
+                continue
         else:
-            stats["indian"] += 1
+            # Keep cricket even if the playlist doesn't explicitly
+            # mark it as Hindi/English/Bhojpuri.
+            if not language:
+                language = "English"
 
-        category = classify(
-            attrs,
-            name,
-            group,
-        )
+        # ----------------------------------------------------
+        # GROUP
+        # ----------------------------------------------------
+        group = classify_channel(name, info)
 
-        # Cricket always belongs to Sports.
-        if is_cricket(
-            attrs,
-            name,
-            group,
-            url,
-        ):
-            category = "Sports"
+        # Foreign cricket always belongs to Sports.
+        if foreign_cricket:
+            group = "Sports"
 
-        if not category:
-            stats["uncategorized"] += 1
+        if group not in ALLOWED_GROUPS:
+            rejected_group += 1
             continue
 
-        if category not in ALLOWED_CATEGORIES:
-            stats["uncategorized"] += 1
+        # ----------------------------------------------------
+        # GLOBAL EXACT URL DEDUP
+        # ----------------------------------------------------
+        if url in seen_urls:
             continue
-
-        language = detect_language(
-            attrs,
-            name,
-            group,
-            source,
-        )
-
-        # If no explicit language is detected,
-        # keep it because the Indian reference
-        # matched and the source playlist itself
-        # may not expose language metadata.
-        #
-        # Regional was already rejected above.
 
         seen_urls.add(url)
 
-        extinf = rewrite_extinf(
-            attrs,
-            name,
-            category,
-            language,
-        )
-
-        final_entries.append({
-            "extinf": extinf,
-            "url": url,
-            "category": category,
+        final.append({
+            "entry": entry,
             "name": name,
+            "url": url,
+            "group": group,
             "language": language,
         })
 
     # --------------------------------------------------------
-    # SORT
+    # Stable ordering:
+    # exact 10 groups only
     # --------------------------------------------------------
-
-    category_order = {
-        category: index
-        for index, category
-        in enumerate(
-            ALLOWED_CATEGORIES,
-            start=1,
-        )
+    group_order = {
+        group: index
+        for index, group in enumerate(ALLOWED_GROUPS)
     }
 
-    final_entries.sort(
+    final.sort(
         key=lambda x: (
-            category_order.get(
-                x["category"],
-                999,
-            ),
-            x["language"],
-            x["name"].lower(),
+            group_order.get(x["group"], 999),
+            norm(x["name"]),
             x["url"],
         )
     )
 
     # --------------------------------------------------------
-    # WRITE
+    # WRITE PLAYLIST
     # --------------------------------------------------------
+    with open(output, "w", encoding="utf-8", newline="\n") as fp:
+        fp.write("#EXTM3U\n")
 
-    output = Path(
-        args.output
-    )
+        current_group = None
 
-    with output.open(
-        "w",
-        encoding="utf-8",
-        newline="\n",
-    ) as f:
+        for item in final:
+            if item["group"] != current_group:
+                current_group = item["group"]
+                fp.write(
+                    f'\n# ===== {current_group} =====\n'
+                )
 
-        f.write(
-            '#EXTM3U '
-            'x-tvg-url="'
-            'https://raw.githubusercontent.com/'
-            'Sri014/3502/main/epg.xml'
-            '"\n'
-        )
-
-        for entry in final_entries:
-            f.write(
-                entry["extinf"]
+            fp.write(
+                rebuild_extinf(
+                    item["entry"],
+                    item["group"],
+                    item["language"],
+                )
                 + "\n"
             )
 
-            f.write(
-                entry["url"]
-                + "\n"
-            )
+            fp.write(item["url"] + "\n")
 
     # --------------------------------------------------------
-    # FINAL STATS
+    # STATS
     # --------------------------------------------------------
+    counts = {group: 0 for group in ALLOWED_GROUPS}
 
-    counts = {
-        category: 0
-        for category
-        in ALLOWED_CATEGORIES
-    }
+    for item in final:
+        counts[item["group"]] += 1
 
-    for entry in final_entries:
-        counts[
-            entry["category"]
-        ] += 1
+    print("\n==============================================")
+    print(" FINAL PLAYLIST")
+    print("==============================================")
 
-    print()
-    print(
-        "========================================"
-    )
-    print(
-        " FINAL RESULT"
-    )
-    print(
-        "========================================"
-    )
+    for group in ALLOWED_GROUPS:
+        print(f"{group:15} : {counts[group]}")
 
-    print(
-        f"FINAL CHANNELS: "
-        f"{len(final_entries)}"
-    )
-
-    print(
-        f"INDIAN MATCHED: "
-        f"{stats['indian']}"
-    )
-
-    print(
-        f"CRICKET ALLOWED: "
-        f"{stats['cricket']}"
-    )
-
-    print(
-        f"NOT IN INDIAN REFERENCE: "
-        f"{stats['not_reference']}"
-    )
-
-    print(
-        f"REGIONAL LANGUAGE REMOVED: "
-        f"{stats['regional']}"
-    )
-
-    print(
-        f"OTHER LANGUAGE REMOVED: "
-        f"{stats['other_language']}"
-    )
-
-    print(
-        f"UNCATEGORIZED: "
-        f"{stats['uncategorized']}"
-    )
-
-    print(
-        f"DUPLICATE URL REMOVED: "
-        f"{stats['duplicate']}"
-    )
-
-    print()
-    print("GROUPS:")
-
-    for category in ALLOWED_CATEGORIES:
-        print(
-            f"  {category}: "
-            f"{counts[category]}"
-        )
-
-    print()
-    print(
-        f"OUTPUT: {output}"
-    )
+    print("----------------------------------------------")
+    print("Source entries       :", len(all_entries))
+    print("Final unique URLs    :", len(final))
+    print("Rejected language    :", rejected_language)
+    print("Rejected category    :", rejected_group)
+    print("Output               :", output)
+    print("==============================================")
 
 
 if __name__ == "__main__":
