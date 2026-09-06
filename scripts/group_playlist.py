@@ -1,4 +1,3 @@
-```python
 #!/usr/bin/env python3
 
 import argparse
@@ -7,14 +6,10 @@ import json
 import re
 import sys
 import urllib.request
-import urllib.error
 import xml.etree.ElementTree as ET
 from pathlib import Path
+from difflib import SequenceMatcher
 
-
-# ============================================================
-# CONFIG
-# ============================================================
 
 SOURCE_URLS = [
     "https://raw.githubusercontent.com/wizakorhd/iptv/main/playlist-hindi.m3u",
@@ -23,7 +18,6 @@ SOURCE_URLS = [
     "https://raw.githubusercontent.com/wizakorhd/iptv/main/playlist.m3u",
 ]
 
-# Correct mitthu786 gist
 JIOTV_JSON_URL = (
     "https://gist.githubusercontent.com/mitthu786/"
     "a6e246c3f0012cdd85a7e5fc3128348f/raw/tsjiotv.json"
@@ -59,31 +53,12 @@ ALLOWED_LANGUAGES = {
 }
 
 BAD_LANGUAGES = {
-    "bengali",
-    "bangla",
-    "tamil",
-    "telugu",
-    "kannada",
-    "malayalam",
-    "marathi",
-    "punjabi",
-    "gujarati",
-    "odia",
-    "oriya",
-    "assamese",
-    "nepali",
-    "urdu",
-    "sinhala",
-    "konkani",
-    "manipuri",
-    "meitei",
-    "sindhi",
-    "kashmiri",
-    "dogri",
-    "maithili",
-    "rajasthani",
-    "haryanvi",
-    "chhattisgarhi",
+    "bengali", "bangla", "tamil", "telugu", "kannada",
+    "malayalam", "marathi", "punjabi", "gujarati",
+    "odia", "oriya", "assamese", "nepali", "urdu",
+    "sinhala", "konkani", "manipuri", "meitei",
+    "sindhi", "kashmiri", "dogri", "maithili",
+    "rajasthani", "haryanvi", "chhattisgarhi",
 }
 
 FOREIGN_CRICKET_WORDS = (
@@ -91,12 +66,44 @@ FOREIGN_CRICKET_WORDS = (
     "icc",
 )
 
+GENRE_MAP = {
+    "news": "News",
 
-# ============================================================
-# HTTP
-# ============================================================
+    "entertainment": "Entertainment",
 
-def fetch_bytes(url, timeout=45):
+    "movie": "Movies",
+    "movies": "Movies",
+    "film": "Movies",
+    "films": "Movies",
+
+    "music": "Music",
+
+    "kids": "Kids",
+    "children": "Kids",
+
+    "infotainment": "Infotainment",
+    "documentary": "Infotainment",
+    "documentaries": "Infotainment",
+    "general": "Infotainment",
+    "special interest": "Infotainment",
+    "travel": "Infotainment",
+
+    "science": "Science",
+    "technology": "Science",
+    "technology science": "Science",
+
+    "lifestyle": "Lifestyle",
+    "lifestyle leisure": "Lifestyle",
+
+    "business": "Business",
+    "business news": "Business",
+
+    "sports": "Sports",
+    "sport": "Sports",
+}
+
+
+def fetch_bytes(url, timeout=60):
     req = urllib.request.Request(
         url,
         headers={
@@ -118,25 +125,14 @@ def fetch_bytes(url, timeout=45):
 def fetch_text(url):
     data = fetch_bytes(url)
 
-    for encoding in (
-        "utf-8-sig",
-        "utf-8",
-        "latin-1",
-    ):
+    for encoding in ("utf-8-sig", "utf-8", "latin-1"):
         try:
             return data.decode(encoding)
         except UnicodeDecodeError:
-            pass
+            continue
 
-    return data.decode(
-        "utf-8",
-        errors="replace",
-    )
+    return data.decode("utf-8", errors="replace")
 
-
-# ============================================================
-# TEXT / NORMALIZATION
-# ============================================================
 
 def clean_text(value):
     if value is None:
@@ -154,11 +150,10 @@ def clean_text(value):
     for old, new in replacements.items():
         value = value.replace(old, new)
 
-    value = re.sub(
-        r"\s+",
-        " ",
-        value,
-    )
+    value = value.replace("ᶠᴴᴰ", " ")
+    value = value.replace("ᴴᴰ", " ")
+
+    value = re.sub(r"\s+", " ", value)
 
     return value.strip()
 
@@ -166,67 +161,30 @@ def clean_text(value):
 def normalize_name(value):
     value = clean_text(value).lower()
 
-    # Unicode HD/FHD decorations
-    value = value.replace("ᶠᴴᴰ", " ")
-    value = value.replace("ᴴᴰ", " ")
-    value = value.replace("ᶠᴴᴰ", " ")
-
-    # Common separators
     value = value.replace("_", " ")
     value = value.replace("&", " and ")
 
-    # Remove quality markers
     value = re.sub(
-        r"\b("
-        r"uhd|4k|8k|fhd|hd|sd|"
-        r"hevc|h265|h264|"
-        r"1080p|720p|576p|480p"
-        r")\b",
-        " ",
-        value,
-        flags=re.I,
-    )
-
-    # Remove common feed suffixes
-    value = re.sub(
-        r"\b("
-        r"live|channel|tv|television"
-        r")\b$",
-        "",
-        value,
-        flags=re.I,
-    )
-
-    # Remove India marker only when used as suffix/prefix
-    value = re.sub(
-        r"\b(india|indian)\b",
-        " ",
-        value,
-        flags=re.I,
-    )
-
-    # Remove language suffixes from identity comparison.
-    # Language itself is checked separately.
-    value = re.sub(
-        r"\b("
-        r"hindi|english|bhojpuri"
-        r")\b",
-        " ",
-        value,
-        flags=re.I,
-    )
-
-    value = re.sub(
-        r"[^a-z0-9]+",
+        r"\b(?:uhd|4k|8k|fhd|hd|sd|hevc|h265|h264|"
+        r"1080p|720p|576p|480p)\b",
         " ",
         value,
     )
 
     value = re.sub(
-        r"\s+",
+        r"\b(?:hindi|english|bhojpuri)\b",
         " ",
         value,
     )
+
+    value = re.sub(
+        r"\b(?:india|indian)\b",
+        " ",
+        value,
+    )
+
+    value = re.sub(r"[^a-z0-9]+", " ", value)
+    value = re.sub(r"\s+", " ", value)
 
     return value.strip()
 
@@ -239,20 +197,40 @@ def compact_name(value):
     )
 
 
-def words(value):
-    return set(
-        normalize_name(value).split()
-    )
+def identity_tokens(value):
+    generic = {
+        "tv",
+        "television",
+        "channel",
+        "live",
+        "network",
+        "india",
+        "indian",
+    }
+
+    return {
+        x
+        for x in normalize_name(value).split()
+        if x not in generic
+    }
 
 
-# ============================================================
-# M3U
-# ============================================================
+def parse_attrs(line):
+    attrs = {}
+
+    for match in re.finditer(
+        r'([\w-]+)="([^"]*)"',
+        line,
+    ):
+        attrs[match.group(1)] = match.group(2)
+
+    return attrs
+
 
 def parse_m3u(text):
     entries = []
-
     current = None
+    pending_options = []
 
     for raw in text.splitlines():
         line = raw.strip()
@@ -260,13 +238,23 @@ def parse_m3u(text):
         if not line:
             continue
 
+        if line.startswith("#EXTVLCOPT:"):
+            if current is not None:
+                current.setdefault("options", []).append(line)
+            else:
+                pending_options.append(line)
+            continue
+
         if line.startswith("#EXTINF:"):
             current = {
                 "extinf": line,
                 "url": "",
                 "name": "",
-                "attrs": {},
+                "attrs": parse_attrs(line),
+                "options": list(pending_options),
             }
+
+            pending_options = []
 
             comma = line.find(",")
 
@@ -275,21 +263,9 @@ def parse_m3u(text):
                     line[comma + 1:]
                 )
 
-            attrs_part = (
-                line[:comma]
-                if comma >= 0
-                else line
-            )
+            continue
 
-            for match in re.finditer(
-                r'([\w-]+)="([^"]*)"',
-                attrs_part,
-            ):
-                current["attrs"][
-                    match.group(1)
-                ] = match.group(2)
-
-        elif (
+        if (
             not line.startswith("#")
             and current is not None
         ):
@@ -304,10 +280,7 @@ def parse_m3u(text):
 
 
 def get_attr(entry, *names):
-    attrs = entry.get(
-        "attrs",
-        {},
-    )
+    attrs = entry.get("attrs", {})
 
     for name in names:
         value = attrs.get(name)
@@ -319,24 +292,14 @@ def get_attr(entry, *names):
 
 
 def source_name(entry):
-    # IMPORTANT:
-    # Display name from EXTINF is the most reliable
-    # Wizakor channel name.
-    display_name = clean_text(
-        entry.get("name", "")
-    )
-
-    if display_name:
-        return display_name
-
     return (
-        get_attr(
+        clean_text(entry.get("name", ""))
+        or get_attr(
             entry,
             "tvg-name",
             "channel-name",
             "name",
         )
-        or ""
     )
 
 
@@ -348,13 +311,7 @@ def source_tvg_id(entry):
     )
 
 
-# ============================================================
-# JIOTV JSON
-# ============================================================
-
 def parse_jiotv_json(data):
-    result = []
-
     if isinstance(data, dict):
         for key in (
             "channels",
@@ -362,15 +319,14 @@ def parse_jiotv_json(data):
             "results",
             "items",
         ):
-            if isinstance(
-                data.get(key),
-                list,
-            ):
+            if isinstance(data.get(key), list):
                 data = data[key]
                 break
 
     if not isinstance(data, list):
-        return result
+        return []
+
+    result = []
 
     for item in data:
         if not isinstance(item, dict):
@@ -384,44 +340,35 @@ def parse_jiotv_json(data):
             or ""
         )
 
-        genre = (
-            item.get("genre")
-            or item.get("category")
-            or ""
-        )
-
-        lang = (
-            item.get("lang")
-            or item.get("language")
-            or ""
-        )
-
-        channel_id = (
-            item.get("id")
-            or item.get("channelId")
-            or ""
-        )
-
-        logo = (
-            item.get("img")
-            or item.get("logo")
-            or item.get("channelLogo")
-            or ""
-        )
-
-        name = clean_text(name)
-
         if not name:
             continue
 
         result.append({
-            "name": name,
+            "name": clean_text(name),
             "norm": normalize_name(name),
             "compact": compact_name(name),
-            "genre": clean_text(genre),
-            "lang": clean_text(lang),
-            "id": clean_text(channel_id),
-            "logo": clean_text(logo),
+            "tokens": identity_tokens(name),
+            "genre": clean_text(
+                item.get("genre")
+                or item.get("category")
+                or ""
+            ),
+            "lang": clean_text(
+                item.get("lang")
+                or item.get("language")
+                or ""
+            ),
+            "id": clean_text(
+                item.get("id")
+                or item.get("channelId")
+                or ""
+            ),
+            "logo": clean_text(
+                item.get("img")
+                or item.get("logo")
+                or item.get("channelLogo")
+                or ""
+            ),
             "source": "jiotv",
         })
 
@@ -432,38 +379,31 @@ def load_jiotv_reference():
     print("Fetching JioTV reference...")
 
     try:
-        raw = fetch_text(
-            JIOTV_JSON_URL
-        )
+        raw = fetch_text(JIOTV_JSON_URL)
+        refs = parse_jiotv_json(json.loads(raw))
 
-        data = json.loads(raw)
+        print(f"  JioTV channels: {len(refs)}")
 
-        refs = parse_jiotv_json(data)
-
-        if refs:
-            print(
-                f"  JioTV channels: {len(refs)}"
-            )
-            return refs
+        return refs
 
     except Exception as exc:
         print(
-            "  JioTV JSON failed: "
+            "  JioTV reference failed: "
             f"{type(exc).__name__}: {exc}"
         )
-
-    print("  JioTV JSON unavailable.")
-
-    return []
+        return []
 
 
-# ============================================================
-# XMLTV
-# ============================================================
+def xml_text(element):
+    if element is None:
+        return ""
+
+    return clean_text(
+        "".join(element.itertext())
+    )
+
 
 def parse_xmltv(data, source_name_value):
-    result = []
-
     try:
         if data[:2] == b"\x1f\x8b":
             data = gzip.decompress(data)
@@ -475,41 +415,113 @@ def parse_xmltv(data, source_name_value):
             f"  {source_name_value} XML error: "
             f"{type(exc).__name__}: {exc}"
         )
-        return result
+        return []
 
-    for channel in root.findall(
-        ".//channel"
-    ):
-        channel_id = clean_text(
-            channel.attrib.get(
-                "id",
-                "",
-            )
+    channels = {}
+
+    for channel in root.findall(".//channel"):
+        cid = clean_text(
+            channel.attrib.get("id", "")
         )
+
+        if not cid:
+            continue
 
         names = []
 
-        for display in channel.findall(
-            "display-name"
-        ):
-            text = clean_text(
-                display.text or ""
-            )
+        for display in channel.findall("display-name"):
+            text = xml_text(display)
 
-            if text:
+            if text and text not in names:
                 names.append(text)
 
         if not names:
             continue
 
-        for name in names:
+        channels[cid] = {
+            "names": names,
+            "categories": [],
+            "languages": [],
+        }
+
+    for program in root.findall(".//programme"):
+        cid = clean_text(
+            program.attrib.get("channel", "")
+        )
+
+        if cid not in channels:
+            continue
+
+        for category in program.findall("category"):
+            value = xml_text(category)
+
+            if value:
+                channels[cid]["categories"].append(value)
+
+        for language in program.findall("language"):
+            value = xml_text(language)
+
+            if value:
+                channels[cid]["languages"].append(value)
+
+    result = []
+
+    for cid, data_item in channels.items():
+        categories = data_item["categories"]
+        languages = data_item["languages"]
+
+        genre = ""
+
+        if categories:
+            counts = {}
+
+            for category in categories:
+                mapped = map_genre(category)
+
+                if mapped:
+                    counts[mapped] = (
+                        counts.get(mapped, 0) + 1
+                    )
+
+            if counts:
+                genre = max(
+                    counts,
+                    key=counts.get,
+                )
+
+        lang = ""
+
+        if languages:
+            lang_counts = {}
+
+            for language in languages:
+                normalized = normalize_language(
+                    language
+                )
+
+                if normalized:
+                    lang_counts[normalized] = (
+                        lang_counts.get(
+                            normalized,
+                            0,
+                        ) + 1
+                    )
+
+            if lang_counts:
+                lang = max(
+                    lang_counts,
+                    key=lang_counts.get,
+                )
+
+        for name in data_item["names"]:
             result.append({
                 "name": name,
                 "norm": normalize_name(name),
                 "compact": compact_name(name),
-                "genre": "",
-                "lang": "",
-                "id": channel_id,
+                "tokens": identity_tokens(name),
+                "genre": genre,
+                "lang": lang,
+                "id": cid,
                 "logo": "",
                 "source": source_name_value,
             })
@@ -517,10 +529,7 @@ def parse_xmltv(data, source_name_value):
     return result
 
 
-def load_epg_reference(
-    url,
-    source_name_value,
-):
+def load_epg_reference(url, source_name_value):
     try:
         data = fetch_bytes(url)
 
@@ -541,94 +550,60 @@ def load_epg_reference(
             f"  {source_name_value} reference failed: "
             f"{type(exc).__name__}: {exc}"
         )
-
         return []
 
 
-# ============================================================
-# REFERENCE INDEX
-# ============================================================
-
 def build_reference_index(refs):
-    by_compact = {}
-    by_norm = {}
-    by_id = {}
+    index = {
+        "compact": {},
+        "norm": {},
+        "id": {},
+        "all": refs,
+    }
 
     for ref in refs:
-        compact = ref.get(
-            "compact",
-            "",
-        )
+        if ref.get("compact"):
+            index["compact"].setdefault(
+                ref["compact"],
+                [],
+            ).append(ref)
 
-        norm = ref.get(
-            "norm",
-            "",
-        )
+        if ref.get("norm"):
+            index["norm"].setdefault(
+                ref["norm"],
+                [],
+            ).append(ref)
 
         rid = clean_text(
-            ref.get(
-                "id",
-                "",
-            )
+            ref.get("id", "")
         ).lower()
 
-        if compact:
-            by_compact.setdefault(
-                compact,
-                [],
-            ).append(ref)
-
-        if norm:
-            by_norm.setdefault(
-                norm,
-                [],
-            ).append(ref)
-
         if rid:
-            by_id.setdefault(
+            index["id"].setdefault(
                 rid,
                 [],
             ).append(ref)
 
-    return {
-        "compact": by_compact,
-        "norm": by_norm,
-        "id": by_id,
-        "all": refs,
-    }
+    return index
 
-
-# ============================================================
-# LANGUAGE
-# ============================================================
 
 def normalize_language(value):
-    value = clean_text(
-        value
-    ).lower()
+    value = clean_text(value).lower()
 
     if not value:
         return ""
 
-    # Handle values such as:
-    # "Hindi / English"
-    # "English,Hindi"
-    # "Hindi English"
     found = []
 
-    for lang in ALLOWED_LANGUAGES:
+    for language in ALLOWED_LANGUAGES:
         if re.search(
             r"\b"
-            + re.escape(lang)
+            + re.escape(language)
             + r"\b",
             value,
         ):
-            found.append(lang)
+            found.append(language)
 
-    if len(found) == 1:
-        return found[0]
-
-    # Prefer Hindi if multiple allowed languages
     if "hindi" in found:
         return "hindi"
 
@@ -642,20 +617,17 @@ def normalize_language(value):
 
 
 def has_bad_language(value):
-    value = clean_text(
-        value
-    ).lower()
+    value = clean_text(value).lower()
 
-    for lang in BAD_LANGUAGES:
-        if re.search(
+    return any(
+        re.search(
             r"\b"
-            + re.escape(lang)
+            + re.escape(language)
             + r"\b",
             value,
-        ):
-            return True
-
-    return False
+        )
+        for language in BAD_LANGUAGES
+    )
 
 
 def source_language(entry):
@@ -669,280 +641,172 @@ def source_language(entry):
     )
 
 
-# ============================================================
-# GENRE
-# ============================================================
-
-GENRE_MAP = {
-    "news": "News",
-
-    "entertainment": "Entertainment",
-
-    "movies": "Movies",
-    "movie": "Movies",
-
-    "music": "Music",
-
-    "kids": "Kids",
-    "children": "Kids",
-
-    "infotainment": "Infotainment",
-
-    "science": "Science",
-
-    "lifestyle": "Lifestyle",
-
-    "business": "Business",
-
-    "sports": "Sports",
-    "sport": "Sports",
-}
-
-
 def map_genre(value):
-    value = normalize_name(
-        value
-    )
+    value = normalize_name(value)
 
     if not value:
         return ""
 
-    return GENRE_MAP.get(
-        value,
-        "",
-    )
+    direct = GENRE_MAP.get(value)
 
+    if direct:
+        return direct
 
-# ============================================================
-# MATCHING HELPERS
-# ============================================================
+    for key, group in GENRE_MAP.items():
+        if key in value:
+            return group
+
+    return ""
+
 
 def id_candidates(value):
-    value = clean_text(
-        value
-    ).lower()
+    value = clean_text(value).lower()
 
     if not value:
         return []
 
-    candidates = [
-        value
-    ]
+    result = [value]
 
     if value.startswith("ts"):
-        candidates.append(
-            value[2:]
-        )
+        result.append(value[2:])
 
-    return list(
-        dict.fromkeys(
-            candidates
-        )
-    )
+    return list(dict.fromkeys(result))
 
 
-def choose_jio(refs):
-    """
-    Prefer JioTV over Tata EPG because Jio reference
-    contains genre + language.
-    """
+def choose_reference(refs):
+    if not refs:
+        return None
+
     for ref in refs:
         if ref.get("source") == "jiotv":
             return ref
 
-    return refs[0] if refs else None
+    return refs[0]
 
 
 def exact_match(entry, index):
-    tvg_id = source_tvg_id(
-        entry
-    )
+    tvg_id = source_tvg_id(entry)
+    name = source_name(entry)
 
-    name = source_name(
-        entry
-    )
+    for rid in id_candidates(tvg_id):
+        found = index["id"].get(rid, [])
 
-    # 1. Exact ID
-    for rid in id_candidates(
-        tvg_id
-    ):
-        matches = index["id"].get(
-            rid,
-            [],
-        )
+        if found:
+            return choose_reference(found), 100
 
-        if matches:
-            ref = choose_jio(
-                matches
-            )
-
-            return ref, 100
-
-    # 2. Exact compact name
-    compact = compact_name(
-        name
-    )
+    compact = compact_name(name)
 
     if compact:
-        matches = index[
-            "compact"
-        ].get(
+        found = index["compact"].get(
             compact,
             [],
         )
 
-        if matches:
-            ref = choose_jio(
-                matches
-            )
+        if found:
+            return choose_reference(found), 100
 
-            return ref, 100
-
-    # 3. Exact normalized name
-    norm = normalize_name(
-        name
-    )
+    norm = normalize_name(name)
 
     if norm:
-        matches = index[
-            "norm"
-        ].get(
+        found = index["norm"].get(
             norm,
             [],
         )
 
-        if matches:
-            ref = choose_jio(
-                matches
-            )
-
-            return ref, 100
+        if found:
+            return choose_reference(found), 100
 
     return None, 0
 
 
+def similarity_score(source, reference):
+    source_compact = compact_name(source)
+    reference_compact = compact_name(reference)
+
+    if not source_compact or not reference_compact:
+        return 0.0
+
+    source_tokens = identity_tokens(source)
+    reference_tokens = identity_tokens(reference)
+
+    if not source_tokens or not reference_tokens:
+        return 0.0
+
+    common = source_tokens & reference_tokens
+
+    if not common:
+        return 0.0
+
+    union = source_tokens | reference_tokens
+    jaccard = len(common) / len(union)
+
+    sequence = SequenceMatcher(
+        None,
+        source_compact,
+        reference_compact,
+    ).ratio()
+
+    containment = 0.0
+
+    if (
+        len(source_compact) >= 5
+        and (
+            source_compact in reference_compact
+            or reference_compact in source_compact
+        )
+    ):
+        containment = 0.20
+
+    score = (
+        (jaccard * 0.55)
+        + (sequence * 0.45)
+        + containment
+    )
+
+    return min(score, 1.0)
+
+
 def fuzzy_match(entry, index):
-    name = source_name(
-        entry
-    )
+    source = source_name(entry)
 
-    src_words = words(
-        name
-    )
-
-    if not src_words:
+    if not source:
         return None, 0
 
-    src_compact = compact_name(
-        name
-    )
-
-    best = None
+    best_ref = None
     best_score = 0.0
 
     for ref in index["all"]:
-        ref_name = ref.get(
-            "name",
-            "",
+        score = similarity_score(
+            source,
+            ref.get("name", ""),
         )
 
-        ref_words = words(
-            ref_name
-        )
-
-        if not ref_words:
+        if score < 0.72:
             continue
-
-        # Avoid dangerous one-word fuzzy matches.
-        if (
-            len(src_words) == 1
-            or len(ref_words) == 1
-        ):
-            continue
-
-        intersection = (
-            src_words & ref_words
-        )
-
-        if not intersection:
-            continue
-
-        union = (
-            src_words | ref_words
-        )
-
-        jaccard = (
-            len(intersection)
-            / max(1, len(union))
-        )
-
-        ref_compact = ref.get(
-            "compact",
-            "",
-        )
-
-        bonus = 0.0
 
         if (
-            src_compact
-            and ref_compact
-            and (
-                src_compact
-                in ref_compact
-                or ref_compact
-                in src_compact
+            score > best_score
+            or (
+                score == best_score
+                and best_ref is not None
+                and ref.get("source") == "jiotv"
+                and best_ref.get("source") != "jiotv"
             )
         ):
-            bonus = 0.30
-
-        # First-word / brand overlap bonus
-        src_first = next(
-            iter(src_words),
-            "",
-        )
-
-        if src_first in ref_words:
-            bonus += 0.05
-
-        score = (
-            jaccard
-            + bonus
-        )
-
-        if score < 0.70:
-            continue
-
-        # Jio preferred
-        if (
-            score == best_score
-            and best is not None
-            and ref.get("source")
-            == "jiotv"
-        ):
-            best = ref
-            continue
-
-        if score > best_score:
             best_score = score
-            best = ref
+            best_ref = ref
 
-    if best is None:
+    if best_ref is None:
         return None, 0
 
     return (
-        best,
+        best_ref,
         int(best_score * 100),
     )
 
 
-# ============================================================
-# FOREIGN CRICKET
-# ============================================================
-
 def is_foreign_cricket(entry):
-    name = source_name(
-        entry
-    ).lower()
+    name = source_name(entry).lower()
 
     if has_bad_language(name):
         return False
@@ -958,22 +822,12 @@ def is_foreign_cricket(entry):
     )
 
 
-# ============================================================
-# RESOLVE
-# ============================================================
-
-def resolve_channel(
-    entry,
-    index,
-):
-    name = source_name(
-        entry
-    )
+def resolve_channel(entry, index):
+    name = source_name(entry)
 
     if not name:
         return None
 
-    # Explicit bad-language channel name
     if has_bad_language(name):
         return None
 
@@ -988,117 +842,63 @@ def resolve_channel(
             index,
         )
 
-    # Foreign cricket exception
     if ref is None:
-        if is_foreign_cricket(
-            entry
-        ):
+        if is_foreign_cricket(entry):
             return {
                 "indian": False,
-                "foreign_cricket": True,
-                "ref": None,
                 "group": "Sports",
                 "language": "English",
+                "ref": None,
                 "score": 0,
             }
 
         return None
 
-    # --------------------------------------------------------
-    # Language
-    # --------------------------------------------------------
-
-    ref_lang_raw = clean_text(
-        ref.get(
-            "lang",
-            "",
-        )
+    ref_lang = normalize_language(
+        ref.get("lang", "")
     )
 
-    if ref_lang_raw and has_bad_language(
-        ref_lang_raw
+    if ref.get("lang") and has_bad_language(
+        ref.get("lang")
     ):
         return None
 
-    ref_lang = normalize_language(
-        ref_lang_raw
-    )
-
-    src_lang = source_language(
-        entry
-    )
-
     language = (
         ref_lang
-        or src_lang
+        or source_language(entry)
     )
 
-    # If Jio has no language but source explicitly says
-    # Hindi/English/Bhojpuri, allow it.
     if language not in ALLOWED_LANGUAGES:
         return None
 
-    # --------------------------------------------------------
-    # Genre
-    # --------------------------------------------------------
-
     group = map_genre(
-        ref.get(
-            "genre",
-            "",
-        )
+        ref.get("genre", "")
     )
-
-    if not group:
-        return None
 
     if group not in GROUPS:
         return None
 
     return {
         "indian": True,
-        "foreign_cricket": False,
-        "ref": ref,
         "group": group,
         "language": language.title(),
+        "ref": ref,
         "score": score,
     }
 
 
-# ============================================================
-# M3U OUTPUT
-# ============================================================
-
 def escape_m3u(value):
-    value = clean_text(
-        value
-    )
-
-    return value.replace(
+    return clean_text(value).replace(
         '"',
         "'",
     )
 
 
-def build_extinf(
-    entry,
-    resolved,
-):
-    ref = resolved.get(
-        "ref"
-    )
-
-    group = resolved[
-        "group"
-    ]
-
-    language = resolved[
-        "language"
-    ]
-
-    name = source_name(
-        entry
-    )
+def build_extinf(entry, resolved):
+    ref = resolved.get("ref")
+    group = resolved["group"]
+    language = resolved["language"]
+    name = source_name(entry)
 
     logo = get_attr(
         entry,
@@ -1106,18 +906,10 @@ def build_extinf(
         "logo",
     )
 
-    tvg_id = source_tvg_id(
-        entry
-    )
+    tvg_id = source_tvg_id(entry)
 
     if not logo and ref:
-        logo = ref.get(
-            "logo",
-            "",
-        )
-
-    # Keep Wizakor display name.
-    # It is usually more useful than the old Jio name.
+        logo = ref.get("logo", "")
 
     attrs = []
 
@@ -1125,18 +917,10 @@ def build_extinf(
         attrs.append(
             f'tvg-id="{escape_m3u(tvg_id)}"'
         )
-    elif ref:
-        rid = clean_text(
-            ref.get(
-                "id",
-                "",
-            )
+    elif ref and ref.get("id"):
+        attrs.append(
+            f'tvg-id="{escape_m3u(ref["id"])}"'
         )
-
-        if rid:
-            attrs.append(
-                f'tvg-id="{escape_m3u(rid)}"'
-            )
 
     if logo:
         attrs.append(
@@ -1159,122 +943,49 @@ def build_extinf(
     )
 
 
-# ============================================================
-# URL
-# ============================================================
-
 def normalize_url(url):
-    return clean_text(
-        url
-    )
+    return clean_text(url)
 
 
 def url_key(url):
-    return normalize_url(
-        url
-    )
+    return normalize_url(url).lower()
 
 
-# ============================================================
-# SOURCE LOADING
-# ============================================================
+def load_sources():
+    """
+    ONLY the four configured WizakorHD playlists.
+    No arbitrary local source files are loaded.
+    """
 
-def load_sources(source_dir):
     entries = []
 
-    source_path = Path(
-        source_dir
-    )
-
-    # Local sources are allowed if workflow provides them.
-    if source_path.exists():
-        files = sorted(
-            p
-            for p in source_path.rglob("*")
-            if (
-                p.is_file()
-                and p.suffix.lower()
-                in {
-                    ".m3u",
-                    ".m3u8",
-                    ".txt",
-                }
-            )
-        )
-
-        for path in files:
-            try:
-                text = path.read_text(
-                    encoding="utf-8",
-                    errors="replace",
-                )
-
-                parsed = parse_m3u(
-                    text
-                )
-
-                print(
-                    f"  {path}: "
-                    f"{len(parsed)} entries"
-                )
-
-                entries.extend(
-                    parsed
-                )
-
-            except Exception as exc:
-                print(
-                    f"  Failed {path}: "
-                    f"{type(exc).__name__}: {exc}"
-                )
-
-    # If local files exist, still use the four configured
-    # Wizakor sources when they are not already represented.
-    print(
-        "Fetching WizakorHD source playlists..."
-    )
+    print("Fetching WizakorHD source playlists...")
 
     for url in SOURCE_URLS:
-        try:
-            text = fetch_text(
-                url
-            )
+        filename = url.rsplit("/", 1)[-1]
 
-            parsed = parse_m3u(
-                text
-            )
+        try:
+            text = fetch_text(url)
+            parsed = parse_m3u(text)
 
             print(
-                f"  {url.rsplit('/', 1)[-1]}: "
+                f"  {filename}: "
                 f"{len(parsed)} entries"
             )
 
-            entries.extend(
-                parsed
-            )
+            entries.extend(parsed)
 
         except Exception as exc:
             print(
-                f"  Source failed: "
-                f"{url}: "
+                f"  {filename} failed: "
                 f"{type(exc).__name__}: {exc}"
             )
 
     return entries
 
 
-# ============================================================
-# MAIN
-# ============================================================
-
 def main():
-    parser = argparse.ArgumentParser(
-        description=(
-            "Build grouped Indian IPTV playlist "
-            "from WizakorHD streams using "
-            "JioTV/Tata Play references."
-        )
-    )
+    parser = argparse.ArgumentParser()
 
     parser.add_argument(
         "sources",
@@ -1290,30 +1001,19 @@ def main():
 
     args = parser.parse_args()
 
-    # --------------------------------------------------------
-    # JioTV
-    # --------------------------------------------------------
+    print("========================================")
+    print("Loading references")
+    print("========================================")
 
     jio_refs = load_jiotv_reference()
-
-    # --------------------------------------------------------
-    # Tata Play identity reference
-    # --------------------------------------------------------
 
     tata_refs = load_epg_reference(
         TATAPLAY_EPG_URL,
         "Tata Play",
     )
 
-    all_refs = []
-
-    all_refs.extend(
-        jio_refs
-    )
-
-    all_refs.extend(
-        tata_refs
-    )
+    # JioTV preferred; Tata Play supplements identity.
+    all_refs = jio_refs + tata_refs
 
     index = build_reference_index(
         all_refs
@@ -1324,40 +1024,30 @@ def main():
         f"{len(all_refs)}"
     )
 
-    # --------------------------------------------------------
-    # Sources
-    # --------------------------------------------------------
+    print()
+    print("========================================")
+    print("Loading streams")
+    print("========================================")
 
-    source_entries = load_sources(
-        args.sources
-    )
+    source_entries = load_sources()
 
     print(
         f"Total source entries: "
         f"{len(source_entries)}"
     )
 
-    # --------------------------------------------------------
-    # Resolve
-    # --------------------------------------------------------
-
-    resolved_entries = []
-
     stats = {
-        "source": len(
-            source_entries
-        ),
+        "source": len(source_entries),
         "indian": 0,
         "foreign_cricket": 0,
         "rejected": 0,
     }
 
+    resolved = []
+
     for entry in source_entries:
         url = normalize_url(
-            entry.get(
-                "url",
-                "",
-            )
+            entry.get("url", "")
         )
 
         if not url:
@@ -1377,48 +1067,36 @@ def main():
             stats["indian"] += 1
             priority = 0
         else:
-            stats[
-                "foreign_cricket"
-            ] += 1
+            stats["foreign_cricket"] += 1
             priority = 1
 
-        resolved_entries.append(
+        resolved.append(
             (
                 priority,
                 entry,
                 result,
+                url,
             )
         )
 
-    # Indian channels first
-    resolved_entries.sort(
-        key=lambda item: item[0]
+    # Indian first, foreign cricket after.
+    resolved.sort(
+        key=lambda item: (
+            item[0],
+            normalize_name(
+                source_name(item[1])
+            ),
+            item[3].lower(),
+        )
     )
 
-    # --------------------------------------------------------
-    # Exact URL global dedup
-    # --------------------------------------------------------
-
+    # Global exact URL dedup.
+    # Same channel + different URLs remain.
     seen_urls = set()
-
     final_entries = []
 
-    for (
-        priority,
-        entry,
-        result,
-    ) in resolved_entries:
-
-        url = normalize_url(
-            entry.get(
-                "url",
-                "",
-            )
-        )
-
-        key = url_key(
-            url
-        )
+    for _, entry, result, url in resolved:
+        key = url_key(url)
 
         if not key:
             continue
@@ -1426,9 +1104,7 @@ def main():
         if key in seen_urls:
             continue
 
-        seen_urls.add(
-            key
-        )
+        seen_urls.add(key)
 
         final_entries.append(
             (
@@ -1438,24 +1114,13 @@ def main():
             )
         )
 
-    # --------------------------------------------------------
-    # Group
-    # --------------------------------------------------------
-
     grouped = {
         group: []
         for group in GROUPS
     }
 
-    for (
-        entry,
-        result,
-        url,
-    ) in final_entries:
-
-        group = result[
-            "group"
-        ]
+    for entry, result, url in final_entries:
+        group = result["group"]
 
         if group in grouped:
             grouped[group].append(
@@ -1466,49 +1131,29 @@ def main():
                 )
             )
 
-    # --------------------------------------------------------
-    # Sort
-    # --------------------------------------------------------
-
     for group in GROUPS:
         grouped[group].sort(
             key=lambda item: (
                 normalize_name(
-                    source_name(
-                        item[0]
-                    )
+                    source_name(item[0])
                 ),
-                item[2],
+                item[2].lower(),
             )
         )
 
-    # --------------------------------------------------------
-    # Write
-    # --------------------------------------------------------
-
-    output = Path(
-        args.output
-    )
+    output = Path(args.output)
 
     output.parent.mkdir(
         parents=True,
         exist_ok=True,
     )
 
-    lines = [
-        "#EXTM3U",
-        '#EXTVLCOPT:http-referrer=""',
-    ]
+    lines = ["#EXTM3U"]
 
     total = 0
 
     for group in GROUPS:
-        for (
-            entry,
-            result,
-            url,
-        ) in grouped[group]:
-
+        for entry, result, url in grouped[group]:
             lines.append(
                 build_extinf(
                     entry,
@@ -1516,63 +1161,45 @@ def main():
                 )
             )
 
-            lines.append(
-                url
-            )
+            # Preserve Wizakor VLC options such as
+            # http-user-agent / http-referrer.
+            for option in entry.get(
+                "options",
+                [],
+            ):
+                lines.append(option)
+
+            lines.append(url)
 
             total += 1
 
     output.write_text(
-        "\n".join(lines)
-        + "\n",
+        "\n".join(lines) + "\n",
         encoding="utf-8",
     )
 
-    # --------------------------------------------------------
-    # REPORT
-    # --------------------------------------------------------
-
     print()
+    print("========================================")
+    print("PLAYLIST COMPLETE")
+    print("========================================")
     print(
-        "========================================"
+        f"Source entries       : {stats['source']}"
     )
     print(
-        "PLAYLIST COMPLETE"
+        f"Indian matched       : {stats['indian']}"
     )
     print(
-        "========================================"
+        f"Foreign cricket      : {stats['foreign_cricket']}"
     )
-
     print(
-        f"Source entries       : "
-        f"{stats['source']}"
+        f"Rejected              : {stats['rejected']}"
     )
-
     print(
-        f"Indian matched       : "
-        f"{stats['indian']}"
+        f"Final unique streams  : {total}"
     )
-
     print(
-        f"Foreign cricket      : "
-        f"{stats['foreign_cricket']}"
+        f"Output                : {output}"
     )
-
-    print(
-        f"Rejected              : "
-        f"{stats['rejected']}"
-    )
-
-    print(
-        f"Final unique streams  : "
-        f"{total}"
-    )
-
-    print(
-        f"Output                : "
-        f"{output}"
-    )
-
     print()
 
     for group in GROUPS:
@@ -1584,4 +1211,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-```
