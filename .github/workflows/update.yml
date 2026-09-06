@@ -8,12 +8,16 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: playlist-update
+  cancel-in-progress: false
+
 jobs:
-  update-playlist:
+  update:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Setup Python
@@ -28,47 +32,74 @@ jobs:
             pip install -r requirements.txt
           fi
 
-      - name: Create source directory
-        run: mkdir -p sources
-
-      - name: Fetch source playlists
-        shell: bash
+      # Get the current public playlist data used by wizakorhd/iptv.
+      - name: Fetch wizakorhd source
         run: |
           set -e
 
-          # Yahan PUBLIC/LEGAL M3U playlist URLs add karo.
-          # Example:
-          # "https://example.com/playlist.m3u"
+          rm -rf source_repo
+          git clone --depth 1 \
+            https://github.com/wizakorhd/iptv.git \
+            source_repo
 
-          URLS=(
-            # "https://example.com/playlist.m3u"
-          )
+          mkdir -p sources
 
-          i=0
-          for url in "${URLS[@]}"; do
-            i=$((i + 1))
-            echo "[+] Fetching source $i"
+          # Copy the source playlists.
+          cp source_repo/playlist.m3u sources/wizakorhd.m3u
 
-            curl -L --fail --retry 3 \
-              --connect-timeout 20 \
-              -A "Mozilla/5.0" \
-              "$url" \
-              -o "sources/source_${i}.m3u"
+          # Keep the separate language playlists too.
+          for file in \
+            playlist-hindi.m3u \
+            playlist-english-india.m3u \
+            playlist-english-intl.m3u \
+            playlist-anime.m3u
+          do
+            if [ -f "source_repo/$file" ]; then
+              cp "source_repo/$file" "sources/$file"
+            fi
           done
 
-      - name: Group and build playlist
-        run: |
-          python scripts/group_playlist.py sources -o playlist.m3u
+          echo "Sources:"
+          ls -lh sources/
 
-      - name: Commit updated playlist
+      # Our grouping engine:
+      # - no duplicate removal
+      # - preserves every stream
+      # - normalizes categories
+      # - keeps Hindi/English/Bhojpuri etc.
+      # - keeps worldwide streams when present
+      - name: Build grouped playlist
+        run: |
+          python scripts/group_playlist.py \
+            sources \
+            --output playlist.m3u
+
+      - name: Validate playlist
+        run: |
+          set -e
+
+          test -s playlist.m3u
+          grep -q '^#EXTM3U' playlist.m3u
+
+          CHANNELS=$(grep -c '^#EXTINF:' playlist.m3u || true)
+
+          echo "Total channels: $CHANNELS"
+
+          if [ "$CHANNELS" -le 0 ]; then
+            echo "No channels generated."
+            exit 1
+          fi
+
+      - name: Commit update
         run: |
           git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config user.email \
+            "41898282+github-actions[bot]@users.noreply.github.com"
 
-          git add playlist.m3u sources/
+          git add playlist.m3u
 
           if git diff --cached --quiet; then
-            echo "No playlist changes."
+            echo "No changes."
             exit 0
           fi
 
