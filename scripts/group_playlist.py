@@ -6,19 +6,22 @@ from pathlib import Path
 
 
 # ============================================================
-# SOURCE PLAYLISTS
+# ONLY TV GARDEN / INDIA SOURCE
+# ALL OTHER SOURCES DISABLED
 # ============================================================
 
 SOURCE_URLS = [
-     "https://tvgarden.world/tv/in",
-   # "https://raw.githubusercontent.com/wizakorhd/iptv/main/playlist-hindi.m3u",
-    #"https://raw.githubusercontent.com/wizakorhd/iptv/refs/heads/main/playlist-top.m3u",
-    #"https://raw.githubusercontent.com/wizakorhd/iptv/refs/heads/main/playlist-english-india.m3u",
+    "https://iptv-org.github.io/iptv/countries/in.m3u",
+
+    # DISABLED SOURCES:
+    # "https://raw.githubusercontent.com/wizakorhd/iptv/main/playlist-hindi.m3u",
+    # "https://raw.githubusercontent.com/wizakorhd/iptv/refs/heads/main/playlist-top.m3u",
+    # "https://raw.githubusercontent.com/wizakorhd/iptv/refs/heads/main/playlist-english-india.m3u",
 ]
 
 
 # ============================================================
-# FINAL GROUP ORDER
+# FINAL GROUPS
 # ============================================================
 
 GROUPS = [
@@ -34,10 +37,6 @@ GROUPS = [
 ]
 
 
-# ============================================================
-# HTTP
-# ============================================================
-
 USER_AGENT = (
     "Mozilla/5.0 "
     "(Windows NT 10.0; Win64; x64) "
@@ -46,6 +45,10 @@ USER_AGENT = (
     "Chrome/140.0 Safari/537.36"
 )
 
+
+# ============================================================
+# FETCH
+# ============================================================
 
 def fetch_text(url):
     request = urllib.request.Request(
@@ -62,24 +65,17 @@ def fetch_text(url):
     ) as response:
         data = response.read()
 
-    for encoding in (
-        "utf-8-sig",
-        "utf-8",
-        "latin-1",
-    ):
+    for encoding in ("utf-8-sig", "utf-8", "latin-1"):
         try:
             return data.decode(encoding)
         except UnicodeDecodeError:
             pass
 
-    return data.decode(
-        "utf-8",
-        errors="replace",
-    )
+    return data.decode("utf-8", errors="replace")
 
 
 # ============================================================
-# TEXT
+# TEXT CLEANING
 # ============================================================
 
 def clean_text(value):
@@ -96,41 +92,18 @@ def clean_text(value):
     }
 
     for old, new in replacements.items():
-        value = value.replace(
-            old,
-            new,
-        )
+        value = value.replace(old, new)
 
-    value = re.sub(
-        r"\s+",
-        " ",
-        value,
-    )
+    value = re.sub(r"\s+", " ", value)
 
     return value.strip()
 
 
 def normalize_text(value):
-    value = clean_text(
-        value
-    ).lower()
-
-    value = value.replace(
-        "&",
-        " and ",
-    )
-
-    value = re.sub(
-        r"[^a-z0-9]+",
-        " ",
-        value,
-    )
-
-    value = re.sub(
-        r"\s+",
-        " ",
-        value,
-    )
+    value = clean_text(value).lower()
+    value = value.replace("&", " and ")
+    value = re.sub(r"[^a-z0-9]+", " ", value)
+    value = re.sub(r"\s+", " ", value)
 
     return value.strip()
 
@@ -144,11 +117,9 @@ def parse_attrs(line):
 
     for match in re.finditer(
         r'([\w-]+)="([^"]*)"',
-        line,
+        line
     ):
-        attrs[
-            match.group(1)
-        ] = match.group(2)
+        attrs[match.group(1)] = match.group(2)
 
     return attrs
 
@@ -170,43 +141,29 @@ def parse_m3u(text):
         if not line:
             continue
 
-        # ----------------------------------------------------
-        # VLC OPTIONS
-        # ----------------------------------------------------
+        # VLC options
+        if line.startswith("#EXTVLCOPT:"):
 
-        if line.startswith(
-            "#EXTVLCOPT:"
-        ):
             if current is not None:
                 current.setdefault(
                     "options",
-                    [],
+                    []
                 ).append(line)
+
             else:
-                pending_options.append(
-                    line
-                )
+                pending_options.append(line)
 
             continue
 
-        # ----------------------------------------------------
-        # EXTINF
-        # ----------------------------------------------------
-
-        if line.startswith(
-            "#EXTINF:"
-        ):
+        # Channel information
+        if line.startswith("#EXTINF:"):
 
             current = {
                 "extinf": line,
                 "name": "",
                 "url": "",
-                "attrs": parse_attrs(
-                    line
-                ),
-                "options": list(
-                    pending_options
-                ),
+                "attrs": parse_attrs(line),
+                "options": list(pending_options),
             }
 
             pending_options = []
@@ -215,30 +172,21 @@ def parse_m3u(text):
 
             if comma >= 0:
                 current["name"] = clean_text(
-                    line[
-                        comma + 1:
-                    ]
+                    line[comma + 1:]
                 )
 
             continue
 
-        # ----------------------------------------------------
-        # URL
-        # ----------------------------------------------------
-
+        # Stream URL
         if (
             current is not None
             and not line.startswith("#")
         ):
 
-            current["url"] = clean_text(
-                line
-            )
+            current["url"] = clean_text(line)
 
             if current["url"]:
-                entries.append(
-                    current
-                )
+                entries.append(current)
 
             current = None
 
@@ -246,80 +194,59 @@ def parse_m3u(text):
 
 
 # ============================================================
-# ATTRIBUTES
+# ATTRIBUTE HELPERS
 # ============================================================
 
-def get_attr(
-    entry,
-    *names,
-):
+def get_attr(entry, *names):
+
     attrs = entry.get(
         "attrs",
-        {},
+        {}
     )
 
     for name in names:
 
-        value = attrs.get(
-            name
-        )
+        value = attrs.get(name)
 
         if value:
-            return clean_text(
-                value
-            )
+            return clean_text(value)
 
     return ""
 
 
 def channel_name(entry):
+
     return (
         clean_text(
-            entry.get(
-                "name",
-                "",
-            )
+            entry.get("name", "")
         )
         or get_attr(
             entry,
             "tvg-name",
             "channel-name",
-            "name",
+            "name"
         )
         or "Unknown"
     )
 
 
 def channel_group(entry):
+
     return get_attr(
         entry,
-        "group-title",
+        "group-title"
     )
 
 
 # ============================================================
-# GROUPING
+# CHANNEL GROUPING
 # ============================================================
 
-def group_channel(
-    entry
-):
-    """
-    Convert Wizakor group-title into the
-    requested clean groups.
+def group_channel(entry):
 
-    IMPORTANT:
-    No channel is rejected here.
-    """
+    original = channel_group(entry)
 
-    original = channel_group(
-        entry
-    )
-
-    value = normalize_text(
-        original
-    )
-
+    value = normalize_text(original)
     name = normalize_text(
         channel_name(entry)
     )
@@ -364,6 +291,7 @@ def group_channel(
     ):
         return "Sports"
 
+
     # --------------------------------------------------------
     # NEWS
     # --------------------------------------------------------
@@ -394,6 +322,7 @@ def group_channel(
 
     if "news" in value:
         return "News"
+
 
     # --------------------------------------------------------
     # MOVIES
@@ -435,6 +364,7 @@ def group_channel(
     ):
         return "Movies"
 
+
     # --------------------------------------------------------
     # MUSIC
     # --------------------------------------------------------
@@ -459,6 +389,7 @@ def group_channel(
 
     if "music" in value:
         return "Music"
+
 
     # --------------------------------------------------------
     # KIDS
@@ -491,6 +422,7 @@ def group_channel(
     ):
         return "Kids"
 
+
     # --------------------------------------------------------
     # BUSINESS
     # --------------------------------------------------------
@@ -512,6 +444,7 @@ def group_channel(
 
     if "business" in value:
         return "Business"
+
 
     # --------------------------------------------------------
     # LIFESTYLE
@@ -544,6 +477,7 @@ def group_channel(
         )
     ):
         return "Lifestyle"
+
 
     # --------------------------------------------------------
     # INFOTAINMENT
@@ -582,6 +516,7 @@ def group_channel(
     ):
         return "Infotainment"
 
+
     # --------------------------------------------------------
     # ENTERTAINMENT
     # --------------------------------------------------------
@@ -615,8 +550,9 @@ def group_channel(
     ):
         return "Entertainment"
 
+
     # --------------------------------------------------------
-    # ORIGINAL GROUP FALLBACK
+    # FALLBACKS
     # --------------------------------------------------------
 
     if "news" in value:
@@ -643,43 +579,27 @@ def group_channel(
     if "infotainment" in value:
         return "Infotainment"
 
-    # --------------------------------------------------------
-    # UNKNOWN
-    #
-    # Do NOT drop it.
-    # Entertainment is safer than losing a channel.
-    # --------------------------------------------------------
-
     return "Entertainment"
 
 
 # ============================================================
-# URL NORMALIZATION
+# URL HELPERS
 # ============================================================
 
 def url_key(url):
-    """
-    Exact URL dedup.
-
-    Same URL appearing in two source playlists
-    will be kept only once.
-    """
 
     return clean_text(
         url
     ).strip().lower()
 
 
-# ============================================================
-# ESCAPE
-# ============================================================
-
 def escape_m3u(value):
+
     return clean_text(
         value
     ).replace(
         '"',
-        "'",
+        "'"
     )
 
 
@@ -687,22 +607,14 @@ def escape_m3u(value):
 # BUILD EXTINF
 # ============================================================
 
-def build_extinf(
-    entry,
-    group,
-):
+def build_extinf(entry, group):
+
     attrs = entry.get(
         "attrs",
-        {},
+        {}
     )
 
-    name = channel_name(
-        entry
-    )
-
-    # --------------------------------------------------------
-    # Preserve original attributes
-    # --------------------------------------------------------
+    name = channel_name(entry)
 
     output_attrs = []
 
@@ -716,32 +628,21 @@ def build_extinf(
 
     for key in preferred:
 
-        value = attrs.get(
-            key
-        )
+        value = attrs.get(key)
 
         if value:
+
             output_attrs.append(
                 f'{key}="{escape_m3u(value)}"'
             )
-
-    # --------------------------------------------------------
-    # Our clean group
-    # --------------------------------------------------------
 
     output_attrs.append(
         f'group-title="{group}"'
     )
 
-    # --------------------------------------------------------
-    # Preserve other useful attributes
-    # --------------------------------------------------------
-
     already = set(
         preferred
-        + [
-            "group-title",
-        ]
+        + ["group-title"]
     )
 
     for key, value in attrs.items():
@@ -758,16 +659,14 @@ def build_extinf(
 
     return (
         "#EXTINF:-1 "
-        + " ".join(
-            output_attrs
-        )
+        + " ".join(output_attrs)
         + ","
         + escape_m3u(name)
     )
 
 
 # ============================================================
-# LOAD ALL THREE PLAYLISTS
+# LOAD SOURCES
 # ============================================================
 
 def load_sources():
@@ -775,32 +674,22 @@ def load_sources():
     all_entries = []
 
     print()
-    print(
-        "========================================"
-    )
-    print(
-        "FETCHING WIZAKOR PLAYLISTS"
-    )
-    print(
-        "========================================"
-    )
+    print("========================================")
+    print("FETCHING TV GARDEN INDIA CHANNELS")
+    print("========================================")
 
     for url in SOURCE_URLS:
 
         filename = url.rsplit(
             "/",
-            1,
+            1
         )[-1]
 
         try:
 
-            text = fetch_text(
-                url
-            )
+            text = fetch_text(url)
 
-            entries = parse_m3u(
-                text
-            )
+            entries = parse_m3u(text)
 
             print(
                 f"{filename:30} "
@@ -818,8 +707,7 @@ def load_sources():
             )
 
             print(
-                f"  {type(exc).__name__}: "
-                f"{exc}"
+                f"  {type(exc).__name__}: {exc}"
             )
 
     return all_entries
@@ -835,29 +723,20 @@ def main():
         "playlist.m3u"
     )
 
-    # --------------------------------------------------------
-    # Fetch
-    # --------------------------------------------------------
-
     entries = load_sources()
 
     print()
-    print(
-        "========================================"
-    )
-    print(
-        "SOURCE RESULT"
-    )
-    print(
-        "========================================"
-    )
+    print("========================================")
+    print("SOURCE RESULT")
+    print("========================================")
 
     print(
         f"Total entries : {len(entries)}"
     )
 
+
     # --------------------------------------------------------
-    # URL DEDUP
+    # EXACT URL DEDUPLICATION
     # --------------------------------------------------------
 
     seen_urls = set()
@@ -871,16 +750,14 @@ def main():
         url = clean_text(
             entry.get(
                 "url",
-                "",
+                ""
             )
         )
 
         if not url:
             continue
 
-        key = url_key(
-            url
-        )
+        key = url_key(url)
 
         if key in seen_urls:
 
@@ -888,13 +765,12 @@ def main():
 
             continue
 
-        seen_urls.add(
-            key
-        )
+        seen_urls.add(key)
 
         unique_entries.append(
             entry
         )
+
 
     print(
         f"Unique URLs   : "
@@ -906,8 +782,9 @@ def main():
         f"{duplicate_count}"
     )
 
+
     # --------------------------------------------------------
-    # GROUPS
+    # GROUP
     # --------------------------------------------------------
 
     grouped = {
@@ -922,16 +799,16 @@ def main():
         )
 
         if group not in grouped:
+
             group = "Entertainment"
 
-        grouped[
-            group
-        ].append(
+        grouped[group].append(
             entry
         )
 
+
     # --------------------------------------------------------
-    # SORT CHANNELS
+    # SORT
     # --------------------------------------------------------
 
     for group in GROUPS:
@@ -939,47 +816,44 @@ def main():
         grouped[group].sort(
             key=lambda entry: (
                 normalize_text(
-                    channel_name(
-                        entry
-                    )
+                    channel_name(entry)
                 ),
                 url_key(
                     entry.get(
                         "url",
-                        "",
+                        ""
                     )
                 ),
             )
         )
 
+
     # --------------------------------------------------------
-    # WRITE
+    # BUILD PLAYLIST
     # --------------------------------------------------------
 
     lines = [
-        "#EXTM3U",
+        "#EXTM3U"
     ]
 
     total = 0
 
     for group in GROUPS:
 
-        for entry in grouped[
-            group
-        ]:
+        for entry in grouped[group]:
 
             lines.append(
                 build_extinf(
                     entry,
-                    group,
+                    group
                 )
             )
 
-            # Preserve original VLC options.
             for option in entry.get(
                 "options",
-                [],
+                []
             ):
+
                 lines.append(
                     option
                 )
@@ -992,28 +866,25 @@ def main():
 
             total += 1
 
+
+    # --------------------------------------------------------
+    # WRITE FILE
+    # --------------------------------------------------------
+
     output_file.write_text(
-        "\n".join(
-            lines
-        )
-        + "\n",
+        "\n".join(lines) + "\n",
         encoding="utf-8",
     )
 
+
     # --------------------------------------------------------
-    # REPORT
+    # RESULT
     # --------------------------------------------------------
 
     print()
-    print(
-        "========================================"
-    )
-    print(
-        "PLAYLIST COMPLETE"
-    )
-    print(
-        "========================================"
-    )
+    print("========================================")
+    print("PLAYLIST COMPLETE")
+    print("========================================")
 
     print(
         f"Final streams : {total}"
@@ -1032,6 +903,10 @@ def main():
             f"{len(grouped[group])}"
         )
 
+
+# ============================================================
+# RUN
+# ============================================================
 
 if __name__ == "__main__":
     main()
