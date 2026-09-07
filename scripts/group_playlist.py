@@ -1,1601 +1,581 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 
 import json
 import re
-import urllib.parse
 import urllib.request
-from pathlib import Path
+import urllib.parse
+from collections import OrderedDict
 
+CHANNELS_URL = "https://iptv-org.github.io/api/channels.json"
+STREAMS_URL = "https://iptv-org.github.io/api/streams.json"
 
-# ============================================================
-# IPTV-ORG SOURCES
-# ============================================================
+OUTPUT = "playlist.m3u"
 
-SOURCE_URLS = [
+UA = (
+    "Mozilla/5.0 (Linux; Android 10) "
+    "AppleWebKit/537.36 Chrome/151.0 Mobile Safari/537.36"
+)
 
-    # India / required languages
-    "https://iptv-org.github.io/iptv/languages/hin.m3u",
-    "https://iptv-org.github.io/iptv/languages/bho.m3u",
-    "https://iptv-org.github.io/iptv/languages/eng.m3u",
+# ------------------------------------------------------------
+# FOREIGN VERIFIED HINDI
+# ------------------------------------------------------------
 
-    # Required categories
-    "https://iptv-org.github.io/iptv/categories/sports.m3u",
-    "https://iptv-org.github.io/iptv/categories/kids.m3u",
-    "https://iptv-org.github.io/iptv/categories/entertainment.m3u",
-    "https://iptv-org.github.io/iptv/categories/science.m3u",
-    "https://iptv-org.github.io/iptv/categories/lifestyle.m3u",
+FOREIGN = {
+    "UK": {
+        "utsav plus",
+        "utsav bharat",
+        "sony max",
+        "sony max uk",
+        "sony sab",
+        "sony sab uk",
+        "sony entertainment television asia",
+        "sony sab asia",
+    },
 
-    # Foreign feeds are ONLY used for allowlisted Hindi channels
-    "https://iptv-org.github.io/iptv/countries/uk.m3u",
-    "https://iptv-org.github.io/iptv/countries/us.m3u",
-    "https://iptv-org.github.io/iptv/countries/ca.m3u",
-    "https://iptv-org.github.io/iptv/countries/ae.m3u",
-    "https://iptv-org.github.io/iptv/countries/qa.m3u",
-    "https://iptv-org.github.io/iptv/countries/sa.m3u",
-]
+    "USA": {
+        "sony sab usa",
+        "sony max us",
+        "sony entertainment television",
+        "sony pal",
+    },
 
+    "CANADA": {
+        "zee tv canada",
+        "tag tv",
+    },
 
-# ============================================================
-# FOREIGN HINDI ALLOWLIST
-# ============================================================
-#
-# IMPORTANT:
-# Country playlist ka koi random channel accept nahi hoga.
-# Sirf yahan listed channel hi foreign source se aa sakta hai.
-#
-# Names ko normalized form me compare kiya jayega.
-# ============================================================
-
-FOREIGN_HINDI_ALLOWLIST = {
-
-    # UK
-    "utsav plus",
-    "utsav bharat",
-    "sony max",
-    "sony max uk",
-    "sony sab",
-    "sony sab uk",
-    "sony entertainment television asia",
-    "sony sab asia",
-
-    # USA
-    "sony sab usa",
-    "sony max us",
-    "sony entertainment television",
-    "sony pal",
-
-    # Canada
-    "zee tv canada",
-    "tag tv",
-
-    # Middle East / wider broadcast area
-    "zee cinema",
-    "and tv",
-    "&tv",
+    "MIDDLE EAST": {
+        "zee cinema",
+        "and tv",
+        "&tv",
+    },
 }
 
-
-# ============================================================
-# SPORTS ALLOWLIST / TYPES
-# ============================================================
-
-SPORT_TYPES = (
-    "cricket",
-    "hockey",
-    "football",
-    "wwe",
-    "tennis",
-)
-
-
-# ============================================================
-# GROUPS
-# ============================================================
-
-GROUPS = [
-    "Hindi",
-    "English",
-    "Bhojpuri",
-    "Sports - Cricket",
-    "Sports - Hockey",
-    "Sports - Football",
-    "Sports - WWE",
-    "Sports - Tennis",
-    "Sports",
-    "Kids",
-    "Entertainment",
-    "Information",
-    "Science",
-    "Lifestyle",
-    "Radio",
-]
-
-
-# ============================================================
-# RADIO GARDEN
-# ============================================================
-
-RADIO_GARDEN_SEARCHES = (
-    "Hindi",
-    "Hindi Radio",
-    "Hindi FM",
-    "Hindi Music",
-    "Bollywood",
-)
-
-
-RADIO_GARDEN_STREAM = (
-    "https://radio.garden/api/ara/content/listen/"
-    "{}/channel.mp3"
-)
-
-
-# ============================================================
-# USER AGENT
-# ============================================================
-
-USER_AGENT = (
-    "Mozilla/5.0 "
-    "(Windows NT 10.0; Win64; x64) "
-    "AppleWebKit/537.36 "
-    "(KHTML, like Gecko) "
-    "Chrome/140.0 Safari/537.36"
-)
-
-
-# ============================================================
-# FETCH
-# ============================================================
-
-def fetch_bytes(url):
-
-    request = urllib.request.Request(
-        url,
-        headers={
-            "User-Agent": USER_AGENT,
-            "Accept": "*/*",
-        },
-    )
-
-    with urllib.request.urlopen(
-        request,
-        timeout=60,
-    ) as response:
-
-        return response.read()
-
-
-def fetch_text(url):
-
-    data = fetch_bytes(url)
-
-    for encoding in (
-        "utf-8-sig",
-        "utf-8",
-        "latin-1",
-    ):
-
-        try:
-            return data.decode(encoding)
-
-        except UnicodeDecodeError:
-            pass
-
-    return data.decode(
-        "utf-8",
-        errors="replace",
-    )
-
-
-def fetch_json(url):
-
-    return json.loads(
-        fetch_text(url)
-    )
-
-
-# ============================================================
-# TEXT HELPERS
-# ============================================================
-
-def clean_text(value):
-
-    if value is None:
-        return ""
-
-    value = str(value)
-
-    replacements = {
-        "&amp;": "&",
-        "&quot;": '"',
-        "&#39;": "'",
-        "&apos;": "'",
-    }
-
-    for old, new in replacements.items():
-        value = value.replace(old, new)
-
-    value = re.sub(
-        r"\s+",
-        " ",
-        value,
-    )
-
-    return value.strip()
-
-
-def normalize_text(value):
-
-    value = clean_text(
-        value
-    ).lower()
-
-    value = value.replace(
-        "&",
-        " and ",
-    )
-
-    value = re.sub(
-        r"[^a-z0-9]+",
-        " ",
-        value,
-    )
-
-    value = re.sub(
-        r"\s+",
-        " ",
-        value,
-    )
-
-    return value.strip()
-
-
-# ============================================================
-# M3U ATTRIBUTES
-# ============================================================
-
-def parse_attrs(line):
-
-    attrs = {}
-
-    for match in re.finditer(
-        r'([\w-]+)="([^"]*)"',
-        line,
-    ):
-
-        attrs[
-            match.group(1)
-        ] = match.group(2)
-
-    return attrs
-
-
-# ============================================================
-# M3U PARSER
-# ============================================================
-
-def parse_m3u(text):
-
-    entries = []
-
-    current = None
-
-    pending_options = []
-
-    for raw in text.splitlines():
-
-        line = raw.strip()
-
-        if not line:
-            continue
-
-        if line.startswith(
-            "#EXTVLCOPT:"
-        ):
-
-            if current is not None:
-
-                current.setdefault(
-                    "options",
-                    [],
-                ).append(line)
-
-            else:
-
-                pending_options.append(
-                    line
-                )
-
-            continue
-
-        if line.startswith(
-            "#EXTINF:"
-        ):
-
-            current = {
-                "extinf": line,
-                "name": "",
-                "url": "",
-                "attrs": parse_attrs(line),
-                "options": list(
-                    pending_options
-                ),
-            }
-
-            pending_options = []
-
-            comma = line.find(",")
-
-            if comma >= 0:
-
-                current["name"] = clean_text(
-                    line[
-                        comma + 1:
-                    ]
-                )
-
-            continue
-
-        if (
-            current is not None
-            and not line.startswith("#")
-        ):
-
-            current["url"] = clean_text(
-                line
-            )
-
-            if current["url"]:
-
-                entries.append(
-                    current
-                )
-
-            current = None
-
-    return entries
-
-
-# ============================================================
-# CHANNEL HELPERS
-# ============================================================
-
-def get_attr(entry, *names):
-
-    attrs = entry.get(
-        "attrs",
-        {},
-    )
-
-    for name in names:
-
-        value = attrs.get(name)
-
-        if value:
-
-            return clean_text(
-                value
-            )
-
-    return ""
-
-
-def channel_name(entry):
-
-    return (
-        clean_text(
-            entry.get(
-                "name",
-                "",
-            )
-        )
-        or get_attr(
-            entry,
-            "tvg-name",
-            "channel-name",
-            "name",
-        )
-        or "Unknown"
-    )
-
-
-def channel_group(entry):
-
-    return get_attr(
-        entry,
-        "group-title",
-    )
-
-
-# ============================================================
-# REMOVE
-# ============================================================
-
-REMOVE_WORDS = (
-    "swayam prabha",
-    "swayamprabha",
-    "pm e vidya",
-    "pm e-vidya",
-    "pmevidya",
-    "pm evidya",
-    "vande gujarat",
-    "vande gujrat",
-)
-
-
-def is_removed(entry):
-
-    text = normalize_text(
-        channel_name(entry)
-        + " "
-        + channel_group(entry)
-    )
-
-    for word in REMOVE_WORDS:
-
-        if normalize_text(word) in text:
-            return True
-
-    return False
-
-
-# ============================================================
-# FOREIGN HINDI FILTER
-# ============================================================
-
-def is_foreign_hindi(entry):
-
-    name = normalize_text(
-        channel_name(entry)
-    )
-
-    attrs = entry.get(
-        "attrs",
-        {},
-    )
-
-    language = normalize_text(
-        attrs.get(
-            "tvg-language",
-            "",
-        )
-    )
-
-    group = normalize_text(
-        channel_group(entry)
-    )
-
-    combined = (
-        name
-        + " "
-        + language
-        + " "
-        + group
-    )
-
-    # Exact / contained allowlist match
-    for allowed in FOREIGN_HINDI_ALLOWLIST:
-
-        allowed_name = normalize_text(
-            allowed
-        )
-
-        if (
-            name == allowed_name
-            or allowed_name in name
-        ):
-
-            return True
-
-    # Do NOT accept every channel just because
-    # "hindi" appears in its metadata.
-    #
-    # Hindi metadata is only accepted when channel
-    # itself is allowlisted.
-
-    if "hindi" not in combined:
-        return False
-
-    return False
-
-
-# ============================================================
-# SPORTS GROUP
-# ============================================================
-
-def sports_group(name, group):
-
-    text = normalize_text(
-        name + " " + group
-    )
-
-    # Cricket
-    if any(x in text for x in (
+FOREIGN_COUNTRIES = {
+    "UK": {"GB", "UK"},
+    "USA": {"US"},
+    "CANADA": {"CA"},
+    "MIDDLE EAST": {"AE", "QA", "SA", "BH", "KW", "OM"},
+}
+
+# ------------------------------------------------------------
+# INDIA CATEGORIES
+# ------------------------------------------------------------
+
+INDIA_GROUPS = {
+    "hin": "India - Hindi",
+    "eng": "India - English",
+    "bho": "India - Bhojpuri",
+}
+
+INDIA_CATEGORIES = {
+    "kids": "India - Kids",
+    "entertainment": "India - Entertainment",
+    "information": "India - Information",
+    "science": "India - Science",
+    "lifestyle": "India - Lifestyle",
+}
+
+# ------------------------------------------------------------
+# SPORTS
+# ------------------------------------------------------------
+
+SPORT_TERMS = {
+    "Cricket": [
         "cricket",
         "willow",
         "fox cricket",
-        "sky cricket",
         "supersport cricket",
-        "super sport cricket",
-        "ten cricket",
-        "sony sports ten 3",
-        "sony ten 3",
-        "star sports cricket",
-        "icc",
-    )):
+    ],
 
-        return "Sports - Cricket"
-
-
-    # Hockey
-    if any(x in text for x in (
+    "Hockey": [
         "hockey",
         "nhl",
-        "field hockey",
-        "ice hockey",
-    )):
+    ],
 
-        return "Sports - Hockey"
-
-
-    # Football
-    if any(x in text for x in (
+    "Football": [
         "football",
         "soccer",
-        "premier league",
-        "epl",
-        "uefa",
-        "champions league",
-        "fifa",
-        "sky sports football",
-        "tnt sports football",
-    )):
+        "sky sports",
+        "tnt sports",
+        "espn",
+        "fox sports",
+        "bein sports",
+    ],
 
-        return "Sports - Football"
-
-
-    # WWE
-    if any(x in text for x in (
+    "WWE": [
         "wwe",
-        "world wrestling",
-        "wrestling",
-        "raw",
-        "smackdown",
-    )):
+        "wwf",
+    ],
 
-        return "Sports - WWE"
-
-
-    # Tennis
-    if any(x in text for x in (
+    "Tennis": [
         "tennis",
         "atp",
         "wta",
-        "wimbledon",
-        "us open",
-        "french open",
-        "australian open",
-    )):
+        "eurosport",
+    ],
+}
 
-        return "Sports - Tennis"
+SPORT_PROVIDER_TERMS = [
+    "willow",
+    "super sport",
+    "supersport",
+    "sky sports",
+    "tnt sports",
+    "fox sports",
+    "fox cricket",
+    "espn",
+    "eurosport",
+    "bein sports",
+]
+
+# ------------------------------------------------------------
+# REMOVE THESE COMPLETELY
+# ------------------------------------------------------------
+
+REMOVE_WORDS = [
+    "swayam prabha",
+    "pm e-vidya",
+    "pm evidya",
+    "pm-evidya",
+    "vande gujarat",
+]
+
+# ------------------------------------------------------------
+# HELPERS
+# ------------------------------------------------------------
+
+def fetch_json(url):
+    req = urllib.request.Request(
+        url,
+        headers={
+            "User-Agent": UA,
+            "Accept": "application/json",
+        },
+    )
+
+    with urllib.request.urlopen(req, timeout=60) as r:
+        return json.loads(r.read().decode("utf-8"))
 
 
-    return "Sports"
+def clean(text):
+    text = str(text or "").lower()
+    text = text.replace("&amp;", "&")
+    text = re.sub(r"\s+", " ", text)
+    return text.strip()
 
 
-# ============================================================
-# GROUP CHANNEL
-# ============================================================
+def channel_text(ch):
+    values = []
 
-def group_channel(entry):
+    values.append(ch.get("name", ""))
 
-    if is_removed(entry):
+    for x in ch.get("alt_names", []) or []:
+        values.append(x)
+
+    values.append(ch.get("network", ""))
+
+    return clean(" ".join(map(str, values)))
+
+
+def stream_text(stream):
+    return clean(
+        " ".join(
+            str(x or "")
+            for x in [
+                stream.get("title"),
+                stream.get("label"),
+                stream.get("feed"),
+            ]
+        )
+    )
+
+
+def blocked_name(text):
+    t = clean(text)
+
+    return any(word in t for word in REMOVE_WORDS)
+
+
+def is_india(ch):
+    return clean(ch.get("country")) == "in"
+
+
+def has_category(ch, category):
+    categories = {
+        clean(x)
+        for x in (ch.get("categories") or [])
+    }
+
+    return category.lower() in categories
+
+
+def languages(ch):
+    return {
+        clean(x)
+        for x in (ch.get("languages") or [])
+    }
+
+
+def foreign_group(ch):
+    name = channel_text(ch)
+    country = clean(ch.get("country")).upper()
+
+    for group, names in FOREIGN.items():
+
+        if country not in FOREIGN_COUNTRIES[group]:
+            continue
+
+        if name in names:
+            return group
+
+        # Exact-ish normalized matching for names with suffixes
+        for allowed in names:
+            if name == allowed:
+                return group
+
+    return None
+
+
+def sport_group(ch, stream):
+    text = " ".join([
+        channel_text(ch),
+        stream_text(stream),
+    ])
+
+    # Only requested sports.
+    for sport, terms in SPORT_TERMS.items():
+
+        for term in terms:
+            if term in text:
+                return f"Sports - {sport}"
+
+    return None
+
+
+def india_group(ch):
+    if not is_india(ch):
         return None
 
+    name = channel_text(ch)
 
-    name = normalize_text(
-        channel_name(entry)
-    )
+    if blocked_name(name):
+        return None
 
-    group = normalize_text(
-        channel_group(entry)
-    )
+    langs = languages(ch)
 
-    combined = (
-        name
-        + " "
-        + group
-    )
+    cats = {
+        clean(x)
+        for x in (ch.get("categories") or [])
+    }
 
+    # Hindi
+    if "hin" in langs:
+        return "India - Hindi"
 
-    # ========================================================
-    # SPORTS
-    # ========================================================
+    # Bhojpuri
+    if "bho" in langs:
+        return "India - Bhojpuri"
 
-    if any(x in combined for x in (
-        "cricket",
-        "hockey",
-        "football",
-        "soccer",
-        "wwe",
-        "tennis",
-        "sport",
-        "willow",
-        "supersport",
-        "sky sports",
-        "tnt sports",
-        "fox sports",
-        "espn",
-        "bein sports",
-        "eurosport",
-    )):
+    # English
+    if "eng" in langs:
+        return "India - English"
 
-        return sports_group(
-            name,
-            group,
-        )
+    # Required Indian categories
+    for category, group in INDIA_CATEGORIES.items():
+        if category in cats:
+            return group
+
+    return None
 
 
-    # ========================================================
-    # BHOJPURI
-    # ========================================================
+# ------------------------------------------------------------
+# PLAYLIST ENTRY
+# ------------------------------------------------------------
 
-    if any(x in combined for x in (
-        "bhojpuri",
-        "bhojpuriya",
-    )):
+def make_entry(ch, stream, group):
+    name = ch.get("name") or stream.get("title") or "Unknown"
 
-        return "Bhojpuri"
+    logo = ch.get("logo") or ""
 
+    url = str(stream.get("url") or "").strip()
 
-    # ========================================================
-    # HINDI
-    # ========================================================
+    if not url:
+        return None
 
-    if any(x in combined for x in (
-        "hindi",
-        "aaj tak",
-        "zee news",
-        "zee tv",
-        "sony sab",
-        "sony pal",
-        "sony entertainment",
-        "utsav",
-        "star plus",
-        "colors",
-        "dangal",
-        "and tv",
-        "dd national",
-        "dd india",
-        "zee cinema",
-        "sony max",
-    )):
+    if blocked_name(name):
+        return None
 
-        return "Hindi"
+    # Don't include obviously dead/blocked labels.
+    label = clean(stream.get("label"))
 
+    if any(x in label for x in [
+        "blocked",
+        "dmca",
+        "retired",
+    ]):
+        return None
 
-    # ========================================================
-    # ENGLISH
-    # ========================================================
-
-    if "english" in combined:
-        return "English"
-
-
-    # ========================================================
-    # KIDS
-    # ========================================================
-
-    if any(x in combined for x in (
-        "kids",
-        "kid",
-        "cartoon",
-        "nick",
-        "nickelodeon",
-        "disney",
-        "pogo",
-        "sonic",
-        "baby",
-        "junior",
-        "anime",
-    )):
-
-        return "Kids"
-
-
-    # ========================================================
-    # SCIENCE
-    # ========================================================
-
-    if any(x in combined for x in (
-        "science",
-        "discovery science",
-        "national geographic",
-        "nat geo",
-        "animal planet",
-        "history",
-        "discovery",
-        "documentary",
-        "technology",
-        "knowledge",
-    )):
-
-        return "Science"
-
-
-    # ========================================================
-    # LIFESTYLE
-    # ========================================================
-
-    if any(x in combined for x in (
-        "lifestyle",
-        "fashion",
-        "food",
-        "travel",
-        "living",
-        "home",
-        "cooking",
-    )):
-
-        return "Lifestyle"
-
-
-    # ========================================================
-    # INFORMATION
-    # ========================================================
-
-    if any(x in combined for x in (
-        "news",
-        "information",
-        "informational",
-        "business",
-        "cnbc",
-        "bloomberg",
-        "finance",
-        "financial",
-        "money",
-        "market",
-        "india today",
-        "times now",
-        "republic",
-        "tv9",
-        "wion",
-    )):
-
-        return "Information"
-
-
-    # ========================================================
-    # ENTERTAINMENT
-    # ========================================================
-
-    if any(x in combined for x in (
-        "entertainment",
-        "movie",
-        "movies",
-        "cinema",
-        "film",
-        "bollywood",
-        "hollywood",
-        "sony",
-        "zee",
-        "colors",
-        "star",
-        "sab",
-        "dangal",
-    )):
-
-        return "Entertainment"
-
-
-    return "Entertainment"
-
-
-# ============================================================
-# EXTINF
-# ============================================================
-
-def escape_m3u(value):
-
-    return clean_text(
-        value
-    ).replace(
-        '"',
-        "'",
-    )
-
-
-def build_extinf(entry, group):
-
-    attrs = entry.get(
-        "attrs",
-        {},
-    )
-
-    name = channel_name(
-        entry
-    )
-
-    output_attrs = []
-
-    preferred = [
-        "tvg-id",
-        "tvg-chno",
-        "tvg-logo",
-        "resolution",
-        "subs",
+    entry = [
+        f'#EXTINF:-1 tvg-id="{ch.get("id", "")}" '
+        f'tvg-name="{name}" '
+        f'tvg-logo="{logo}" '
+        f'group-title="{group}",{name}'
     ]
 
-    for key in preferred:
+    referrer = stream.get("referrer")
+    user_agent = stream.get("user_agent")
 
-        value = attrs.get(key)
+    if referrer:
+        entry.append(f"#EXTVLCOPT:http-referrer={referrer}")
 
-        if value:
+    if user_agent:
+        entry.append(f"#EXTVLCOPT:http-user-agent={user_agent}")
 
-            output_attrs.append(
-                f'{key}="{escape_m3u(value)}"'
-            )
+    entry.append(url)
 
-    output_attrs.append(
-        f'group-title="{group}"'
-    )
+    return "\n".join(entry)
 
-    already = set(
-        preferred
-        + ["group-title"]
-    )
 
-    for key, value in attrs.items():
-
-        if key in already:
-            continue
-
-        if not value:
-            continue
-
-        output_attrs.append(
-            f'{key}="{escape_m3u(value)}"'
-        )
-
-    return (
-        "#EXTINF:-1 "
-        + " ".join(output_attrs)
-        + ","
-        + escape_m3u(name)
-    )
-
-
-# ============================================================
-# RADIO GARDEN
-# ============================================================
-
-def walk_json(value):
-
-    if isinstance(value, dict):
-
-        yield value
-
-        for child in value.values():
-
-            yield from walk_json(
-                child
-            )
-
-    elif isinstance(value, list):
-
-        for child in value:
-
-            yield from walk_json(
-                child
-            )
-
-
-def radio_text(obj):
-
-    parts = []
-
-    if not isinstance(
-        obj,
-        dict,
-    ):
-
-        return ""
-
-
-    for key in (
-        "name",
-        "title",
-        "description",
-        "language",
-        "languages",
-        "genre",
-        "genres",
-        "tags",
-        "city",
-        "country",
-        "place",
-    ):
-
-        value = obj.get(key)
-
-        if isinstance(
-            value,
-            list,
-        ):
-
-            parts.extend(
-                str(x)
-                for x in value
-            )
-
-        elif isinstance(
-            value,
-            dict,
-        ):
-
-            parts.extend(
-                str(x)
-                for x in value.values()
-            )
-
-        elif value is not None:
-
-            parts.append(
-                str(value)
-            )
-
-    return normalize_text(
-        " ".join(parts)
-    )
-
-
-def radio_channel_id(obj):
-
-    if not isinstance(
-        obj,
-        dict,
-    ):
-
-        return ""
-
-
-    # Radio Garden search objects commonly expose
-    # channel ID through id/channelId.
-    for key in (
-        "channelId",
-        "channel_id",
-    ):
-
-        value = obj.get(key)
-
-        if value:
-
-            return str(
-                value
-            ).strip()
-
-
-    # Some API/search representations put ID inside _source.
-    source = obj.get(
-        "_source"
-    )
-
-    if isinstance(
-        source,
-        dict,
-    ):
-
-        for key in (
-            "channelId",
-            "channel_id",
-            "id",
-        ):
-
-            value = source.get(key)
-
-            if value:
-
-                return str(
-                    value
-                ).strip()
-
-
-    # Direct id is accepted only when this object
-    # looks like a station.
-    value = obj.get(
-        "id"
-    )
-
-    if value:
-
-        station_text = radio_text(
-            obj
-        )
-
-        if any(x in station_text for x in (
-            "hindi",
-            "bollywood",
-            "radio",
-            "fm",
-        )):
-
-            return str(
-                value
-            ).strip()
-
-
-    return ""
-
-
-def radio_station_name(obj):
-
-    if not isinstance(
-        obj,
-        dict,
-    ):
-
-        return ""
-
-
-    source = obj.get(
-        "_source"
-    )
-
-    objects = [obj]
-
-    if isinstance(
-        source,
-        dict,
-    ):
-
-        objects.append(
-            source
-        )
-
-
-    for current in objects:
-
-        for key in (
-            "name",
-            "title",
-            "stationName",
-            "channelName",
-        ):
-
-            value = current.get(
-                key
-            )
-
-            if (
-                isinstance(
-                    value,
-                    str,
-                )
-                and value.strip()
-            ):
-
-                return clean_text(
-                    value
-                )
-
-
-    return ""
-
-
-def radio_is_hindi(obj):
-
-    text = radio_text(
-        obj
-    )
-
-    return any(x in text for x in (
-        "hindi",
-        "hindustani",
-        "hindi radio",
-        "hindi fm",
-        "hindi music",
-        "hindi songs",
-        "bollywood",
-    ))
-
-
-def fetch_radio_garden():
-
-    print()
-    print(
-        "========================================"
-    )
-    print(
-        "FETCHING HINDI RADIO GARDEN"
-    )
-    print(
-        "========================================"
-    )
-
-    stations = []
-    seen_ids = set()
-
-    for query in RADIO_GARDEN_SEARCHES:
-
-        url = (
-            "https://radio.garden/api/search?q="
-            + urllib.parse.quote(
-                query
-            )
-        )
-
-        try:
-
-            data = fetch_json(
-                url
-            )
-
-        except Exception as exc:
-
-            print(
-                f"Radio Garden [{query}] FAILED: "
-                f"{type(exc).__name__}: {exc}"
-            )
-
-            continue
-
-
-        added = 0
-
-        for obj in walk_json(
-            data
-        ):
-
-            if not radio_is_hindi(
-                obj
-            ):
-
-                continue
-
-
-            channel_id = radio_channel_id(
-                obj
-            )
-
-            if not channel_id:
-
-                continue
-
-
-            if channel_id in seen_ids:
-
-                continue
-
-
-            name = radio_station_name(
-                obj
-            )
-
-            if not name:
-
-                continue
-
-
-            stream_url = (
-                RADIO_GARDEN_STREAM.format(
-                    channel_id
-                )
-            )
-
-
-            stations.append({
-                "name": name,
-                "url": stream_url,
-                "attrs": {
-                    "tvg-id": (
-                        "radio-garden-"
-                        + channel_id
-                    ),
-                    "tvg-name": name,
-                    "radio": "true",
-                },
-                "options": [],
-            })
-
-
-            seen_ids.add(
-                channel_id
-            )
-
-            added += 1
-
-
-        print(
-            f"{query:20} -> "
-            f"{added} Hindi stations"
-        )
-
-
-    print(
-        f"Radio Garden total: "
-        f"{len(stations)}"
-    )
-
-    return stations
-
-
-# ============================================================
-# LOAD SOURCES
-# ============================================================
-
-def load_sources():
-
-    all_entries = []
-
-    print()
-    print(
-        "========================================"
-    )
-    print(
-        "FETCHING IPTV SOURCES"
-    )
-    print(
-        "========================================"
-    )
-
-
-    foreign_paths = (
-        "/countries/uk.m3u",
-        "/countries/us.m3u",
-        "/countries/ca.m3u",
-        "/countries/ae.m3u",
-        "/countries/qa.m3u",
-        "/countries/sa.m3u",
-    )
-
-
-    for url in SOURCE_URLS:
-
-        filename = url.rsplit(
-            "/",
-            1
-        )[-1]
-
-        try:
-
-            text = fetch_text(
-                url
-            )
-
-            entries = parse_m3u(
-                text
-            )
-
-            print(
-                f"{filename:35} "
-                f"{len(entries):5} channels"
-            )
-
-
-            # =================================================
-            # FOREIGN:
-            # ONLY ALLOWLIST
-            # =================================================
-
-            is_foreign = any(
-                path in url
-                for path in foreign_paths
-            )
-
-
-            if is_foreign:
-
-                allowed = []
-
-                for entry in entries:
-
-                    if is_removed(
-                        entry
-                    ):
-
-                        continue
-
-                    if is_foreign_hindi(
-                        entry
-                    ):
-
-                        allowed.append(
-                            entry
-                        )
-
-
-                print(
-                    f"  -> allowlisted Hindi: "
-                    f"{len(allowed)}"
-                )
-
-                all_entries.extend(
-                    allowed
-                )
-
-
-            else:
-
-                all_entries.extend(
-                    entries
-                )
-
-
-        except Exception as exc:
-
-            print(
-                f"{filename:35} FAILED"
-            )
-
-            print(
-                f"  {type(exc).__name__}: {exc}"
-            )
-
-
-    # ========================================================
-    # RADIO GARDEN
-    # ========================================================
-
-    radio_entries = fetch_radio_garden()
-
-    all_entries.extend(
-        radio_entries
-    )
-
-    return all_entries
-
-
-# ============================================================
+# ------------------------------------------------------------
 # MAIN
-# ============================================================
+# ------------------------------------------------------------
 
 def main():
 
-    output_file = Path(
-        "playlist.m3u"
-    )
+    print("=" * 60)
+    print(" IPTV PLAYLIST GENERATOR")
+    print("=" * 60)
 
-    entries = load_sources()
+    print("[1/4] Fetching channels.json...")
+    channels_data = fetch_json(CHANNELS_URL)
 
+    print(f"      Channels fetched: {len(channels_data):,}")
 
-    print()
-    print(
-        "========================================"
-    )
-    print(
-        "SOURCE RESULT"
-    )
-    print(
-        "========================================"
-    )
+    print("[2/4] Fetching streams.json...")
+    streams_data = fetch_json(STREAMS_URL)
 
-    print(
-        f"Total entries : {len(entries)}"
-    )
+    print(f"      Streams fetched:  {len(streams_data):,}")
 
+    # --------------------------------------------------------
+    # Channel lookup
+    # --------------------------------------------------------
 
-    # ========================================================
-    # EXACT URL DEDUP ONLY
-    # ========================================================
+    channels = {}
 
+    for ch in channels_data:
+
+        cid = ch.get("id")
+
+        if not cid:
+            continue
+
+        if ch.get("is_nsfw"):
+            continue
+
+        if ch.get("closed"):
+            continue
+
+        channels[cid] = ch
+
+    # --------------------------------------------------------
+    # Build playlist
+    # --------------------------------------------------------
+
+    groups = OrderedDict()
+
+    for group in [
+        "India - Hindi",
+        "India - English",
+        "India - Bhojpuri",
+        "India - Kids",
+        "India - Entertainment",
+        "India - Information",
+        "India - Science",
+        "India - Lifestyle",
+        "UK - Hindi",
+        "USA - Hindi",
+        "Canada - Hindi",
+        "Middle East - Hindi",
+        "Sports - Cricket",
+        "Sports - Hockey",
+        "Sports - Football",
+        "Sports - WWE",
+        "Sports - Tennis",
+        "Radio - Hindi",
+    ]:
+        groups[group] = []
+
+    # Exact URL duplicate protection.
     seen_urls = set()
 
-    unique_entries = []
+    duplicate_urls = 0
+    dropped = 0
 
-    duplicate_count = 0
+    for stream in streams_data:
 
-
-    for entry in entries:
-
-        url = clean_text(
-            entry.get(
-                "url",
-                "",
-            )
-        )
+        url = str(stream.get("url") or "").strip()
 
         if not url:
             continue
 
-
-        key = url.lower().strip()
-
-
-        if key in seen_urls:
-
-            duplicate_count += 1
-
+        # EXACT SAME URL = remove duplicate
+        if url in seen_urls:
+            duplicate_urls += 1
             continue
 
+        cid = stream.get("channel")
 
-        seen_urls.add(
-            key
-        )
+        if not cid:
+            dropped += 1
+            continue
 
-        unique_entries.append(
-            entry
-        )
+        ch = channels.get(cid)
 
+        if not ch:
+            dropped += 1
+            continue
 
-    print(
-        f"Unique URLs   : "
-        f"{len(unique_entries)}"
-    )
+        name = ch.get("name") or stream.get("title") or ""
 
-    print(
-        f"Duplicates    : "
-        f"{duplicate_count}"
-    )
+        if blocked_name(name):
+            dropped += 1
+            continue
 
+        group = None
 
-    # ========================================================
-    # GROUP
-    # ========================================================
+        # ----------------------------------------------------
+        # INDIA
+        # ----------------------------------------------------
 
-    grouped = {
-        group: []
-        for group in GROUPS
-    }
+        group = india_group(ch)
 
-    removed = 0
-
-
-    for entry in unique_entries:
-
-        attrs = entry.get(
-            "attrs",
-            {},
-        )
-
-
-        # Radio Garden is always Radio
-        if (
-            str(
-                attrs.get(
-                    "radio",
-                    "",
-                )
-            ).lower()
-            == "true"
-        ):
-
-            group = "Radio"
-
-        else:
-
-            group = group_channel(
-                entry
-            )
-
+        # ----------------------------------------------------
+        # FOREIGN VERIFIED HINDI
+        # ----------------------------------------------------
 
         if group is None:
+            fg = foreign_group(ch)
 
-            removed += 1
+            if fg:
+                group = f"{fg} - Hindi"
 
+        # ----------------------------------------------------
+        # SPORTS
+        # ----------------------------------------------------
+
+        if group is None:
+            group = sport_group(ch, stream)
+
+        # ----------------------------------------------------
+        # IMPORTANT:
+        # NO FALLBACK TO ENTERTAINMENT.
+        # UNKNOWN CHANNELS ARE DROPPED.
+        # ----------------------------------------------------
+
+        if group is None:
+            dropped += 1
             continue
 
+        entry = make_entry(ch, stream, group)
 
-        if group not in grouped:
-
+        if not entry:
+            dropped += 1
             continue
 
+        seen_urls.add(url)
 
-        grouped[group].append(
-            entry
-        )
+        groups[group].append({
+            "name": name,
+            "url": url,
+            "entry": entry,
+        })
 
+    # --------------------------------------------------------
+    # Sort
+    # --------------------------------------------------------
 
-    # ========================================================
-    # SORT
-    # ========================================================
-
-    for group in GROUPS:
-
-        grouped[group].sort(
-            key=lambda entry: (
-                normalize_text(
-                    channel_name(entry)
-                ),
-                clean_text(
-                    entry.get(
-                        "url",
-                        "",
-                    )
-                ).lower(),
+    for group in groups:
+        groups[group].sort(
+            key=lambda x: (
+                clean(x["name"]),
+                x["url"],
             )
         )
 
-
-    # ========================================================
-    # BUILD
-    # ========================================================
-
-    lines = [
-        "#EXTM3U"
-    ]
+    # --------------------------------------------------------
+    # Write M3U
+    # --------------------------------------------------------
 
     total = 0
 
+    with open(OUTPUT, "w", encoding="utf-8") as f:
 
-    for group in GROUPS:
+        f.write("#EXTM3U\n")
 
-        for entry in grouped[group]:
+        for group, items in groups.items():
 
-            lines.append(
-                build_extinf(
-                    entry,
-                    group,
-                )
+            if not items:
+                continue
+
+            f.write(
+                f"\n"
+                f"# ===== {group} =====\n"
             )
 
+            for item in items:
+                f.write(item["entry"])
+                f.write("\n")
 
-            for option in entry.get(
-                "options",
-                [],
-            ):
+                total += 1
 
-                lines.append(
-                    option
-                )
+    # --------------------------------------------------------
+    # FINAL RESULT
+    # --------------------------------------------------------
 
+    print()
+    print("=" * 60)
+    print(" PLAYLIST RESULT")
+    print("=" * 60)
 
-            lines.append(
-                clean_text(
-                    entry["url"]
-                )
+    for group, items in groups.items():
+
+        if items:
+            print(
+                f"{group:<25} : {len(items):>5}"
             )
 
-            total += 1
+    print("-" * 60)
 
-
-    # ========================================================
-    # WRITE
-    # ========================================================
-
-    output_file.write_text(
-        "\n".join(lines) + "\n",
-        encoding="utf-8",
-    )
-
-
-    # ========================================================
-    # RESULT
-    # ========================================================
-
-    print()
     print(
-        "========================================"
-    )
-    print(
-        "PLAYLIST COMPLETE"
-    )
-    print(
-        "========================================"
+        f"TOTAL STREAMS          : {total:,}"
     )
 
     print(
-        f"Final streams : {total}"
+        f"DUPLICATE URL REMOVED  : {duplicate_urls:,}"
     )
 
     print(
-        f"Removed       : {removed}"
+        f"DROPPED                 : {dropped:,}"
     )
 
     print(
-        f"Output        : {output_file}"
+        f"OUTPUT                  : {OUTPUT}"
     )
 
-    print()
-
-
-    for group in GROUPS:
-
-        print(
-            f"{group:22} : "
-            f"{len(grouped[group])}"
-        )
+    print("=" * 60)
 
 
 if __name__ == "__main__":
+    try:
+        main()
 
-    main()
+    except KeyboardInterrupt:
+        print("\nStopped.")
+
+    except Exception as e:
+        print()
+        print("ERROR:")
+        print(type(e).__name__, str(e))
+        raise
