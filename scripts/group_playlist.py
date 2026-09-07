@@ -1,138 +1,74 @@
 #!/usr/bin/env python3
 
+import argparse
 import json
 import re
 import sys
 import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
+from urllib.error import HTTPError, URLError
 from urllib.parse import urljoin
 from urllib.request import Request, urlopen
-from urllib.error import HTTPError, URLError
 
-# ============================================================
-# CONFIG
-# ============================================================
 
 CHANNELS_URL = "https://iptv-org.github.io/api/channels.json"
-FEEDS_URL    = "https://iptv-org.github.io/api/feeds.json"
-STREAMS_URL  = "https://iptv-org.github.io/api/streams.json"
+FEEDS_URL = "https://iptv-org.github.io/api/feeds.json"
+STREAMS_URL = "https://iptv-org.github.io/api/streams.json"
 
-OUTPUT_FILE = "playlist.m3u"
+DEFAULT_OUTPUT = "playlist.m3u"
 
+# Health check is REPORT ONLY.
+# It will NOT remove a channel from playlist.
 HEALTH_CHECK = True
-MAX_WORKERS = 20
-TIMEOUT = 8
+HEALTH_WORKERS = 24
+HEALTH_TIMEOUT = 6
+
 
 # ============================================================
-# GROUP ORDER
+# ALLOWED LANGUAGES
 # ============================================================
 
-GROUP_ORDER = [
-    "India - Hindi",
-    "India - Hindi - News",
-    "India - Hindi - Music",
-    "India - Hindi - Entertainment",
-    "India - Hindi - Lifestyle",
-    "India - Hindi - Infotainment",
-    "India - Hindi - Science",
-    "India - Hindi - Kids",
-
-    "India - English",
-    "India - English - News",
-    "India - English - Music",
-    "India - English - Entertainment",
-    "India - English - Lifestyle",
-    "India - English - Infotainment",
-    "India - English - Science",
-    "India - English - Kids",
-
-    "India - Bhojpuri",
-    "India - Bhojpuri - News",
-    "India - Bhojpuri - Music",
-    "India - Bhojpuri - Entertainment",
-
-    "UK - Hindi",
-    "UK - Hindi - News",
-    "UK - Hindi - Music",
-    "UK - Hindi - Entertainment",
-
-    "USA - Hindi",
-    "USA - Hindi - News",
-    "USA - Hindi - Music",
-    "USA - Hindi - Entertainment",
-
-    "Canada - Hindi",
-    "Canada - Hindi - News",
-    "Canada - Hindi - Music",
-    "Canada - Hindi - Entertainment",
-
-    "Middle East - Hindi",
-    "Middle East - Hindi - News",
-    "Middle East - Hindi - Music",
-    "Middle East - Hindi - Entertainment",
-
-    "Sports - Cricket",
-    "Radio - Hindi",
-]
-
-# ============================================================
-# LANGUAGE
-# ============================================================
-
-HINDI = {
-    "hindi",
-    "hin",
-}
-
-ENGLISH = {
-    "english",
-    "eng",
-}
-
-BHOJPURI = {
-    "bhojpuri",
-    "bho",
-}
-
-# ============================================================
-# INDIAN REGIONAL LANGUAGES
-# ============================================================
+HINDI = {"hin", "hindi"}
+ENGLISH = {"eng", "english"}
+BHOJPURI = {"bho", "bhojpuri"}
 
 REGIONAL = {
-    "tamil", "tam",
-    "telugu", "tel",
-    "bengali", "ben",
-    "marathi", "mar",
-    "gujarati", "guj",
-    "kannada", "kan",
-    "malayalam", "mal",
-    "punjabi", "pan",
-    "odia", "oriya", "ori",
-    "assamese", "asm",
-    "urdu", "urd",
-    "kashmiri", "kas",
-    "nepali", "nep",
-    "konkani", "kok",
-    "sanskrit", "san",
-    "sindhi", "snd",
-    "maithili", "mai",
-    "dogri", "doi",
-    "manipuri", "mni",
+    "tam", "tamil",
+    "tel", "telugu",
+    "ben", "bengali",
+    "mar", "marathi",
+    "guj", "gujarati",
+    "kan", "kannada",
+    "mal", "malayalam",
+    "pan", "punjabi",
+    "ori", "odia", "oriya",
+    "asm", "assamese",
+    "urd", "urdu",
+    "kas", "kashmiri",
+    "nep", "nepali",
+    "kok", "konkani",
+    "san", "sanskrit",
+    "snd", "sindhi",
+    "mai", "maithili",
+    "doi", "dogri",
+    "mni", "manipuri",
 }
 
+
 # ============================================================
-# BAD CHANNEL NAMES
+# BAD CHANNELS
 # ============================================================
 
-BAD_WORDS = (
+BAD_WORDS = {
     "evidya",
     "pmevidya",
     "swayamprabha",
     "vandegujarat",
-)
+}
+
 
 # ============================================================
-# STRICT CRICKET CHANNELS
+# STRICT CRICKET
 # ============================================================
 
 CRICKET_NAMES = {
@@ -144,35 +80,17 @@ CRICKET_NAMES = {
     "wplg 10.1",
 }
 
-# ============================================================
-# FOREIGN COUNTRIES
-# ============================================================
-
-FOREIGN_COUNTRIES = {
-    "GB": "UK - Hindi",
-    "US": "USA - Hindi",
-    "CA": "Canada - Hindi",
-
-    "AE": "Middle East - Hindi",
-    "QA": "Middle East - Hindi",
-    "SA": "Middle East - Hindi",
-    "BH": "Middle East - Hindi",
-    "KW": "Middle East - Hindi",
-    "OM": "Middle East - Hindi",
-}
 
 # ============================================================
-# FOREIGN VERIFIED NETWORKS
+# FOREIGN HINDI NETWORKS
 # ============================================================
 
 FOREIGN_NETWORKS = {
-    # COLORS
     "colors",
     "colors cineplex",
     "colors cineplex hd",
     "colors rishtey",
 
-    # SONY
     "sony sab",
     "sony sab hd",
     "sony max",
@@ -182,7 +100,6 @@ FOREIGN_NETWORKS = {
     "sony entertainment television hd",
     "sony pal",
 
-    # ZEE
     "zee tv",
     "zee tv hd",
     "zee cinema",
@@ -192,7 +109,6 @@ FOREIGN_NETWORKS = {
     "zee zindagi",
     "zee classic",
 
-    # STAR
     "star plus",
     "star plus hd",
     "star bharat",
@@ -206,33 +122,40 @@ FOREIGN_NETWORKS = {
     "utsav bharat",
 }
 
+
+FOREIGN_COUNTRIES = {
+    "GB": "UK - Hindi",
+    "US": "USA - Hindi",
+    "CA": "Canada - Hindi",
+    "AE": "Middle East - Hindi",
+    "QA": "Middle East - Hindi",
+    "SA": "Middle East - Hindi",
+    "BH": "Middle East - Hindi",
+    "KW": "Middle East - Hindi",
+    "OM": "Middle East - Hindi",
+}
+
+
 # ============================================================
-# JIOTV STYLE CATEGORIES
+# CATEGORY MAP
 # ============================================================
 
 CATEGORY_MAP = {
     "news": "News",
-
     "music": "Music",
-
     "entertainment": "Entertainment",
-
     "lifestyle": "Lifestyle",
-
     "infotainment": "Infotainment",
-
     "science": "Science",
-
     "kids": "Kids",
     "children": "Kids",
-
-    # Common IPTV-org category names
-    "movies": "Entertainment",
-    "movie": "Entertainment",
+    "animation": "Kids",
     "documentary": "Infotainment",
     "education": "Infotainment",
-    "animation": "Kids",
+    "movies": "Entertainment",
+    "movie": "Entertainment",
 }
+
 
 CATEGORY_PRIORITY = [
     "news",
@@ -243,12 +166,13 @@ CATEGORY_PRIORITY = [
     "science",
     "kids",
     "children",
-    "movies",
-    "movie",
+    "animation",
     "documentary",
     "education",
-    "animation",
+    "movies",
+    "movie",
 ]
+
 
 # ============================================================
 # HELPERS
@@ -263,174 +187,58 @@ def norm(value):
 
     if isinstance(value, dict):
         return " ".join(
-            f"{norm(k)} {norm(v)}"
-            for k, v in value.items()
+            norm(v) for v in value.values()
         )
 
     return str(value).strip().lower()
 
 
 def clean_name(value):
-    if not value:
-        return "Unknown"
-
-    value = str(value).strip()
+    value = str(value or "").strip()
     value = re.sub(r"\s+", " ", value)
-
     return value
 
 
-def get_name(obj):
-    for key in ("name", "title", "channelName", "channel_name"):
-        value = obj.get(key)
+def get_languages(feed):
+    result = set()
 
-        if value:
-            return clean_name(value)
-
-    return "Unknown"
-
-
-def get_id(obj):
-    for key in ("id", "channel", "channelId", "channel_id"):
-        value = obj.get(key)
-
-        if value is not None:
-            return str(value)
-
-    return ""
-
-
-def get_languages(obj):
-    values = []
-
-    for key in (
-        "languages",
-        "language",
-        "lang",
-    ):
-        value = obj.get(key)
-
-        if isinstance(value, list):
-            values.extend(value)
-
-        elif value:
-            values.append(value)
-
-    return {
-        norm(x)
-        for x in values
-        if norm(x)
-    }
-
-
-def get_country(obj):
-    for key in (
-        "country",
-        "countryCode",
-        "country_code",
-    ):
-        value = obj.get(key)
-
-        if isinstance(value, list):
-            for item in value:
-                item = str(item).upper().strip()
-
-                if item:
-                    return item
-
-        elif value:
-            return str(value).upper().strip()
-
-    return ""
-
-
-def get_categories(obj):
-    values = []
-
-    for key in (
-        "categories",
-        "category",
-        "genres",
-        "genre",
-    ):
-        value = obj.get(key)
-
-        if isinstance(value, list):
-            values.extend(value)
-
-        elif value:
-            values.append(value)
-
-    result = []
-
-    for value in values:
+    for value in feed.get("languages", []):
         value = norm(value)
 
         if value:
-            result.append(value)
+            result.add(value)
 
     return result
 
 
-def get_network(obj):
-    for key in (
-        "network",
-        "networkName",
-        "network_name",
-    ):
-        value = obj.get(key)
-
-        if value:
-            return clean_name(value)
-
-    return ""
-
-
-def get_stream_url(obj):
-    for key in (
-        "url",
-        "stream",
-        "stream_url",
-        "streamUrl",
-        "play_url",
-        "playUrl",
-    ):
-        value = obj.get(key)
-
-        if isinstance(value, str):
-            value = value.strip()
-
-            if value.startswith(("http://", "https://")):
-                return value
-
-    return ""
-
-
-def combined_text(channel, feed=None, stream=None):
-    parts = [
-        get_name(channel),
-        get_network(channel),
-        norm(channel.get("languages")),
-        norm(channel.get("categories")),
+def channel_text(channel, feed=None, stream=None):
+    values = [
+        channel.get("id", ""),
+        channel.get("name", ""),
+        channel.get("network", ""),
+        channel.get("alt_names", []),
+        channel.get("categories", []),
     ]
 
     if feed:
-        parts.extend([
-            get_name(feed),
-            get_network(feed),
-            norm(feed),
-        ])
+        values += [
+            feed.get("id", ""),
+            feed.get("name", ""),
+            feed.get("alt_names", []),
+            feed.get("languages", []),
+        ]
 
     if stream:
-        parts.extend([
-            norm(stream),
-        ])
+        values += [
+            stream.get("title", ""),
+            stream.get("label", ""),
+        ]
 
-    return " ".join(parts).lower()
+    return norm(values)
 
 
 def is_bad(channel, feed=None):
-    text = combined_text(channel, feed)
+    text = channel_text(channel, feed)
 
     return any(
         word in text
@@ -438,145 +246,115 @@ def is_bad(channel, feed=None):
     )
 
 
-def has_regional_language(channel, feed=None):
-    languages = set(
-        get_languages(channel)
-    )
-
-    if feed:
-        languages.update(
-            get_languages(feed)
-        )
-
+def has_regional(feed):
     return bool(
-        languages.intersection(REGIONAL)
+        get_languages(feed)
+        & REGIONAL
     )
 
 
-def has_hindi(channel, feed=None):
-    languages = set(
-        get_languages(channel)
-    )
-
-    if feed:
-        languages.update(
-            get_languages(feed)
-        )
-
-    if languages.intersection(HINDI):
-        return True
-
-    text = combined_text(channel, feed)
-
+def has_hindi(feed):
     return bool(
-        re.search(
-            r"\bhindi\b|\bhindustani\b",
-            text,
-            re.I
-        )
+        get_languages(feed)
+        & HINDI
     )
 
 
-def has_english(channel, feed=None):
-    languages = set(
-        get_languages(channel)
-    )
-
-    if feed:
-        languages.update(
-            get_languages(feed)
-        )
-
+def has_english(feed):
     return bool(
-        languages.intersection(ENGLISH)
+        get_languages(feed)
+        & ENGLISH
     )
 
 
-def has_bhojpuri(channel, feed=None):
-    languages = set(
-        get_languages(channel)
-    )
-
-    if feed:
-        languages.update(
-            get_languages(feed)
-        )
-
+def has_bhojpuri(feed):
     return bool(
-        languages.intersection(BHOJPURI)
+        get_languages(feed)
+        & BHOJPURI
     )
 
 
-def cricket_channel(channel, feed=None):
-    name = get_name(channel).lower().strip()
-
-    if name in CRICKET_NAMES:
-        return True
-
-    if feed:
-        feed_name = get_name(feed).lower().strip()
-
-        if feed_name in CRICKET_NAMES:
-            return True
-
-    return False
-
-
-def get_category(channel, feed=None):
-    categories = get_categories(channel)
-
-    if feed:
-        categories.extend(
-            get_categories(feed)
-        )
-
-    # Also inspect raw text for category names.
-    raw = combined_text(
-        channel,
-        feed
+def category(channel):
+    categories = channel.get(
+        "categories",
+        []
     )
 
-    for category in CATEGORY_PRIORITY:
-        if category in categories:
-            return CATEGORY_MAP[category]
+    for cat in categories:
 
-    for category in CATEGORY_PRIORITY:
-        if re.search(
-            rf"\b{re.escape(category)}\b",
-            raw,
-            re.I
-        ):
-            return CATEGORY_MAP[category]
+        cat = norm(cat)
+
+        if cat in CATEGORY_MAP:
+            return CATEGORY_MAP[cat]
 
     return ""
 
 
+def is_cricket(channel, feed, stream):
+    name = clean_name(
+        channel.get("name", "")
+    ).lower()
+
+    stream_title = clean_name(
+        stream.get("title", "")
+    ).lower()
+
+    feed_name = clean_name(
+        feed.get("name", "")
+    ).lower()
+
+    return (
+        name in CRICKET_NAMES
+        or stream_title in CRICKET_NAMES
+        or feed_name in CRICKET_NAMES
+    )
+
+
+def get_network(channel):
+    return clean_name(
+        channel.get("network", "")
+    ).lower()
+
+
+def foreign_verified(channel):
+    name = clean_name(
+        channel.get("name", "")
+    ).lower()
+
+    network = get_network(channel)
+
+    return (
+        name in FOREIGN_NETWORKS
+        or network in FOREIGN_NETWORKS
+    )
+
+
 # ============================================================
-# FETCH JSON
+# DOWNLOAD JSON
 # ============================================================
 
 def fetch_json(url):
     print(f"Fetching: {url}")
 
-    req = Request(
+    request = Request(
         url,
         headers={
             "User-Agent": (
                 "Mozilla/5.0 "
-                "Android IPTV Playlist Generator"
+                "IPTV Playlist Generator"
             )
         },
     )
 
     with urlopen(
-        req,
-        timeout=30
+        request,
+        timeout=45
     ) as response:
 
-        data = response.read()
+        raw = response.read()
 
     return json.loads(
-        data.decode(
+        raw.decode(
             "utf-8",
             errors="replace"
         )
@@ -584,49 +362,81 @@ def fetch_json(url):
 
 
 # ============================================================
-# INDEXES
+# INDEX FEEDS
 # ============================================================
 
 def build_feed_index(feeds):
+    """
+    feeds.json:
+        {
+            "channel": "France3.fr",
+            "id": "ParisIledeFrance",
+            "languages": [...]
+        }
+
+    One channel can have MANY feeds.
+    """
+
     index = {}
 
     for feed in feeds:
 
-        cid = get_id(feed)
+        channel_id = feed.get(
+            "channel"
+        )
 
-        if not cid:
-            cid = str(
-                feed.get("channel", "")
-            )
-
-        if not cid:
+        if not channel_id:
             continue
 
         index.setdefault(
-            cid,
+            channel_id,
             []
         ).append(feed)
 
     return index
 
 
+# ============================================================
+# STREAM INDEX
+# ============================================================
+
 def build_stream_index(streams):
+    """
+    streams.json:
+        {
+            "channel": "...",
+            "feed": "...",
+            "url": "..."
+        }
+    """
+
     index = {}
 
     for stream in streams:
 
-        cid = get_id(stream)
+        channel_id = stream.get(
+            "channel"
+        )
 
-        if not cid:
+        url = stream.get(
+            "url"
+        )
+
+        if not channel_id:
             continue
-
-        url = get_stream_url(stream)
 
         if not url:
             continue
 
+        url = str(url).strip()
+
+        if not url.startswith(
+            ("http://", "https://")
+        ):
+            continue
+
         index.setdefault(
-            cid,
+            channel_id,
             []
         ).append(stream)
 
@@ -634,32 +444,149 @@ def build_stream_index(streams):
 
 
 # ============================================================
-# M3U ENTRY
+# STREAM -> FEED MATCH
 # ============================================================
 
-def make_entry(
-    group,
-    name,
-    channel_id,
-    logo,
-    url
+def get_stream_feed(
+    stream,
+    feeds_for_channel
 ):
-    logo = logo or ""
+    """
+    Prefer exact feed match.
 
-    return (
-        f'#EXTINF:-1 tvg-id="{channel_id}" '
-        f'tvg-name="{name}" '
-        f'tvg-logo="{logo}" '
-        f'group-title="{group}",{name}\n'
-        f'{url}\n'
+    If stream.feed is empty/missing,
+    still use the channel's feeds so
+    language filtering does not kill the stream.
+    """
+
+    stream_feed = stream.get(
+        "feed"
     )
 
+    if stream_feed:
+
+        for feed in feeds_for_channel:
+
+            if str(
+                feed.get("id", "")
+            ) == str(stream_feed):
+
+                return feed
+
+    # If no exact feed is available,
+    # choose main feed first.
+    for feed in feeds_for_channel:
+
+        if feed.get(
+            "is_main"
+        ):
+            return feed
+
+    if feeds_for_channel:
+        return feeds_for_channel[0]
+
+    return {}
+
 
 # ============================================================
-# STREAM HEADERS
+# GROUP DECISION
 # ============================================================
 
-def stream_headers(stream=None):
+def get_group(
+    channel,
+    feed,
+    stream
+):
+    country = str(
+        channel.get(
+            "country",
+            ""
+        )
+    ).upper()
+
+    name = clean_name(
+        channel.get(
+            "name",
+            ""
+        )
+    )
+
+    # --------------------------------------------------------
+    # CRICKET
+    # --------------------------------------------------------
+
+    if is_cricket(
+        channel,
+        feed,
+        stream
+    ):
+        return "Sports - Cricket"
+
+    # --------------------------------------------------------
+    # INDIA
+    # --------------------------------------------------------
+
+    if country == "IN":
+
+        # Explicitly reject Indian regional language.
+        if has_regional(feed):
+            return None
+
+        if has_hindi(feed):
+            base = "India - Hindi"
+
+        elif has_english(feed):
+            base = "India - English"
+
+        elif has_bhojpuri(feed):
+            base = "India - Bhojpuri"
+
+        else:
+            # No language = no random fallback.
+            return None
+
+        cat = category(channel)
+
+        if cat:
+            return f"{base} - {cat}"
+
+        return base
+
+    # --------------------------------------------------------
+    # FOREIGN HINDI
+    # --------------------------------------------------------
+
+    if country in FOREIGN_COUNTRIES:
+
+        if not has_hindi(feed):
+            return None
+
+        if not foreign_verified(channel):
+            return None
+
+        base = FOREIGN_COUNTRIES[
+            country
+        ]
+
+        cat = category(channel)
+
+        if cat:
+            return f"{base} - {cat}"
+
+        return base
+
+    # --------------------------------------------------------
+    # EVERYTHING ELSE
+    # --------------------------------------------------------
+
+    return None
+
+
+# ============================================================
+# HEADERS
+# ============================================================
+
+def get_headers(stream):
     headers = {
         "User-Agent": (
             "Mozilla/5.0 "
@@ -667,67 +594,52 @@ def stream_headers(stream=None):
             "AppleWebKit/537.36 "
             "Chrome/151.0 Mobile Safari/537.36"
         ),
-        "Accept": (
-            "application/vnd.apple.mpegurl,"
-            "application/x-mpegURL,"
-            "video/*,"
-            "*/*"
-        ),
+        "Accept": "*/*",
     }
 
-    if not stream:
-        return headers
+    ua = stream.get(
+        "user_agent"
+    )
 
-    for key in (
-        "user_agent",
-        "user-agent",
-        "userAgent",
-    ):
-        value = stream.get(key)
+    if ua:
+        headers["User-Agent"] = ua
 
-        if value:
-            headers["User-Agent"] = str(value)
-            break
+    referrer = stream.get(
+        "referrer"
+    )
 
-    for key in (
-        "referrer",
-        "referer",
-        "http_referrer",
-        "http-referrer",
-    ):
-        value = stream.get(key)
-
-        if value:
-            headers["Referer"] = str(value)
-            break
-
-    origin = stream.get("origin")
-
-    if origin:
-        headers["Origin"] = str(origin)
+    if referrer:
+        headers["Referer"] = referrer
 
     return headers
 
 
 # ============================================================
-# HTTP READ
+# HEALTH CHECK
 # ============================================================
 
-def http_read(url, stream=None, limit=65536):
-    headers = stream_headers(stream)
+def health_check(item):
+    url = item["url"]
+    stream = item["stream"]
 
-    req = Request(
+    request = Request(
         url,
-        headers=headers
+        headers=get_headers(stream)
     )
 
     try:
+
         with urlopen(
-            req,
-            timeout=TIMEOUT
+            request,
+            timeout=HEALTH_TIMEOUT
         ) as response:
 
             status = response.status
+
+            body = response.read(
+                8192
+            )
+
             content_type = (
                 response.headers.get(
                     "Content-Type",
@@ -736,308 +648,98 @@ def http_read(url, stream=None, limit=65536):
                 .lower()
             )
 
-            body = response.read(
-                limit
+            if status not in (
+                200,
+                206
+            ):
+                return (
+                    url,
+                    False,
+                    f"HTTP {status}"
+                )
+
+            if not body:
+                return (
+                    url,
+                    False,
+                    "EMPTY"
+                )
+
+            text = body.decode(
+                "utf-8",
+                errors="ignore"
             )
 
-            final_url = response.geturl()
+            is_m3u8 = (
+                "#EXTM3U" in text
+                or "mpegurl" in content_type
+                or url.lower().endswith(
+                    ".m3u8"
+                )
+            )
+
+            if is_m3u8:
+
+                if "#EXTM3U" not in text:
+                    return (
+                        url,
+                        False,
+                        "BAD M3U8"
+                    )
+
+                return (
+                    url,
+                    True,
+                    "M3U8 OK"
+                )
 
             return (
+                url,
                 True,
-                status,
-                content_type,
-                body,
-                final_url,
+                f"HTTP {status}"
             )
 
     except HTTPError as e:
+
         return (
-            False,
-            e.code,
-            "",
-            b"",
             url,
+            False,
+            f"HTTP {e.code}"
         )
 
     except (
         URLError,
         TimeoutError,
-        ConnectionError,
+        ConnectionError
     ):
+
         return (
-            False,
-            0,
-            "",
-            b"",
             url,
+            False,
+            "TIMEOUT/CONNECTION"
         )
 
-    except Exception:
+    except Exception as e:
+
         return (
-            False,
-            0,
-            "",
-            b"",
             url,
+            False,
+            type(e).__name__
         )
 
 
 # ============================================================
-# HLS CHECK
+# NAME NUMBERING
 # ============================================================
 
-def check_hls(
-    url,
-    stream=None,
-    body=None,
-    content_type=""
-):
-    if body is None:
-        ok, status, content_type, body, final_url = (
-            http_read(
-                url,
-                stream
-            )
-        )
-
-        if not ok:
-            return False, f"HTTP {status}"
-
-        url = final_url
-
-    text = body.decode(
-        "utf-8",
-        errors="ignore"
-    )
-
-    if "#EXTM3U" not in text:
-        return False, "Not M3U8"
-
-    lines = [
-        line.strip()
-        for line in text.splitlines()
-        if line.strip()
-    ]
-
-    # Master playlist
-    if "#EXT-X-STREAM-INF" in text:
-
-        variant = ""
-
-        for i, line in enumerate(lines):
-
-            if line.startswith(
-                "#EXT-X-STREAM-INF"
-            ):
-                for next_line in lines[i + 1:]:
-
-                    if (
-                        not next_line.startswith(
-                            "#"
-                        )
-                    ):
-                        variant = next_line
-                        break
-
-                if variant:
-                    break
-
-        if variant:
-
-            variant_url = urljoin(
-                url,
-                variant
-            )
-
-            ok, status, ctype, variant_body, final_url = (
-                http_read(
-                    variant_url,
-                    stream
-                )
-            )
-
-            if not ok:
-                return (
-                    False,
-                    f"Variant HTTP {status}"
-                )
-
-            variant_text = variant_body.decode(
-                "utf-8",
-                errors="ignore"
-            )
-
-            if "#EXTM3U" not in variant_text:
-                return (
-                    False,
-                    "Invalid variant"
-                )
-
-            text = variant_text
-            url = final_url
-            lines = [
-                line.strip()
-                for line in text.splitlines()
-                if line.strip()
-            ]
-
-    # Media playlist
-    segment = ""
-
-    for line in lines:
-
-        if line.startswith("#"):
-            continue
-
-        if (
-            line.startswith(
-                "http://"
-            )
-            or line.startswith(
-                "https://"
-            )
-            or line.startswith("/")
-            or "." in line
-        ):
-            segment = line
-            break
-
-    if not segment:
-        # A valid live playlist may temporarily
-        # contain no segment yet.
-        if (
-            "#EXT-X-TARGETDURATION" in text
-            or "#EXT-X-MEDIA-SEQUENCE" in text
-        ):
-            return True, "Valid HLS"
-
-        return False, "No HLS media"
-
-    segment_url = urljoin(
-        url,
-        segment
-    )
-
-    ok, status, ctype, segment_body, final_url = (
-        http_read(
-            segment_url,
-            stream,
-            limit=4096
-        )
-    )
-
-    if not ok:
-        return (
-            False,
-            f"Segment HTTP {status}"
-        )
-
-    if not segment_body:
-        return False, "Empty segment"
-
-    return True, "HLS OK"
-
-
-# ============================================================
-# COMPLETE STREAM HEALTH CHECK
-# ============================================================
-
-def check_stream(item):
-    url = item["url"]
-    stream = item.get("stream")
-
-    ok, status, content_type, body, final_url = (
-        http_read(
-            url,
-            stream
-        )
-    )
-
-    if not ok:
-        return (
-            url,
-            False,
-            f"HTTP {status}"
-        )
-
-    if status not in (
-        200,
-        206,
-    ):
-        return (
-            url,
-            False,
-            f"HTTP {status}"
-        )
-
-    text_head = body[:4096].decode(
-        "utf-8",
-        errors="ignore"
-    )
-
-    is_hls = (
-        "#EXTM3U" in text_head
-        or "mpegurl" in content_type
-        or "vnd.apple.mpegurl" in content_type
-        or url.lower().split("?")[0].endswith(
-            ".m3u8"
-        )
-    )
-
-    if is_hls:
-
-        ok, reason = check_hls(
-            final_url,
-            stream,
-            body,
-            content_type
-        )
-
-        return (
-            url,
-            ok,
-            reason
-        )
-
-    if not body:
-        return (
-            url,
-            False,
-            "Empty response"
-        )
-
-    # Reject obvious HTML error pages.
-    lower = text_head.lower()
-
-    if (
-        "<html" in lower
-        or "<!doctype html" in lower
-    ):
-        return (
-            url,
-            False,
-            "HTML response"
-        )
-
-    return (
-        url,
-        True,
-        f"HTTP {status}"
-    )
-
-
-# ============================================================
-# UNIQUE NAME
-# ============================================================
-
-def unique_name(
+def numbered_name(
     group,
-    base_name,
+    name,
     counters
 ):
     key = (
         group,
-        base_name.lower().strip()
+        name.lower()
     )
 
     counters[key] = (
@@ -1047,21 +749,51 @@ def unique_name(
     number = counters[key]
 
     if number == 1:
-        return base_name
+        return name
 
-    return f"{base_name} {number}"
+    return f"{name} {number}"
 
 
 # ============================================================
-# BUILD PLAYLIST
+# M3U
 # ============================================================
 
-def build_playlist(
+def m3u_entry(item, display_name):
+    channel = item["channel"]
+
+    channel_id = channel.get(
+        "id",
+        ""
+    )
+
+    logo = channel.get(
+        "logo",
+        ""
+    )
+
+    group = item["group"]
+    url = item["url"]
+
+    return (
+        f'#EXTINF:-1 '
+        f'tvg-id="{channel_id}" '
+        f'tvg-name="{display_name}" '
+        f'tvg-logo="{logo}" '
+        f'group-title="{group}",'
+        f'{display_name}\n'
+        f'{url}\n'
+    )
+
+
+# ============================================================
+# BUILD
+# ============================================================
+
+def build(
     channels,
     feeds,
     streams
 ):
-
     feed_index = build_feed_index(
         feeds
     )
@@ -1071,537 +803,318 @@ def build_playlist(
     )
 
     stats = {
-        "regional_removed": 0,
-        "bad_removed": 0,
-        "not_allowed": 0,
-        "no_url": 0,
+        "channels": len(channels),
+        "feeds": len(feeds),
+        "streams": len(streams),
+        "eligible": 0,
         "duplicate_urls": 0,
-        "health_failed": 0,
-        "health_working": 0,
+        "regional": 0,
+        "not_allowed": 0,
+        "no_stream": 0,
+        "working": 0,
+        "failed": 0,
     }
 
-    # --------------------------------------------------------
-    # Candidate collection
-    # --------------------------------------------------------
-
+    # URL is the global identity.
     candidates = {}
-    # URL -> item
-    #
-    # This globally removes exact duplicate URLs BEFORE
-    # health checking.
-    #
-    # If the same channel has another URL, that URL survives.
+
+    # --------------------------------------------------------
+    # WALK CHANNELS
+    # --------------------------------------------------------
 
     for channel in channels:
 
-        cid = get_id(channel)
+        channel_id = channel.get(
+            "id"
+        )
 
-        if not cid:
+        if not channel_id:
             continue
 
-        name = get_name(channel)
+        channel_name = clean_name(
+            channel.get(
+                "name",
+                channel_id
+            )
+        )
 
-        if name == "Unknown":
-            continue
-
-        channel_feeds = feed_index.get(
-            cid,
+        feeds_for_channel = feed_index.get(
+            channel_id,
             []
         )
 
-        channel_streams = stream_index.get(
-            cid,
+        streams_for_channel = stream_index.get(
+            channel_id,
             []
         )
 
+        if not streams_for_channel:
+            stats["no_stream"] += 1
+            continue
+
         # ----------------------------------------------------
-        # Build stream list.
-        # Feed URL first, then streams.json.
+        # Every stream is considered separately.
+        # This is important:
+        #
+        # Same channel + different URL = KEEP BOTH.
+        # Same URL globally = KEEP ONE.
         # ----------------------------------------------------
 
-        source_items = []
+        for stream in streams_for_channel:
 
-        for feed in channel_feeds:
+            url = str(
+                stream.get(
+                    "url",
+                    ""
+                )
+            ).strip()
 
-            url = get_stream_url(feed)
+            if not url:
+                continue
 
-            if url:
-                source_items.append(
-                    (
-                        url,
-                        feed
+            feed = get_stream_feed(
+                stream,
+                feeds_for_channel
+            )
+
+            # Bad educational/public channels
+            if is_bad(
+                channel,
+                feed
+            ):
+                stats["not_allowed"] += 1
+                continue
+
+            group = get_group(
+                channel,
+                feed,
+                stream
+            )
+
+            if group is None:
+
+                # Count regional separately
+                country = str(
+                    channel.get(
+                        "country",
+                        ""
                     )
-                )
+                ).upper()
 
-        for stream in channel_streams:
+                if (
+                    country == "IN"
+                    and has_regional(feed)
+                ):
+                    stats["regional"] += 1
+                else:
+                    stats["not_allowed"] += 1
 
-            url = get_stream_url(stream)
-
-            if url:
-                source_items.append(
-                    (
-                        url,
-                        stream
-                    )
-                )
-
-        if not source_items:
-            stats["no_url"] += 1
-            continue
-
-        # ----------------------------------------------------
-        # Bad channels
-        # ----------------------------------------------------
-
-        if is_bad(
-            channel,
-            channel_feeds[0]
-            if channel_feeds
-            else None
-        ):
-            stats["bad_removed"] += 1
-            continue
-
-        country = get_country(
-            channel
-        )
-
-        # ====================================================
-        # CRICKET
-        # ====================================================
-
-        if cricket_channel(
-            channel,
-            channel_feeds[0]
-            if channel_feeds
-            else None
-        ):
-
-            group = "Sports - Cricket"
-
-        # ====================================================
-        # INDIA
-        # ====================================================
-
-        elif country == "IN":
-
-            # NEVER add Indian regional channels.
-            if has_regional_language(
-                channel,
-                channel_feeds[0]
-                if channel_feeds
-                else None
-            ):
-                stats["regional_removed"] += 1
                 continue
 
-            if has_hindi(
-                channel,
-                channel_feeds[0]
-                if channel_feeds
-                else None
-            ):
-                base_group = "India - Hindi"
-
-            elif has_english(
-                channel,
-                channel_feeds[0]
-                if channel_feeds
-                else None
-            ):
-                base_group = "India - English"
-
-            elif has_bhojpuri(
-                channel,
-                channel_feeds[0]
-                if channel_feeds
-                else None
-            ):
-                base_group = "India - Bhojpuri"
-
-            else:
-                # NO RANDOM FALLBACK.
-                stats["not_allowed"] += 1
-                continue
-
-            category = get_category(
-                channel,
-                channel_feeds[0]
-                if channel_feeds
-                else None
-            )
-
-            if category:
-                group = (
-                    f"{base_group} - {category}"
-                )
-            else:
-                group = base_group
-
-        # ====================================================
-        # FOREIGN HINDI
-        # ====================================================
-
-        elif country in FOREIGN_COUNTRIES:
-
-            if not has_hindi(
-                channel,
-                channel_feeds[0]
-                if channel_feeds
-                else None
-            ):
-                stats["not_allowed"] += 1
-                continue
-
-            network = get_network(
-                channel
-            ).lower().strip()
-
-            channel_name = name.lower().strip()
-
-            verified = (
-                network in FOREIGN_NETWORKS
-                or channel_name in FOREIGN_NETWORKS
-            )
-
-            if not verified:
-                stats["not_allowed"] += 1
-                continue
-
-            base_group = FOREIGN_COUNTRIES[
-                country
-            ]
-
-            category = get_category(
-                channel,
-                channel_feeds[0]
-                if channel_feeds
-                else None
-            )
-
-            if category:
-                group = (
-                    f"{base_group} - {category}"
-                )
-            else:
-                group = base_group
-
-        else:
-            # No random country channels.
-            stats["not_allowed"] += 1
-            continue
-
-        # ----------------------------------------------------
-        # Candidate per URL
-        # ----------------------------------------------------
-
-        logo = channel.get(
-            "logo",
-            ""
-        )
-
-        for url, stream_obj in source_items:
+            # ------------------------------------------------
+            # GLOBAL EXACT URL DEDUP
+            # ------------------------------------------------
 
             if url in candidates:
+
                 stats["duplicate_urls"] += 1
                 continue
 
             candidates[url] = {
                 "url": url,
                 "channel": channel,
-                "stream": stream_obj,
+                "feed": feed,
+                "stream": stream,
                 "group": group,
-                "name": name,
-                "id": cid,
-                "logo": logo,
+                "name": channel_name,
             }
 
-    # ========================================================
-    # STREAM HEALTH CHECK
-    # ========================================================
-
-    print()
-    print(
-        "----------------------------------"
-    )
-    print(
-        f"UNIQUE STREAM CANDIDATES: {len(candidates)}"
-    )
-    print(
-        "STREAM HEALTH CHECK:"
-        + (
-            " ENABLED"
-            if HEALTH_CHECK
-            else " DISABLED"
-        )
-    )
-    print(
-        "----------------------------------"
+    stats["eligible"] = len(
+        candidates
     )
 
-    working = []
+    return candidates, stats
 
-    if HEALTH_CHECK and candidates:
 
-        start = time.time()
+# ============================================================
+# WRITE
+# ============================================================
 
-        with ThreadPoolExecutor(
-            max_workers=MAX_WORKERS
-        ) as executor:
-
-            future_map = {
-                executor.submit(
-                    check_stream,
-                    item
-                ): item
-                for item in candidates.values()
-            }
-
-            completed = 0
-            total = len(
-                future_map
-            )
-
-            for future in as_completed(
-                future_map
-            ):
-
-                item = future_map[
-                    future
-                ]
-
-                try:
-                    url, ok, reason = (
-                        future.result()
-                    )
-
-                except Exception as e:
-                    url = item["url"]
-                    ok = False
-                    reason = str(e)
-
-                completed += 1
-
-                if ok:
-
-                    stats["health_working"] += 1
-
-                    working.append(
-                        item
-                    )
-
-                else:
-
-                    stats["health_failed"] += 1
-
-                if (
-                    completed % 25 == 0
-                    or completed == total
-                ):
-                    print(
-                        f"Checked "
-                        f"{completed}/{total} | "
-                        f"Working "
-                        f"{stats['health_working']} | "
-                        f"Failed "
-                        f"{stats['health_failed']}"
-                    )
-
-        elapsed = time.time() - start
-
-        print(
-            f"Health check completed in "
-            f"{elapsed:.1f}s"
-        )
-
-    else:
-
-        working = list(
-            candidates.values()
-        )
-
-        stats["health_working"] = len(
-            working
-        )
-
-    # ========================================================
-    # SORT
-    # ========================================================
-
-    order_map = {
-        group: index
-        for index, group
-        in enumerate(
-            GROUP_ORDER
-        )
-    }
-
-    working.sort(
-        key=lambda x: (
-            order_map.get(
-                x["group"],
-                999
-            ),
-            x["name"].lower(),
-            x["url"],
-        )
-    )
-
-    # ========================================================
-    # WRITE M3U
-    # ========================================================
-
-    output = [
-        "#EXTM3U",
-        "#PLAYLIST:Generated IPTV Playlist",
-        "",
-    ]
-
+def write_playlist(
+    candidates,
+    output
+):
     counters = {}
 
-    group_counts = {}
+    items = list(
+        candidates.values()
+    )
 
-    for item in working:
-
-        group = item["group"]
-
-        display_name = unique_name(
-            group,
-            item["name"],
-            counters
+    items.sort(
+        key=lambda x: (
+            x["group"].lower(),
+            x["name"].lower(),
+            x["url"]
         )
-
-        group_counts[group] = (
-            group_counts.get(
-                group,
-                0
-            ) + 1
-        )
-
-        output.append(
-            make_entry(
-                group=group,
-                name=display_name,
-                channel_id=item["id"],
-                logo=item["logo"],
-                url=item["url"],
-            )
-        )
+    )
 
     with open(
-        OUTPUT_FILE,
+        output,
         "w",
         encoding="utf-8"
     ) as f:
 
         f.write(
-            "\n".join(output)
+            "#EXTM3U\n"
         )
 
-    # ========================================================
-    # FINAL STATS
-    # ========================================================
+        for item in items:
+
+            name = numbered_name(
+                item["group"],
+                item["name"],
+                counters
+            )
+
+            f.write(
+                m3u_entry(
+                    item,
+                    name
+                )
+            )
+
+    return items
+
+
+# ============================================================
+# HEALTH REPORT
+# ============================================================
+
+def run_health_check(
+    candidates
+):
+    if not candidates:
+        return
+
+    print()
+    print(
+        "----------------------------------"
+    )
+    print(
+        f"HEALTH CHECK: "
+        f"{len(candidates)} unique streams"
+    )
+    print(
+        "REPORT ONLY - "
+        "FAILED STREAMS WILL NOT BE REMOVED"
+    )
+    print(
+        "----------------------------------"
+    )
+
+    working = 0
+    failed = 0
+
+    started = time.time()
+
+    with ThreadPoolExecutor(
+        max_workers=HEALTH_WORKERS
+    ) as executor:
+
+        jobs = [
+            executor.submit(
+                health_check,
+                item
+            )
+            for item in candidates.values()
+        ]
+
+        total = len(jobs)
+
+        for number, future in enumerate(
+            as_completed(jobs),
+            1
+        ):
+
+            try:
+                url, ok, reason = (
+                    future.result()
+                )
+            except Exception:
+                ok = False
+                reason = "ERROR"
+
+            if ok:
+                working += 1
+            else:
+                failed += 1
+
+            if (
+                number % 100 == 0
+                or number == total
+            ):
+                print(
+                    f"Checked {number}/{total} | "
+                    f"Working {working} | "
+                    f"Failed {failed}"
+                )
+
+    elapsed = time.time() - started
+
+    print(
+        f"Health check finished in "
+        f"{elapsed:.1f}s"
+    )
+
+    print(
+        f"Working: {working}"
+    )
+
+    print(
+        f"Failed: {failed}"
+    )
+
+
+# ============================================================
+# GROUP STATS
+# ============================================================
+
+def print_groups(items):
+    groups = {}
+
+    for item in items:
+
+        group = item["group"]
+
+        groups[group] = (
+            groups.get(group, 0) + 1
+        )
 
     print()
     print(
         "=================================="
     )
     print(
-        "PLAYLIST GENERATED"
+        "GROUPS"
     )
     print(
         "=================================="
     )
 
-    for group in GROUP_ORDER:
-
-        count = group_counts.get(
-            group,
-            0
-        )
-
-        if count:
-            print(
-                f"{group}: {count}"
-            )
-
-    # Print any extra category that appeared.
-    extra_groups = [
-        g
-        for g in group_counts
-        if g not in GROUP_ORDER
-    ]
-
     for group in sorted(
-        extra_groups
+        groups
     ):
+
         print(
-            f"{group}: "
-            f"{group_counts[group]}"
+            f"{group}: {groups[group]}"
         )
 
     print(
         "----------------------------------"
     )
 
-    total = sum(
-        group_counts.values()
-    )
-
-    cricket_count = group_counts.get(
-        "Sports - Cricket",
-        0
-    )
-
     print(
-        f"TOTAL WORKING CHANNELS: {total}"
-    )
-
-    print(
-        f"CRICKET: {cricket_count}"
-    )
-
-    print(
-        f"Duplicate URLs removed: "
-        f"{stats['duplicate_urls']}"
-    )
-
-    print(
-        f"Regional removed: "
-        f"{stats['regional_removed']}"
-    )
-
-    print(
-        f"Bad channels removed: "
-        f"{stats['bad_removed']}"
-    )
-
-    print(
-        f"No URL: "
-        f"{stats['no_url']}"
-    )
-
-    print(
-        f"Not allowed: "
-        f"{stats['not_allowed']}"
-    )
-
-    print(
-        f"Stream working: "
-        f"{stats['health_working']}"
-    )
-
-    print(
-        f"Stream failed: "
-        f"{stats['health_failed']}"
-    )
-
-    print(
-        "=================================="
-    )
-
-    print(
-        f"FILE: {OUTPUT_FILE}"
+        f"TOTAL: {len(items)}"
     )
 
     print(
@@ -1614,6 +1127,37 @@ def build_playlist(
 # ============================================================
 
 def main():
+
+    parser = argparse.ArgumentParser()
+
+    parser.add_argument(
+        "source",
+        nargs="?",
+        default="sources"
+    )
+
+    parser.add_argument(
+        "-o",
+        "--output",
+        default=DEFAULT_OUTPUT
+    )
+
+    parser.add_argument(
+        "--no-health-check",
+        action="store_true"
+    )
+
+    args = parser.parse_args()
+
+    print(
+        "IPTV Playlist Generator"
+    )
+
+    print(
+        "Source: IPTV-org API"
+    )
+
+    print()
 
     try:
 
@@ -1632,36 +1176,9 @@ def main():
     except Exception as e:
 
         print(
-            f"ERROR FETCHING API: {e}"
+            f"\nERROR: {e}"
         )
 
-        sys.exit(1)
-
-    if not isinstance(
-        channels,
-        list
-    ):
-        print(
-            "ERROR: channels.json invalid"
-        )
-        sys.exit(1)
-
-    if not isinstance(
-        feeds,
-        list
-    ):
-        print(
-            "ERROR: feeds.json invalid"
-        )
-        sys.exit(1)
-
-    if not isinstance(
-        streams,
-        list
-    ):
-        print(
-            "ERROR: streams.json invalid"
-        )
         sys.exit(1)
 
     print()
@@ -1677,10 +1194,78 @@ def main():
         f"Streams API: {len(streams)}"
     )
 
-    build_playlist(
+    print()
+
+    candidates, stats = build(
         channels,
         feeds,
         streams
+    )
+
+    print(
+        "----------------------------------"
+    )
+
+    print(
+        f"Channels scanned: "
+        f"{stats['channels']}"
+    )
+
+    print(
+        f"Streams mapped: "
+        f"{stats['streams']}"
+    )
+
+    print(
+        f"Eligible unique URLs: "
+        f"{stats['eligible']}"
+    )
+
+    print(
+        f"Duplicate URLs removed: "
+        f"{stats['duplicate_urls']}"
+    )
+
+    print(
+        f"Regional removed: "
+        f"{stats['regional']}"
+    )
+
+    print(
+        f"Not allowed: "
+        f"{stats['not_allowed']}"
+    )
+
+    print(
+        f"Channels without streams: "
+        f"{stats['no_stream']}"
+    )
+
+    print(
+        "----------------------------------"
+    )
+
+    # IMPORTANT:
+    # Health check NEVER filters playlist.
+    if (
+        HEALTH_CHECK
+        and not args.no_health_check
+    ):
+        run_health_check(
+            candidates
+        )
+
+    items = write_playlist(
+        candidates,
+        args.output
+    )
+
+    print_groups(
+        items
+    )
+
+    print(
+        f"PLAYLIST: {args.output}"
     )
 
 
