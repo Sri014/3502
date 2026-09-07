@@ -1,70 +1,94 @@
 #!/usr/bin/env python3
 
 import re
+import json
 import urllib.request
 from pathlib import Path
 
 
 # ============================================================
-# SOURCES
+# IPTV-ORG SOURCES
 # ============================================================
 
 SOURCE_URLS = [
 
-    # ---------------- INDIA / HINDI ----------------
+    # ========================================================
+    # INDIA / REQUIRED LANGUAGE SOURCES
+    # ========================================================
+
     "https://iptv-org.github.io/iptv/languages/hin.m3u",
-
-    # ---------------- BHOJPURI ----------------
     "https://iptv-org.github.io/iptv/languages/bho.m3u",
-
-    # ---------------- ENGLISH ----------------
     "https://iptv-org.github.io/iptv/languages/eng.m3u",
 
-    # ---------------- SPORTS ----------------
+    # ========================================================
+    # REQUIRED CATEGORIES
+    # ========================================================
+
     "https://iptv-org.github.io/iptv/categories/sports.m3u",
-
-    # ---------------- KIDS ----------------
     "https://iptv-org.github.io/iptv/categories/kids.m3u",
-
-    # ---------------- ENTERTAINMENT ----------------
     "https://iptv-org.github.io/iptv/categories/entertainment.m3u",
-
-    # ---------------- SCIENCE ----------------
     "https://iptv-org.github.io/iptv/categories/science.m3u",
-
-    # ---------------- LIFESTYLE ----------------
     "https://iptv-org.github.io/iptv/categories/lifestyle.m3u",
 
     # ========================================================
-    # FOREIGN HINDI FEEDS
-    # UK
+    # FOREIGN HINDI ONLY
+    #
+    # Country playlists are NOT loaded.
+    # They are fetched only to pick explicit Hindi allowlist
+    # channels below.
     # ========================================================
 
     "https://iptv-org.github.io/iptv/countries/uk.m3u",
-
-    # USA
     "https://iptv-org.github.io/iptv/countries/us.m3u",
-
-    # CANADA
     "https://iptv-org.github.io/iptv/countries/ca.m3u",
 
-    # Middle East
+    # Middle East sources only for allowlisted Hindi channels
     "https://iptv-org.github.io/iptv/countries/ae.m3u",
     "https://iptv-org.github.io/iptv/countries/qa.m3u",
     "https://iptv-org.github.io/iptv/countries/sa.m3u",
-
-    # ========================================================
-    # DISABLED
-    # ========================================================
-
-    # TV Garden webpage is NOT an M3U:
-    # "https://tvgarden.world/tv/in",
-
-    # Wizakor disabled:
-    # "https://raw.githubusercontent.com/wizakorhd/iptv/main/playlist-hindi.m3u",
-    # "https://raw.githubusercontent.com/wizakorhd/iptv/refs/heads/main/playlist-top.m3u",
-    # "https://raw.githubusercontent.com/wizakorhd/iptv/refs/heads/main/playlist-english-india.m3u",
 ]
+
+
+# ============================================================
+# FOREIGN HINDI ALLOWLIST
+#
+# ONLY these foreign/broadcast-area Hindi channels can enter
+# from UK / USA / Canada / Middle East country playlists.
+#
+# No random country channels.
+# ============================================================
+
+FOREIGN_HINDI_ALLOWLIST = {
+
+    # ---------------- UK ----------------
+
+    "utsav plus",
+    "utsav bharat",
+    "sony max",
+    "sony max uk",
+    "sony sab",
+    "sony sab uk",
+    "sony entertainment television asia",
+    "sony sab asia",
+
+    # ---------------- USA ----------------
+
+    "sony sab usa",
+    "sony max us",
+    "sony entertainment television",
+    "sony pal",
+
+    # ---------------- CANADA ----------------
+
+    "zee tv canada",
+    "tag tv",
+
+    # ---------------- MIDDLE EAST ----------------
+
+    "zee cinema",
+    "&tv",
+    "and tv",
+}
 
 
 # ============================================================
@@ -91,6 +115,35 @@ GROUPS = [
 
 
 # ============================================================
+# RADIO GARDEN
+# ============================================================
+
+RADIO_GARDEN_SEARCH_URLS = [
+
+    "https://radio.garden/api/search?q=Hindi",
+
+    "https://radio.garden/api/search?q=Hindi%20Radio",
+
+    "https://radio.garden/api/search?q=Bollywood",
+
+    "https://radio.garden/api/search?q=Hindi%20FM",
+
+]
+
+
+# Radio Garden direct channel endpoint.
+#
+# The channel ID is discovered from the Radio Garden API.
+# The endpoint redirects to the station's current stream.
+# ============================================================
+
+RADIO_GARDEN_STREAM_TEMPLATE = (
+    "https://radio.garden/api/ara/content/listen/"
+    "{channel_id}/channel.mp3"
+)
+
+
+# ============================================================
 # USER AGENT
 # ============================================================
 
@@ -107,7 +160,7 @@ USER_AGENT = (
 # FETCH
 # ============================================================
 
-def fetch_text(url):
+def fetch_bytes(url):
 
     request = urllib.request.Request(
         url,
@@ -122,7 +175,12 @@ def fetch_text(url):
         timeout=60,
     ) as response:
 
-        data = response.read()
+        return response.read()
+
+
+def fetch_text(url):
+
+    data = fetch_bytes(url)
 
     for encoding in (
         "utf-8-sig",
@@ -131,9 +189,13 @@ def fetch_text(url):
     ):
 
         try:
-            return data.decode(encoding)
+
+            return data.decode(
+                encoding
+            )
 
         except UnicodeDecodeError:
+
             pass
 
     return data.decode(
@@ -149,6 +211,7 @@ def fetch_text(url):
 def clean_text(value):
 
     if value is None:
+
         return ""
 
     value = str(value)
@@ -161,7 +224,11 @@ def clean_text(value):
     }
 
     for old, new in replacements.items():
-        value = value.replace(old, new)
+
+        value = value.replace(
+            old,
+            new
+        )
 
     value = re.sub(
         r"\s+",
@@ -174,7 +241,9 @@ def clean_text(value):
 
 def normalize_text(value):
 
-    value = clean_text(value).lower()
+    value = clean_text(
+        value
+    ).lower()
 
     value = value.replace(
         "&",
@@ -233,6 +302,7 @@ def parse_m3u(text):
         line = raw.strip()
 
         if not line:
+
             continue
 
         if line.startswith(
@@ -275,7 +345,9 @@ def parse_m3u(text):
             if comma >= 0:
 
                 current["name"] = clean_text(
-                    line[comma + 1:]
+                    line[
+                        comma + 1:
+                    ]
                 )
 
             continue
@@ -316,7 +388,10 @@ def get_attr(entry, *names):
         value = attrs.get(name)
 
         if value:
-            return clean_text(value)
+
+            return clean_text(
+                value
+            )
 
     return ""
 
@@ -349,12 +424,11 @@ def channel_group(entry):
 
 
 # ============================================================
-# EXCLUDE UNWANTED CHANNELS
+# REMOVE
 # ============================================================
 
 REMOVE_WORDS = (
 
-    # Educational channels requested to remove
     "swayam prabha",
     "swayamprabha",
     "pm e vidya",
@@ -385,6 +459,53 @@ def is_removed(entry):
 
 
 # ============================================================
+# FOREIGN HINDI CHECK
+# ============================================================
+
+def is_foreign_hindi(entry):
+
+    name = normalize_text(
+        channel_name(entry)
+    )
+
+    group = normalize_text(
+        channel_group(entry)
+    )
+
+    combined = name + " " + group
+
+    for allowed in FOREIGN_HINDI_ALLOWLIST:
+
+        allowed_normalized = normalize_text(
+            allowed
+        )
+
+        if (
+            name == allowed_normalized
+            or allowed_normalized in name
+        ):
+
+            return True
+
+    # Strong Hindi metadata check for explicitly named
+    # foreign/broadcast-area channels.
+
+    if "hindi" in combined:
+
+        for allowed in FOREIGN_HINDI_ALLOWLIST:
+
+            allowed_normalized = normalize_text(
+                allowed
+            )
+
+            if allowed_normalized in name:
+
+                return True
+
+    return False
+
+
+# ============================================================
 # SPORTS GROUPING
 # ============================================================
 
@@ -394,7 +515,6 @@ def sports_group(name, group):
         name + " " + group
     )
 
-    # Cricket
     if any(word in text for word in (
         "cricket",
         "willow",
@@ -412,7 +532,6 @@ def sports_group(name, group):
         return "Sports - Cricket"
 
 
-    # Hockey
     if any(word in text for word in (
         "hockey",
         "nhl",
@@ -423,7 +542,6 @@ def sports_group(name, group):
         return "Sports - Hockey"
 
 
-    # Football
     if any(word in text for word in (
         "football",
         "soccer",
@@ -439,7 +557,6 @@ def sports_group(name, group):
         return "Sports - Football"
 
 
-    # WWE
     if any(word in text for word in (
         "wwe",
         "world wrestling",
@@ -451,7 +568,6 @@ def sports_group(name, group):
         return "Sports - WWE"
 
 
-    # Tennis
     if any(word in text for word in (
         "tennis",
         "atp",
@@ -474,6 +590,11 @@ def sports_group(name, group):
 
 def group_channel(entry):
 
+    if is_removed(entry):
+
+        return None
+
+
     name = normalize_text(
         channel_name(entry)
     )
@@ -482,16 +603,11 @@ def group_channel(entry):
         channel_group(entry)
     )
 
-    combined = name + " " + original
-
-
-    # --------------------------------------------------------
-    # REMOVE UNWANTED
-    # --------------------------------------------------------
-
-    if is_removed(entry):
-
-        return None
+    combined = (
+        name
+        + " "
+        + original
+    )
 
 
     # --------------------------------------------------------
@@ -675,10 +791,6 @@ def group_channel(entry):
         return "Entertainment"
 
 
-    # --------------------------------------------------------
-    # DEFAULT
-    # --------------------------------------------------------
-
     return "Entertainment"
 
 
@@ -703,7 +815,9 @@ def build_extinf(entry, group):
         {}
     )
 
-    name = channel_name(entry)
+    name = channel_name(
+        entry
+    )
 
     output_attrs = []
 
@@ -737,9 +851,11 @@ def build_extinf(entry, group):
     for key, value in attrs.items():
 
         if key in already:
+
             continue
 
         if not value:
+
             continue
 
         output_attrs.append(
@@ -755,7 +871,345 @@ def build_extinf(entry, group):
 
 
 # ============================================================
-# LOAD
+# RADIO GARDEN HELPERS
+# ============================================================
+
+def recursive_objects(value):
+
+    if isinstance(
+        value,
+        dict
+    ):
+
+        yield value
+
+        for child in value.values():
+
+            yield from recursive_objects(
+                child
+            )
+
+    elif isinstance(
+        value,
+        list
+    ):
+
+        for child in value:
+
+            yield from recursive_objects(
+                child
+            )
+
+
+def get_first_string(
+    obj,
+    keys
+):
+
+    if not isinstance(
+        obj,
+        dict
+    ):
+
+        return ""
+
+    for key in keys:
+
+        value = obj.get(
+            key
+        )
+
+        if isinstance(
+            value,
+            str
+        ) and value.strip():
+
+            return clean_text(
+                value
+            )
+
+    return ""
+
+
+def radio_is_hindi(obj):
+
+    if not isinstance(
+        obj,
+        dict
+    ):
+
+        return False
+
+    pieces = []
+
+    for key in (
+        "name",
+        "title",
+        "description",
+        "language",
+        "languages",
+        "genre",
+        "genres",
+        "tags",
+        "tag",
+        "city",
+        "country",
+        "place",
+    ):
+
+        value = obj.get(
+            key
+        )
+
+        if isinstance(
+            value,
+            list
+        ):
+
+            pieces.extend(
+                str(x)
+                for x in value
+            )
+
+        elif isinstance(
+            value,
+            dict
+        ):
+
+            pieces.extend(
+                str(x)
+                for x in value.values()
+            )
+
+        elif value is not None:
+
+            pieces.append(
+                str(value)
+            )
+
+    text = normalize_text(
+        " ".join(pieces)
+    )
+
+    hindi_words = (
+        "hindi",
+        "hindustani",
+        "bollywood",
+        "desi hindi",
+        "hindi fm",
+        "hindi radio",
+        "hindi music",
+        "hindi songs",
+    )
+
+    return any(
+        word in text
+        for word in hindi_words
+    )
+
+
+def radio_channel_id(obj):
+
+    if not isinstance(
+        obj,
+        dict
+    ):
+
+        return ""
+
+    possible_keys = (
+        "channelId",
+        "channel_id",
+        "channel",
+        "id",
+        "slug",
+    )
+
+    for key in possible_keys:
+
+        value = obj.get(
+            key
+        )
+
+        if isinstance(
+            value,
+            str
+        ):
+
+            value = value.strip()
+
+            if value:
+
+                # Avoid accidentally treating place IDs
+                # or URLs as channel IDs.
+                if (
+                    "/" not in value
+                    and " " not in value
+                ):
+
+                    return value
+
+        elif isinstance(
+            value,
+            int
+        ):
+
+            return str(value)
+
+    return ""
+
+
+def fetch_radio_garden():
+
+    print()
+    print("========================================")
+    print("FETCHING HINDI RADIO GARDEN")
+    print("========================================")
+
+    stations = []
+
+    seen_ids = set()
+
+    for search_url in RADIO_GARDEN_SEARCH_URLS:
+
+        try:
+
+            raw = fetch_text(
+                search_url
+            )
+
+            data = json.loads(
+                raw
+            )
+
+        except Exception as exc:
+
+            print(
+                "Radio Garden search FAILED:",
+                search_url
+            )
+
+            print(
+                f"  {type(exc).__name__}: {exc}"
+            )
+
+            continue
+
+
+        found_here = 0
+
+        for obj in recursive_objects(
+            data
+        ):
+
+            if not radio_is_hindi(
+                obj
+            ):
+
+                continue
+
+            channel_id = radio_channel_id(
+                obj
+            )
+
+            if not channel_id:
+
+                continue
+
+            if channel_id in seen_ids:
+
+                continue
+
+            name = get_first_string(
+                obj,
+                (
+                    "name",
+                    "title",
+                    "stationName",
+                    "channelName",
+                )
+            )
+
+            if not name:
+
+                continue
+
+            city = get_first_string(
+                obj,
+                (
+                    "city",
+                    "town",
+                    "placeName",
+                )
+            )
+
+            country = get_first_string(
+                obj,
+                (
+                    "country",
+                    "countryName",
+                )
+            )
+
+            stream_url = (
+                RADIO_GARDEN_STREAM_TEMPLATE.format(
+                    channel_id=channel_id
+                )
+            )
+
+            entry = {
+                "name": name,
+                "url": stream_url,
+                "attrs": {
+                    "tvg-id": (
+                        "radiogarden-"
+                        + channel_id
+                    ),
+                    "tvg-name": name,
+                    "radio": "true",
+                },
+                "options": [],
+            }
+
+            if city:
+
+                entry["attrs"][
+                    "tvg-city"
+                ] = city
+
+            if country:
+
+                entry["attrs"][
+                    "tvg-country"
+                ] = country
+
+            stations.append(
+                entry
+            )
+
+            seen_ids.add(
+                channel_id
+            )
+
+            found_here += 1
+
+
+        print(
+            f"{search_url:55} "
+            f"{found_here:4} Hindi stations"
+        )
+
+
+    print(
+        f"Radio Garden total : "
+        f"{len(stations)}"
+    )
+
+    return stations
+
+
+# ============================================================
+# LOAD IPTV SOURCES
 # ============================================================
 
 def load_sources():
@@ -764,7 +1218,7 @@ def load_sources():
 
     print()
     print("========================================")
-    print("FETCHING VERIFIED IPTV SOURCES")
+    print("FETCHING IPTV SOURCES")
     print("========================================")
 
     for url in SOURCE_URLS:
@@ -776,7 +1230,9 @@ def load_sources():
 
         try:
 
-            text = fetch_text(url)
+            text = fetch_text(
+                url
+            )
 
             entries = parse_m3u(
                 text
@@ -787,9 +1243,57 @@ def load_sources():
                 f"{len(entries):5} channels"
             )
 
-            all_entries.extend(
-                entries
+            # ------------------------------------------------
+            # IMPORTANT:
+            # Foreign country feeds are allowlist filtered.
+            # ------------------------------------------------
+
+            is_foreign_source = any(
+                country in url
+                for country in (
+                    "/countries/uk.m3u",
+                    "/countries/us.m3u",
+                    "/countries/ca.m3u",
+                    "/countries/ae.m3u",
+                    "/countries/qa.m3u",
+                    "/countries/sa.m3u",
+                )
             )
+
+            if is_foreign_source:
+
+                allowed = []
+
+                for entry in entries:
+
+                    if is_removed(
+                        entry
+                    ):
+
+                        continue
+
+                    if is_foreign_hindi(
+                        entry
+                    ):
+
+                        allowed.append(
+                            entry
+                        )
+
+                print(
+                    f"  FOREIGN HINDI ALLOWED: "
+                    f"{len(allowed)}"
+                )
+
+                all_entries.extend(
+                    allowed
+                )
+
+            else:
+
+                all_entries.extend(
+                    entries
+                )
 
         except Exception as exc:
 
@@ -800,6 +1304,17 @@ def load_sources():
             print(
                 f"  {type(exc).__name__}: {exc}"
             )
+
+
+    # ========================================================
+    # RADIO GARDEN
+    # ========================================================
+
+    radio_entries = fetch_radio_garden()
+
+    all_entries.extend(
+        radio_entries
+    )
 
     return all_entries
 
@@ -826,9 +1341,12 @@ def main():
     )
 
 
-    # --------------------------------------------------------
-    # URL DEDUP
-    # --------------------------------------------------------
+    # ========================================================
+    # EXACT URL DEDUP
+    #
+    # Same URL -> one entry
+    # Same channel + different URL -> BOTH KEPT
+    # ========================================================
 
     seen_urls = set()
 
@@ -846,9 +1364,10 @@ def main():
         )
 
         if not url:
+
             continue
 
-        key = url.lower().strip()
+        key = url.strip().lower()
 
         if key in seen_urls:
 
@@ -856,7 +1375,9 @@ def main():
 
             continue
 
-        seen_urls.add(key)
+        seen_urls.add(
+            key
+        )
 
         unique_entries.append(
             entry
@@ -874,9 +1395,9 @@ def main():
     )
 
 
-    # --------------------------------------------------------
+    # ========================================================
     # GROUP
-    # --------------------------------------------------------
+    # ========================================================
 
     grouped = {
         group: []
@@ -890,6 +1411,23 @@ def main():
         group = group_channel(
             entry
         )
+
+        # Radio Garden entries must always remain Radio.
+        if (
+            str(
+                entry.get(
+                    "attrs",
+                    {}
+                ).get(
+                    "radio",
+                    ""
+                )
+            ).lower()
+            == "true"
+        ):
+
+            group = "Radio"
+
 
         if group is None:
 
@@ -906,9 +1444,9 @@ def main():
         )
 
 
-    # --------------------------------------------------------
+    # ========================================================
     # SORT
-    # --------------------------------------------------------
+    # ========================================================
 
     for group in GROUPS:
 
@@ -927,9 +1465,9 @@ def main():
         )
 
 
-    # --------------------------------------------------------
+    # ========================================================
     # BUILD PLAYLIST
-    # --------------------------------------------------------
+    # ========================================================
 
     lines = [
         "#EXTM3U"
@@ -953,7 +1491,9 @@ def main():
                 []
             ):
 
-                lines.append(option)
+                lines.append(
+                    option
+                )
 
             lines.append(
                 clean_text(
@@ -964,9 +1504,9 @@ def main():
             total += 1
 
 
-    # --------------------------------------------------------
+    # ========================================================
     # WRITE
-    # --------------------------------------------------------
+    # ========================================================
 
     output_file.write_text(
         "\n".join(lines) + "\n",
@@ -974,9 +1514,9 @@ def main():
     )
 
 
-    # --------------------------------------------------------
+    # ========================================================
     # RESULT
-    # --------------------------------------------------------
+    # ========================================================
 
     print()
     print("========================================")
