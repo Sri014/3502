@@ -295,24 +295,6 @@ http://66.102.126.10:8000/play/a01i/index.m3u8
 https://cc-czbq30x55knit.akamaized.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-czbq30x55knit/DIYC/PMSL/IN10/Epic_TV_IN_B/Epic_TV_IN_B.m3u8
 #EXTINF:-1 tvg-id="ETVBalBharat.in" tvg-name="ETV Bal Bharat" group-title="India - Hindi" ,ETV Bal Bharat
 http://103.185.24.134:3001/ETV-BAL-BHARAT/index.m3u8
-#EXTINF:-1 tvg-id="EVidya4.in" tvg-name="E-Vidya 4" group-title="India - Hindi" ,E-Vidya 4
-http://103.72.101.252:8080/live/406.m3u8
-#EXTINF:-1 tvg-id="EVidya5.in" tvg-name="E-Vidya 5" group-title="India - Hindi" ,E-Vidya 5
-http://103.72.101.252:8080/live/407.m3u8
-#EXTINF:-1 tvg-id="EVidya6.in" tvg-name="E-Vidya 6" group-title="India - Hindi" ,E-Vidya 6
-http://103.72.101.252:8080/live/408.m3u8
-#EXTINF:-1 tvg-id="EVidya7.in" tvg-name="E-Vidya 7" group-title="India - Hindi" ,E-Vidya 7
-http://103.72.101.252:8080/live/404.m3u8
-#EXTINF:-1 tvg-id="EVidya8.in" tvg-name="E-Vidya 8" group-title="India - Hindi" ,E-Vidya 8
-http://103.72.101.252:8080/live/409.m3u8
-#EXTINF:-1 tvg-id="EVidya9.in" tvg-name="E-Vidya 9" group-title="India - Hindi" ,E-Vidya 9
-http://103.72.101.252:8080/live/410.m3u8
-#EXTINF:-1 tvg-id="EVidya10.in" tvg-name="E-Vidya 10" group-title="India - Hindi" ,E-Vidya 10
-http://103.72.101.252:8080/live/411.m3u8
-#EXTINF:-1 tvg-id="EVidya11.in" tvg-name="E-Vidya 11" group-title="India - Hindi" ,E-Vidya 11
-http://103.72.101.252:8080/live/1410.m3u8
-#EXTINF:-1 tvg-id="EVidya12.in" tvg-name="E-Vidya 12" group-title="India - Hindi" ,E-Vidya 12
-http://103.72.101.252:8080/live/1532.m3u8
 #EXTINF:-1 tvg-id="FatehTV.in" tvg-name="Fateh TV" group-title="India - Hindi" ,Fateh TV
 https://ott.livelegitpro.in/fatehtv/fatehtv/index.m3u8
 #EXTINF:-1 tvg-id="FatehTV.in" tvg-name="Fateh TV" group-title="India - Hindi" ,Fateh TV
@@ -376,8 +358,12 @@ http://103.154.3.101:5001/live/577.m3u8
 https://raw.githubusercontent.com/amazeyourself/adaptive-streams/refs/heads/main/streams/in/HistoryTV18HD.m3u8
 #EXTINF:-1 tvg-id="HistoryTV18.in" tvg-name="History TV18 HD Hindi" group-title="India - Hindi" ,History TV18 HD Hindi
 https://amg01448-amg01448c16-samsung-in-3495.playouts.now.amagi.tv/ts-ap-s1-n1/playlist/amg01448-samsungindia-historychannelhindi-samsungin/playlist.m3u8
+#EXTINF:-1 tvg-id="HosannaTV.in" tvg-name="Hosanna TV Global" group-title="India - Hindi" ,Hosanna TV Global
+https://ktismaservers.in:3349/live/hosannatvlive.m3u8
 #EXTINF:-1 tvg-id="HosannaTV.in" tvg-name="Hosanna TV Hindi" group-title="India - Hindi" ,Hosanna TV Hindi
 https://ktismaservers.in:3466/live/hosannattvhindhilive.m3u8
+#EXTINF:-1 tvg-id="HosannaTV.in" tvg-name="Hosanna TV" group-title="India - Hindi" ,Hosanna TV
+https://asia.mslivestream.net/mslive/bfba54c5c96a6359e2da0ca35f4998af.sdp/playlist.m3u8
 #EXTINF:-1 tvg-id="HungamaTV.in" tvg-name="Hungama TV" group-title="India - Hindi" ,Hungama TV
 http://103.185.24.134:3001/HUNGAMA/index.m3u8
 #EXTINF:-1 tvg-id="HungamaTV.in" tvg-name="Hungama TV" group-title="India - Hindi" ,Hungama TV
@@ -890,6 +876,8 @@ https://cdn-2.pishow.tv/live/1522/master.m3u8
 https://deltatesttatasky.akamaized.net/out/i/968284.m3u8
 #EXTINF:-1 tvg-id="Travelxp.in" tvg-name="Travelxp HD" group-title="India - Hindi" ,Travelxp HD
 https://amg00416-amg00416c9-samsung-in-4882.playouts.now.amagi.tv/playlist/amg00416-travelxp-travelxphd-samsungin/playlist.m3u8
+#EXTINF:-1 tvg-id="Travelxp.in" tvg-name="Travelxp Russia" group-title="India - Hindi" ,Travelxp Russia
+http://stream.mcquack.net/451/index.m3u8
 #EXTINF:-1 tvg-id="TV9Bharatvarsh.in" tvg-name="TV9 Bharatvarsh" group-title="India - Hindi" ,TV9 Bharatvarsh
 https://dyjmyiv3bp2ez.cloudfront.net/pub-iotv9hinjzgtpe/liveabr/playlist.m3u8
 #EXTINF:-1 tvg-id="TV9Bharatvarsh.in" tvg-name="TV9 Bharatvarsh" group-title="India - Hindi" ,TV9 Bharatvarsh
@@ -916,6 +904,10 @@ https://lbgo.bozztv.com/ssh101/ssh101/afghantheatretv/playlist.m3u8
 https://jukin-weatherspy-2-in.samsung.wurl.tv/playlist.m3u8
 #EXTINF:-1 tvg-id="WOWKidz.in" tvg-name="WOW Kidz" group-title="India - Hindi" ,WOW Kidz
 https://yuppparoriglin.akamaized.net/181224/smil:wowkidzhindi.smil/playlist.m3u8?hdnts=st=1735898689~exp=1835898688~acl=*~hmac=f5fe24724fe05481e3841f9eb5ab8efdee0a3dd83645ae9dcf45703f525bab7b
+#EXTINF:-1 tvg-id="WOWKidz.in" tvg-name="WOW Kidz Tamil" group-title="India - Hindi" ,WOW Kidz Tamil
+https://yuppparoriglin.akamaized.net/181224/smil:wowkidztam.smil/playlist.m3u8?hdnts=st=1735898689~exp=1835898688~acl=*~hmac=f5fe24724fe05481e3841f9eb5ab8efdee0a3dd83645ae9dcf45703f525bab7b
+#EXTINF:-1 tvg-id="WOWKidz.in" tvg-name="WOW Kidz" group-title="India - Hindi" ,WOW Kidz
+https://yuppparoriglin.akamaized.net/181224/smil:wowkidztelgu.smil/playlist.m3u8?hdnts=st=1735898689~exp=1835898688~acl=*~hmac=f5fe24724fe05481e3841f9eb5ab8efdee0a3dd83645ae9dcf45703f525bab7b
 #EXTINF:-1 tvg-id="YRFMusic.in" tvg-name="YRF Music" group-title="India - Hindi" ,YRF Music
 https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg01412-xiaomiasia-yrfmusic-xiaomi/playlist.m3u8
 #EXTINF:-1 tvg-id="YRFMusic.in" tvg-name="YRF Music" group-title="India - Hindi" ,YRF Music
@@ -933,6 +925,8 @@ https://s3.itcnbd.live/channel/a5979fd53c01d1b2.m3u8
 https://dwby15d04agvq.cloudfront.net/index_5.m3u8
 #EXTINF:-1 tvg-id="ZeeBusiness.in" tvg-name="Zee Business" group-title="India - Hindi" ,Zee Business
 https://dwby15d04agvq.cloudfront.net/index_1.m3u8
+#EXTINF:-1 tvg-id="ZeeCafe.in" tvg-name="Zee Cafe HD" group-title="India - Hindi" ,Zee Cafe HD
+http://103.72.101.252:8080/live/1319.m3u8
 #EXTINF:-1 tvg-id="ZeeCineClassic.in" tvg-name="Zee Cine Classic" group-title="India - Hindi" ,Zee Cine Classic
 https://amg00862-amg00862c8-amgplt0173.playout.now3.amagi.tv/playlist/amg00862-amg00862c8-amgplt0173/playlist.m3u8
 #EXTINF:-1 tvg-id="ZeeCinema.in" tvg-name="Zee Cinema APAC" group-title="India - Hindi" ,Zee Cinema APAC
@@ -1059,8 +1053,6 @@ https://d1msejlow1t3l4.cloudfront.net/fta/hornbilltv/playlist.m3u8
 https://mumt01.tangotv.in/O5aw8Zn3HORNBILLTV/index.m3u8
 #EXTINF:-1 tvg-id="HornbillTV.in" tvg-name="Hornbill TV" group-title="India - English" ,Hornbill TV
 https://cdn-2.pishow.tv/live/1463/master.m3u8
-#EXTINF:-1 tvg-id="HosannaTV.in" tvg-name="Hosanna TV Global" group-title="India - English" ,Hosanna TV Global
-https://ktismaservers.in:3349/live/hosannatvlive.m3u8
 #EXTINF:-1 tvg-id="IndiaAhead.in" tvg-name="India Ahead" group-title="India - English" ,India Ahead
 https://mumt05.tangotv.in/87NeALx2INDIAAHEAD/index.m3u8
 #EXTINF:-1 tvg-id="IndiaAhead.in" tvg-name="India Ahead" group-title="India - English" ,India Ahead
@@ -1186,8 +1178,6 @@ https://zainabia.livebox.co.in/ZainabiaChannelhls/channel.m3u8
 https://amg17931-zee-amg17931c8-samsung-au-8871.playouts.now.amagi.tv/playlist.m3u8
 #EXTINF:-1 tvg-id="ZeeBollymovies.in" tvg-name="Zee Bollymovies" group-title="India - English" ,Zee Bollymovies
 https://amg17931-zee-amg17931c8-samsung-th-6526.playouts.now.amagi.tv/playlist.m3u8
-#EXTINF:-1 tvg-id="ZeeCafe.in" tvg-name="Zee Cafe HD" group-title="India - English" ,Zee Cafe HD
-http://103.72.101.252:8080/live/1319.m3u8
 #EXTINF:-1 tvg-id="B4UBhojpuri.in" tvg-name="B4U Bhojpuri" group-title="India - Bhojpuri" ,B4U Bhojpuri
 https://cdnb4u.wiseplayout.com/B4U_Bhojpuri/master.m3u8
 #EXTINF:-1 tvg-id="B4UBhojpuri.in" tvg-name="B4U Bhojpuri" group-title="India - Bhojpuri" ,B4U Bhojpuri
@@ -1778,10 +1768,6 @@ https://d1msejlow1t3l4.cloudfront.net/fta/kappatv/playlist.m3u8
 https://cdn-3.pishow.tv/live/1123/master.m3u8
 #EXTINF:-1 tvg-id="Chithiram.in" tvg-name="Chithiram" group-title="India - Kids" ,Chithiram
 https://cdn-6.pishow.tv/live/1243/master.m3u8
-#EXTINF:-1 tvg-id="WOWKidz.in" tvg-name="WOW Kidz Tamil" group-title="India - Kids" ,WOW Kidz Tamil
-https://yuppparoriglin.akamaized.net/181224/smil:wowkidztam.smil/playlist.m3u8?hdnts=st=1735898689~exp=1835898688~acl=*~hmac=f5fe24724fe05481e3841f9eb5ab8efdee0a3dd83645ae9dcf45703f525bab7b
-#EXTINF:-1 tvg-id="WOWKidz.in" tvg-name="WOW Kidz" group-title="India - Kids" ,WOW Kidz
-https://yuppparoriglin.akamaized.net/181224/smil:wowkidztelgu.smil/playlist.m3u8?hdnts=st=1735898689~exp=1835898688~acl=*~hmac=f5fe24724fe05481e3841f9eb5ab8efdee0a3dd83645ae9dcf45703f525bab7b
 #EXTINF:-1 tvg-id="ZBCartoon.in" tvg-name="ZB Cartoon" group-title="India - Kids" ,ZB Cartoon
 https://server.zillarbarta.com/zbcatun/video.m3u8
 #EXTINF:-1 tvg-id="AakaashAath.in" tvg-name="Aakaash Aath" group-title="India - Entertainment" ,Aakaash Aath
@@ -2019,11 +2005,31 @@ https://da86m1sqpm3o0.cloudfront.net/28072023/smil:zeetamil1.smil/playlist.m3u8
 http://103.72.101.252:8080/live/414.m3u8
 #EXTINF:-1 tvg-id="ZodiakTV.in" tvg-name="Zodiak TV" group-title="India - Entertainment" ,Zodiak TV
 https://ranacable.duckdns.org/ZodiakTv/index.m3u8
+#EXTINF:-1 tvg-id="AlkarmaTVTalmazaDiscipleship.us" tvg-name="Alkarma TV Talmaza (Discipleship)" group-title="Sports - Cricket" ,Alkarma TV Talmaza (Discipleship)
+https://58cc65c534c67.streamlock.net/alkarmatv.com/alkarmame2.smil/playlist.m3u8
+#EXTINF:-1 tvg-id="AniplusAsia.sg" tvg-name="Aniplus Asia" group-title="Sports - Cricket" ,Aniplus Asia
+https://amg18481-amg18481c1-amgplt0352.playout.now3.amagi.tv/playlist/amg18481-amg18481c1-amgplt0352/playlist.m3u8
+#EXTINF:-1 tvg-id="Atlas.us" tvg-name="Atlas" group-title="Sports - Cricket" ,Atlas
+https://cdn.whiplash.cc/whiplash-atlas/index.m3u8
+#EXTINF:-1 tvg-id="CanalDiplomatico.ve" tvg-name="Canal Diplomatico" group-title="Sports - Cricket" ,Canal Diplomatico
+https://master.myplaytv.com:2020/hls/canaldiplomatico/canaldiplomatico.m3u8
 #EXTINF:-1 tvg-id="CricketGold.au" tvg-name="Cricket Gold" group-title="Sports - Cricket" ,Cricket Gold
 https://streams2.sofast.tv/ptnr-yupptv/title-cricketgold/v1/master/611d79b11b77e2f571934fd80ca1413453772ac7/b2048bb8-1686-4432-aa50-647245383e0c/manifest.m3u8
 #EXTINF:-1 tvg-id="CricketGold.au" tvg-name="Cricket Gold" group-title="Sports - Cricket" ,Cricket Gold
 https://streams2.sofast.tv/scheduler/scheduleMaster/418.m3u8
 #EXTINF:-1 tvg-id="CricketGold.au" tvg-name="Cricket Gold" group-title="Sports - Cricket" ,Cricket Gold
 https://d382r3rgbxdixq.cloudfront.net/scheduler/scheduleMaster/418.m3u8
+#EXTINF:-1 tvg-id="PSLTV.us" tvg-name="Port St Lucie PSL TV (Port St Lucie FL)" group-title="Sports - Cricket" ,Port St Lucie PSL TV (Port St Lucie FL)
+https://cdn3.wowza.com/5/UWpORHhLSEs5SkJs/psl/G0262_003/playlist.m3u8
 #EXTINF:-1 tvg-id="SkySportsCricket.uk" tvg-name="Sky Sports Cricket HD" group-title="Sports - Cricket" ,Sky Sports Cricket HD
 https://xemzi.short.gy/2000006
+#EXTINF:-1 tvg-id="Whiplash.us" tvg-name="Whiplash" group-title="Sports - Cricket" ,Whiplash
+https://cdn.whiplash.cc/whiplash/index.m3u8
+#EXTINF:-1 tvg-id="WhiplashCinema.us" tvg-name="Whiplash Cinema" group-title="Sports - Cricket" ,Whiplash Cinema
+https://cdn.whiplash.cc/whiplash-cinema/index.m3u8
+#EXTINF:-1 tvg-id="WhiplashII.us" tvg-name="Whiplash II" group-title="Sports - Cricket" ,Whiplash II
+https://cdn.whiplash.cc/whiplash-2/index.m3u8
+#EXTINF:-1 tvg-id="WindowTV.us" tvg-name="Window TV" group-title="Sports - Cricket" ,Window TV
+https://cdn.whiplash.cc/whiplash-windowtv/index.m3u8
+#EXTINF:-1 tvg-id="WPLG101.us" tvg-name="ABC (WPLG-DT1) Miami FL" group-title="Sports - Cricket" ,ABC (WPLG-DT1) Miami FL
+https://pubads.g.doubleclick.net/ssai/event/tQD6w9OJQVOobcyV3Dammw/master.m3u8
