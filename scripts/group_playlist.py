@@ -30,7 +30,13 @@ REGIONAL = {
     "snd", "sindhi", "mai", "maithili", "doi", "dogri", "mni", "manipuri",
 }
 
-BAD_WORDS = {"evidya", "pmevidya", "swayamprabha", "vandegujarat"}
+# Channels that should not be included at all.
+# Devotional channels are intentionally removed; they must not fall into Entertainment.
+BAD_WORDS = {
+    "evidya", "pmevidya", "swayamprabha", "vandegujarat",
+    "devotional", "devotion", "bhakti", "bhajan", "spiritual",
+    "prayer", "worship", "god tv", "religious", "religion",
+}
 
 # Canada intentionally excluded.
 FOREIGN_COUNTRIES = {
@@ -62,7 +68,6 @@ CATEGORY_MAP = {
     "documentary": "Infotainment", "education": "Infotainment",
 }
 
-# Fallback keyword mapping keeps every selected channel inside the nine JioTV-style groups.
 CATEGORY_KEYWORDS = {
     "News": {"news", "breaking", "bulletin", "politics", "business news", "headlines"},
     "Movies": {"movie", "movies", "cinema", "film", "films"},
@@ -114,7 +119,6 @@ def get_category(channel):
         if any(keyword in text for keyword in CATEGORY_KEYWORDS[category]):
             return category
 
-    # No "Other" group: generic TV channels are kept under Entertainment.
     return "Entertainment"
 
 
@@ -240,7 +244,6 @@ def sort_items(items):
 
 def write_playlist(items, path):
     items = sort_items(items)
-    # Number duplicate channel URLs consistently before writing each playlist.
     totals = {}
     for item in items:
         key = (item["category"], item["name"].lower())
@@ -337,7 +340,7 @@ def main():
     print(f"Non-working: {len(nonworking)} -> {NONWORKING_OUTPUT}")
     print_counts("WORKING", working)
     print_counts("NON-WORKING", nonworking)
-    print("\nNo regional-language group and no Other category are generated.")
+    print("\nDevotional channels are excluded; no regional-language group and no Other category are generated.")
 
 
 if __name__ == "__main__":
