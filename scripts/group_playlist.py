@@ -4,49 +4,86 @@
 import json
 import re
 import urllib.request
-import urllib.parse
 from collections import OrderedDict
 
 CHANNELS_URL = "https://iptv-org.github.io/api/channels.json"
 STREAMS_URL = "https://iptv-org.github.io/api/streams.json"
-
 OUTPUT = "playlist.m3u"
 
-UA = (
-    "Mozilla/5.0 (Linux; Android 10) "
-    "AppleWebKit/537.36 Chrome/151.0 Mobile Safari/537.36"
-)
+UA = "Mozilla/5.0 (Linux; Android 10) AppleWebKit/537.36 Chrome/151 Safari/537.36"
+
+GROUPS = [
+    "India - Hindi",
+    "India - English",
+    "India - Bhojpuri",
+    "India - Music",
+    "India - News",
+    "India - Lifestyle",
+    "India - Infotainment",
+    "India - Science",
+    "India - Kids",
+    "India - Entertainment",
+    "UK - Hindi",
+    "USA - Hindi",
+    "Canada - Hindi",
+    "Middle East - Hindi",
+    "Sports - Cricket",
+    "Radio - Hindi",
+]
 
 # ------------------------------------------------------------
-# FOREIGN VERIFIED HINDI
+# ONLY VERIFIED FOREIGN HINDI CHANNEL NAMES
 # ------------------------------------------------------------
 
-FOREIGN = {
+FOREIGN_NAMES = {
     "UK": {
-        "utsav plus",
-        "utsav bharat",
+        "colors rishtey",
+        "colors cineplex",
+        "colors tv",
         "sony max",
-        "sony max uk",
         "sony sab",
-        "sony sab uk",
         "sony entertainment television asia",
         "sony sab asia",
+        "utsav plus",
+        "utsav bharat",
+        "zee tv",
+        "zee cinema",
+        "zee punjabi",
+        "star plus",
+        "star bharat",
     },
-
     "USA": {
-        "sony sab usa",
-        "sony max us",
-        "sony entertainment television",
+        "colors tv",
+        "colors cineplex",
+        "sony max",
+        "sony sab",
         "sony pal",
+        "sony entertainment television",
+        "zee tv",
+        "zee cinema",
+        "star plus",
+        "star bharat",
     },
-
     "CANADA": {
+        "colors tv",
+        "colors cineplex",
+        "sony max",
+        "sony sab",
         "zee tv canada",
+        "zee cinema",
+        "star plus",
+        "star bharat",
         "tag tv",
     },
-
     "MIDDLE EAST": {
+        "colors tv",
+        "colors cineplex",
+        "sony max",
+        "sony sab",
+        "zee tv",
         "zee cinema",
+        "star plus",
+        "star bharat",
         "and tv",
         "&tv",
     },
@@ -60,91 +97,41 @@ FOREIGN_COUNTRIES = {
 }
 
 # ------------------------------------------------------------
-# INDIA CATEGORIES
+# FORBIDDEN
 # ------------------------------------------------------------
 
-INDIA_GROUPS = {
-    "hin": "India - Hindi",
-    "eng": "India - English",
-    "bho": "India - Bhojpuri",
-}
-
-INDIA_CATEGORIES = {
-    "kids": "India - Kids",
-    "entertainment": "India - Entertainment",
-    "information": "India - Information",
-    "science": "India - Science",
-    "lifestyle": "India - Lifestyle",
-}
-
-# ------------------------------------------------------------
-# SPORTS
-# ------------------------------------------------------------
-
-SPORT_TERMS = {
-    "Cricket": [
-        "cricket",
-        "willow",
-        "fox cricket",
-        "supersport cricket",
-    ],
-
-    "Hockey": [
-        "hockey",
-        "nhl",
-    ],
-
-    "Football": [
-        "football",
-        "soccer",
-        "sky sports",
-        "tnt sports",
-        "espn",
-        "fox sports",
-        "bein sports",
-    ],
-
-    "WWE": [
-        "wwe",
-        "wwf",
-    ],
-
-    "Tennis": [
-        "tennis",
-        "atp",
-        "wta",
-        "eurosport",
-    ],
-}
-
-SPORT_PROVIDER_TERMS = [
-    "willow",
-    "super sport",
-    "supersport",
-    "sky sports",
-    "tnt sports",
-    "fox sports",
-    "fox cricket",
-    "espn",
-    "eurosport",
-    "bein sports",
-]
-
-# ------------------------------------------------------------
-# REMOVE THESE COMPLETELY
-# ------------------------------------------------------------
-
-REMOVE_WORDS = [
+FORBIDDEN = (
     "swayam prabha",
     "pm e-vidya",
     "pm evidya",
     "pm-evidya",
     "vande gujarat",
-]
+)
+
+# ------------------------------------------------------------
+# INDIA CATEGORY MAP
+# ------------------------------------------------------------
+
+CATEGORY_MAP = {
+    "music": "India - Music",
+    "news": "India - News",
+    "lifestyle": "India - Lifestyle",
+    "infotainment": "India - Infotainment",
+    "science": "India - Science",
+    "kids": "India - Kids",
+    "entertainment": "India - Entertainment",
+}
 
 # ------------------------------------------------------------
 # HELPERS
 # ------------------------------------------------------------
+
+def norm(value):
+    value = str(value or "").lower()
+    value = value.replace("&amp;", "&")
+    value = re.sub(r"\s+", " ", value)
+    return value.strip()
+
 
 def fetch_json(url):
     req = urllib.request.Request(
@@ -155,135 +142,61 @@ def fetch_json(url):
         },
     )
 
-    with urllib.request.urlopen(req, timeout=60) as r:
-        return json.loads(r.read().decode("utf-8"))
+    with urllib.request.urlopen(req, timeout=90) as response:
+        return json.loads(response.read().decode("utf-8"))
 
 
-def clean(text):
-    text = str(text or "").lower()
-    text = text.replace("&amp;", "&")
-    text = re.sub(r"\s+", " ", text)
-    return text.strip()
+def channel_name(channel):
+    return norm(channel.get("name", ""))
 
 
-def channel_text(ch):
-    values = []
-
-    values.append(ch.get("name", ""))
-
-    for x in ch.get("alt_names", []) or []:
-        values.append(x)
-
-    values.append(ch.get("network", ""))
-
-    return clean(" ".join(map(str, values)))
-
-
-def stream_text(stream):
-    return clean(
-        " ".join(
-            str(x or "")
-            for x in [
-                stream.get("title"),
-                stream.get("label"),
-                stream.get("feed"),
-            ]
-        )
-    )
-
-
-def blocked_name(text):
-    t = clean(text)
-
-    return any(word in t for word in REMOVE_WORDS)
-
-
-def is_india(ch):
-    return clean(ch.get("country")) == "in"
-
-
-def has_category(ch, category):
-    categories = {
-        clean(x)
-        for x in (ch.get("categories") or [])
-    }
-
-    return category.lower() in categories
-
-
-def languages(ch):
+def channel_languages(channel):
     return {
-        clean(x)
-        for x in (ch.get("languages") or [])
+        norm(x)
+        for x in (channel.get("languages") or [])
     }
 
 
-def foreign_group(ch):
-    name = channel_text(ch)
-    country = clean(ch.get("country")).upper()
-
-    for group, names in FOREIGN.items():
-
-        if country not in FOREIGN_COUNTRIES[group]:
-            continue
-
-        if name in names:
-            return group
-
-        # Exact-ish normalized matching for names with suffixes
-        for allowed in names:
-            if name == allowed:
-                return group
-
-    return None
-
-
-def sport_group(ch, stream):
-    text = " ".join([
-        channel_text(ch),
-        stream_text(stream),
-    ])
-
-    # Only requested sports.
-    for sport, terms in SPORT_TERMS.items():
-
-        for term in terms:
-            if term in text:
-                return f"Sports - {sport}"
-
-    return None
-
-
-def india_group(ch):
-    if not is_india(ch):
-        return None
-
-    name = channel_text(ch)
-
-    if blocked_name(name):
-        return None
-
-    langs = languages(ch)
-
-    cats = {
-        clean(x)
-        for x in (ch.get("categories") or [])
+def channel_categories(channel):
+    return {
+        norm(x)
+        for x in (channel.get("categories") or [])
     }
 
-    # Hindi
+
+def forbidden(name):
+    n = norm(name)
+    return any(x in n for x in FORBIDDEN)
+
+
+# ------------------------------------------------------------
+# INDIA
+# ------------------------------------------------------------
+
+def india_group(channel):
+    if norm(channel.get("country")) != "in":
+        return None
+
+    name = channel_name(channel)
+
+    if forbidden(name):
+        return None
+
+    langs = channel_languages(channel)
+    cats = channel_categories(channel)
+
+    # ONLY these 3 languages
     if "hin" in langs:
         return "India - Hindi"
 
-    # Bhojpuri
-    if "bho" in langs:
-        return "India - Bhojpuri"
-
-    # English
     if "eng" in langs:
         return "India - English"
 
-    # Required Indian categories
-    for category, group in INDIA_CATEGORIES.items():
+    if "bho" in langs:
+        return "India - Bhojpuri"
+
+    # Categories
+    for category, group in CATEGORY_MAP.items():
         if category in cats:
             return group
 
@@ -291,51 +204,112 @@ def india_group(ch):
 
 
 # ------------------------------------------------------------
-# PLAYLIST ENTRY
+# FOREIGN HINDI
 # ------------------------------------------------------------
 
-def make_entry(ch, stream, group):
-    name = ch.get("name") or stream.get("title") or "Unknown"
+def foreign_group(channel):
+    country = norm(channel.get("country")).upper()
+    name = channel_name(channel)
 
-    logo = ch.get("logo") or ""
+    for region, countries in FOREIGN_COUNTRIES.items():
 
+        if country not in countries:
+            continue
+
+        allowed = FOREIGN_NAMES[region]
+
+        if name not in allowed:
+            continue
+
+        # Must actually be Hindi
+        langs = channel_languages(channel)
+
+        if "hin" not in langs:
+            continue
+
+        return f"{region} - Hindi"
+
+    return None
+
+
+# ------------------------------------------------------------
+# CRICKET ONLY
+# ------------------------------------------------------------
+
+CRICKET_TERMS = (
+    "cricket",
+    "willow",
+    "fox cricket",
+    "supersport cricket",
+    "super sport cricket",
+)
+
+
+def cricket_group(channel, stream):
+    name = channel_name(channel)
+
+    stream_name = norm(
+        " ".join(
+            str(stream.get(k, "") or "")
+            for k in ("title", "label", "feed")
+        )
+    )
+
+    text = f"{name} {stream_name}"
+
+    if any(term in text for term in CRICKET_TERMS):
+        return "Sports - Cricket"
+
+    return None
+
+
+# ------------------------------------------------------------
+# M3U ENTRY
+# ------------------------------------------------------------
+
+def make_entry(channel, stream, group):
     url = str(stream.get("url") or "").strip()
 
     if not url:
         return None
 
-    if blocked_name(name):
+    name = str(
+        channel.get("name")
+        or stream.get("title")
+        or "Unknown"
+    ).strip()
+
+    if forbidden(name):
         return None
 
-    # Don't include obviously dead/blocked labels.
-    label = clean(stream.get("label"))
+    logo = str(channel.get("logo") or "").strip()
+    cid = str(channel.get("id") or "").strip()
 
-    if any(x in label for x in [
-        "blocked",
-        "dmca",
-        "retired",
-    ]):
-        return None
-
-    entry = [
-        f'#EXTINF:-1 tvg-id="{ch.get("id", "")}" '
-        f'tvg-name="{name}" '
-        f'tvg-logo="{logo}" '
-        f'group-title="{group}",{name}'
+    lines = [
+        (
+            f'#EXTINF:-1 tvg-id="{cid}" '
+            f'tvg-name="{name}" '
+            f'tvg-logo="{logo}" '
+            f'group-title="{group}",{name}'
+        )
     ]
 
     referrer = stream.get("referrer")
     user_agent = stream.get("user_agent")
 
     if referrer:
-        entry.append(f"#EXTVLCOPT:http-referrer={referrer}")
+        lines.append(
+            f"#EXTVLCOPT:http-referrer={referrer}"
+        )
 
     if user_agent:
-        entry.append(f"#EXTVLCOPT:http-user-agent={user_agent}")
+        lines.append(
+            f"#EXTVLCOPT:http-user-agent={user_agent}"
+        )
 
-    entry.append(url)
+    lines.append(url)
 
-    return "\n".join(entry)
+    return "\n".join(lines)
 
 
 # ------------------------------------------------------------
@@ -345,73 +319,47 @@ def make_entry(ch, stream, group):
 def main():
 
     print("=" * 60)
-    print(" IPTV PLAYLIST GENERATOR")
+    print("FINAL IPTV PLAYLIST GENERATOR")
     print("=" * 60)
 
-    print("[1/4] Fetching channels.json...")
+    print("[1] Fetch channels...")
     channels_data = fetch_json(CHANNELS_URL)
+    print("    Channels:", len(channels_data))
 
-    print(f"      Channels fetched: {len(channels_data):,}")
-
-    print("[2/4] Fetching streams.json...")
+    print("[2] Fetch streams...")
     streams_data = fetch_json(STREAMS_URL)
-
-    print(f"      Streams fetched:  {len(streams_data):,}")
-
-    # --------------------------------------------------------
-    # Channel lookup
-    # --------------------------------------------------------
+    print("    Streams :", len(streams_data))
 
     channels = {}
 
-    for ch in channels_data:
+    for channel in channels_data:
 
-        cid = ch.get("id")
+        cid = channel.get("id")
 
         if not cid:
             continue
 
-        if ch.get("is_nsfw"):
+        if channel.get("is_nsfw"):
             continue
 
-        if ch.get("closed"):
+        if channel.get("closed"):
             continue
 
-        channels[cid] = ch
+        channels[cid] = channel
 
-    # --------------------------------------------------------
-    # Build playlist
-    # --------------------------------------------------------
+    groups = OrderedDict(
+        (group, [])
+        for group in GROUPS
+    )
 
-    groups = OrderedDict()
-
-    for group in [
-        "India - Hindi",
-        "India - English",
-        "India - Bhojpuri",
-        "India - Kids",
-        "India - Entertainment",
-        "India - Information",
-        "India - Science",
-        "India - Lifestyle",
-        "UK - Hindi",
-        "USA - Hindi",
-        "Canada - Hindi",
-        "Middle East - Hindi",
-        "Sports - Cricket",
-        "Sports - Hockey",
-        "Sports - Football",
-        "Sports - WWE",
-        "Sports - Tennis",
-        "Radio - Hindi",
-    ]:
-        groups[group] = []
-
-    # Exact URL duplicate protection.
     seen_urls = set()
 
     duplicate_urls = 0
     dropped = 0
+
+    # --------------------------------------------------------
+    # PROCESS STREAMS
+    # --------------------------------------------------------
 
     for stream in streams_data:
 
@@ -420,7 +368,7 @@ def main():
         if not url:
             continue
 
-        # EXACT SAME URL = remove duplicate
+        # Exact URL duplicate only
         if url in seen_urls:
             duplicate_urls += 1
             continue
@@ -431,54 +379,41 @@ def main():
             dropped += 1
             continue
 
-        ch = channels.get(cid)
+        channel = channels.get(cid)
 
-        if not ch:
+        if not channel:
             dropped += 1
             continue
 
-        name = ch.get("name") or stream.get("title") or ""
+        name = channel.get("name", "")
 
-        if blocked_name(name):
+        if forbidden(name):
             dropped += 1
             continue
 
         group = None
 
-        # ----------------------------------------------------
-        # INDIA
-        # ----------------------------------------------------
+        # India
+        group = india_group(channel)
 
-        group = india_group(ch)
-
-        # ----------------------------------------------------
-        # FOREIGN VERIFIED HINDI
-        # ----------------------------------------------------
-
+        # Foreign verified Hindi
         if group is None:
-            fg = foreign_group(ch)
+            group = foreign_group(channel)
 
-            if fg:
-                group = f"{fg} - Hindi"
-
-        # ----------------------------------------------------
-        # SPORTS
-        # ----------------------------------------------------
-
+        # Cricket ONLY
         if group is None:
-            group = sport_group(ch, stream)
+            group = cricket_group(channel, stream)
 
-        # ----------------------------------------------------
-        # IMPORTANT:
-        # NO FALLBACK TO ENTERTAINMENT.
-        # UNKNOWN CHANNELS ARE DROPPED.
-        # ----------------------------------------------------
-
+        # Unknown = DROP
         if group is None:
             dropped += 1
             continue
 
-        entry = make_entry(ch, stream, group)
+        entry = make_entry(
+            channel,
+            stream,
+            group
+        )
 
         if not entry:
             dropped += 1
@@ -487,30 +422,34 @@ def main():
         seen_urls.add(url)
 
         groups[group].append({
-            "name": name,
+            "name": str(name),
             "url": url,
             "entry": entry,
         })
 
     # --------------------------------------------------------
-    # Sort
+    # SORT
     # --------------------------------------------------------
 
     for group in groups:
         groups[group].sort(
             key=lambda x: (
-                clean(x["name"]),
-                x["url"],
+                norm(x["name"]),
+                x["url"]
             )
         )
 
     # --------------------------------------------------------
-    # Write M3U
+    # WRITE
     # --------------------------------------------------------
 
     total = 0
 
-    with open(OUTPUT, "w", encoding="utf-8") as f:
+    with open(
+        OUTPUT,
+        "w",
+        encoding="utf-8"
+    ) as f:
 
         f.write("#EXTM3U\n")
 
@@ -520,62 +459,43 @@ def main():
                 continue
 
             f.write(
-                f"\n"
-                f"# ===== {group} =====\n"
+                f"\n# ===== {group} =====\n"
             )
 
             for item in items:
                 f.write(item["entry"])
                 f.write("\n")
-
                 total += 1
 
     # --------------------------------------------------------
-    # FINAL RESULT
+    # RESULT
     # --------------------------------------------------------
 
     print()
     print("=" * 60)
-    print(" PLAYLIST RESULT")
+    print("RESULT")
     print("=" * 60)
 
     for group, items in groups.items():
-
-        if items:
-            print(
-                f"{group:<25} : {len(items):>5}"
-            )
+        print(
+            f"{group:<28} {len(items):>5}"
+        )
 
     print("-" * 60)
-
     print(
-        f"TOTAL STREAMS          : {total:,}"
+        f"TOTAL                    {total:>5}"
     )
-
     print(
-        f"DUPLICATE URL REMOVED  : {duplicate_urls:,}"
+        f"EXACT URL DUPLICATES     {duplicate_urls:>5}"
     )
-
     print(
-        f"DROPPED                 : {dropped:,}"
+        f"DROPPED / UNKNOWN        {dropped:>5}"
     )
-
     print(
-        f"OUTPUT                  : {OUTPUT}"
+        f"OUTPUT                   {OUTPUT}"
     )
-
     print("=" * 60)
 
 
 if __name__ == "__main__":
-    try:
-        main()
-
-    except KeyboardInterrupt:
-        print("\nStopped.")
-
-    except Exception as e:
-        print()
-        print("ERROR:")
-        print(type(e).__name__, str(e))
-        raise
+    main()
