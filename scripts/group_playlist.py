@@ -30,12 +30,13 @@ REGIONAL = {
     "snd", "sindhi", "mai", "maithili", "doi", "dogri", "mni", "manipuri",
 }
 
-# Channels that should not be included at all.
-# Devotional channels are intentionally removed; they must not fall into Entertainment.
+# Exclude devotional/religious channels completely.
 BAD_WORDS = {
     "evidya", "pmevidya", "swayamprabha", "vandegujarat",
     "devotional", "devotion", "bhakti", "bhajan", "spiritual",
     "prayer", "worship", "god tv", "religious", "religion",
+    "aastha", "aastha bhajan", "angel", "adinath", "anand", "aryan",
+    "awakening", "divya darshan", "divya darshan24", "darshan24",
 }
 
 # Canada intentionally excluded.
@@ -50,9 +51,10 @@ FOREIGN_COUNTRIES = {
     "OM": "Middle East - Hindi",
 }
 
+# JioTV-style groups plus a dedicated Doordarshan group as requested.
 CATEGORIES = (
     "News", "Movies", "Music", "Sports", "Entertainment",
-    "Lifestyle", "Infotainment", "Science", "Kids"
+    "Lifestyle", "Infotainment", "Science", "Kids", "Business", "Doordarshan"
 )
 
 CATEGORY_MAP = {
@@ -66,10 +68,14 @@ CATEGORY_MAP = {
     "science": "Science",
     "kids": "Kids", "children": "Kids", "animation": "Kids",
     "documentary": "Infotainment", "education": "Infotainment",
+    "business": "Business", "business news": "Business", "finance": "Business",
+    "doordarshan": "Doordarshan", "dd": "Doordarshan",
 }
 
 CATEGORY_KEYWORDS = {
-    "News": {"news", "breaking", "bulletin", "politics", "business news", "headlines"},
+    "Doordarshan": {"doordarshan", "dd national", "dd news", "dd india", "dd sports", "dd kisan", "dd bharati", "dd urdu"},
+    "Business": {"cnbc", "business", "finance", "market", "markets", "economy", "stock market", "money", "awaaz"},
+    "News": {"news", "breaking", "bulletin", "politics", "headlines"},
     "Movies": {"movie", "movies", "cinema", "film", "films"},
     "Music": {"music", "songs", "song", "mtv", "radio music"},
     "Sports": {"sport", "sports", "cricket", "football", "soccer", "tennis", "golf", "racing", "wrestling"},
@@ -115,7 +121,18 @@ def get_category(channel):
         channel.get("name", ""), channel.get("network", ""),
         channel.get("alt_names", []), raw_categories,
     ])
+
+    # Doordarshan gets its own group and must win over generic News/Sports/etc.
+    if any(keyword in text for keyword in CATEGORY_KEYWORDS["Doordarshan"]):
+        return "Doordarshan"
+
+    # Business channels such as CNBC TV18 / CNBC Awaaz / CNBC TV18 Prime.
+    if any(keyword in text for keyword in CATEGORY_KEYWORDS["Business"]):
+        return "Business"
+
     for category in CATEGORIES:
+        if category in ("Doordarshan", "Business"):
+            continue
         if any(keyword in text for keyword in CATEGORY_KEYWORDS[category]):
             return category
 
@@ -244,11 +261,6 @@ def sort_items(items):
 
 def write_playlist(items, path):
     items = sort_items(items)
-    totals = {}
-    for item in items:
-        key = (item["category"], item["name"].lower())
-        totals[key] = totals.get(key, 0) + 1
-
     counters = {}
     with open(path, "w", encoding="utf-8") as playlist:
         playlist.write("#EXTM3U\n")
@@ -340,7 +352,7 @@ def main():
     print(f"Non-working: {len(nonworking)} -> {NONWORKING_OUTPUT}")
     print_counts("WORKING", working)
     print_counts("NON-WORKING", nonworking)
-    print("\nDevotional channels are excluded; no regional-language group and no Other category are generated.")
+    print("\nDevotional channels are excluded; no regional-language group is generated; Canada is excluded.")
 
 
 if __name__ == "__main__":
