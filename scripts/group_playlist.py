@@ -10,6 +10,7 @@ from pathlib import Path
 # ============================================================
 
 SOURCE_URLS = [
+     "https://tvgarden.world/tv/in",
     "https://raw.githubusercontent.com/wizakorhd/iptv/main/playlist-hindi.m3u",
     "https://raw.githubusercontent.com/wizakorhd/iptv/refs/heads/main/playlist-top.m3u",
     "https://raw.githubusercontent.com/wizakorhd/iptv/refs/heads/main/playlist-english-india.m3u",
