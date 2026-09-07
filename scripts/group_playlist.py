@@ -6,14 +6,61 @@ from pathlib import Path
 
 
 # ============================================================
-# ONLY TV GARDEN / INDIA SOURCE
-# ALL OTHER SOURCES DISABLED
+# SOURCES
 # ============================================================
 
 SOURCE_URLS = [
-    "https://iptv-org.github.io/iptv/countries/in.m3u",
 
-    # DISABLED SOURCES:
+    # ---------------- INDIA / HINDI ----------------
+    "https://iptv-org.github.io/iptv/languages/hin.m3u",
+
+    # ---------------- BHOJPURI ----------------
+    "https://iptv-org.github.io/iptv/languages/bho.m3u",
+
+    # ---------------- ENGLISH ----------------
+    "https://iptv-org.github.io/iptv/languages/eng.m3u",
+
+    # ---------------- SPORTS ----------------
+    "https://iptv-org.github.io/iptv/categories/sports.m3u",
+
+    # ---------------- KIDS ----------------
+    "https://iptv-org.github.io/iptv/categories/kids.m3u",
+
+    # ---------------- ENTERTAINMENT ----------------
+    "https://iptv-org.github.io/iptv/categories/entertainment.m3u",
+
+    # ---------------- SCIENCE ----------------
+    "https://iptv-org.github.io/iptv/categories/science.m3u",
+
+    # ---------------- LIFESTYLE ----------------
+    "https://iptv-org.github.io/iptv/categories/lifestyle.m3u",
+
+    # ========================================================
+    # FOREIGN HINDI FEEDS
+    # UK
+    # ========================================================
+
+    "https://iptv-org.github.io/iptv/countries/uk.m3u",
+
+    # USA
+    "https://iptv-org.github.io/iptv/countries/us.m3u",
+
+    # CANADA
+    "https://iptv-org.github.io/iptv/countries/ca.m3u",
+
+    # Middle East
+    "https://iptv-org.github.io/iptv/countries/ae.m3u",
+    "https://iptv-org.github.io/iptv/countries/qa.m3u",
+    "https://iptv-org.github.io/iptv/countries/sa.m3u",
+
+    # ========================================================
+    # DISABLED
+    # ========================================================
+
+    # TV Garden webpage is NOT an M3U:
+    # "https://tvgarden.world/tv/in",
+
+    # Wizakor disabled:
     # "https://raw.githubusercontent.com/wizakorhd/iptv/main/playlist-hindi.m3u",
     # "https://raw.githubusercontent.com/wizakorhd/iptv/refs/heads/main/playlist-top.m3u",
     # "https://raw.githubusercontent.com/wizakorhd/iptv/refs/heads/main/playlist-english-india.m3u",
@@ -25,17 +72,27 @@ SOURCE_URLS = [
 # ============================================================
 
 GROUPS = [
-    "News",
-    "Entertainment",
-    "Movies",
-    "Music",
-    "Kids",
-    "Infotainment",
-    "Business",
-    "Lifestyle",
+    "Hindi",
+    "English",
+    "Bhojpuri",
+    "Sports - Cricket",
+    "Sports - Hockey",
+    "Sports - Football",
+    "Sports - WWE",
+    "Sports - Tennis",
     "Sports",
+    "Kids",
+    "Entertainment",
+    "Information",
+    "Science",
+    "Lifestyle",
+    "Radio",
 ]
 
+
+# ============================================================
+# USER AGENT
+# ============================================================
 
 USER_AGENT = (
     "Mozilla/5.0 "
@@ -51,6 +108,7 @@ USER_AGENT = (
 # ============================================================
 
 def fetch_text(url):
+
     request = urllib.request.Request(
         url,
         headers={
@@ -63,22 +121,33 @@ def fetch_text(url):
         request,
         timeout=60,
     ) as response:
+
         data = response.read()
 
-    for encoding in ("utf-8-sig", "utf-8", "latin-1"):
+    for encoding in (
+        "utf-8-sig",
+        "utf-8",
+        "latin-1",
+    ):
+
         try:
             return data.decode(encoding)
+
         except UnicodeDecodeError:
             pass
 
-    return data.decode("utf-8", errors="replace")
+    return data.decode(
+        "utf-8",
+        errors="replace"
+    )
 
 
 # ============================================================
-# TEXT CLEANING
+# CLEAN
 # ============================================================
 
 def clean_text(value):
+
     if value is None:
         return ""
 
@@ -94,32 +163,55 @@ def clean_text(value):
     for old, new in replacements.items():
         value = value.replace(old, new)
 
-    value = re.sub(r"\s+", " ", value)
+    value = re.sub(
+        r"\s+",
+        " ",
+        value
+    )
 
     return value.strip()
 
 
 def normalize_text(value):
+
     value = clean_text(value).lower()
-    value = value.replace("&", " and ")
-    value = re.sub(r"[^a-z0-9]+", " ", value)
-    value = re.sub(r"\s+", " ", value)
+
+    value = value.replace(
+        "&",
+        " and "
+    )
+
+    value = re.sub(
+        r"[^a-z0-9]+",
+        " ",
+        value
+    )
+
+    value = re.sub(
+        r"\s+",
+        " ",
+        value
+    )
 
     return value.strip()
 
 
 # ============================================================
-# M3U ATTRIBUTE PARSER
+# ATTRIBUTES
 # ============================================================
 
 def parse_attrs(line):
+
     attrs = {}
 
     for match in re.finditer(
         r'([\w-]+)="([^"]*)"',
         line
     ):
-        attrs[match.group(1)] = match.group(2)
+
+        attrs[
+            match.group(1)
+        ] = match.group(2)
 
     return attrs
 
@@ -129,9 +221,11 @@ def parse_attrs(line):
 # ============================================================
 
 def parse_m3u(text):
+
     entries = []
 
     current = None
+
     pending_options = []
 
     for raw in text.splitlines():
@@ -141,29 +235,37 @@ def parse_m3u(text):
         if not line:
             continue
 
-        # VLC options
-        if line.startswith("#EXTVLCOPT:"):
+        if line.startswith(
+            "#EXTVLCOPT:"
+        ):
 
             if current is not None:
+
                 current.setdefault(
                     "options",
                     []
                 ).append(line)
 
             else:
-                pending_options.append(line)
+
+                pending_options.append(
+                    line
+                )
 
             continue
 
-        # Channel information
-        if line.startswith("#EXTINF:"):
+        if line.startswith(
+            "#EXTINF:"
+        ):
 
             current = {
                 "extinf": line,
                 "name": "",
                 "url": "",
                 "attrs": parse_attrs(line),
-                "options": list(pending_options),
+                "options": list(
+                    pending_options
+                ),
             }
 
             pending_options = []
@@ -171,22 +273,27 @@ def parse_m3u(text):
             comma = line.find(",")
 
             if comma >= 0:
+
                 current["name"] = clean_text(
                     line[comma + 1:]
                 )
 
             continue
 
-        # Stream URL
         if (
             current is not None
             and not line.startswith("#")
         ):
 
-            current["url"] = clean_text(line)
+            current["url"] = clean_text(
+                line
+            )
 
             if current["url"]:
-                entries.append(current)
+
+                entries.append(
+                    current
+                )
 
             current = None
 
@@ -194,7 +301,7 @@ def parse_m3u(text):
 
 
 # ============================================================
-# ATTRIBUTE HELPERS
+# ATTR
 # ============================================================
 
 def get_attr(entry, *names):
@@ -218,7 +325,10 @@ def channel_name(entry):
 
     return (
         clean_text(
-            entry.get("name", "")
+            entry.get(
+                "name",
+                ""
+            )
         )
         or get_attr(
             entry,
@@ -239,359 +349,342 @@ def channel_group(entry):
 
 
 # ============================================================
+# EXCLUDE UNWANTED CHANNELS
+# ============================================================
+
+REMOVE_WORDS = (
+
+    # Educational channels requested to remove
+    "swayam prabha",
+    "swayamprabha",
+    "pm e vidya",
+    "pm e-vidya",
+    "pmevidya",
+    "pm evidya",
+    "vande gujarat",
+    "vande gujrat",
+
+)
+
+
+def is_removed(entry):
+
+    text = normalize_text(
+        channel_name(entry)
+        + " "
+        + channel_group(entry)
+    )
+
+    for word in REMOVE_WORDS:
+
+        if normalize_text(word) in text:
+
+            return True
+
+    return False
+
+
+# ============================================================
+# SPORTS GROUPING
+# ============================================================
+
+def sports_group(name, group):
+
+    text = normalize_text(
+        name + " " + group
+    )
+
+    # Cricket
+    if any(word in text for word in (
+        "cricket",
+        "willow",
+        "fox cricket",
+        "sky cricket",
+        "super sport cricket",
+        "supersport cricket",
+        "ten cricket",
+        "sony sports ten 3",
+        "sony ten 3",
+        "star sports cricket",
+        "icc",
+    )):
+
+        return "Sports - Cricket"
+
+
+    # Hockey
+    if any(word in text for word in (
+        "hockey",
+        "nhl",
+        "field hockey",
+        "ice hockey",
+    )):
+
+        return "Sports - Hockey"
+
+
+    # Football
+    if any(word in text for word in (
+        "football",
+        "soccer",
+        "sky sports football",
+        "tnt sports football",
+        "premier league",
+        "epl",
+        "uefa",
+        "champions league",
+        "fifa",
+    )):
+
+        return "Sports - Football"
+
+
+    # WWE
+    if any(word in text for word in (
+        "wwe",
+        "world wrestling",
+        "wrestling",
+        "raw",
+        "smackdown",
+    )):
+
+        return "Sports - WWE"
+
+
+    # Tennis
+    if any(word in text for word in (
+        "tennis",
+        "atp",
+        "wta",
+        "us open",
+        "french open",
+        "wimbledon",
+        "australian open",
+    )):
+
+        return "Sports - Tennis"
+
+
+    return "Sports"
+
+
+# ============================================================
 # CHANNEL GROUPING
 # ============================================================
 
 def group_channel(entry):
 
-    original = channel_group(entry)
-
-    value = normalize_text(original)
     name = normalize_text(
         channel_name(entry)
     )
+
+    original = normalize_text(
+        channel_group(entry)
+    )
+
+    combined = name + " " + original
+
+
+    # --------------------------------------------------------
+    # REMOVE UNWANTED
+    # --------------------------------------------------------
+
+    if is_removed(entry):
+
+        return None
+
 
     # --------------------------------------------------------
     # SPORTS
     # --------------------------------------------------------
 
-    sports_words = (
+    if any(word in combined for word in (
         "sport",
-        "sports",
         "cricket",
-        "willow",
-        "sky sports",
-        "ten sports",
-        "star sports",
-        "sony sports",
-        "espn",
-        "eurosport",
-        "bein sports",
-        "fox sports",
-        "icc",
+        "hockey",
         "football",
-        "fifa",
+        "soccer",
+        "wwe",
         "tennis",
-        "golf",
-        "nba",
-        "nfl",
-        "nhl",
-        "mlb",
-    )
+        "willow",
+        "supersport",
+        "sky sports",
+        "tnt sports",
+        "fox sports",
+        "espn",
+        "bein sports",
+        "eurosport",
+    )):
 
-    if any(
-        word in name
-        for word in sports_words
-    ):
-        return "Sports"
-
-    if (
-        "sport" in value
-        or "sports" in value
-    ):
-        return "Sports"
+        return sports_group(
+            name,
+            original
+        )
 
 
     # --------------------------------------------------------
-    # NEWS
+    # BHOJPURI
     # --------------------------------------------------------
 
-    news_words = (
-        "news",
+    if any(word in combined for word in (
+        "bhojpuri",
+        "bhojpuriya",
+    )):
+
+        return "Bhojpuri"
+
+
+    # --------------------------------------------------------
+    # HINDI
+    # --------------------------------------------------------
+
+    if any(word in combined for word in (
+        "hindi",
         "aaj tak",
-        "ndtv",
-        "cnn",
-        "bbc news",
-        "republic",
-        "times now",
-        "india today",
-        "news18",
         "zee news",
-        "abp news",
-        "tv9",
-        "wion",
-        "cnbc",
-        "business today",
-    )
-
-    if any(
-        word in name
-        for word in news_words
-    ):
-        return "News"
-
-    if "news" in value:
-        return "News"
-
-
-    # --------------------------------------------------------
-    # MOVIES
-    # --------------------------------------------------------
-
-    movie_words = (
-        "movie",
-        "movies",
-        "film",
-        "films",
-        "cinema",
-        "bollywood",
-        "hollywood",
-        "action",
-        "pictures",
-        "flix",
-        "colors cineplex",
+        "zee tv",
+        "sony sab",
+        "sony pal",
+        "sony entertainment",
+        "utsav",
+        "star plus",
+        "colors",
+        "dangal",
+        "and tv",
+        "dd national",
+        "dd india",
         "zee cinema",
         "sony max",
-        "star gold",
-        "and pictures",
-        "shemaroo",
-    )
+    )):
 
-    if any(
-        word in name
-        for word in movie_words
-    ):
-        return "Movies"
-
-    if any(
-        word in value
-        for word in (
-            "movie",
-            "movies",
-            "film",
-            "cinema",
-        )
-    ):
-        return "Movies"
+        return "Hindi"
 
 
     # --------------------------------------------------------
-    # MUSIC
+    # ENGLISH
     # --------------------------------------------------------
 
-    music_words = (
-        "music",
-        "mtv",
-        "9xm",
-        "9x music",
-        "b4u music",
-        "zoom",
-        "mastiii",
-        "hungama music",
-        "songs",
-    )
+    if "english" in combined:
 
-    if any(
-        word in name
-        for word in music_words
-    ):
-        return "Music"
-
-    if "music" in value:
-        return "Music"
+        return "English"
 
 
     # --------------------------------------------------------
     # KIDS
     # --------------------------------------------------------
 
-    kids_words = (
+    if any(word in combined for word in (
         "kids",
+        "kid",
         "cartoon",
         "nick",
         "nickelodeon",
         "disney",
         "pogo",
-        "hungama",
         "sonic",
         "baby",
         "junior",
         "anime",
-    )
+    )):
 
-    if any(
-        word in name
-        for word in kids_words
-    ):
-        return "Kids"
-
-    if (
-        "kid" in value
-        or "children" in value
-        or "anime" in value
-    ):
         return "Kids"
 
 
     # --------------------------------------------------------
-    # BUSINESS
+    # SCIENCE
     # --------------------------------------------------------
 
-    business_words = (
-        "business",
-        "cnbc",
-        "bloomberg",
-        "money",
-        "market",
-        "financial",
-    )
+    if any(word in combined for word in (
+        "science",
+        "discovery science",
+        "national geographic",
+        "nat geo",
+        "animal planet",
+        "history",
+        "discovery",
+        "documentary",
+        "technology",
+        "knowledge",
+    )):
 
-    if any(
-        word in name
-        for word in business_words
-    ):
-        return "Business"
-
-    if "business" in value:
-        return "Business"
+        return "Science"
 
 
     # --------------------------------------------------------
     # LIFESTYLE
     # --------------------------------------------------------
 
-    lifestyle_words = (
+    if any(word in combined for word in (
         "lifestyle",
         "fashion",
         "food",
         "travel",
         "living",
         "home",
-        "cook",
         "cooking",
-    )
+    )):
 
-    if any(
-        word in name
-        for word in lifestyle_words
-    ):
-        return "Lifestyle"
-
-    if any(
-        word in value
-        for word in (
-            "lifestyle",
-            "fashion",
-            "food",
-            "travel",
-        )
-    ):
         return "Lifestyle"
 
 
     # --------------------------------------------------------
-    # INFOTAINMENT
+    # INFORMATION
     # --------------------------------------------------------
 
-    infotainment_words = (
-        "discovery",
-        "history",
-        "national geographic",
-        "nat geo",
-        "animal planet",
-        "documentary",
-        "science",
-        "technology",
-        "knowledge",
-        "infotainment",
-        "wild",
-        "explore",
-    )
+    if any(word in combined for word in (
+        "news",
+        "information",
+        "informational",
+        "business",
+        "cnbc",
+        "bloomberg",
+        "finance",
+        "financial",
+        "money",
+        "market",
+        "india today",
+        "times now",
+        "republic",
+        "tv9",
+        "wion",
+    )):
 
-    if any(
-        word in name
-        for word in infotainment_words
-    ):
-        return "Infotainment"
-
-    if any(
-        word in value
-        for word in (
-            "infotainment",
-            "documentary",
-            "science",
-            "technology",
-            "travel",
-        )
-    ):
-        return "Infotainment"
+        return "Information"
 
 
     # --------------------------------------------------------
     # ENTERTAINMENT
     # --------------------------------------------------------
 
-    entertainment_words = (
+    if any(word in combined for word in (
         "entertainment",
-        "ent",
-        "colors",
-        "zee tv",
+        "movie",
+        "movies",
+        "cinema",
+        "film",
+        "bollywood",
+        "hollywood",
         "sony",
-        "star plus",
-        "star bharat",
+        "zee",
+        "colors",
+        "star",
         "sab",
         "dangal",
-        "and tv",
-        "dd national",
-        "dd india",
-        "sun tv",
-        "general entertainment",
-    )
+    )):
 
-    if any(
-        word in name
-        for word in entertainment_words
-    ):
-        return "Entertainment"
-
-    if (
-        "entertainment" in value
-        or "general" in value
-    ):
         return "Entertainment"
 
 
     # --------------------------------------------------------
-    # FALLBACKS
+    # DEFAULT
     # --------------------------------------------------------
-
-    if "news" in value:
-        return "News"
-
-    if "movie" in value:
-        return "Movies"
-
-    if "music" in value:
-        return "Music"
-
-    if "kid" in value:
-        return "Kids"
-
-    if "sport" in value:
-        return "Sports"
-
-    if "business" in value:
-        return "Business"
-
-    if "lifestyle" in value:
-        return "Lifestyle"
-
-    if "infotainment" in value:
-        return "Infotainment"
 
     return "Entertainment"
 
 
 # ============================================================
-# URL HELPERS
+# EXTINF
 # ============================================================
-
-def url_key(url):
-
-    return clean_text(
-        url
-    ).strip().lower()
-
 
 def escape_m3u(value):
 
@@ -602,10 +695,6 @@ def escape_m3u(value):
         "'"
     )
 
-
-# ============================================================
-# BUILD EXTINF
-# ============================================================
 
 def build_extinf(entry, group):
 
@@ -666,7 +755,7 @@ def build_extinf(entry, group):
 
 
 # ============================================================
-# LOAD SOURCES
+# LOAD
 # ============================================================
 
 def load_sources():
@@ -675,7 +764,7 @@ def load_sources():
 
     print()
     print("========================================")
-    print("FETCHING TV GARDEN INDIA CHANNELS")
+    print("FETCHING VERIFIED IPTV SOURCES")
     print("========================================")
 
     for url in SOURCE_URLS:
@@ -689,11 +778,13 @@ def load_sources():
 
             text = fetch_text(url)
 
-            entries = parse_m3u(text)
+            entries = parse_m3u(
+                text
+            )
 
             print(
-                f"{filename:30} "
-                f"{len(entries):4} channels"
+                f"{filename:35} "
+                f"{len(entries):5} channels"
             )
 
             all_entries.extend(
@@ -703,7 +794,7 @@ def load_sources():
         except Exception as exc:
 
             print(
-                f"{filename:30} FAILED"
+                f"{filename:35} FAILED"
             )
 
             print(
@@ -736,7 +827,7 @@ def main():
 
 
     # --------------------------------------------------------
-    # EXACT URL DEDUPLICATION
+    # URL DEDUP
     # --------------------------------------------------------
 
     seen_urls = set()
@@ -757,7 +848,7 @@ def main():
         if not url:
             continue
 
-        key = url_key(url)
+        key = url.lower().strip()
 
         if key in seen_urls:
 
@@ -792,11 +883,19 @@ def main():
         for group in GROUPS
     }
 
+    removed = 0
+
     for entry in unique_entries:
 
         group = group_channel(
             entry
         )
+
+        if group is None:
+
+            removed += 1
+
+            continue
 
         if group not in grouped:
 
@@ -818,12 +917,12 @@ def main():
                 normalize_text(
                     channel_name(entry)
                 ),
-                url_key(
+                clean_text(
                     entry.get(
                         "url",
                         ""
                     )
-                ),
+                ).lower(),
             )
         )
 
@@ -854,9 +953,7 @@ def main():
                 []
             ):
 
-                lines.append(
-                    option
-                )
+                lines.append(option)
 
             lines.append(
                 clean_text(
@@ -868,7 +965,7 @@ def main():
 
 
     # --------------------------------------------------------
-    # WRITE FILE
+    # WRITE
     # --------------------------------------------------------
 
     output_file.write_text(
@@ -891,6 +988,10 @@ def main():
     )
 
     print(
+        f"Removed       : {removed}"
+    )
+
+    print(
         f"Output        : {output_file}"
     )
 
@@ -899,14 +1000,11 @@ def main():
     for group in GROUPS:
 
         print(
-            f"{group:16} : "
+            f"{group:22} : "
             f"{len(grouped[group])}"
         )
 
 
-# ============================================================
-# RUN
-# ============================================================
-
 if __name__ == "__main__":
+
     main()
