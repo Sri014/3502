@@ -1,4 +1,4 @@
-name: Update IPTV Playlist
+name: Update IPTV Playlists
 
 on:
   workflow_dispatch:
@@ -9,11 +9,11 @@ permissions:
   contents: write
 
 jobs:
-  update-playlist:
+  update-playlists:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout playlist repo
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Setup Python
@@ -21,49 +21,28 @@ jobs:
         with:
           python-version: "3.x"
 
-      - name: Fetch wizakorhd IPTV source
+      - name: Generate playlists
+        run: python scripts/group_playlist.py
+
+      - name: Validate playlists
         run: |
-          rm -rf source_repo
-          git clone --depth 1 https://github.com/wizakorhd/iptv.git source_repo
+          test -s playlist_working.m3u
+          test -s playlist_nonworking.m3u
+          grep -q '^#EXTM3U' playlist_working.m3u
+          grep -q '^#EXTM3U' playlist_nonworking.m3u
+          echo "Working entries:"
+          grep -c '^#EXTINF:' playlist_working.m3u || true
+          echo "Non-working entries:"
+          grep -c '^#EXTINF:' playlist_nonworking.m3u || true
 
-      - name: Prepare source playlists
-        run: |
-          rm -rf sources
-          mkdir -p sources
-
-          find source_repo -maxdepth 1 -type f \
-            \( -name "*.m3u" -o -name "*.m3u8" \) \
-            -exec cp {} sources/ \;
-
-          echo "Source playlists:"
-          ls -lh sources
-
-      - name: Generate grouped playlist
-        run: |
-          python scripts/group_playlist.py sources -o playlist.m3u
-
-      - name: Validate playlist
-        run: |
-          test -s playlist.m3u
-          grep -q '^#EXTM3U' playlist.m3u
-          echo "Playlist generated successfully"
-          echo "Entries:"
-          grep -c '^#EXTINF:' playlist.m3u || true
-          echo "Groups:"
-          grep '^#EXTINF:' playlist.m3u \
-            | sed -n 's/.*group-title="\([^"]*\)".*/\1/p' \
-            | sort | uniq -c | sort -nr
-
-      - name: Commit updated playlist
+      - name: Commit updated playlists
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-
-          git add playlist.m3u
-
+          git add playlist_working.m3u playlist_nonworking.m3u
           if git diff --cached --quiet; then
             echo "No playlist changes."
           else
-            git commit -m "Update IPTV playlist"
+            git commit -m "Update IPTV working and non-working playlists"
             git push
           fi
