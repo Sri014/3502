@@ -5,7 +5,6 @@ import re
 import time
 from urllib.parse import quote
 from urllib.request import Request, urlopen
-from urllib.error import URLError, HTTPError
 
 
 # ============================================================
@@ -84,33 +83,37 @@ INDIA_CATEGORY_MAP = {
     "music": "India - Music",
     "news": "India - News",
     "lifestyle": "India - Lifestyle",
+    "infotainment": "India - Infotainment",
     "science": "India - Science",
     "kids": "India - Kids",
     "entertainment": "India - Entertainment",
-
-    # If IPTV-org provides this category directly
-    "infotainment": "India - Infotainment",
 }
 
 
 # ============================================================
 # EXCLUSIONS
+#
+# Handles:
+# eVidya
+# E-Vidya
+# PM eVidya
+# PM-E-Vidya
+# Swayam Prabha
+# Swayam-Prabha
+# Vande Gujarat
+# Vande-Gujarat
 # ============================================================
 
-EXCLUDED_NAME_WORDS = {
-    "swayam prabha",
-    "pm evidya",
-    "pm e-vidya",
+EXCLUDED_NAME_WORDS = (
+    "evidya",
     "pmevidya",
-    "vande gujarat",
-}
+    "swayamprabha",
+    "vandegujarat",
+)
 
 
 # ============================================================
 # FOREIGN HINDI CHANNELS
-#
-# Strict brand/name matching.
-# No generic "contains sony" / "contains zee" dumping.
 # ============================================================
 
 FOREIGN_HINDI_PATTERNS = [
@@ -119,7 +122,6 @@ FOREIGN_HINDI_PATTERNS = [
     r"^colors$",
     r"^colors cineplex$",
     r"^colors cineplex hd$",
-    r"^colors rishtey$",
     r"^colors rishtey$",
 
     # SONY
@@ -158,10 +160,12 @@ FOREIGN_HINDI_PATTERNS = [
 
 
 # ============================================================
-# SPORTS / CRICKET
+# CRICKET KEYWORDS
+#
+# Used as fallback in addition to feeds.json detection.
 # ============================================================
 
-CRICKET_WORDS = {
+CRICKET_WORDS = (
     "cricket",
     "willow cricket",
     "fox cricket",
@@ -169,7 +173,18 @@ CRICKET_WORDS = {
     "supersport cricket",
     "ten cricket",
     "t sports cricket",
-}
+    "icc cricket",
+    "ipl",
+    "bcci",
+    "big bash",
+    "bbl",
+    "psl",
+    "wpl",
+    "cpl",
+    "test cricket",
+    "county cricket",
+    "the hundred",
+)
 
 
 # ============================================================
@@ -177,6 +192,7 @@ CRICKET_WORDS = {
 # ============================================================
 
 def http_get(url):
+
     req = Request(
         url,
         headers={
@@ -185,18 +201,30 @@ def http_get(url):
         },
     )
 
-    with urlopen(req, timeout=REQUEST_TIMEOUT) as response:
-        return response.read().decode("utf-8", errors="replace")
+    with urlopen(
+        req,
+        timeout=REQUEST_TIMEOUT
+    ) as response:
+
+        return response.read().decode(
+            "utf-8",
+            errors="replace"
+        )
 
 
 def fetch_json(url):
+
     print("FETCH:", url)
 
     data = http_get(url)
 
     obj = json.loads(data)
 
-    print("OK:", len(data), "bytes")
+    print(
+        "OK:",
+        len(data),
+        "bytes"
+    )
 
     return obj
 
@@ -206,6 +234,7 @@ def fetch_json(url):
 # ============================================================
 
 def text(value):
+
     if value is None:
         return ""
 
@@ -213,6 +242,7 @@ def text(value):
 
 
 def norm(value):
+
     return re.sub(
         r"\s+",
         " ",
@@ -221,6 +251,7 @@ def norm(value):
 
 
 def normalize_list(value):
+
     if not value:
         return []
 
@@ -234,6 +265,7 @@ def normalize_list(value):
 
 
 def normalize_languages(value):
+
     return {
         norm(x)
         for x in normalize_list(value)
@@ -245,19 +277,23 @@ def normalize_languages(value):
 # LANGUAGE
 # ============================================================
 
-def get_channel_languages(channel, feed=None):
+def get_channel_languages(
+    channel,
+    feed=None
+):
 
     languages = set()
 
-    # Feed language is important
+    # Feed language has priority
     if feed:
+
         languages.update(
             normalize_languages(
                 feed.get("languages")
             )
         )
 
-    # Channel language fallback
+    # Channel fallback
     languages.update(
         normalize_languages(
             channel.get("languages")
@@ -267,7 +303,11 @@ def get_channel_languages(channel, feed=None):
     return languages
 
 
-def has_language(channel, feed, wanted):
+def has_language(
+    channel,
+    feed,
+    wanted
+):
 
     languages = get_channel_languages(
         channel,
@@ -281,19 +321,160 @@ def has_language(channel, feed, wanted):
 
 
 # ============================================================
+# BUILD HINDI IDS FROM FEEDS
+#
+# Uses exactly the logic requested:
+# languages = hindi / hin
+# ============================================================
+
+def build_hindi_channel_ids(feeds):
+
+    ids = set()
+
+    for item in feeds:
+
+        languages = item.get(
+            "languages"
+        ) or []
+
+        if isinstance(
+            languages,
+            str
+        ):
+            languages = [
+                languages
+            ]
+
+        language_set = {
+            norm(x)
+            for x in languages
+            if norm(x)
+        }
+
+        if not (
+            language_set &
+            {"hindi", "hin"}
+        ):
+            continue
+
+        channel_id = text(
+            item.get("channel")
+        )
+
+        if channel_id:
+            ids.add(channel_id)
+
+    return ids
+
+
+# ============================================================
+# BUILD GLOBAL CRICKET IDS FROM FEEDS
+#
+# IMPORTANT:
+# No India-country restriction.
+# ============================================================
+
+def build_cricket_channel_ids(feeds):
+
+    ids = set()
+
+    for item in feeds:
+
+        values = []
+
+        for key in (
+            "name",
+            "title",
+            "channel",
+            "category",
+            "description",
+            "network",
+        ):
+
+            value = item.get(key)
+
+            if isinstance(
+                value,
+                list
+            ):
+
+                values.extend(
+                    text(x)
+                    for x in value
+                )
+
+            else:
+
+                values.append(
+                    text(value)
+                )
+
+        languages = item.get(
+            "languages"
+        ) or []
+
+        if isinstance(
+            languages,
+            list
+        ):
+
+            values.extend(
+                text(x)
+                for x in languages
+            )
+
+        else:
+
+            values.append(
+                text(languages)
+            )
+
+        combined = norm(
+            " ".join(
+                x for x in values
+                if x
+            )
+        )
+
+        # Feed explicitly mentions cricket
+        if "cricket" in combined:
+
+            channel_id = text(
+                item.get("channel")
+            )
+
+            if channel_id:
+                ids.add(channel_id)
+
+    return ids
+
+
+# ============================================================
 # COUNTRY
 # ============================================================
 
 def get_country(channel):
 
-    country = channel.get("country", "")
+    country = channel.get(
+        "country",
+        ""
+    )
 
-    if isinstance(country, list):
+    if isinstance(
+        country,
+        list
+    ):
+
         if country:
-            return norm(country[0]).upper()
+            return norm(
+                country[0]
+            ).upper()
+
         return ""
 
-    return norm(country).upper()
+    return norm(
+        country
+    ).upper()
 
 
 # ============================================================
@@ -302,10 +483,17 @@ def get_country(channel):
 
 def get_categories(channel):
 
-    values = channel.get("categories") or []
+    values = channel.get(
+        "categories"
+    ) or []
 
-    if isinstance(values, str):
-        values = [values]
+    if isinstance(
+        values,
+        str
+    ):
+        values = [
+            values
+        ]
 
     return {
         norm(x)
@@ -315,35 +503,63 @@ def get_categories(channel):
 
 
 # ============================================================
-# NAME / TEXT
+# CHANNEL NAME
 # ============================================================
 
-def get_channel_name(channel, stream=None):
+def get_channel_name(
+    channel,
+    stream=None
+):
 
     if stream:
-        title = text(stream.get("title"))
+
+        title = text(
+            stream.get("title")
+        )
 
         if title:
             return title
 
-    name = text(channel.get("name"))
+    name = text(
+        channel.get("name")
+    )
 
     if name:
         return name
 
-    alt = channel.get("alt_names") or []
+    alt = channel.get(
+        "alt_names"
+    ) or []
 
-    if isinstance(alt, list) and alt:
-        return text(alt[0])
+    if isinstance(
+        alt,
+        list
+    ) and alt:
+
+        return text(
+            alt[0]
+        )
 
     return "Unknown Channel"
 
 
-def combined_text(channel, feed=None, stream=None):
+# ============================================================
+# COMBINED TEXT
+# ============================================================
+
+def combined_text(
+    channel,
+    feed=None,
+    stream=None
+):
 
     values = []
 
-    for obj in (channel, feed, stream):
+    for obj in (
+        channel,
+        feed,
+        stream
+    ):
 
         if not obj:
             continue
@@ -354,16 +570,25 @@ def combined_text(channel, feed=None, stream=None):
             "network",
             "alt_names",
             "description",
+            "category",
+            "categories",
+            "tags",
         ):
 
             value = obj.get(key)
 
-            if isinstance(value, list):
+            if isinstance(
+                value,
+                list
+            ):
+
                 values.extend(
                     text(x)
                     for x in value
                 )
+
             else:
+
                 values.append(
                     text(value)
                 )
@@ -380,7 +605,11 @@ def combined_text(channel, feed=None, stream=None):
 # EXCLUSIONS
 # ============================================================
 
-def is_excluded(channel, feed=None, stream=None):
+def is_excluded(
+    channel,
+    feed=None,
+    stream=None
+):
 
     full_text = combined_text(
         channel,
@@ -388,12 +617,16 @@ def is_excluded(channel, feed=None, stream=None):
         stream
     )
 
-    for bad in EXCLUDED_NAME_WORDS:
+    compact = re.sub(
+        r"[^a-z0-9]",
+        "",
+        full_text
+    )
 
-        if bad in full_text:
-            return True
-
-    return False
+    return any(
+        bad in compact
+        for bad in EXCLUDED_NAME_WORDS
+    )
 
 
 # ============================================================
@@ -415,7 +648,6 @@ def is_verified_foreign_hindi(
     stream
 ):
 
-    # Hindi is mandatory
     if not has_language(
         channel,
         feed,
@@ -446,14 +678,16 @@ def is_verified_foreign_hindi(
 
         for pattern in FOREIGN_HINDI_REGEX:
 
-            if pattern.fullmatch(candidate):
+            if pattern.fullmatch(
+                candidate
+            ):
                 return True
 
     return False
 
 
 # ============================================================
-# INDIA GROUP
+# INDIA LANGUAGE GROUP
 # ============================================================
 
 def get_india_language_group(
@@ -485,12 +719,21 @@ def get_india_language_group(
     return None
 
 
-def get_india_category_group(channel):
+# ============================================================
+# INDIA CATEGORY GROUP
+# ============================================================
 
-    categories = get_categories(channel)
+def get_india_category_group(
+    channel
+):
 
-    # Exact IPTV category matching
-    for category, group in INDIA_CATEGORY_MAP.items():
+    categories = get_categories(
+        channel
+    )
+
+    for category, group in (
+        INDIA_CATEGORY_MAP.items()
+    ):
 
         if category in categories:
             return group
@@ -500,28 +743,42 @@ def get_india_category_group(channel):
 
 # ============================================================
 # CRICKET
+#
+# Global:
+# No country restriction.
 # ============================================================
 
 def is_cricket(
     channel,
     feed=None,
-    stream=None
+    stream=None,
+    cricket_ids=None
 ):
 
-    categories = get_categories(channel)
+    channel_id = text(
+        channel.get("id")
+    )
 
-    if "sports" not in categories:
-        return False
+    # Primary detection:
+    # feeds.json
+    if (
+        cricket_ids and
+        channel_id in cricket_ids
+    ):
+        return True
 
+    # Fallback detection:
+    # channel/feed/stream text
     full_text = combined_text(
         channel,
         feed,
         stream
     )
 
-    # Strict cricket check
-    if "cricket" in full_text:
-        return True
+    for keyword in CRICKET_WORDS:
+
+        if keyword in full_text:
+            return True
 
     return False
 
@@ -536,15 +793,20 @@ def get_foreign_group(
     stream
 ):
 
-    country = get_country(channel)
+    country = get_country(
+        channel
+    )
 
     if country == "GB":
+
         group = "UK - Hindi"
 
     elif country == "US":
+
         group = "USA - Hindi"
 
     elif country == "CA":
+
         group = "Canada - Hindi"
 
     elif country in {
@@ -555,9 +817,11 @@ def get_foreign_group(
         "KW",
         "OM",
     }:
+
         group = "Middle East - Hindi"
 
     else:
+
         return None
 
     if is_verified_foreign_hindi(
@@ -574,7 +838,9 @@ def get_foreign_group(
 # FEED INDEX
 # ============================================================
 
-def build_feed_index(feeds):
+def build_feed_index(
+    feeds
+):
 
     index = {}
 
@@ -588,10 +854,16 @@ def build_feed_index(feeds):
             feed.get("id")
         )
 
-        if channel_id and feed_id:
+        if (
+            channel_id and
+            feed_id
+        ):
 
             index[
-                (channel_id, feed_id)
+                (
+                    channel_id,
+                    feed_id
+                )
             ] = feed
 
     return index
@@ -601,7 +873,9 @@ def build_feed_index(feeds):
 # CHANNEL INDEX
 # ============================================================
 
-def build_channel_index(channels):
+def build_channel_index(
+    channels
+):
 
     result = {}
 
@@ -621,22 +895,26 @@ def build_channel_index(channels):
 # STREAM URL
 # ============================================================
 
-def get_stream_url(stream):
+def get_stream_url(
+    stream
+):
 
-    url = text(
+    return text(
         stream.get("url")
     )
 
-    return url
-
 
 # ============================================================
-# M3U ENTRY
+# M3U TEXT
 # ============================================================
 
-def clean_m3u_text(value):
+def clean_m3u_text(
+    value
+):
 
-    value = text(value)
+    value = text(
+        value
+    )
 
     value = value.replace(
         '"',
@@ -656,6 +934,10 @@ def clean_m3u_text(value):
     return value.strip()
 
 
+# ============================================================
+# EXTINF
+# ============================================================
+
 def make_extinf(
     group,
     name,
@@ -672,6 +954,7 @@ def make_extinf(
     )
 
     if not logo:
+
         logo = clean_m3u_text(
             stream.get("logo")
         )
@@ -685,6 +968,7 @@ def make_extinf(
     ]
 
     if logo:
+
         parts.append(
             f'tvg-logo="{logo}"'
         )
@@ -700,6 +984,10 @@ def make_extinf(
     return " ".join(parts)
 
 
+# ============================================================
+# M3U ENTRY
+# ============================================================
+
 def make_entry(
     group,
     channel,
@@ -707,7 +995,9 @@ def make_entry(
     stream
 ):
 
-    url = get_stream_url(stream)
+    url = get_stream_url(
+        stream
+    )
 
     if not url:
         return None
@@ -735,20 +1025,26 @@ def make_entry(
     )
 
     if referrer:
+
         lines.append(
             "#EXTVLCOPT:http-referrer="
             + referrer
         )
 
     if user_agent:
+
         lines.append(
             "#EXTVLCOPT:http-user-agent="
             + user_agent
         )
 
-    lines.append(url)
+    lines.append(
+        url
+    )
 
-    return "\n".join(lines)
+    return "\n".join(
+        lines
+    )
 
 
 # ============================================================
@@ -766,26 +1062,43 @@ RADIO_SEARCHES = [
 
 def recursive_objects(obj):
 
-    if isinstance(obj, dict):
+    if isinstance(
+        obj,
+        dict
+    ):
 
         yield obj
 
         for value in obj.values():
-            yield from recursive_objects(value)
 
-    elif isinstance(obj, list):
+            yield from recursive_objects(
+                value
+            )
+
+    elif isinstance(
+        obj,
+        list
+    ):
 
         for value in obj:
-            yield from recursive_objects(value)
+
+            yield from recursive_objects(
+                value
+            )
 
 
 def extract_ids(obj):
 
     ids = set()
 
-    for item in recursive_objects(obj):
+    for item in recursive_objects(
+        obj
+    ):
 
-        if not isinstance(item, dict):
+        if not isinstance(
+            item,
+            dict
+        ):
             continue
 
         for key in (
@@ -794,20 +1107,28 @@ def extract_ids(obj):
             "channel_id",
         ):
 
-            value = item.get(key)
+            value = item.get(
+                key
+            )
 
             if value is None:
                 continue
 
-            value = text(value)
+            value = text(
+                value
+            )
 
             if value:
-                ids.add(value)
+                ids.add(
+                    value
+                )
 
     return ids
 
 
-def radio_garden_search(query):
+def radio_garden_search(
+    query
+):
 
     url = (
         "https://radio.garden/api/search?q="
@@ -815,7 +1136,10 @@ def radio_garden_search(query):
     )
 
     try:
-        return fetch_json(url)
+
+        return fetch_json(
+            url
+        )
 
     except Exception as e:
 
@@ -828,7 +1152,9 @@ def radio_garden_search(query):
         return None
 
 
-def get_radio_channel(channel_id):
+def get_radio_channel(
+    channel_id
+):
 
     url = (
         "https://radio.garden/api/"
@@ -837,7 +1163,10 @@ def get_radio_channel(channel_id):
     )
 
     try:
-        return fetch_json(url)
+
+        return fetch_json(
+            url
+        )
 
     except Exception as e:
 
@@ -850,16 +1179,23 @@ def get_radio_channel(channel_id):
         return None
 
 
-def is_hindi_radio(data):
+def is_hindi_radio(
+    data
+):
 
     if not data:
         return False
 
     words = []
 
-    for item in recursive_objects(data):
+    for item in recursive_objects(
+        data
+    ):
 
-        if not isinstance(item, dict):
+        if not isinstance(
+            item,
+            dict
+        ):
             continue
 
         for key in (
@@ -872,15 +1208,22 @@ def is_hindi_radio(data):
             "tags",
         ):
 
-            value = item.get(key)
+            value = item.get(
+                key
+            )
 
-            if isinstance(value, list):
+            if isinstance(
+                value,
+                list
+            ):
+
                 words.extend(
                     text(x)
                     for x in value
                 )
 
             else:
+
                 words.append(
                     text(value)
                 )
@@ -921,7 +1264,9 @@ def build_radio_entries():
         if not result:
             continue
 
-        ids = extract_ids(result)
+        ids = extract_ids(
+            result
+        )
 
         print(
             "Radio Garden:",
@@ -957,7 +1302,10 @@ def build_radio_entries():
                 details
             ):
 
-                if not isinstance(item, dict):
+                if not isinstance(
+                    item,
+                    dict
+                ):
                     continue
 
                 for key in (
@@ -970,6 +1318,7 @@ def build_radio_entries():
                     )
 
                     if value:
+
                         name = value
                         break
 
@@ -977,6 +1326,7 @@ def build_radio_entries():
                     break
 
             if not name:
+
                 name = (
                     "Hindi Radio "
                     + channel_id
@@ -994,7 +1344,9 @@ def build_radio_entries():
                 "url": stream_url,
             })
 
-            time.sleep(0.1)
+            time.sleep(
+                0.1
+            )
 
     return entries
 
@@ -1031,6 +1383,7 @@ def build_playlist():
         channels_data,
         list
     ):
+
         raise RuntimeError(
             "channels.json invalid"
         )
@@ -1039,6 +1392,7 @@ def build_playlist():
         feeds_data,
         list
     ):
+
         raise RuntimeError(
             "feeds.json invalid"
         )
@@ -1047,6 +1401,7 @@ def build_playlist():
         streams_data,
         list
     ):
+
         raise RuntimeError(
             "streams.json invalid"
         )
@@ -1056,6 +1411,18 @@ def build_playlist():
     )
 
     feed_index = build_feed_index(
+        feeds_data
+    )
+
+    # --------------------------------------------------------
+    # BUILD SPECIAL INDEXES
+    # --------------------------------------------------------
+
+    hindi_ids = build_hindi_channel_ids(
+        feeds_data
+    )
+
+    cricket_ids = build_cricket_channel_ids(
         feeds_data
     )
 
@@ -1075,6 +1442,16 @@ def build_playlist():
         len(streams_data)
     )
 
+    print(
+        "HINDI FEED CHANNEL IDS:",
+        len(hindi_ids)
+    )
+
+    print(
+        "CRICKET FEED CHANNEL IDS:",
+        len(cricket_ids)
+    )
+
     # --------------------------------------------------------
     # GROUP STORAGE
     # --------------------------------------------------------
@@ -1086,9 +1463,6 @@ def build_playlist():
 
     # --------------------------------------------------------
     # GLOBAL URL DEDUP
-    #
-    # Same URL = remove duplicate
-    # Different URL = keep
     # --------------------------------------------------------
 
     seen_urls = set()
@@ -1107,11 +1481,13 @@ def build_playlist():
         )
 
         if not url:
+
             skipped += 1
             continue
 
         # Exact same URL globally
         if url in seen_urls:
+
             skipped += 1
             continue
 
@@ -1120,6 +1496,7 @@ def build_playlist():
         )
 
         if not channel_id:
+
             skipped += 1
             continue
 
@@ -1128,6 +1505,7 @@ def build_playlist():
         )
 
         if not channel:
+
             skipped += 1
             continue
 
@@ -1136,15 +1514,22 @@ def build_playlist():
         )
 
         feed = feed_index.get(
-            (channel_id, feed_id)
+            (
+                channel_id,
+                feed_id
+            )
         )
 
-        # Exclude unwanted channels
+        # ----------------------------------------------------
+        # EXCLUDE eVidya / Swayam Prabha / Vande Gujarat
+        # ----------------------------------------------------
+
         if is_excluded(
             channel,
             feed,
             stream
         ):
+
             skipped += 1
             continue
 
@@ -1161,16 +1546,22 @@ def build_playlist():
         if country == "IN":
 
             # ------------------------------------------------
-            # 1. LANGUAGE GROUPS FIRST
+            # HINDI FEED IDS FIRST
             # ------------------------------------------------
 
-            group = get_india_language_group(
-                channel,
-                feed
-            )
+            if channel_id in hindi_ids:
+
+                group = "India - Hindi"
+
+            else:
+
+                group = get_india_language_group(
+                    channel,
+                    feed
+                )
 
             # ------------------------------------------------
-            # 2. CATEGORY GROUPS
+            # CATEGORY GROUP
             # ------------------------------------------------
 
             if group is None:
@@ -1192,7 +1583,9 @@ def build_playlist():
             )
 
         # ====================================================
-        # SPORTS - CRICKET ONLY
+        # GLOBAL CRICKET
+        #
+        # No country restriction.
         # ====================================================
 
         if group is None:
@@ -1200,15 +1593,14 @@ def build_playlist():
             if is_cricket(
                 channel,
                 feed,
-                stream
+                stream,
+                cricket_ids
             ):
+
                 group = "Sports - Cricket"
 
         # ====================================================
         # NOTHING MATCHED
-        #
-        # IMPORTANT:
-        # DO NOT PUT UNKNOWN CHANNELS INTO ENTERTAINMENT
         # ====================================================
 
         if group is None:
@@ -1217,7 +1609,7 @@ def build_playlist():
             continue
 
         # ----------------------------------------------------
-        # Create M3U entry
+        # CREATE M3U ENTRY
         # ----------------------------------------------------
 
         entry = make_entry(
@@ -1228,11 +1620,14 @@ def build_playlist():
         )
 
         if not entry:
+
             skipped += 1
             continue
 
         # Mark URL used
-        seen_urls.add(url)
+        seen_urls.add(
+            url
+        )
 
         groups[group].append(
             entry
@@ -1263,8 +1658,13 @@ def build_playlist():
         if url in radio_seen:
             continue
 
-        radio_seen.add(url)
-        seen_urls.add(url)
+        radio_seen.add(
+            url
+        )
+
+        seen_urls.add(
+            url
+        )
 
         name = clean_m3u_text(
             radio["name"]
@@ -1280,7 +1680,9 @@ def build_playlist():
 
         groups[
             "Radio - Hindi"
-        ].append(entry)
+        ].append(
+            entry
+        )
 
     # ========================================================
     # WRITE PLAYLIST
@@ -1292,11 +1694,11 @@ def build_playlist():
 
     for group in GROUP_ORDER:
 
-        entries = groups[group]
+        for entry in groups[group]:
 
-        for entry in entries:
-
-            output.append(entry)
+            output.append(
+                entry
+            )
 
     with open(
         OUTPUT_FILE,
@@ -1310,39 +1712,100 @@ def build_playlist():
         )
 
     # ========================================================
-    # COUNTS
+    # FINAL COUNTS + CHANNEL NAMES
     # ========================================================
 
     print()
     print("========================================")
-    print(" FINAL PLAYLIST COUNTS")
+    print(" FINAL PLAYLIST")
+    print(" CHANNEL NAMES + COUNTS")
     print("========================================")
 
     total = 0
 
     for group in GROUP_ORDER:
 
+        entries = groups[group]
+
         count = len(
-            groups[group]
+            entries
         )
 
         total += count
 
+        print()
         print(
-            f"{group:<30} {count}"
+            f"### {group} ({count})"
+        )
+
+        print(
+            "----------------------------------------"
+        )
+
+        for i, entry in enumerate(
+            entries,
+            1
+        ):
+
+            extinf = (
+                entry.splitlines()[0]
+                if entry
+                else ""
+            )
+
+            if "," in extinf:
+
+                name = (
+                    extinf.split(
+                        ",",
+                        1
+                    )[1].strip()
+                )
+
+            else:
+
+                name = "Unknown"
+
+            print(
+                f"{i}. {name}"
+            )
+
+    # ========================================================
+    # SUMMARY
+    # ========================================================
+
+    print()
+    print("========================================")
+    print(" FINAL SUMMARY")
+    print("========================================")
+
+    for group in GROUP_ORDER:
+
+        print(
+            f"{group:<30} "
+            f"{len(groups[group])}"
         )
 
     print("----------------------------------------")
+
     print(
-        f"{'TOTAL':<30} {total}"
+        f"{'TOTAL CHANNELS':<30}"
+        f"{total}"
     )
 
     print(
-        f"{'UNMATCHED/SKIPPED':<30} {skipped}"
+        f"{'PROCESSED':<30}"
+        f"{processed}"
     )
 
     print(
-        f"{'UNIQUE URLS':<30} {len(seen_urls)}"
+        f"{'UNMATCHED/SKIPPED':<30}"
+        f"{skipped}"
+    )
+
+    print(
+        f"{'UNIQUE URLS':<30}"
+        f"{len(seen_urls)}"
     )
 
     print("----------------------------------------")
