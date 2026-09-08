@@ -1,34 +1,14 @@
 {
   "source": "https://raw.githubusercontent.com/Sri014/Garden/main/working.m3u",
-  "repaired": 11,
+  "repaired": 4,
   "channels": [
     {
       "channel": "JK 24x7 News",
       "url": "https://live.gulistannews.in/hls/jk.m3u8"
     },
     {
-      "channel": "Nagaland TV",
-      "url": "https://mumt06.tangotv.in/qYyB8fXVNAGALANDTV/index.m3u8"
-    },
-    {
-      "channel": "News18 Madhya Pradesh/Chhattisgarh",
-      "url": "https://n18syndication.akamaized.net/bpk-tv/News18_MP_Chhattisgarh_NW18_MOB/output01/master.m3u8"
-    },
-    {
-      "channel": "&xplor HD",
-      "url": "http://66.102.126.10:8000/play/a028/index.m3u8"
-    },
-    {
       "channel": "All Time Movies",
       "url": "https://tvsen6.aynaott.com/a2cKGQtB/index.m3u8"
-    },
-    {
-      "channel": "Colors Cineplex",
-      "url": "http://66.102.126.10:8000/play/a076/index.m3u8"
-    },
-    {
-      "channel": "Star Gold 2",
-      "url": "http://66.102.126.10:8000/play/a077/index.m3u8"
     },
     {
       "channel": "Star Gold Romance",
@@ -37,14 +17,6 @@
     {
       "channel": "Star Gold Select",
       "url": "http://66.102.126.10:8000/play/a01s/index.m3u8"
-    },
-    {
-      "channel": "Colors",
-      "url": "http://66.102.126.10:8000/play/a00a/index.m3u8"
-    },
-    {
-      "channel": "CNBC Awaaz",
-      "url": "https://n18syndication.akamaized.net/bpk-tv/CNBC_Awaaz_NW18_MOB/output01/master.m3u8"
     }
   ]
 }
