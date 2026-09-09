@@ -1,7 +1,11 @@
 {
   "source": "https://raw.githubusercontent.com/Sri014/Garden/main/working.m3u",
-  "repaired": 9,
+  "repaired": 13,
   "channels": [
+    {
+      "channel": "Awaaz India TV",
+      "url": "https://awaazindia.livebox.co.in/AwaazIndaTVhls/Live.m3u8"
+    },
     {
       "channel": "JK 24x7 News",
       "url": "https://live.gulistannews.in/hls/jk.m3u8"
@@ -13,6 +17,14 @@
     {
       "channel": "News18 Rajasthan",
       "url": "https://n18syndication.akamaized.net/bpk-tv/News18_Rajasthan_NW18_MOB/output01/master.m3u8"
+    },
+    {
+      "channel": "TNP News",
+      "url": "https://server.thelegitpro.in/tnpnews/tnpnews/index.m3u8"
+    },
+    {
+      "channel": "&xplor HD",
+      "url": "http://dksmedia.tv/play/live.php?mac=00:1A:79:B6:60:3D&stream=209743&extension=ts&play_token=mR7FwO88sY"
     },
     {
       "channel": "All Time Movies",
@@ -37,6 +49,10 @@
     {
       "channel": "Colors",
       "url": "http://66.102.126.10:8000/play/a00a/index.m3u8"
+    },
+    {
+      "channel": "CNBC TV18",
+      "url": "https://n18syndication.akamaized.net/bpk-tv/CNBC_TV18_NW18_MOB/output01/index.m3u8"
     }
   ]
 }
