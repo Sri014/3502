@@ -1,6 +1,10 @@
 #EXTM3U
 #EXTINF:-1 tvg-id="AajTak.in" tvg-name="Aaj Tak" tvg-logo="" group-title="News",Aaj Tak
 http://103.213.31.109:90/AajtakHD/playlist.m3u8
+#EXTINF:-1 tvg-id="ANBNews.in" tvg-name="ANB News" tvg-logo="" group-title="News",ANB News
+https://server.livelegitpro.in:9899/anbnews/anbnews/index.m3u8
+#EXTINF:-1 tvg-id="APN.in" tvg-name="APN" tvg-logo="" group-title="News",APN
+https://mumt01.tangotv.in/O5aw8Zn3APN/index.m3u8
 #EXTINF:-1 tvg-id="BansalNews.in" tvg-name="Bansal News" tvg-logo="" group-title="News",Bansal News
 https://8yzmq2gbdvax-hls-live.wmncdn.net/bansalnewstv1/live1.stream/playlist.m3u8
 #EXTINF:-1 tvg-id="BansalNews.in" tvg-name="Bansal News 2" tvg-logo="" group-title="News",Bansal News 2
@@ -31,8 +35,8 @@ https://cdn-3.pishow.tv/live/273/master.m3u8
 https://cdn-2.pishow.tv/live/1493/master.m3u8
 #EXTINF:-1 tvg-id="PrimeNews.in" tvg-name="Prime News" tvg-logo="" group-title="News",Prime News
 https://mumt02.tangotv.in/PRIMENEWS/index.m3u8
-#EXTINF:-1 tvg-id="PublicFirst.in" tvg-name="Public First" tvg-logo="" group-title="News",Public First
-
+#EXTINF:-1 tvg-id="PublicFirst.in" tvg-name="Public First 2" tvg-logo="" group-title="News",Public First 2
+https://mumt06.tangotv.in/qYyB8fXVPUBLICFIRST/index.m3u8
 #EXTINF:-1 tvg-id="RajPariwar.in" tvg-name="Raj Pariwar" tvg-logo="" group-title="News",Raj Pariwar
 http://103.72.101.252:8080/live/533.m3u8
 #EXTINF:-1 tvg-id="RepublicBharat.in" tvg-name="Republic Bharat" tvg-logo="" group-title="News",Republic Bharat
@@ -47,6 +51,8 @@ https://cdn-2.pishow.tv/live/1516/master.m3u8
 https://cdn-2.pishow.tv/live/465/master.m3u8
 #EXTINF:-1 tvg-id="SwarajExpressSMBC.in" tvg-name="Swaraj Express SMBC" tvg-logo="" group-title="News",Swaraj Express SMBC
 https://cdn-2.pishow.tv/live/477/master.m3u8
+#EXTINF:-1 tvg-id="SwarajExpressSMBC.in" tvg-name="Swaraj Express SMBC 2" tvg-logo="" group-title="News",Swaraj Express SMBC 2
+https://mumt04.tangotv.in/m18aqlK4SWARAJEXPRESS/index.m3u8
 #EXTINF:-1 tvg-id="TimesNow.in" tvg-name="Times Now" tvg-logo="" group-title="News",Times Now
 
 #EXTINF:-1 tvg-id="TimesNowNavbharat.in" tvg-name="Times Now Navbharat" tvg-logo="" group-title="News",Times Now Navbharat
@@ -61,8 +67,8 @@ http://103.72.101.252:8080/live/876.m3u8
 
 #EXTINF:-1 tvg-id="Andpictures.in" tvg-name="&pictures" tvg-logo="" group-title="Movies",&pictures
 https://tvsen3.aynaott.com/jzT482XQ/index.m3u8
-#EXTINF:-1 tvg-id="AndxplorHD.in" tvg-name="&xplor HD 2" tvg-logo="" group-title="Movies",&xplor HD 2
-http://dksmedia.tv/play/live.php?mac=00:1A:79:B6:60:3D&stream=209743&extension=ts&play_token=mR7FwO88sY
+#EXTINF:-1 tvg-id="AndxplorHD.in" tvg-name="&xplor HD" tvg-logo="" group-title="Movies",&xplor HD
+http://66.102.126.10:8000/play/a028/index.m3u8
 #EXTINF:-1 tvg-id="AllTimeMovies.in" tvg-name="All Time Movies" tvg-logo="" group-title="Movies",All Time Movies
 https://streams.tangotv.in/ALLTIMEMOVIES/ORIGIN/index.m3u8
 #EXTINF:-1 tvg-id="B4UKadak.in" tvg-name="B4U Kadak" tvg-logo="" group-title="Movies",B4U Kadak
@@ -75,8 +81,6 @@ http://66.102.126.10:8000/play/a01n/index.m3u8
 https://cdn-2.pishow.tv/live/419/master.m3u8
 #EXTINF:-1 tvg-id="BhojpuriCinema.in" tvg-name="Bhojpuri Cinema" tvg-logo="" group-title="Movies",Bhojpuri Cinema
 https://cdn-4.pishow.tv/live/1033/master.m3u8
-#EXTINF:-1 tvg-id="ColorsCineplexBollywood.in" tvg-name="Colors Cineplex Bollywood" tvg-logo="" group-title="Movies",Colors Cineplex Bollywood
-http://dksmedia.tv/play/live.php?mac=00:1A:79:B6:60:3D&stream=946375&extension=ts&play_token=5n2Zexr7WT
 #EXTINF:-1 tvg-id="Goldmines.in" tvg-name="Goldmines" tvg-logo="" group-title="Movies",Goldmines
 https://cdn-2.pishow.tv/live/1459/master.m3u8
 #EXTINF:-1 tvg-id="GoldminesBollywood.in" tvg-name="Goldmines Bollywood" tvg-logo="" group-title="Movies",Goldmines Bollywood
@@ -107,8 +111,6 @@ http://103.157.248.140:8000/play/a015/index.m3u8
 
 #EXTINF:-1 tvg-id="ShemarooJosh.in" tvg-name="Shemaroo Josh 2" tvg-logo="" group-title="Movies",Shemaroo Josh 2
 http://103.213.31.109:90/ChumbakTv/playlist.m3u8
-#EXTINF:-1 tvg-id="SonyMax.in" tvg-name="Sony Max" tvg-logo="" group-title="Movies",Sony Max
-http://dksmedia.tv/play/live.php?mac=00:1A:79:B6:60:3D&stream=156013&extension=ts&play_token=slNi06NyY0
 #EXTINF:-1 tvg-id="SonyMax1.in" tvg-name="Sony Max 1" tvg-logo="" group-title="Movies",Sony Max 1
 http://103.159.180.34:5001/live/3418.m3u8
 #EXTINF:-1 tvg-id="SonyMax2.in" tvg-name="Sony Max 2" tvg-logo="" group-title="Movies",Sony Max 2
@@ -197,8 +199,6 @@ https://anjan.vstream.online/anjanorg/ngrp:anjan_hdall/playlist.m3u8
 https://cdn-1.pishow.tv/live/993/master.m3u8
 #EXTINF:-1 tvg-id="ColorsInfinity.in" tvg-name="Colors Infinity" tvg-logo="" group-title="Entertainment",Colors Infinity
 http://66.102.126.10:8000/play/a014/index.m3u8
-#EXTINF:-1 tvg-id="Dangal2.in" tvg-name="Dangal 2" tvg-logo="" group-title="Entertainment",Dangal 2
-https://tvsen3.aynaott.com/8KfZvBYS/index.m3u8
 #EXTINF:-1 tvg-id="HiDost.in" tvg-name="Hi Dost!" tvg-logo="" group-title="Entertainment",Hi Dost!
 https://cdn-1.pishow.tv/live/224/master.m3u8
 #EXTINF:-1 tvg-id="ManoranjanPrime.in" tvg-name="Manoranjan Prime" tvg-logo="" group-title="Entertainment",Manoranjan Prime
@@ -273,6 +273,10 @@ https://cdn-1.pishow.tv/live/36/master.m3u8
 https://cdn-1.pishow.tv/live/17/master.m3u8
 #EXTINF:-1 tvg-id="AradanaTV.in" tvg-name="Aradana TV" tvg-logo="" group-title="Non Jio",Aradana TV
 https://cdn-1.pishow.tv/live/961/master.m3u8
+#EXTINF:-1 tvg-id="HosannaTV.in" tvg-name="Hosanna TV" tvg-logo="" group-title="Non Jio",Hosanna TV
+https://ktismaservers.in:3349/live/hosannatvlive.m3u8
+#EXTINF:-1 tvg-id="HosannaTV.in" tvg-name="Hosanna TV 2" tvg-logo="" group-title="Non Jio",Hosanna TV 2
+https://ktismaservers.in:3466/live/hosannattvhindhilive.m3u8
 #EXTINF:-1 tvg-id="JanTV.in" tvg-name="Jan TV" tvg-logo="" group-title="Non Jio",Jan TV
 https://cdn-6.pishow.tv/live/10004/master.m3u8
 #EXTINF:-1 tvg-id="JinvaniChannel.in" tvg-name="Jinvani Channel" tvg-logo="" group-title="Non Jio",Jinvani Channel
