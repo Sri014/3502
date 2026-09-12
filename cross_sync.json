@@ -1,6 +1,6 @@
 {
   "source": "https://raw.githubusercontent.com/Sri014/Garden/main/working.m3u",
-  "repaired": 11,
+  "repaired": 6,
   "channels": [
     {
       "channel": "JK 24x7 News",
@@ -19,32 +19,12 @@
       "url": "https://live.vipnews24x7.co.in/vipnews24x7/d0dbe915091d400bd8ee7f27f0791303.sdp/playlist.m3u8"
     },
     {
-      "channel": "All Time Movies",
-      "url": "https://tvsen6.aynaott.com/a2cKGQtB/index.m3u8"
-    },
-    {
-      "channel": "Colors Cineplex",
-      "url": "http://66.102.126.10:8000/play/a076/index.m3u8"
-    },
-    {
-      "channel": "Star Gold 2",
-      "url": "http://66.102.126.10:8000/play/a077/index.m3u8"
-    },
-    {
-      "channel": "Star Gold Romance",
-      "url": "http://66.102.126.10:8000/play/a00r/index.m3u8"
-    },
-    {
-      "channel": "Star Gold Select",
-      "url": "http://66.102.126.10:8000/play/a01s/index.m3u8"
+      "channel": "&xplor HD",
+      "url": "http://dksmedia.tv/play/live.php?mac=00:1A:79:B6:60:3D&stream=209743&extension=ts&play_token=mR7FwO88sY"
     },
     {
       "channel": "Colors",
       "url": "http://66.102.126.10:8000/play/a00a/index.m3u8"
-    },
-    {
-      "channel": "Enterr 10 Rangeela",
-      "url": "http://103.185.24.134:3001/SUN-BANGLA-HD/index.m3u8"
     }
   ]
 }
