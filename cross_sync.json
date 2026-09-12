@@ -1,7 +1,11 @@
 {
   "source": "https://raw.githubusercontent.com/Sri014/Garden/main/working.m3u",
-  "repaired": 8,
+  "repaired": 11,
   "channels": [
+    {
+      "channel": "HNN 24x7",
+      "url": "https://ott.livelegitpro.in:9899/hnnnews/hnnnews/index.m3u8"
+    },
     {
       "channel": "JK 24x7 News",
       "url": "https://live.gulistannews.in/hls/jk.m3u8"
@@ -31,8 +35,16 @@
       "url": "http://66.102.126.10:8000/play/a00a/index.m3u8"
     },
     {
+      "channel": "Enterr 10 Rangeela",
+      "url": "http://103.185.24.134:3001/SUN-BANGLA-HD/index.m3u8"
+    },
+    {
       "channel": "Manoranjan Prime",
       "url": "https://mumt06.tangotv.in/qYyB8fXVMANORANJANPRIME/index.m3u8"
+    },
+    {
+      "channel": "Sharnam TV",
+      "url": "https://mumt06.tangotv.in/qYyB8fXVSHARNAMTV/index.m3u8"
     }
   ]
 }
