@@ -1,6 +1,6 @@
 {
   "source": "https://raw.githubusercontent.com/Sri014/Garden/main/working.m3u",
-  "repaired": 6,
+  "repaired": 8,
   "channels": [
     {
       "channel": "JK 24x7 News",
@@ -19,12 +19,20 @@
       "url": "https://live.vipnews24x7.co.in/vipnews24x7/d0dbe915091d400bd8ee7f27f0791303.sdp/playlist.m3u8"
     },
     {
-      "channel": "&xplor HD",
-      "url": "http://dksmedia.tv/play/live.php?mac=00:1A:79:B6:60:3D&stream=209743&extension=ts&play_token=mR7FwO88sY"
+      "channel": "All Time Movies",
+      "url": "https://tvsen6.aynaott.com/a2cKGQtB/index.m3u8"
+    },
+    {
+      "channel": "Manoranjan Grand",
+      "url": "https://streams.tangotv.in/MANORANJANGRAND/ORIGIN/index.m3u8"
     },
     {
       "channel": "Colors",
       "url": "http://66.102.126.10:8000/play/a00a/index.m3u8"
+    },
+    {
+      "channel": "Manoranjan Prime",
+      "url": "https://mumt06.tangotv.in/qYyB8fXVMANORANJANPRIME/index.m3u8"
     }
   ]
 }
