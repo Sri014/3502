@@ -1,6 +1,6 @@
 {
   "source": "https://raw.githubusercontent.com/Sri014/Garden/main/working.m3u",
-  "repaired": 9,
+  "repaired": 8,
   "channels": [
     {
       "channel": "JK 24x7 News",
@@ -13,10 +13,6 @@
     {
       "channel": "Public First",
       "url": "https://mumt06.tangotv.in/qYyB8fXVPUBLICFIRST/index.m3u8"
-    },
-    {
-      "channel": "TNP News",
-      "url": "https://server.thelegitpro.in/tnpnews/tnpnews/index.m3u8"
     },
     {
       "channel": "VIP News",
