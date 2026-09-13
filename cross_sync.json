@@ -1,11 +1,7 @@
 {
   "source": "https://raw.githubusercontent.com/Sri014/Garden/main/working.m3u",
-  "repaired": 10,
+  "repaired": 9,
   "channels": [
-    {
-      "channel": "HNN 24x7",
-      "url": "https://ott.livelegitpro.in:9899/hnnnews/hnnnews/index.m3u8"
-    },
     {
       "channel": "JK 24x7 News",
       "url": "https://live.gulistannews.in/hls/jk.m3u8"
@@ -19,12 +15,12 @@
       "url": "https://mumt06.tangotv.in/qYyB8fXVPUBLICFIRST/index.m3u8"
     },
     {
-      "channel": "VIP News",
-      "url": "https://live.vipnews24x7.co.in/vipnews24x7/d0dbe915091d400bd8ee7f27f0791303.sdp/playlist.m3u8"
+      "channel": "TNP News",
+      "url": "https://server.thelegitpro.in/tnpnews/tnpnews/index.m3u8"
     },
     {
-      "channel": "All Time Movies",
-      "url": "https://tvsen6.aynaott.com/a2cKGQtB/index.m3u8"
+      "channel": "VIP News",
+      "url": "https://live.vipnews24x7.co.in/vipnews24x7/d0dbe915091d400bd8ee7f27f0791303.sdp/playlist.m3u8"
     },
     {
       "channel": "Manoranjan Grand",
