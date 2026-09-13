@@ -1,11 +1,7 @@
 {
   "source": "https://raw.githubusercontent.com/Sri014/Garden/main/working.m3u",
-  "repaired": 11,
+  "repaired": 10,
   "channels": [
-    {
-      "channel": "Awaaz India TV",
-      "url": "https://awaazindia.livebox.co.in/AwaazIndaTVhls/Live.m3u8"
-    },
     {
       "channel": "HNN 24x7",
       "url": "https://ott.livelegitpro.in:9899/hnnnews/hnnnews/index.m3u8"
@@ -19,16 +15,20 @@
       "url": "https://mumt06.tangotv.in/qYyB8fXVNAGALANDTV/index.m3u8"
     },
     {
+      "channel": "Public First",
+      "url": "https://mumt06.tangotv.in/qYyB8fXVPUBLICFIRST/index.m3u8"
+    },
+    {
       "channel": "VIP News",
       "url": "https://live.vipnews24x7.co.in/vipnews24x7/d0dbe915091d400bd8ee7f27f0791303.sdp/playlist.m3u8"
     },
     {
-      "channel": "Manoranjan Grand",
-      "url": "https://streams.tangotv.in/MANORANJANGRAND/ORIGIN/index.m3u8"
+      "channel": "All Time Movies",
+      "url": "https://tvsen6.aynaott.com/a2cKGQtB/index.m3u8"
     },
     {
-      "channel": "Zee Action",
-      "url": "http://107.167.16.138/zeeaction/index.m3u8?token=test"
+      "channel": "Manoranjan Grand",
+      "url": "https://streams.tangotv.in/MANORANJANGRAND/ORIGIN/index.m3u8"
     },
     {
       "channel": "Colors",
@@ -37,10 +37,6 @@
     {
       "channel": "Manoranjan Prime",
       "url": "https://mumt06.tangotv.in/qYyB8fXVMANORANJANPRIME/index.m3u8"
-    },
-    {
-      "channel": "CNBC TV18 Prime HD",
-      "url": "https://n18syndication.akamaized.net/bpk-tv/CNBC_Tv18_Prime_HD_NW18_MOB/output01/index.m3u8"
     },
     {
       "channel": "Sharnam TV",
