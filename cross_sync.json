@@ -1,6 +1,6 @@
 {
   "source": "https://raw.githubusercontent.com/Sri014/Garden/main/working.m3u",
-  "repaired": 11,
+  "repaired": 10,
   "channels": [
     {
       "channel": "JK 24x7 News",
@@ -37,10 +37,6 @@
     {
       "channel": "Manoranjan Prime",
       "url": "https://mumt06.tangotv.in/qYyB8fXVMANORANJANPRIME/index.m3u8"
-    },
-    {
-      "channel": "CNBC Awaaz",
-      "url": "https://n18syndication.akamaized.net/bpk-tv/CNBC_Awaaz_NW18_MOB/output01/master.m3u8"
     },
     {
       "channel": "Sharnam TV",
