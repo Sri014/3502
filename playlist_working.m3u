@@ -47,6 +47,8 @@ https://d1msejlow1t3l4.cloudfront.net/fta/bharatsamachar/playlist.m3u8
 https://idvd.multitvsolution.com/idvo/bharatsamachar.m3u8
 #EXTINF:-1 tvg-id="BharatSamachar.in" tvg-name="Bharat Samachar 3" tvg-logo="" group-title="News",Bharat Samachar 3
 https://mumt03.tangotv.in/Dsly5z3HBHARATSAMACHAR/index.m3u8
+#EXTINF:-1 tvg-id="BharatSamachar.in" tvg-name="Bharat Samachar 4" tvg-logo="" group-title="News",Bharat Samachar 4
+https://tvsen3.aynaott.com/m94BZDYb/index.m3u8
 #EXTINF:-1 tvg-id="Bharat24.in" tvg-name="Bharat24" tvg-logo="" group-title="News",Bharat24
 https://cdn.ottlive.co.in/bharat24/index.m3u8
 #EXTINF:-1 tvg-id="Bharat24.in" tvg-name="Bharat24 2" tvg-logo="" group-title="News",Bharat24 2
@@ -115,8 +117,6 @@ https://cc-lyf4c0hwzg5dd.akamaized.net/v1/master/3722c60a815c199d9c0ef36c5b73da6
 https://cc-lyf4c0hwzg5dd.akamaized.net/v1/vglive-sk-479089/main.m3u8
 #EXTINF:-1 tvg-id="IndiaVoice.in" tvg-name="India Voice" tvg-logo="" group-title="News",India Voice
 https://d1msejlow1t3l4.cloudfront.net/fta/indiavoice/playlist.m3u8
-#EXTINF:-1 tvg-id="IndiaVoice.in" tvg-name="India Voice 2" tvg-logo="" group-title="News",India Voice 2
-https://mumt04.tangotv.in/m18aqlK4INDIAVOICE/index.m3u8
 #EXTINF:-1 tvg-id="INH24x7.in" tvg-name="INH 24x7" tvg-logo="" group-title="News",INH 24x7
 https://7epd6o8edk9b-hls-live.wmncdn.net/inh24/live.stream/playlist.m3u8
 #EXTINF:-1 tvg-id="INH24x7.in" tvg-name="INH 24x7 2" tvg-logo="" group-title="News",INH 24x7 2
@@ -151,8 +151,6 @@ https://stream.ottlive.co.in/livetimetv/index.m3u8
 
 #EXTINF:-1 tvg-id="MirrorNow.in" tvg-name="Mirror Now 2" tvg-logo="" group-title="News",Mirror Now 2
 https://pubads.g.doubleclick.net/ssai/event/DXkHhH2QSnma-HnE3QJqlA/master.m3u8
-#EXTINF:-1 tvg-id="NagalandTV.in" tvg-name="Nagaland TV" tvg-logo="" group-title="News",Nagaland TV
-https://mumt06.tangotv.in/qYyB8fXVNAGALANDTV/index.m3u8
 #EXTINF:-1 tvg-id="NDTV24x7.in" tvg-name="NDTV 24x7" tvg-logo="" group-title="News",NDTV 24x7
 https://ndtv24x7elemarchana.akamaized.net/hls/live/2003678/ndtv24x7/master.m3u8
 #EXTINF:-1 tvg-id="NDTV24x7.in" tvg-name="NDTV 24x7 2" tvg-logo="" group-title="News",NDTV 24x7 2
@@ -171,6 +169,8 @@ https://mumt05.tangotv.in/87NeALx2NENEWS/index.m3u8
 https://d1msejlow1t3l4.cloudfront.net/fta/news1india/playlist.m3u8
 #EXTINF:-1 tvg-id="News1India.in" tvg-name="News 1 India 2" tvg-logo="" group-title="News",News 1 India 2
 https://mumt07.tangotv.in/zHjX9OFlNEWS1INDIA/index.m3u8
+#EXTINF:-1 tvg-id="News1India.in" tvg-name="News 1 India 3" tvg-logo="" group-title="News",News 1 India 3
+https://tvsen6.aynaott.com/TaVfw58T/index.m3u8
 #EXTINF:-1 tvg-id="News11.in" tvg-name="News 11" tvg-logo="" group-title="News",News 11
 https://d1msejlow1t3l4.cloudfront.net/fta/news11bharat/playlist.m3u8
 #EXTINF:-1 tvg-id="News11.in" tvg-name="News 11 2" tvg-logo="" group-title="News",News 11 2
@@ -225,6 +225,8 @@ https://mumt03.tangotv.in/Dsly5z3HNEWSXWORLD/index.m3u8
 https://mumt01.tangotv.in/O5aw8Zn3NORTHEASTLIVE/index.m3u8
 #EXTINF:-1 tvg-id="NortheastLive.in" tvg-name="Northeast Live 2" tvg-logo="" group-title="News",Northeast Live 2
 
+#EXTINF:-1 tvg-id="OnlyBharat.in" tvg-name="Only Bharat" tvg-logo="" group-title="News",Only Bharat
+https://mumt07.tangotv.in/zHjX9OFlONLYBHARAT/index.m3u8
 #EXTINF:-1 tvg-id="PrimeNews.in" tvg-name="Prime News" tvg-logo="" group-title="News",Prime News
 https://mumt07.tangotv.in/zHjX9OFlPRIMENEWS/index.m3u8
 #EXTINF:-1 tvg-id="PrudentMedia.in" tvg-name="Prudent Media" tvg-logo="" group-title="News",Prudent Media
@@ -281,6 +283,8 @@ https://mumt03.tangotv.in/Dsly5z3HSWADESHNEWS/index.m3u8
 https://cdn.pishow.tv/ott/live/477/master.m3u8
 #EXTINF:-1 tvg-id="SwarajExpressSMBC.in" tvg-name="Swaraj Express SMBC 2" tvg-logo="" group-title="News",Swaraj Express SMBC 2
 https://d1msejlow1t3l4.cloudfront.net/fta/swarajexpresssmbc/playlist.m3u8
+#EXTINF:-1 tvg-id="SwarajExpressSMBC.in" tvg-name="Swaraj Express SMBC 3" tvg-logo="" group-title="News",Swaraj Express SMBC 3
+https://mumt04.tangotv.in/m18aqlK4SWARAJEXPRESS/index.m3u8
 #EXTINF:-1 tvg-id="TheVoiceTV.in" tvg-name="The Voice TV" tvg-logo="" group-title="News",The Voice TV
 https://legitpro.co.in/thevoicetv/thevoicetv/index.m3u8
 #EXTINF:-1 tvg-id="TimesNow.in" tvg-name="Times Now" tvg-logo="" group-title="News",Times Now
@@ -301,6 +305,8 @@ https://live.sli.ke/live/npnhm84gz9/master.m3u8
 https://mumt04.tangotv.in/m18aqlK4TV27/index.m3u8
 #EXTINF:-1 tvg-id="TV30India.in" tvg-name="TV30 India" tvg-logo="" group-title="News",TV30 India
 https://stream.tv30bharat.com/hls/shree/bhattji.m3u8
+#EXTINF:-1 tvg-id="TV45.in" tvg-name="TV45" tvg-logo="" group-title="News",TV45
+https://server.livelegitpro.in/bnews24/bnews24/video.m3u8
 #EXTINF:-1 tvg-id="TV9Bharatvarsh.in" tvg-name="TV9 Bharatvarsh" tvg-logo="" group-title="News",TV9 Bharatvarsh
 https://dyjmyiv3bp2ez.cloudfront.net/pub-iotv9hinjzgtpe/liveabr/playlist.m3u8
 #EXTINF:-1 tvg-id="TV9Bharatvarsh.in" tvg-name="TV9 Bharatvarsh 2" tvg-logo="" group-title="News",TV9 Bharatvarsh 2
@@ -349,6 +355,8 @@ https://vg-zeefta.akamaized.net/ptnr-yupptv/title-zeenews/v1/master/611d79b11b77
 https://vg-zeefta.akamaized.net/ptnr-yupptv/title-zeerajashthannews/v1/master/611d79b11b77e2f571934fd80ca1413453772ac7/8e864b9a-1681-41a0-99a6-387490bc5b24/main.m3u8
 #EXTINF:-1 tvg-id="ZeeUttarPradeshUttarakhand.in" tvg-name="Zee Uttar Pradesh/Uttarakhand" tvg-logo="" group-title="News",Zee Uttar Pradesh/Uttarakhand
 https://duw35ict5q7th.cloudfront.net/index_3.m3u8
+#EXTINF:-1 tvg-id="ZeeUttarPradeshUttarakhand.in" tvg-name="Zee Uttar Pradesh/Uttarakhand 2" tvg-logo="" group-title="News",Zee Uttar Pradesh/Uttarakhand 2
+https://mumt07.tangotv.in/zHjX9OFlZEEUPUK/index.m3u8
 #EXTINF:-1 tvg-id="B4UBhojpuri.in" tvg-name="B4U Bhojpuri" tvg-logo="" group-title="Movies",B4U Bhojpuri
 https://cdnb4u.wiseplayout.com/B4U_Bhojpuri/master.m3u8
 #EXTINF:-1 tvg-id="B4UBhojpuri.in" tvg-name="B4U Bhojpuri 2" tvg-logo="" group-title="Movies",B4U Bhojpuri 2
@@ -359,6 +367,8 @@ http://107.167.16.138/b4ukadak/index.m3u8?token=test
 https://cdn.pishow.tv/ott/live/227/master.m3u8
 #EXTINF:-1 tvg-id="B4UKadak.in" tvg-name="B4U Kadak 3" tvg-logo="" group-title="Movies",B4U Kadak 3
 https://streams.tangotv.in/B4UKADAK/ORIGIN/index.m3u8
+#EXTINF:-1 tvg-id="B4UKadak.in" tvg-name="B4U Kadak 4" tvg-logo="" group-title="Movies",B4U Kadak 4
+https://tvsen3.aynaott.com/X9E6bxg3/index.m3u8
 #EXTINF:-1 tvg-id="B4UMovies.in" tvg-name="B4U Movies" tvg-logo="" group-title="Movies",B4U Movies
 https://cdn.pishow.tv/ott/live/419/master.m3u8
 #EXTINF:-1 tvg-id="B4UMovies.in" tvg-name="B4U Movies 2" tvg-logo="" group-title="Movies",B4U Movies 2
@@ -393,6 +403,8 @@ https://tvsen6.aynaott.com/55xNrLdf/index.m3u8
 https://cdn.pishow.tv/ott/live/1461/master.m3u8
 #EXTINF:-1 tvg-id="GoldminesMovies.in" tvg-name="Goldmines Movies 2" tvg-logo="" group-title="Movies",Goldmines Movies 2
 https://streams.tangotv.in/GOLDMINEMOVIES/ORIGIN/index.m3u8
+#EXTINF:-1 tvg-id="GoldminesMovies.in" tvg-name="Goldmines Movies 3" tvg-logo="" group-title="Movies",Goldmines Movies 3
+https://tvsen3.aynaott.com/5CGfPvGp/index.m3u8
 #EXTINF:-1 tvg-id="IndywoodTV.in" tvg-name="Indywood TV" tvg-logo="" group-title="Movies",Indywood TV
 https://43wrzjnpqoxe-hls-live.wmncdn.net/indywood/indywoodtv/index.m3u8
 #EXTINF:-1 tvg-id="MahaMovie.in" tvg-name="Maha Movie" tvg-logo="" group-title="Movies",Maha Movie
@@ -450,6 +462,8 @@ http://107.167.16.138/zeeclassic/index.m3u8?token=test
 #EXTINF:-1 tvg-id="9XJalwa.in" tvg-name="9X Jalwa" tvg-logo="" group-title="Music",9X Jalwa
 https://mumt03.tangotv.in/Dsly5z3H9XJALWA/index.m3u8
 #EXTINF:-1 tvg-id="9XJalwa.in" tvg-name="9X Jalwa 2" tvg-logo="" group-title="Music",9X Jalwa 2
+https://tvsen6.aynaott.com/CiPT1VTG8bVekeAZiibd/index.m3u8
+#EXTINF:-1 tvg-id="9XJalwa.in" tvg-name="9X Jalwa 3" tvg-logo="" group-title="Music",9X Jalwa 3
 https://wiselp.wiseplayout.com/9X_Jalwa/master.m3u8
 #EXTINF:-1 tvg-id="9XM.in" tvg-name="9XM" tvg-logo="" group-title="Music",9XM
 https://9xjio.wiseplayout.com/9XM/master.m3u8
@@ -465,8 +479,6 @@ https://streams.tangotv.in/B4UMUSIC/ORIGIN/index.m3u8
 https://cdn.pishow.tv/ott/live/987/master.m3u8
 #EXTINF:-1 tvg-id="BalleBalle.in" tvg-name="Balle Balle 2" tvg-logo="" group-title="Music",Balle Balle 2
 https://mcncdndigital.com/balleballetv/index.m3u8
-#EXTINF:-1 tvg-id="BalleBalle.in" tvg-name="Balle Balle 3" tvg-logo="" group-title="Music",Balle Balle 3
-https://streams.tangotv.in/BALLEBALLE/ORIGIN/index.m3u8
 #EXTINF:-1 tvg-id="DeewanaHD.in" tvg-name="Deewana HD" tvg-logo="" group-title="Music",Deewana HD
 https://live20.bozztv.com/giatvplayout7/giatv-209592/index.m3u8
 #EXTINF:-1 tvg-id="Dhamaal.in" tvg-name="Dhamaal" tvg-logo="" group-title="Music",Dhamaal
@@ -545,6 +557,8 @@ http://107.167.16.138/dangal/index.m3u8?token=test
 https://live-dangal.akamaized.net/liveabr/playlist.m3u8
 #EXTINF:-1 tvg-id="DangalTV.in" tvg-name="Dangal TV 3" tvg-logo="" group-title="Entertainment",Dangal TV 3
 https://streams.tangotv.in/DANGAL/ORIGIN/index.m3u8
+#EXTINF:-1 tvg-id="DangalTV.in" tvg-name="Dangal TV 4" tvg-logo="" group-title="Entertainment",Dangal TV 4
+https://tvsen3.aynaott.com/qPNg4LJK/index.m3u8
 #EXTINF:-1 tvg-id="E24.in" tvg-name="E 24" tvg-logo="" group-title="Entertainment",E 24
 https://mumt04.tangotv.in/m18aqlK4E24/index.m3u8
 #EXTINF:-1 tvg-id="Enterr10Rangeela.in" tvg-name="Enterr 10 Rangeela" tvg-logo="" group-title="Entertainment",Enterr 10 Rangeela
@@ -575,6 +589,8 @@ https://mumt06.tangotv.in/qYyB8fXVMANORANJANPRIME/index.m3u8
 https://cdn.pishow.tv/ott/live/1013/master.m3u8
 #EXTINF:-1 tvg-id="ManoranjanTV.in" tvg-name="Manoranjan TV 2" tvg-logo="" group-title="Entertainment",Manoranjan TV 2
 https://streams.tangotv.in/MANORANJANTV/ORIGIN/index.m3u8
+#EXTINF:-1 tvg-id="ManoranjanTV.in" tvg-name="Manoranjan TV 3" tvg-logo="" group-title="Entertainment",Manoranjan TV 3
+https://tvsen6.aynaott.com/vhu6qz5Nsd/index.m3u8
 #EXTINF:-1 tvg-id="MHOneDilSe.in" tvg-name="MH One Dil Se" tvg-logo="" group-title="Entertainment",MH One Dil Se
 https://streams.tangotv.in/MHONEDILSE/ORIGIN/index.m3u8
 #EXTINF:-1 tvg-id="PasandTV.in" tvg-name="Pasand TV" tvg-logo="" group-title="Entertainment",Pasand TV
@@ -613,6 +629,8 @@ http://202.70.146.135:8000/play/a009/index.m3u8
 http://41.205.93.154/STAR-PLUS/index.m3u8
 #EXTINF:-1 tvg-id="UniqueTV.in" tvg-name="Unique TV" tvg-logo="" group-title="Entertainment",Unique TV
 https://mumt05.tangotv.in/87NeALx2UNIQUETV/index.m3u8
+#EXTINF:-1 tvg-id="ZeeTV.in" tvg-name="Zee TV" tvg-logo="" group-title="Entertainment",Zee TV
+http://41.205.93.154/ZEE-TV/index.m3u8
 #EXTINF:-1 tvg-id="BVG.in" tvg-name="BVG" tvg-logo="" group-title="Infotainment",BVG
 https://mumt05.tangotv.in/87NeALx2BVG/index.m3u8
 #EXTINF:-1 tvg-id="DocuBayTV.in" tvg-name="DocuBay TV" tvg-logo="" group-title="Infotainment",DocuBay TV
@@ -782,8 +800,6 @@ https://oqgdrkxby4rm-hls-live.5centscdn.com/kaumudytv/live.stream/playlist.m3u8
 #EXTINF:-1 tvg-id="LLBNTVSouthAsia.us" tvg-name="LLBN TV South Asia" tvg-logo="" group-title="Non Jio",LLBN TV South Asia
 https://brightstar-southasia-pull-secure.akamaized.net/brightstarsouthasia/stream.m3u8
 #EXTINF:-1 tvg-id="MercyTV.in" tvg-name="Mercy TV" tvg-logo="" group-title="Non Jio",Mercy TV
-https://5dd3981940faa.streamlock.net/mercytv/mercytv/playlist.m3u8
-#EXTINF:-1 tvg-id="MercyTV.in" tvg-name="Mercy TV 2" tvg-logo="" group-title="Non Jio",Mercy TV 2
 https://mumt03.tangotv.in/Dsly5z3HMERCYTV/index.m3u8
 #EXTINF:-1 tvg-id="Mh1Prime.in" tvg-name="Mh 1 Prime" tvg-logo="" group-title="Non Jio",Mh 1 Prime
 https://streams.tangotv.in/MHONE/ORIGIN/index.m3u8
@@ -799,6 +815,8 @@ https://d1msejlow1t3l4.cloudfront.net/fta/network10/playlist.m3u8
 https://mumt01.tangotv.in/O5aw8Zn3NETWORK10/index.m3u8
 #EXTINF:-1 tvg-id="Network10.in" tvg-name="Network 10 3" tvg-logo="" group-title="Non Jio",Network 10 3
 https://network10.livebox.co.in/network10hls/live.m3u8
+#EXTINF:-1 tvg-id="Network10.in" tvg-name="Network 10 4" tvg-logo="" group-title="Non Jio",Network 10 4
+https://tvsen6.aynaott.com/3Cb2WLFz/index.m3u8
 #EXTINF:-1 tvg-id="ParasGold.in" tvg-name="Paras Gold" tvg-logo="" group-title="Non Jio",Paras Gold
 https://mumt04.tangotv.in/m18aqlK4PARASGOLD/index.m3u8
 #EXTINF:-1 tvg-id="PeaceofMindTV.in" tvg-name="Peace of Mind TV" tvg-logo="" group-title="Non Jio",Peace of Mind TV
@@ -875,10 +893,10 @@ https://lbgo.bozztv.com/ssh101/ssh101/afghantheatretv/playlist.m3u8
 https://jukin-weatherspy-2-in.samsung.wurl.tv/playlist.m3u8
 #EXTINF:-1 tvg-id="JK24x7News.in" tvg-name="JK 24x7 News" tvg-logo="" group-title="News",JK 24x7 News
 https://live.gulistannews.in/hls/jk.m3u8
+#EXTINF:-1 tvg-id="NagalandTV.in" tvg-name="Nagaland TV" tvg-logo="" group-title="News",Nagaland TV
+https://mumt06.tangotv.in/qYyB8fXVNAGALANDTV/index.m3u8
 #EXTINF:-1 tvg-id="PublicFirst.in" tvg-name="Public First" tvg-logo="" group-title="News",Public First
 https://mumt06.tangotv.in/qYyB8fXVPUBLICFIRST/index.m3u8
-#EXTINF:-1 tvg-id="TV45.in" tvg-name="TV45" tvg-logo="" group-title="News",TV45
-https://server.livelegitpro.in/bnews24/bnews24/video.m3u8
 #EXTINF:-1 tvg-id="VIPNews.in" tvg-name="VIP News" tvg-logo="" group-title="News",VIP News
 https://live.vipnews24x7.co.in/vipnews24x7/d0dbe915091d400bd8ee7f27f0791303.sdp/playlist.m3u8
 #EXTINF:-1 tvg-id="AllTimeMovies.in" tvg-name="All Time Movies" tvg-logo="" group-title="Movies",All Time Movies
