@@ -3,8 +3,8 @@ IPTV PLAYLIST SOURCE REPORT
 
 Source: https://iptv-org.github.io/iptv/index.m3u
 Total Channels: 505
-Working Channels: 445
-Non-Working Channels: 60
+Working Channels: 444
+Non-Working Channels: 61
 Indian Sony + Star Working: 13
 
 WORKING CHANNELS
@@ -68,7 +68,6 @@ India TV 2
 India TV Speed News
 India TV Speed News 2
 India Voice
-India Voice 2
 INH 24x7
 INH 24x7 2
 Janta TV
@@ -110,7 +109,8 @@ News India 24x7
 News Nation
 News Nation 2
 News Nation 3
-News18 Madhya Pradesh/Chhattisgarh
+News18 Bihar Jharkhand
+News18 India
 News18 Rajasthan
 News18 Uttar Pradesh Uttarakhand
 News9Live
@@ -185,7 +185,7 @@ Zee News 4
 Zee Rajasthan
 Zee Uttar Pradesh/Uttarakhand
 Zee Uttar Pradesh/Uttarakhand 2
-&xplor HD
+All Time Movies
 B4U Bhojpuri
 B4U Bhojpuri 2
 B4U Kadak
@@ -198,7 +198,6 @@ Bhojpuri Cinema
 Bhojpuri Cinema 2
 Bhojpuri Cinema 3
 Colors Cineplex Bollywood
-Colors Cineplex Bollywood 2
 Epic Bhojpuri
 Epic Bhojpuri 2
 Goldmines
@@ -280,9 +279,11 @@ Anjan TV 3
 Colors MENA
 Dangal 2
 Dangal 2 2
+Dangal 2 3
 Dangal TV
 Dangal TV 2
 Dangal TV 3
+Dangal TV 4
 E 24
 Enterr 10 Rangeela
 Epic Bharat
@@ -297,7 +298,6 @@ Mango
 Manoranjan Prime
 Manoranjan Prime 2
 Manoranjan TV
-Manoranjan TV 2
 MH One Dil Se
 Pasand TV
 Pasand TV 2
@@ -404,6 +404,7 @@ Kaumudy TV
 Kaumudy TV 2
 LLBN TV South Asia
 Mercy TV
+Mercy TV 2
 Mh 1 Prime
 MH One Shraddha
 MH One Shraddha 2
@@ -447,11 +448,9 @@ Vedic 2
 VTU
 WeatherSpy
 JK 24x7 News
-News18 Bihar Jharkhand
-News18 India
+News18 Madhya Pradesh/Chhattisgarh
 Public First
 VIP News
-All Time Movies
 Kabaddi 24x7
 Colors
 
@@ -461,6 +460,7 @@ Aaj Tak
 ABP News
 Bansal News
 Bharat Samachar
+India Voice
 NDTV India
 News 1 India
 Prime News
@@ -468,7 +468,9 @@ Public First 2
 Raj Pariwar
 Times Now Navbharat 2
 Times Now World
+&xplor HD
 B4U Movies
+Colors Cineplex Bollywood
 Goldmines
 Romedy Now
 Sony Max
@@ -494,10 +496,9 @@ Zing!
 Zoom
 Star Sports 2 Hindi
 &TV
-Dangal 2
-Dangal TV
 Manoranjan TV
 Manoranjan TV 2
+Manoranjan TV 3
 Sony Entertainment Television
 StarPlus
 Zee Comedy Nation
@@ -509,7 +510,6 @@ Channel Divya
 Fateh TV
 Jus Hindi
 Jus One
-Mercy TV
 Network 10
 Punjabi Zindabad TV
 Rongeen TV
