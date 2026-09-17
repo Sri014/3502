@@ -15,7 +15,63 @@ PATTERNS = [
 ]
 RX = re.compile('(?:' + '|'.join(PATTERNS) + ')', re.I)
 
+# Explicit worldwide streams requested by user. They are checked and then
+# placed into playlist_working.m3u or playlist_nonworking.m3u accordingly.
 MANUAL = [
+    {
+        'name': 'Sony Sports Ten 1 HD',
+        'url': 'https://cloudplay-sonyliv.pages.dev/ten1hd.m3u8',
+        'logo': 'https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/LIVETV_LIVETVCHANNEL_SONY_SPORTS_TEN_1/images/LOGO_HD/image.png',
+        'category': 'Sports'
+    },
+    {
+        'name': 'Sony Sports Ten 4',
+        'url': 'https://cloudplay-sonyliv.pages.dev/ten4.m3u8',
+        'logo': 'https://dtil.tmsimg.com/assets/GNLZZGG0025T4PV.png?lock=720x540',
+        'category': 'Sports'
+    },
+    {
+        'name': 'Sony Sports Ten 4 Telugu',
+        'url': 'https://cloudplay-sonyliv.pages.dev/ten4hd.m3u8',
+        'logo': 'https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/LIVETV_LIVETVCHANNEL_SONY_SPORTS_TEN_4/images/LOGO_HD/image.png',
+        'category': 'Sports'
+    },
+    {
+        'name': 'Sony Sports Ten 5',
+        'url': 'https://cloudplay-sonyliv.pages.dev/ten5.m3u8',
+        'logo': 'https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/LIVETV_LIVETVCHANNEL_SONY_SPORTS_TEN_5/images/LOGO_HD/image.png',
+        'category': 'Sports'
+    },
+    {
+        'name': 'Sony Sports Ten 5 HD',
+        'url': 'https://cloudplay-sonyliv.pages.dev/ten5hd.m3u8',
+        'logo': 'https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/LIVETV_LIVETVCHANNEL_SONY_SPORTS_TEN_5/images/LOGO_HD/image.png',
+        'category': 'Sports'
+    },
+    {
+        'name': 'Star Sports 1 Hindi',
+        'url': 'http://103.253.18.58:8000/play/a03o',
+        'logo': 'https://i.imgur.com/FtRT73R.png',
+        'category': 'Sports'
+    },
+    {
+        'name': 'Star Sports 2 HD',
+        'url': 'http://tvsen5.aynascope.net/cXPB2LKkErN9/index.m3u8',
+        'logo': 'https://i.imgur.com/FtRT73R.png',
+        'category': 'Sports'
+    },
+    {
+        'name': 'Star Sports 2 Hindi HD',
+        'url': 'http://103.157.248.140:8000/play/a01m/index.m3u8',
+        'logo': 'https://i.imgur.com/FtRT73R.png',
+        'category': 'Sports'
+    },
+    {
+        'name': 'Star Sports Khel',
+        'url': 'http://103.175.73.12:8080/live/151/151_0.m3u8',
+        'logo': 'https://i.imgur.com/FtRT73R.png',
+        'category': 'Sports'
+    },
     {
         'name': 'Utsav Bharat [UK]',
         'url': 'http://xown.site/token/stream.php?id=1484530&token=jzVQIX8Sa8Du818wRZdAH2eDDBHwGaqq',
@@ -47,7 +103,7 @@ def category(name):
         return 'Sports'
     if any(x in n for x in ('sony max', 'sony wah', 'sony pix', 'star gold', 'star utsav movies')):
         return 'Movies'
-    if any(x in n for x in ('e24 music',)):
+    if 'e24 music' in n:
         return 'Music'
     return 'Entertainment'
 
@@ -140,6 +196,8 @@ def main():
             ext = ext.replace(',', ' group-title="' + group + '",', 1)
         candidates.append({'extinf': ext, 'extra': e['extra'], 'url': url, 'name': name, 'category': group})
 
+    # Explicit entries are considered even when the worldwide source changes its
+    # display name. Exact URL de-duplication prevents duplicate stream URLs.
     for m in MANUAL:
         url = clean(m['url'])
         if not url or url in known or url in seen:
@@ -157,6 +215,9 @@ def main():
     append_entries(WORKING, working)
     append_entries(NONWORKING, nonworking)
     print('NEW:', len(candidates), 'WORKING:', len(working), 'NONWORKING:', len(nonworking))
+    for e in candidates:
+        if e['name'] in {m['name'] for m in MANUAL}:
+            print(e['name'], '=>', 'WORKING' if e in working else 'NONWORKING')
 
 
 if __name__ == '__main__':
