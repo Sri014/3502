@@ -3,15 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Garden vs 3502 Channel Compare</title>
+<title>Garden → 3502 Channel Manager</title>
 <style>
-body{font-family:Arial,sans-serif;background:#111;color:#eee;margin:0;padding:14px}.top{position:sticky;top:0;background:#111;padding:10px 0;z-index:5}.stats{margin:8px 0;font-size:14px}.toolbar{display:flex;gap:8px;flex-wrap:wrap}.toolbar button{padding:9px 12px;border:0;border-radius:8px;cursor:pointer}.addall{background:#198754;color:#fff}.clear{background:#dc3545;color:#fff}.card{background:#1d1d1d;border:1px solid #333;border-radius:10px;margin:8px 0;padding:10px}.name{font-weight:700;font-size:16px}.status{font-size:12px;margin:4px 0 8px}.same{color:#35d07f}.diff{color:#ffb020}.missing{color:#ff5b6e}.actions{display:flex;gap:8px}.actions button{padding:7px 12px;border:0;border-radius:7px;cursor:pointer}.btnAdd{background:#198754;color:#fff}.btnDel{background:#dc3545;color:#fff}.url{font-size:11px;color:#aaa;word-break:break-all;margin-top:5px}.section{margin-top:20px}.section h2{font-size:18px;border-bottom:1px solid #333;padding-bottom:6px}.selected{outline:2px solid #198754}
+body{font-family:Arial,sans-serif;background:#111;color:#eee;margin:0;padding:14px}.top{position:sticky;top:0;background:#111;padding:10px 0;z-index:5}.stats{margin:8px 0;font-size:14px}.toolbar{display:flex;gap:8px;flex-wrap:wrap}.toolbar button,.tokenbox button{padding:9px 12px;border:0;border-radius:8px;cursor:pointer}.addall{background:#198754;color:#fff}.clear{background:#dc3545;color:#fff}.apply{background:#0d6efd;color:#fff}.tokenbox{display:flex;gap:8px;margin:10px 0}.tokenbox input{flex:1;min-width:0;padding:9px;border-radius:8px;border:1px solid #444;background:#222;color:#fff}.card{background:#1d1d1d;border:1px solid #333;border-radius:10px;margin:8px 0;padding:10px}.name{font-weight:700;font-size:16px}.status{font-size:12px;margin:4px 0 8px}.diff{color:#ffb020}.missing{color:#ff5b6e}.actions{display:flex;gap:8px}.actions button{padding:7px 12px;border:0;border-radius:7px;cursor:pointer}.btnAdd{background:#198754;color:#fff}.btnDel{background:#dc3545;color:#fff}.url{font-size:11px;color:#aaa;word-break:break-all;margin-top:5px}.section{margin-top:20px}.section h2{font-size:18px;border-bottom:1px solid #333;padding-bottom:6px}.selected{outline:2px solid #198754}.help{font-size:12px;color:#aaa;margin:5px 0 10px}
 </style>
 </head>
 <body>
 <div class="top">
-<h2>Garden → 3502 Compare</h2>
+<h2>Garden → 3502 Channel Manager</h2>
 <div class="stats" id="stats">Loading actual playlists…</div>
+<div class="tokenbox"><input id="token" type="password" autocomplete="off" placeholder="GitHub token (used only in this page)"><button class="apply" onclick="applySelected()">Apply Selected</button></div>
+<div class="help">Token is kept only in memory and is not saved. It needs permission to run GitHub Actions.</div>
 <div class="toolbar">
 <button class="addall" onclick="addAllVisible()">Add All Visible</button>
 <button class="clear" onclick="clearSelected()">Delete Selected</button>
@@ -22,57 +24,15 @@ body{font-family:Arial,sans-serif;background:#111;color:#eee;margin:0;padding:14
 <script>
 const G='https://raw.githubusercontent.com/Sri014/Garden/main/working.m3u';
 const W='https://raw.githubusercontent.com/Sri014/3502/main/playlist_working.m3u';
+const API='https://api.github.com/repos/Sri014/3502/actions/workflows/garden_selected.yml/dispatches';
 let rows=[],selected=new Set();
-function parseM3U(t){
- const a=t.replace(/\r/g,'').split('\n'),r=[];
- for(let i=0;i<a.length;i++){
-  if(!a[i].startsWith('#EXTINF')) continue;
-  const meta=a[i], url=(a[i+1]||'').trim();
-  if(!url||url.startsWith('#')) continue;
-  const name=(meta.split(',').slice(1).join(',')||'').trim();
-  const gm=meta.match(/group-title="([^"]*)"/i); const group=gm?gm[1]:'Unknown';
-  r.push({name,group,url,meta});
- }
- return r;
-}
-function esc(s){return s.replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));}
-async function load(){
- try{
-  const [g,w]=await Promise.all([fetch(G,{cache:'no-store'}),fetch(W,{cache:'no-store'})]);
-  if(!g.ok||!w.ok) throw new Error('Playlist fetch failed');
-  const gt=await g.text(),wt=await w.text();
-  const garden=parseM3U(gt),work=parseM3U(wt),urls=new Set(work.map(x=>x.url));
-  const byName=new Map();
-  work.forEach(x=>{const k=x.name.toLowerCase().replace(/\s*\[[^\]]+\]\s*/g,'').trim();if(!byName.has(k))byName.set(k,[]);byName.get(k).push(x)});
-  rows=garden.map((x,i)=>{
-   const same=urls.has(x.url), key=x.name.toLowerCase().replace(/\s*\[[^\]]+\]\s*/g,'').trim();
-   const matches=byName.get(key)||[];
-   return {...x,i,status:same?'same':(matches.length?'diff':'missing'),matches};
-  }).filter(x=>x.status!=='same');
-  render();
- }catch(e){document.getElementById('out').innerHTML='<div class="card">Error: '+esc(e.message)+'</div>';document.getElementById('stats').textContent='Could not load playlists.';}
-}
-function render(){
- const cats={};rows.forEach(r=>(cats[r.group]??=[]).push(r));
- let html='';
- for(const [cat,list] of Object.entries(cats)){
-  html+='<div class="section"><h2>'+esc(cat)+' ('+list.length+')</h2>';
-  list.forEach(r=>{const cls=r.status==='diff'?'diff':'missing';const st=r.status==='diff'?'Different URL':'Not Found';const key=r.i;
-   html+='<div class="card '+(selected.has(key)?'selected':'')+'" id="c'+key+'">'+
-   '<div class="name">'+esc(r.name)+'</div><div class="status '+cls+'">'+st+'</div>'+
-   '<div class="url">Garden URL: '+esc(r.url)+'</div>'+ (r.matches[0]?'<div class="url">3502 URL: '+esc(r.matches[0].url)+'</div>':'')+
-   '<div class="actions"><button class="btnAdd" onclick="add('+key+')">Add</button><button class="btnDel" onclick="del('+key+')">Delete</button></div></div>';
-  }); html+='</div>';
- }
- document.getElementById('out').innerHTML=html||'<div class="card">No Different/Not Found channels.</div>';
- const d=rows.filter(x=>x.status==='diff').length,m=rows.filter(x=>x.status==='missing').length;
- document.getElementById('stats').textContent='Different: '+d+' | Not Found: '+m+' | Selected: '+selected.size;
-}
-function add(i){selected.add(i);render()}
-function del(i){selected.delete(i);render()}
-function addAllVisible(){rows.forEach(r=>selected.add(r.i));render()}
-function clearSelected(){selected.clear();render()}
-function showSelected(){const names=rows.filter(r=>selected.has(r.i)).map(r=>r.name);alert(names.length?names.join('\n'):'Nothing selected');}
+function parseM3U(t){const a=t.replace(/\r/g,'').split('\n'),r=[];for(let i=0;i<a.length;i++){if(!a[i].startsWith('#EXTINF'))continue;const meta=a[i],url=(a[i+1]||'').trim();if(!url||url.startsWith('#'))continue;const name=(meta.split(',').slice(1).join(',')||'').trim();const gm=meta.match(/group-title="([^"]*)"/i);const group=gm?gm[1]:'Unknown';r.push({name,group,url,meta})}return r}
+function keyName(s){return s.toLowerCase().replace(/\s*\[[^\]]+\]\s*/g,'').trim()}
+function esc(s){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
+async function load(){try{const[g,w]=await Promise.all([fetch(G,{cache:'no-store'}),fetch(W,{cache:'no-store'})]);if(!g.ok||!w.ok)throw new Error('Playlist fetch failed');const[garden,work]=[parseM3U(await g.text()),parseM3U(await w.text())];const urls=new Set(work.map(x=>x.url));const byName=new Map();work.forEach(x=>{const k=keyName(x.name);if(!byName.has(k))byName.set(k,[]);byName.get(k).push(x)});rows=garden.map((x,i)=>{const matches=byName.get(keyName(x.name))||[];return{...x,i,status:urls.has(x.url)?'same':(matches.length?'diff':'missing'),matches}}).filter(x=>x.status!=='same');render()}catch(e){document.getElementById('stats').textContent='Could not load playlists.';document.getElementById('out').innerHTML='<div class="card">Error: '+esc(e.message)+'</div>'}}
+function render(){const cats={};rows.forEach(r=>(cats[r.group]??=[]).push(r));let html='';for(const[cat,list]of Object.entries(cats)){html+='<div class="section"><h2>'+esc(cat)+' ('+list.length+')</h2>';list.forEach(r=>{const cls=r.status==='diff'?'diff':'missing',st=r.status==='diff'?'Different URL':'Not Found';html+='<div class="card '+(selected.has(r.i)?'selected':'')+'" id="c'+r.i+'"><div class="name">'+esc(r.name)+'</div><div class="status '+cls+'">'+st+'</div><div class="url">Garden URL: '+esc(r.url)+'</div>'+(r.matches[0]?'<div class="url">3502 URL: '+esc(r.matches[0].url)+'</div>':'')+'<div class="actions"><button class="btnAdd" onclick="add('+r.i+')">Add</button><button class="btnDel" onclick="del('+r.i+')">Delete</button></div></div>'});html+='</div>'}document.getElementById('out').innerHTML=html||'<div class="card">No Different/Not Found channels.</div>';const d=rows.filter(x=>x.status==='diff').length,m=rows.filter(x=>x.status==='missing').length;document.getElementById('stats').textContent='Different: '+d+' | Not Found: '+m+' | Selected: '+selected.size}
+function add(i){selected.add(i);render()}function del(i){selected.delete(i);render()}function addAllVisible(){rows.forEach(r=>selected.add(r.i));render()}function clearSelected(){selected.clear();render()}function showSelected(){alert(rows.filter(r=>selected.has(r.i)).map(r=>r.name).join('\n')||'Nothing selected')}
+async function applySelected(){const token=document.getElementById('token').value.trim();const items=rows.filter(r=>selected.has(r.i));if(!items.length)return alert('No channels selected.');if(!token)return alert('GitHub token required.');if(!confirm('Apply '+items.length+' selected channel(s) to 3502 playlist_working.m3u?'))return;let ok=0;try{for(const r of items){const payload={ref:'main',inputs:{channels:btoa(unescape(encodeURIComponent(JSON.stringify([{meta:r.meta,url:r.url}]))))}};const res=await fetch(API,{method:'POST',headers:{'Accept':'application/vnd.github+json','Authorization':'Bearer '+token,'X-GitHub-Api-Version':'2022-11-28','Content-Type':'application/json'},body:JSON.stringify(payload)});if(!res.ok){const tx=await res.text();throw new Error('GitHub rejected '+r.name+': '+res.status+' '+tx)}ok++;}alert('Workflow dispatched for '+ok+' channel(s). GitHub Actions will update playlist_working.m3u.');selected.clear();document.getElementById('token').value='';render()}catch(e){alert('Apply stopped after '+ok+' channel(s): '+e.message)}}
 load();
 </script>
 </body>
