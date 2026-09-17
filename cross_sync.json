@@ -1,26 +1,26 @@
 {
   "source": "https://raw.githubusercontent.com/Sri014/Garden/main/working.m3u",
-  "repaired": 7,
+  "repaired": 8,
   "channels": [
     {
       "channel": "JK 24x7 News",
       "url": "https://live.gulistannews.in/hls/jk.m3u8"
     },
     {
-      "channel": "News18 Bihar Jharkhand",
-      "url": "https://n18syndication.akamaized.net/bpk-tv/News18_Bihar_Jharkhand_NW18_MOB/output01/master.m3u8"
-    },
-    {
-      "channel": "News18 Rajasthan",
-      "url": "https://n18syndication.akamaized.net/bpk-tv/News18_Rajasthan_NW18_MOB/output01/master.m3u8"
-    },
-    {
       "channel": "Public First",
       "url": "https://mumt06.tangotv.in/qYyB8fXVPUBLICFIRST/index.m3u8"
     },
     {
+      "channel": "TV30 India",
+      "url": "https://stream.tv30bharat.com/hls/shree/bhattji.m3u8"
+    },
+    {
       "channel": "VIP News",
       "url": "https://live.vipnews24x7.co.in/vipnews24x7/d0dbe915091d400bd8ee7f27f0791303.sdp/playlist.m3u8"
+    },
+    {
+      "channel": "Deewana HD",
+      "url": "https://live20.bozztv.com/giatvplayout7/giatv-209592/index.m3u8"
     },
     {
       "channel": "Kabaddi 24x7",
@@ -29,6 +29,10 @@
     {
       "channel": "Colors",
       "url": "http://66.102.126.10:8000/play/a00a/index.m3u8"
+    },
+    {
+      "channel": "CNBC Awaaz",
+      "url": "https://n18syndication.akamaized.net/bpk-tv/CNBC_Awaaz_NW18_MOB/output01/master.m3u8"
     }
   ]
 }
