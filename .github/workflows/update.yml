@@ -8,6 +8,7 @@ on:
       - 'fetch_sources.py'
       - 'scripts/group_playlist.py'
       - 'scripts/sync_garden.py'
+      - 'scripts/add_garden_movies.py'
       - 'scripts/sony_star_india.py'
       - 'scripts/merge_worldwide_sony_star.py'
   schedule:
@@ -28,6 +29,8 @@ jobs:
           python-version: "3.x"
       - name: Generate playlists
         run: python scripts/group_playlist.py
+      - name: Add missing Garden movie streams by URL
+        run: python scripts/add_garden_movies.py
       - name: Cross-sync from Garden working playlist
         run: python scripts/sync_garden.py
       - name: Add missing worldwide Indian Sony and Star streams
