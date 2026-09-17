@@ -8,6 +8,7 @@ on:
       - 'fetch_sources.py'
       - 'scripts/group_playlist.py'
       - 'scripts/sync_garden.py'
+      - 'scripts/sony_star_india.py'
   schedule:
     - cron: "0 */6 * * *"
 
@@ -28,12 +29,13 @@ jobs:
         run: python scripts/group_playlist.py
       - name: Cross-sync from Garden working playlist
         run: python scripts/sync_garden.py
+      - name: Generate exact Indian Sony and Star playlist
+        run: python scripts/sony_star_india.py
       - name: Generate source report
         shell: bash
         run: |
           python3 - <<'PY'
           from pathlib import Path
-          import re
 
           def read_playlist(path):
               rows=[]
@@ -52,6 +54,7 @@ jobs:
 
           working=read_playlist('playlist_working.m3u')
           nonworking=read_playlist('playlist_nonworking.m3u')
+          sony_star=read_playlist('playlists/sony-star-india.m3u')
 
           source_url='https://iptv-org.github.io/iptv/index.m3u'
           out=[]
@@ -62,6 +65,7 @@ jobs:
           out.append('Total Channels: '+str(len(working)+len(nonworking)))
           out.append('Working Channels: '+str(len(working)))
           out.append('Non-Working Channels: '+str(len(nonworking)))
+          out.append('Indian Sony + Star Working: '+str(len(sony_star)))
           out.append('')
           out.append('WORKING CHANNELS')
           out.append('-----------------')
@@ -73,30 +77,40 @@ jobs:
           for n,_ in nonworking:
               out.append(n)
           out.append('')
+          out.append('INDIAN SONY + STAR WORKING')
+          out.append('--------------------------')
+          for n,_ in sony_star:
+              out.append(n)
+          out.append('')
           out.append('Note: This report is regenerated automatically with every playlist update.')
           Path('source.txt').write_text('\n'.join(out)+'\n',encoding='utf-8')
           print(f'Working: {len(working)}')
           print(f'Non-working: {len(nonworking)}')
+          print(f'Indian Sony + Star: {len(sony_star)}')
           PY
       - name: Validate playlists
         run: |
           test -s playlist_working.m3u
           test -s playlist_nonworking.m3u
+          test -s playlists/sony-star-india.m3u
           test -s source.txt
           grep -q '^#EXTM3U' playlist_working.m3u
           grep -q '^#EXTM3U' playlist_nonworking.m3u
+          grep -q '^#EXTM3U' playlists/sony-star-india.m3u
           echo "Working entries:"
           grep -c '^#EXTINF:' playlist_working.m3u || true
           echo "Non-working entries:"
           grep -c '^#EXTINF:' playlist_nonworking.m3u || true
+          echo "Indian Sony + Star entries:"
+          grep -c '^#EXTINF:' playlists/sony-star-india.m3u || true
       - name: Commit updated playlists and source report
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add playlist_working.m3u playlist_nonworking.m3u cross_sync.json source.txt
+          git add playlist_working.m3u playlist_nonworking.m3u playlists/sony-star-india.m3u cross_sync.json source.txt
           if git diff --cached --quiet; then
             echo "No playlist changes."
           else
-            git commit -m "Update IPTV playlists and source report"
+            git commit -m "Update IPTV playlists, Sony Star filter and source report"
             git push
           fi
