@@ -11,6 +11,7 @@ on:
       - 'scripts/add_garden_movies.py'
       - 'scripts/sony_star_india.py'
       - 'scripts/merge_worldwide_sony_star.py'
+      - 'scripts/garden_3502_source_compare.py'
   schedule:
     - cron: "0 */6 * * *"
 
@@ -37,6 +38,8 @@ jobs:
         run: python scripts/merge_worldwide_sony_star.py
       - name: Generate exact Indian Sony and Star playlist
         run: python scripts/sony_star_india.py
+      - name: Compare Garden and 3502 actual sources
+        run: python scripts/garden_3502_source_compare.py
       - name: Generate source report
         shell: bash
         run: |
@@ -84,23 +87,18 @@ jobs:
           test -s playlist_nonworking.m3u
           test -s playlists/sony-star-india.m3u
           test -s source.txt
+          test -s garden_3502_source_comparison.md
           grep -q '^#EXTM3U' playlist_working.m3u
           grep -q '^#EXTM3U' playlist_nonworking.m3u
           grep -q '^#EXTM3U' playlists/sony-star-india.m3u
-          echo "Working entries:"
-          grep -c '^#EXTINF:' playlist_working.m3u || true
-          echo "Non-working entries:"
-          grep -c '^#EXTINF:' playlist_nonworking.m3u || true
-          echo "Indian Sony + Star entries:"
-          grep -c '^#EXTINF:' playlists/sony-star-india.m3u || true
-      - name: Commit updated playlists and source report
+      - name: Commit updated playlists and reports
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add playlist_working.m3u playlist_nonworking.m3u playlists/sony-star-india.m3u cross_sync.json source.txt
+          git add playlist_working.m3u playlist_nonworking.m3u playlists/sony-star-india.m3u cross_sync.json source.txt garden_3502_source_comparison.md
           if git diff --cached --quiet; then
-            echo "No playlist changes."
+            echo "No playlist/report changes."
           else
-            git commit -m "Add missing worldwide Indian Sony Star streams"
+            git commit -m "Update playlists and Garden 3502 source comparison"
             git push
           fi
