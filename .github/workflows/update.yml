@@ -2,6 +2,12 @@ name: Update IPTV Playlists
 
 on:
   workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/update.yml'
+      - 'fetch_sources.py'
+      - 'scripts/group_playlist.py'
+      - 'scripts/sync_garden.py'
   schedule:
     - cron: "0 */6 * * *"
 
@@ -22,24 +28,75 @@ jobs:
         run: python scripts/group_playlist.py
       - name: Cross-sync from Garden working playlist
         run: python scripts/sync_garden.py
+      - name: Generate source report
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+
+          def read_playlist(path):
+              rows=[]
+              p=Path(path)
+              if not p.exists():
+                  return rows
+              lines=p.read_text(errors='ignore').splitlines()
+              name=''
+              for line in lines:
+                  if line.startswith('#EXTINF:'):
+                      name=line.split(',',1)[-1].strip() if ',' in line else ''
+                  elif name and line.strip() and not line.startswith('#'):
+                      rows.append((name,line.strip()))
+                      name=''
+              return rows
+
+          working=read_playlist('playlist_working.m3u')
+          nonworking=read_playlist('playlist_nonworking.m3u')
+
+          source_url='https://iptv-org.github.io/iptv/index.m3u'
+          out=[]
+          out.append('IPTV PLAYLIST SOURCE REPORT')
+          out.append('===========================')
+          out.append('')
+          out.append('Source: '+source_url)
+          out.append('Total Channels: '+str(len(working)+len(nonworking)))
+          out.append('Working Channels: '+str(len(working)))
+          out.append('Non-Working Channels: '+str(len(nonworking)))
+          out.append('')
+          out.append('WORKING CHANNELS')
+          out.append('-----------------')
+          for n,_ in working:
+              out.append(n)
+          out.append('')
+          out.append('NON-WORKING CHANNELS')
+          out.append('--------------------')
+          for n,_ in nonworking:
+              out.append(n)
+          out.append('')
+          out.append('Note: This report is regenerated automatically with every playlist update.')
+          Path('source.txt').write_text('\n'.join(out)+'\n',encoding='utf-8')
+          print(f'Working: {len(working)}')
+          print(f'Non-working: {len(nonworking)}')
+          PY
       - name: Validate playlists
         run: |
           test -s playlist_working.m3u
           test -s playlist_nonworking.m3u
+          test -s source.txt
           grep -q '^#EXTM3U' playlist_working.m3u
           grep -q '^#EXTM3U' playlist_nonworking.m3u
           echo "Working entries:"
           grep -c '^#EXTINF:' playlist_working.m3u || true
           echo "Non-working entries:"
           grep -c '^#EXTINF:' playlist_nonworking.m3u || true
-      - name: Commit updated playlists
+      - name: Commit updated playlists and source report
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add playlist_working.m3u playlist_nonworking.m3u cross_sync.json
+          git add playlist_working.m3u playlist_nonworking.m3u cross_sync.json source.txt
           if git diff --cached --quiet; then
             echo "No playlist changes."
           else
-            git commit -m "Update IPTV playlists and cross-sync Garden"
+            git commit -m "Update IPTV playlists and source report"
             git push
           fi
