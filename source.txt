@@ -3,8 +3,8 @@ IPTV PLAYLIST SOURCE REPORT
 
 Source: https://iptv-org.github.io/iptv/index.m3u
 Total Channels: 505
-Working Channels: 448
-Non-Working Channels: 57
+Working Channels: 445
+Non-Working Channels: 60
 Indian Sony + Star Working: 13
 
 WORKING CHANNELS
@@ -110,8 +110,6 @@ News India 24x7
 News Nation
 News Nation 2
 News Nation 3
-News18 Bihar Jharkhand
-News18 India
 News18 Madhya Pradesh/Chhattisgarh
 News18 Rajasthan
 News18 Uttar Pradesh Uttarakhand
@@ -150,6 +148,7 @@ Swadesh News
 Swadesh News 2
 Swaraj Express SMBC
 Swaraj Express SMBC 2
+Swaraj Express SMBC 3
 The Voice TV
 Times Now
 Times Now Navbharat
@@ -228,7 +227,6 @@ Shubh Cinema TV
 Shubh Cinema TV 2
 Sony Max
 Sony Max 2
-Sony Max 3
 Sony Max 2
 Sony Max 2 2
 Sony Wah
@@ -282,11 +280,9 @@ Anjan TV 3
 Colors MENA
 Dangal 2
 Dangal 2 2
-Dangal 2 3
 Dangal TV
 Dangal TV 2
 Dangal TV 3
-Dangal TV 4
 E 24
 Enterr 10 Rangeela
 Epic Bharat
@@ -408,7 +404,6 @@ Kaumudy TV
 Kaumudy TV 2
 LLBN TV South Asia
 Mercy TV
-Mercy TV 2
 Mh 1 Prime
 MH One Shraddha
 MH One Shraddha 2
@@ -452,6 +447,8 @@ Vedic 2
 VTU
 WeatherSpy
 JK 24x7 News
+News18 Bihar Jharkhand
+News18 India
 Public First
 VIP News
 All Time Movies
@@ -469,12 +466,12 @@ News 1 India
 Prime News
 Public First 2
 Raj Pariwar
-Swaraj Express SMBC
 Times Now Navbharat 2
 Times Now World
 B4U Movies
 Goldmines
 Romedy Now
+Sony Max
 Sony Max 2
 Sony Wah
 Star Gold 2
@@ -497,6 +494,8 @@ Zing!
 Zoom
 Star Sports 2 Hindi
 &TV
+Dangal 2
+Dangal TV
 Manoranjan TV
 Manoranjan TV 2
 Sony Entertainment Television
@@ -510,6 +509,7 @@ Channel Divya
 Fateh TV
 Jus Hindi
 Jus One
+Mercy TV
 Network 10
 Punjabi Zindabad TV
 Rongeen TV
