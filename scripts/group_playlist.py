@@ -4,27 +4,14 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
-CHANNELS_URL='https://iptv-org.github.io/api/channels.json'; FEEDS_URL='https://iptv-org.github.io/api/feeds.json'; STREAMS_URL='https://iptv-org.github.io/api/streams.json'
+CHANNELS_URL='https://iptv-org.github.io/api/channels.json'; FEEDS_URL='https://iptv-org.github.io/api/feeds.json'; STREAMS_URL='https://iptv-org.github.io/api/streams.json'; LOGOS_URL='https://iptv-org.github.io/api/logos.json'
 WORKING_OUTPUT='playlist_working.m3u'; NONWORKING_OUTPUT='playlist_nonworking.m3u'; WORKERS=24; TIMEOUT=8
 HINDI={'hin','hindi'}; ENGLISH={'eng','english'}; BHOJPURI={'bho','bhojpuri'}
 REGIONAL={'tam','tamil','tel','telugu','ben','bengali','mar','marathi','guj','gujarati','kan','kannada','mal','malayalam','pan','punjabi','ori','odia','oriya','asm','assamese','urd','urdu','kas','kashmiri','nep','nepali','kok','konkani','san','sanskrit','snd','sindhi','mai','maithili','doi','dogri','mni','manipuri'}
 BAD_WORDS={'evidya','pmevidya','swayamprabha','vandegujarat','devotional','devotion','bhakti','bhajan','spiritual','prayer','worship','god tv','religious','religion','aastha','aastha bhajan','angel','adinath','anand','aryan','awakening','divya darshan','divya darshan24','darshan24'}
 FOREIGN_COUNTRIES={'US':'USA - Hindi','GB':'UK - Hindi','AE':'Middle East - Hindi','QA':'Middle East - Hindi','SA':'Middle East - Hindi','BH':'Middle East - Hindi','KW':'Middle East - Hindi','OM':'Middle East - Hindi'}
 CATEGORIES=('News','Movies','Music','Sports','Entertainment','Lifestyle','Infotainment','Science','Kids','Business','Doordarshan','Non Jio')
-
-# JioTV Hindi category/name rules. Exact known channel names take priority over generic IPTV-org categories.
-JIO_NAMES={
-'News':{'aaj tak','abp news','india tv','ndtv india','ndtv 24x7','news18 india','news18 hindi','zee news','times now navbharat','republic bharat','tv9 bharatvarsh','news24','bharat express','good news today','firstpost','cnn-news18','cnn news18'},
-'Movies':{'star gold','star gold hd','star gold 2','star gold 2 hd','star gold romance','star gold thrills','star gold select','star gold select hd','sony max','sony max hd','sony max 2','sony wah','zee cinema','zee cinema hd','zee bollywood','zee action','zee classic','zee anmol cinema','&pictures','&pictures hd','&xplor hd','colors cineplex','colors cineplex hd','colors cineplex superhits','colors cineplex bollywood','star utsav movies','b4u movies'},
-'Music':{'mtv','9xm','9x music','9x jhakaas','zoom','music india','mastiii','b4u music','zing','mood mix','songsara','9x tashan','9x jalwa'},
-'Sports':{'star sports 1','star sports 1 hd','star sports 2','star sports 2 hd','star sports 3','star sports 3 hd','star sports 1 hindi','star sports hindi 1','star sports khel','star sports khel hd','sony sports ten 1','sony sports ten 2','sony sports ten 3','sony sports ten 4','sony sports ten 5','sony sports ten 1 hd','sony sports ten 2 hd','sony sports ten 3 hd','sony sports ten 5 hd','sports18 1','sports18 1 hd','sports18 khel','wion sports'},
-'Kids':{'nick','nick hd+','sonic','sonic hd','hungama','hungama hd','disney channel','disney junior','pogo','discovery kids','cartoon network','super hungama','marvel hq'},
-'Infotainment':{'discovery','discovery hd world','history tv18','history tv18 hd','nat geo','nat geo hd','national geographic','national geographic hd','sony bbc earth','sony bbc earth hd','animal planet','animal planet hd','tlc','tata play fitness','epic','epic hd','travel xp','travel xp hd','food food','good times'},
-'Lifestyle':{'food food','food food hd','travelxp','travel xp','tlc','fashion tv','fashion tv hd','living foodz','living foodz hd'},
-'Business':{'cnbc tv18','cnbc tv18 prime','cnbc awaaz','zee business','et now','et now swadesh','bloomberg tv','business today'},
-'Doordarshan':{'dd national','dd news','dd india','dd sports','dd kisan','dd bharati','dd urdu','doordarshan'},
-'Entertainment':{'star plus','star plus hd','sony entertainment television','sony set hd','sony sab','sony sab hd','colors','colors hd','zee tv','zee tv hd','star bharat','star bharat hd','&tv','&tv hd','colors rishtey','sony pal','zee anmol','star utsav','dangal tv','dangal 2','big magic','shemaroo umang','shemaroo tv'}
-}
+JIO_NAMES={'News':{'aaj tak','abp news','india tv','ndtv india','ndtv 24x7','news18 india','news18 hindi','zee news','times now navbharat','republic bharat','tv9 bharatvarsh','news24','bharat express','good news today','firstpost','cnn-news18','cnn news18'},'Movies':{'star gold','star gold hd','star gold 2','star gold 2 hd','star gold romance','star gold thrills','star gold select','star gold select hd','sony max','sony max hd','sony max 2','sony wah','zee cinema','zee cinema hd','zee bollywood','zee action','zee classic','zee anmol cinema','&pictures','&pictures hd','&xplor hd','colors cineplex','colors cineplex hd','colors cineplex superhits','colors cineplex bollywood','star utsav movies','b4u movies'},'Music':{'mtv','9xm','9x music','9x jhakaas','zoom','music india','mastiii','b4u music','zing','mood mix','songsara','9x tashan','9x jalwa'},'Sports':{'star sports 1','star sports 1 hd','star sports 2','star sports 2 hd','star sports 3','star sports 3 hd','star sports 1 hindi','star sports hindi 1','star sports khel','star sports khel hd','sony sports ten 1','sony sports ten 2','sony sports ten 3','sony sports ten 4','sony sports ten 5','sony sports ten 1 hd','sony sports ten 2 hd','sony sports ten 3 hd','sony sports ten 5 hd','sports18 1','sports18 1 hd','sports18 khel','wion sports'},'Kids':{'nick','nick hd+','sonic','sonic hd','hungama','hungama hd','disney channel','disney junior','pogo','discovery kids','cartoon network','super hungama','marvel hq'},'Infotainment':{'discovery','discovery hd world','history tv18','history tv18 hd','nat geo','nat geo hd','national geographic','national geographic hd','sony bbc earth','sony bbc earth hd','animal planet','animal planet hd','tlc','tata play fitness','epic','epic hd','travel xp','travel xp hd','food food','good times'},'Lifestyle':{'food food','food food hd','travelxp','travel xp','tlc','fashion tv','fashion tv hd','living foodz','living foodz hd'},'Business':{'cnbc tv18','cnbc tv18 prime','cnbc awaaz','zee business','et now','et now swadesh','bloomberg tv','business today'},'Doordarshan':{'dd national','dd news','dd india','dd sports','dd kisan','dd bharati','dd urdu','doordarshan'},'Entertainment':{'star plus','star plus hd','sony entertainment television','sony set hd','sony sab','sony sab hd','colors','colors hd','zee tv','zee tv hd','star bharat','star bharat hd','&tv','&tv hd','colors rishtey','sony pal','zee anmol','star utsav','dangal tv','dangal 2','big magic','shemaroo umang','shemaroo tv'}}
 KEYWORDS={'News':{'news','breaking','bulletin','politics','headlines'},'Movies':{'movie','movies','cinema','film','films'},'Music':{'music','songs','song','mtv','radio music'},'Sports':{'sport','sports','cricket','football','soccer','tennis','golf','racing','wrestling'},'Lifestyle':{'lifestyle','food','travel','fashion','home','cooking','cookery'},'Science':{'science','technology','tech','space','nature'},'Kids':{'kids','children','child','cartoon','animation','junior'},'Infotainment':{'documentary','education','history','knowledge','discovery','learning'},'Entertainment':{'entertainment','comedy','drama','reality','serial','show'}}
 
 def clean(v): return re.sub(r'\s+',' ',str(v or '').strip())
@@ -44,10 +31,8 @@ def exact_jio_category(name,channel):
 def get_category(channel):
     name=clean(channel.get('name','')); exact=exact_jio_category(name,channel)
     if exact:return exact
-    # Preserve only JioTV-style category when IPTV-org category is directly usable.
     for value in channel.get('categories',[]):
-        v=norm(value)
-        mapping={'news':'News','movies':'Movies','movie':'Movies','music':'Music','sports':'Sports','entertainment':'Entertainment','lifestyle':'Lifestyle','infotainment':'Infotainment','science':'Science','kids':'Kids','children':'Kids','animation':'Kids','documentary':'Infotainment','education':'Infotainment','business':'Business','business news':'Business','finance':'Business','doordarshan':'Doordarshan','dd':'Doordarshan'}
+        v=norm(value); mapping={'news':'News','movies':'Movies','movie':'Movies','music':'Music','sports':'Sports','entertainment':'Entertainment','lifestyle':'Lifestyle','infotainment':'Infotainment','science':'Science','kids':'Kids','children':'Kids','animation':'Kids','documentary':'Infotainment','education':'Infotainment','business':'Business','business news':'Business','finance':'Business','doordarshan':'Doordarshan','dd':'Doordarshan'}
         if v in mapping:return mapping[v]
     text=norm([channel.get('name',''),channel.get('network',''),channel.get('alt_names',[])])
     if any(k in text for k in JIO_NAMES['Doordarshan']):return 'Doordarshan'
@@ -111,30 +96,40 @@ def check_stream(i):
             t=b.decode('utf-8',errors='ignore'); hls='.m3u8' in i['url'].lower() or '#EXTM3U' in t or 'mpegurl' in r.headers.get('Content-Type','').lower()
             return '#EXTM3U' in t if hls else True
     except Exception:return False
+def build_logo_map(logos):
+    best={}
+    for x in logos:
+        cid=x.get('channel'); url=clean(x.get('url',''))
+        if not cid or not url or not x.get('in_use',False):continue
+        score=(0 if 'white' in [str(t).lower() for t in x.get('tags',[])] else 10)+min(int(x.get('width') or 0),2000)/2000
+        if cid not in best or score>best[cid][0]:best[cid]=(score,url)
+    return {k:v[1] for k,v in best.items()}
 def sort_items(items):
     order={n:i for i,n in enumerate(CATEGORIES)};return sorted(items,key=lambda x:(order[x['category']],x['name'].lower(),x['url']))
-def write_playlist(items,path):
+def write_playlist(items,path,logo_map):
     counters={}
     with open(path,'w',encoding='utf-8') as p:
         p.write('#EXTM3U\n')
         for i in sort_items(items):
             key=(i['category'],i['name'].lower());counters[key]=counters.get(key,0)+1;n=counters[key];dn=i['name'] if n==1 else f"{i['name']} {n}"
-            ch=i['channel'];p.write(f'#EXTINF:-1 tvg-id="{clean(ch.get("id",""))}" tvg-name="{dn}" tvg-logo="{clean(ch.get("logo",""))}" group-title="{i["category"]}",{dn}\n')
+            ch=i['channel']; logo=logo_map.get(clean(ch.get('id','')),'')
+            p.write(f'#EXTINF:-1 tvg-id="{clean(ch.get("id",""))}" tvg-name="{dn}" tvg-logo="{logo}" group-title="{i["category"]}",{dn}\n')
             if i['stream'].get('referrer'):p.write(f"#EXTVLCOPT:http-referrer={i['stream']['referrer']}\n")
             if i['stream'].get('user_agent'):p.write(f"#EXTVLCOPT:http-user-agent={i['stream']['user_agent']}\n")
             p.write(i['url']+'\n')
 def main():
-    try: ch=fetch_json(CHANNELS_URL);fe=fetch_json(FEEDS_URL);st=fetch_json(STREAMS_URL)
+    try: ch=fetch_json(CHANNELS_URL);fe=fetch_json(FEEDS_URL);st=fetch_json(STREAMS_URL);lg=fetch_json(LOGOS_URL)
     except Exception as e:print('ERROR:',e);sys.exit(1)
+    logo_map=build_logo_map(lg);print(f'Usable channel logos: {len(logo_map)}')
     items=list(build_candidates(ch,fe,st).values());print(f'Selected unique streams: {len(items)}')
     working=[];non=[]
     with ThreadPoolExecutor(max_workers=WORKERS) as ex:
         jobs={ex.submit(check_stream,i):i for i in items}
         for f in as_completed(jobs):(working if f.result() else non).append(jobs[f])
-    write_playlist(working,WORKING_OUTPUT);write_playlist(non,NONWORKING_OUTPUT)
+    write_playlist(working,WORKING_OUTPUT,logo_map);write_playlist(non,NONWORKING_OUTPUT,logo_map)
     for title,arr in [('WORKING',working),('NON-WORKING',non)]:
-        print(title,len(arr));
-        for c in CATEGORIES: 
+        print(title,len(arr))
+        for c in CATEGORIES:
             n=sum(1 for x in arr if x['category']==c)
             if n:print(' ',c,n)
 if __name__=='__main__':main()
