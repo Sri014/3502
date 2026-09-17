@@ -1,14 +1,10 @@
 {
   "source": "https://raw.githubusercontent.com/Sri014/Garden/main/working.m3u",
-  "repaired": 8,
+  "repaired": 7,
   "channels": [
     {
       "channel": "JK 24x7 News",
       "url": "https://live.gulistannews.in/hls/jk.m3u8"
-    },
-    {
-      "channel": "News18 Rajasthan",
-      "url": "https://n18syndication.akamaized.net/bpk-tv/News18_Rajasthan_NW18_MOB/output01/master.m3u8"
     },
     {
       "channel": "Public First",
@@ -31,8 +27,8 @@
       "url": "http://66.102.126.10:8000/play/a00a/index.m3u8"
     },
     {
-      "channel": "Enterr 10 Rangeela",
-      "url": "http://103.185.24.134:3001/SUN-BANGLA-HD/index.m3u8"
+      "channel": "CNBC TV18 Prime HD",
+      "url": "https://n18syndication.akamaized.net/bpk-tv/CNBC_Tv18_Prime_HD_NW18_MOB/output01/index.m3u8"
     }
   ]
 }

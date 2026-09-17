@@ -2,10 +2,10 @@ IPTV PLAYLIST SOURCE REPORT
 ===========================
 
 Source: https://iptv-org.github.io/iptv/index.m3u
-Total Channels: 508
-Working Channels: 442
-Non-Working Channels: 66
-Indian Sony + Star Working: 13
+Total Channels: 516
+Working Channels: 453
+Non-Working Channels: 63
+Indian Sony + Star Working: 18
 
 WORKING CHANNELS
 -----------------
@@ -67,6 +67,7 @@ India TV 2
 India TV Speed News
 India TV Speed News 2
 India Voice
+India Voice 2
 INH 24x7
 INH 24x7 2
 Janta TV
@@ -111,6 +112,7 @@ News Nation 3
 News18 Bihar Jharkhand
 News18 India
 News18 Madhya Pradesh/Chhattisgarh
+News18 Rajasthan
 News18 Uttar Pradesh Uttarakhand
 News9Live
 News9Live 2
@@ -183,6 +185,7 @@ Zee News 4
 Zee Rajasthan
 Zee Uttar Pradesh/Uttarakhand
 Zee Uttar Pradesh/Uttarakhand 2
+&xplor HD
 All Time Movies
 B4U Bhojpuri
 B4U Bhojpuri 2
@@ -196,6 +199,7 @@ Bhojpuri Cinema
 Bhojpuri Cinema 2
 Bhojpuri Cinema 3
 Colors Cineplex Bollywood
+Colors Cineplex Bollywood 2
 Epic Bhojpuri
 Epic Bhojpuri 2
 Goldmines
@@ -222,6 +226,7 @@ Shubh Cinema TV
 Shubh Cinema TV 2
 Sony Max
 Sony Max 2
+Sony Max 3
 Sony Max 2
 Sony Max 2 2
 Sony Wah
@@ -281,6 +286,7 @@ Dangal TV 2
 Dangal TV 3
 Dangal TV 4
 E 24
+Enterr 10 Rangeela
 Epic Bharat
 Epic Bharat 2
 Epic Bharat 3
@@ -332,7 +338,6 @@ The Jungle Book
 WOW Kidz
 CNBC Awaaz
 CNBC TV18
-CNBC TV18 Prime HD
 NDTV Profit
 NDTV Profit 2
 Zee Business
@@ -400,6 +405,7 @@ Kaumudy TV
 Kaumudy TV 2
 LLBN TV South Asia
 Mercy TV
+Mercy TV 2
 Mh 1 Prime
 MH One Shraddha
 MH One Shraddha 2
@@ -443,13 +449,18 @@ Vedic 2
 VTU
 WeatherSpy
 JK 24x7 News
-News18 Rajasthan
 Public First
 TV30 India
 VIP News
 Kabaddi 24x7
 Colors
-Enterr 10 Rangeela
+CNBC TV18 Prime HD
+Sony Sports Ten 1 HD
+Sony Sports Ten 4
+Sony Sports Ten 4 Telugu
+Sony Sports Ten 5
+Sony Sports Ten 5 HD
+Star Sports 2 HD
 Cricket Gold
 
 NON-WORKING CHANNELS
@@ -459,7 +470,6 @@ ABP News
 APN
 Bansal News
 Bharat Samachar
-India Voice
 NDTV India
 News 1 India
 Prime News
@@ -467,14 +477,11 @@ Public First 2
 Raj Pariwar
 Times Now Navbharat 2
 Times Now World
-&xplor HD
 B4U Movies
-Colors Cineplex Bollywood
 Goldmines
 Goldmines Bollywood
 Goldmines Movies 2
 Romedy Now
-Sony Max
 Sony Max 2
 Sony Wah
 Star Gold 2
@@ -510,7 +517,6 @@ Channel Divya
 Fateh TV
 Jus Hindi
 Jus One
-Mercy TV
 Network 10
 Punjabi Zindabad TV
 Rongeen TV
@@ -518,6 +524,8 @@ Rongeen TV 2
 Sansad TV 2
 Sarv Dharam Sangam
 Zee Cine Classic
+Star Sports 1 Hindi
+Star Sports Khel
 Utsav Bharat [UK]
 Utsav Plus [UK]
 
@@ -536,5 +544,10 @@ Sony Entertainment Television
 Sony Pal
 Sony SAB
 StarPlus
+Sony Sports Ten 1 HD
+Sony Sports Ten 4
+Sony Sports Ten 5
+Sony Sports Ten 5 HD
+Star Sports 2 HD
 
 Note: This report is regenerated automatically with every playlist update.
