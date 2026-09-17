@@ -3,8 +3,9 @@ IPTV PLAYLIST SOURCE REPORT
 
 Source: https://iptv-org.github.io/iptv/index.m3u
 Total Channels: 505
-Working Channels: 447
-Non-Working Channels: 58
+Working Channels: 448
+Non-Working Channels: 57
+Indian Sony + Star Working: 13
 
 WORKING CHANNELS
 -----------------
@@ -30,7 +31,6 @@ Awaaz India TV
 Bansal News
 Bansal News 2
 Bansal News 3
-Bansal News 4
 Bharat Samachar
 Bharat Samachar 2
 Bharat Samachar 3
@@ -150,7 +150,6 @@ Swadesh News
 Swadesh News 2
 Swaraj Express SMBC
 Swaraj Express SMBC 2
-Swaraj Express SMBC 3
 The Voice TV
 Times Now
 Times Now Navbharat
@@ -187,6 +186,7 @@ Zee News 4
 Zee Rajasthan
 Zee Uttar Pradesh/Uttarakhand
 Zee Uttar Pradesh/Uttarakhand 2
+&xplor HD
 B4U Bhojpuri
 B4U Bhojpuri 2
 B4U Kadak
@@ -199,6 +199,7 @@ Bhojpuri Cinema
 Bhojpuri Cinema 2
 Bhojpuri Cinema 3
 Colors Cineplex Bollywood
+Colors Cineplex Bollywood 2
 Epic Bhojpuri
 Epic Bhojpuri 2
 Goldmines
@@ -227,6 +228,7 @@ Shubh Cinema TV
 Shubh Cinema TV 2
 Sony Max
 Sony Max 2
+Sony Max 3
 Sony Max 2
 Sony Max 2 2
 Sony Wah
@@ -460,20 +462,19 @@ NON-WORKING CHANNELS
 --------------------
 Aaj Tak
 ABP News
+Bansal News
 Bharat Samachar
 NDTV India
 News 1 India
 Prime News
 Public First 2
 Raj Pariwar
+Swaraj Express SMBC
 Times Now Navbharat 2
 Times Now World
-&xplor HD
 B4U Movies
-Colors Cineplex Bollywood
 Goldmines
 Romedy Now
-Sony Max
 Sony Max 2
 Sony Wah
 Star Gold 2
@@ -516,5 +517,21 @@ Rongeen TV 2
 Sansad TV 2
 Sarv Dharam Sangam
 Zee Cine Classic
+
+INDIAN SONY + STAR WORKING
+--------------------------
+Sony Max
+Sony Max 2
+Sony Max 2
+Sony Wah
+Star Gold 2
+Sony Sports Ten 1
+Sony Sports Ten 2
+Star Sports 2 Hindi
+Star Sports Select 2
+Sony Entertainment Television
+Sony Pal
+Sony SAB
+StarPlus
 
 Note: This report is regenerated automatically with every playlist update.
