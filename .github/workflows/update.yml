@@ -9,6 +9,7 @@ on:
       - 'scripts/group_playlist.py'
       - 'scripts/sync_garden.py'
       - 'scripts/sony_star_india.py'
+      - 'scripts/merge_worldwide_sony_star.py'
   schedule:
     - cron: "0 */6 * * *"
 
@@ -29,6 +30,8 @@ jobs:
         run: python scripts/group_playlist.py
       - name: Cross-sync from Garden working playlist
         run: python scripts/sync_garden.py
+      - name: Add missing worldwide Indian Sony and Star streams
+        run: python scripts/merge_worldwide_sony_star.py
       - name: Generate exact Indian Sony and Star playlist
         run: python scripts/sony_star_india.py
       - name: Generate source report
@@ -40,49 +43,33 @@ jobs:
           def read_playlist(path):
               rows=[]
               p=Path(path)
-              if not p.exists():
-                  return rows
+              if not p.exists(): return rows
               lines=p.read_text(errors='ignore').splitlines()
               name=''
               for line in lines:
                   if line.startswith('#EXTINF:'):
                       name=line.split(',',1)[-1].strip() if ',' in line else ''
                   elif name and line.strip() and not line.startswith('#'):
-                      rows.append((name,line.strip()))
-                      name=''
+                      rows.append((name,line.strip())); name=''
               return rows
 
           working=read_playlist('playlist_working.m3u')
           nonworking=read_playlist('playlist_nonworking.m3u')
           sony_star=read_playlist('playlists/sony-star-india.m3u')
-
           source_url='https://iptv-org.github.io/iptv/index.m3u'
-          out=[]
-          out.append('IPTV PLAYLIST SOURCE REPORT')
-          out.append('===========================')
-          out.append('')
-          out.append('Source: '+source_url)
-          out.append('Total Channels: '+str(len(working)+len(nonworking)))
-          out.append('Working Channels: '+str(len(working)))
-          out.append('Non-Working Channels: '+str(len(nonworking)))
-          out.append('Indian Sony + Star Working: '+str(len(sony_star)))
-          out.append('')
-          out.append('WORKING CHANNELS')
-          out.append('-----------------')
-          for n,_ in working:
-              out.append(n)
-          out.append('')
-          out.append('NON-WORKING CHANNELS')
-          out.append('--------------------')
-          for n,_ in nonworking:
-              out.append(n)
-          out.append('')
-          out.append('INDIAN SONY + STAR WORKING')
-          out.append('--------------------------')
-          for n,_ in sony_star:
-              out.append(n)
-          out.append('')
-          out.append('Note: This report is regenerated automatically with every playlist update.')
+          out=['IPTV PLAYLIST SOURCE REPORT','===========================','',
+               'Source: '+source_url,
+               'Total Channels: '+str(len(working)+len(nonworking)),
+               'Working Channels: '+str(len(working)),
+               'Non-Working Channels: '+str(len(nonworking)),
+               'Indian Sony + Star Working: '+str(len(sony_star)),'',
+               'WORKING CHANNELS','-----------------']
+          out += [n for n,_ in working]
+          out += ['', 'NON-WORKING CHANNELS','--------------------']
+          out += [n for n,_ in nonworking]
+          out += ['', 'INDIAN SONY + STAR WORKING','--------------------------']
+          out += [n for n,_ in sony_star]
+          out += ['', 'Note: This report is regenerated automatically with every playlist update.']
           Path('source.txt').write_text('\n'.join(out)+'\n',encoding='utf-8')
           print(f'Working: {len(working)}')
           print(f'Non-working: {len(nonworking)}')
@@ -111,6 +98,6 @@ jobs:
           if git diff --cached --quiet; then
             echo "No playlist changes."
           else
-            git commit -m "Update IPTV playlists, Sony Star filter and source report"
+            git commit -m "Add missing worldwide Indian Sony Star streams"
             git push
           fi
