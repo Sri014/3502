@@ -3,8 +3,8 @@ IPTV PLAYLIST SOURCE REPORT
 
 Source: https://iptv-org.github.io/iptv/index.m3u
 Total Channels: 508
-Working Channels: 444
-Non-Working Channels: 64
+Working Channels: 442
+Non-Working Channels: 66
 Indian Sony + Star Working: 13
 
 WORKING CHANNELS
@@ -23,7 +23,6 @@ AmarUjala
 ANB News
 ANB News 2
 APN
-APN 2
 Argus News
 Argus News 2
 Asian News
@@ -68,7 +67,6 @@ India TV 2
 India TV Speed News
 India TV Speed News 2
 India Voice
-India Voice 2
 INH 24x7
 INH 24x7 2
 Janta TV
@@ -113,7 +111,6 @@ News Nation 3
 News18 Bihar Jharkhand
 News18 India
 News18 Madhya Pradesh/Chhattisgarh
-News18 Rajasthan
 News18 Uttar Pradesh Uttarakhand
 News9Live
 News9Live 2
@@ -150,6 +147,7 @@ Swadesh News
 Swadesh News 2
 Swaraj Express SMBC
 Swaraj Express SMBC 2
+Swaraj Express SMBC 3
 The Voice TV
 Times Now
 Times Now Navbharat
@@ -245,6 +243,7 @@ B4U Music 2
 Balle Balle
 Balle Balle 2
 Balle Balle 3
+Deewana HD
 Dhamaal
 Epic Music
 Epic Music 2
@@ -282,7 +281,6 @@ Dangal TV 2
 Dangal TV 3
 Dangal TV 4
 E 24
-Enterr 10 Rangeela
 Epic Bharat
 Epic Bharat 2
 Epic Bharat 3
@@ -332,6 +330,7 @@ Nick Jr.
 Nick Jr. 2
 The Jungle Book
 WOW Kidz
+CNBC Awaaz
 CNBC TV18
 CNBC TV18 Prime HD
 NDTV Profit
@@ -401,7 +400,6 @@ Kaumudy TV
 Kaumudy TV 2
 LLBN TV South Asia
 Mercy TV
-Mercy TV 2
 Mh 1 Prime
 MH One Shraddha
 MH One Shraddha 2
@@ -445,27 +443,28 @@ Vedic 2
 VTU
 WeatherSpy
 JK 24x7 News
+News18 Rajasthan
 Public First
 TV30 India
 VIP News
-Deewana HD
 Kabaddi 24x7
 Colors
-CNBC Awaaz
+Enterr 10 Rangeela
 Cricket Gold
 
 NON-WORKING CHANNELS
 --------------------
 Aaj Tak
 ABP News
+APN
 Bansal News
 Bharat Samachar
+India Voice
 NDTV India
 News 1 India
 Prime News
 Public First 2
 Raj Pariwar
-Swaraj Express SMBC
 Times Now Navbharat 2
 Times Now World
 &xplor HD
@@ -511,6 +510,7 @@ Channel Divya
 Fateh TV
 Jus Hindi
 Jus One
+Mercy TV
 Network 10
 Punjabi Zindabad TV
 Rongeen TV

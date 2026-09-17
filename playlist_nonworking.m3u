@@ -3,10 +3,14 @@
 http://103.213.31.109:90/AajtakHD/playlist.m3u8
 #EXTINF:-1 tvg-id="ABPNews.in" tvg-name="ABP News" tvg-logo="https://ltsk-cdn.s3.eu-west-1.amazonaws.com/jumpstart/Temp_Live/cdn/HLS/Channel/transparentImages/ABP%20NWS.png" group-title="News",ABP News
 https://mumt04.tangotv.in/m18aqlK4ABPNEWS/index.m3u8
+#EXTINF:-1 tvg-id="APN.in" tvg-name="APN" tvg-logo="https://ltsk-cdn.s3.eu-west-1.amazonaws.com/jumpstart/Temp_Live/cdn/HLS/Channel/transparentImages/APN.png" group-title="News",APN
+https://mumt01.tangotv.in/O5aw8Zn3APN/index.m3u8
 #EXTINF:-1 tvg-id="BansalNews.in" tvg-name="Bansal News" tvg-logo="https://ltsk-cdn.s3.eu-west-1.amazonaws.com/jumpstart/Temp_Live/cdn/HLS/Channel/transparentImages/Bansal-News-transparent.png" group-title="News",Bansal News
 https://8yzmq2gbdvax-hls-live.wmncdn.net/bansalnewstv1/live1.stream/playlist.m3u8
 #EXTINF:-1 tvg-id="BharatSamachar.in" tvg-name="Bharat Samachar" tvg-logo="https://ltsk-cdn.s3.eu-west-1.amazonaws.com/jumpstart/Temp_Live/cdn/HLS/Channel/transparentImages/9ff26e4cd19e2f6c3ad7de6b58c0326d.jpg" group-title="News",Bharat Samachar
 https://tvsen3.aynaott.com/m94BZDYb/index.m3u8
+#EXTINF:-1 tvg-id="IndiaVoice.in" tvg-name="India Voice" tvg-logo="https://jiotvimages.cdn.jio.com/dare_images/images/India_Voice.png" group-title="News",India Voice
+https://mumt04.tangotv.in/m18aqlK4INDIAVOICE/index.m3u8
 #EXTINF:-1 tvg-id="NDTVIndia.in" tvg-name="NDTV India" tvg-logo="https://dtil.tmsimg.com/assets/s157588_ld_h15_aa.png?lock=720x540" group-title="News",NDTV India
 http://103.213.31.109:90/StarUtsavMovies/playlist.m3u8
 #EXTINF:-1 tvg-id="News1India.in" tvg-name="News 1 India" tvg-logo="https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/LIVETV_LIVETVCHANNEL_NEWS_1_INDIA/images/LOGO_HD/image.png" group-title="News",News 1 India
@@ -19,8 +23,6 @@ https://mumt02.tangotv.in/PRIMENEWS/index.m3u8
 https://mumt06.tangotv.in/qYyB8fXVPUBLICFIRST/index.m3u8
 #EXTINF:-1 tvg-id="RajPariwar.in" tvg-name="Raj Pariwar" tvg-logo="https://ltsk-cdn.s3.eu-west-1.amazonaws.com/jumpstart/Temp_Live/cdn/HLS/Channel/transparentImages/raj_pariwar_alpha_2000_X_1125_Transpharent.png" group-title="News",Raj Pariwar
 http://103.72.101.252:8080/live/533.m3u8
-#EXTINF:-1 tvg-id="SwarajExpressSMBC.in" tvg-name="Swaraj Express SMBC" tvg-logo="https://ltsk-cdn.s3.eu-west-1.amazonaws.com/jumpstart/Temp_Live/cdn/HLS/Channel/transparentImages/Swaraj%20Express%20SMBC.png" group-title="News",Swaraj Express SMBC
-https://mumt04.tangotv.in/m18aqlK4SWARAJEXPRESS/index.m3u8
 #EXTINF:-1 tvg-id="TimesNow.in" tvg-name="Times Now" tvg-logo="https://ltsk-cdn.s3.eu-west-1.amazonaws.com/jumpstart/Temp_Live/cdn/HLS/Channel/transparentImages/TIMES%20NOW.png" group-title="News",Times Now
 
 #EXTINF:-1 tvg-id="TimesNowNavbharat.in" tvg-name="Times Now Navbharat" tvg-logo="https://ltsk-cdn.s3.eu-west-1.amazonaws.com/jumpstart/Temp_Live/cdn/HLS/Channel/transparentImages/NAV-BHARAT-HD-Transpatrnt.png" group-title="News",Times Now Navbharat
@@ -143,6 +145,8 @@ http://180.188.254.253/live/FATEHTVHD.m3u8
 http://103.154.3.101:5001/live/960.m3u8
 #EXTINF:-1 tvg-id="JusOne.us" tvg-name="Jus One" tvg-logo="https://i.imgur.com/8NutGr2.png" group-title="Non Jio",Jus One
 http://103.154.3.101:5001/live/961.m3u8
+#EXTINF:-1 tvg-id="MercyTV.in" tvg-name="Mercy TV" tvg-logo="https://i.imgur.com/klNH4tV.png" group-title="Non Jio",Mercy TV
+https://5dd3981940faa.streamlock.net/mercytv/mercytv/playlist.m3u8
 #EXTINF:-1 tvg-id="Network10.in" tvg-name="Network 10" tvg-logo="https://ltsk-cdn.s3.eu-west-1.amazonaws.com/jumpstart/Temp_Live/cdn/HLS/Channel/transparentImages/Network%2010.png" group-title="Non Jio",Network 10
 https://tvsen6.aynaott.com/3Cb2WLFz/index.m3u8
 #EXTINF:-1 tvg-id="PunjabiZindabadTV.in" tvg-name="Punjabi Zindabad TV" tvg-logo="https://i.imgur.com/H46oTS2.png" group-title="Non Jio",Punjabi Zindabad TV
