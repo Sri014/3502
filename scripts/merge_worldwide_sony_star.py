@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
 import re
-import sys
-from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
 WORLDWIDE_URL = 'https://iptv-org.github.io/iptv/streams/in.m3u'
@@ -9,24 +7,11 @@ WORKING = 'playlist_working.m3u'
 NONWORKING = 'playlist_nonworking.m3u'
 TIMEOUT = 8
 
-CATEGORY_ORDER = {
-    'News': 0, 'Movies': 1, 'Music': 2, 'Sports': 3,
-    'Entertainment': 4, 'Lifestyle': 5, 'Infotainment': 6,
-    'Science': 7, 'Kids': 8, 'Business': 9, 'Doordarshan': 10,
-    'Non Jio': 11
-}
-
 PATTERNS = [
-    r'\bSony Entertainment Television\b', r'\bSony SAB\b', r'\bSony Pal\b',
-    r'\bSony Max(?: 2)?\b', r'\bSony Wah\b', r'\bSony Pix\b',
-    r'\bSony Sports Ten [1-5]\b', r'\bSony Marathi\b', r'\bSony Aath\b',
-    r'\bSony YAY!?\b', r'\bSony BBC Earth\b',
-    r'\bStar ?Plus\b', r'\bStar Bharat\b', r'\bStar Jalsha\b',
-    r'\bStar Pravah\b', r'\bStar Vijay\b', r'\bStar Maa\b',
-    r'\bStar Suvarna\b', r'\bStar Utsav(?: Movies)?\b',
-    r'\bStar Gold(?: 2| Romance| Thrills| Select)?\b',
+    r'\bSony Sports Ten [1-5]\b',
     r'\bStar Sports(?: [1-3])?(?: Hindi)?\b',
-    r'\bStar Sports Select [1-2]\b', r'\bStar Sports Khel\b'
+    r'\bStar Sports Select [1-2]\b',
+    r'\bStar Sports Khel\b'
 ]
 RX = re.compile('(?:' + '|'.join(PATTERNS) + ')', re.I)
 
@@ -62,6 +47,8 @@ def category(name):
         return 'Sports'
     if any(x in n for x in ('sony max', 'sony wah', 'sony pix', 'star gold', 'star utsav movies')):
         return 'Movies'
+    if any(x in n for x in ('e24 music',)):
+        return 'Music'
     return 'Entertainment'
 
 
@@ -105,8 +92,9 @@ def check(url):
             if not b:
                 return False
             t = b.decode('utf-8', errors='ignore')
-            hls = '.m3u8' in url.lower() or '#EXTM3U' in t or 'mpegurl' in r.headers.get('Content-Type', '').lower()
-            return '#EXTM3U' in t if hls else True
+            if '.m3u8' in url.lower() or '#EXTM3U' in t or 'mpegurl' in r.headers.get('Content-Type', '').lower():
+                return '#EXTM3U' in t
+            return True
     except Exception:
         return False
 
@@ -152,7 +140,6 @@ def main():
             ext = ext.replace(',', ' group-title="' + group + '",', 1)
         candidates.append({'extinf': ext, 'extra': e['extra'], 'url': url, 'name': name, 'category': group})
 
-    # Explicit requested worldwide/UK entries. Only add if the exact URL is not already present.
     for m in MANUAL:
         url = clean(m['url'])
         if not url or url in known or url in seen:
@@ -160,31 +147,16 @@ def main():
         seen.add(url)
         candidates.append({
             'extinf': f'#EXTINF:-1 tvg-name="{m["name"]}" tvg-logo="{m["logo"]}" group-title="{m["category"]}",{m["name"]}',
-            'extra': [],
-            'url': url,
-            'name': m['name'],
-            'category': m['category']
+            'extra': [], 'url': url, 'name': m['name'], 'category': m['category']
         })
 
-    if not candidates:
-        print('WORLDWIDE SONY/STAR + MANUAL: no new stream URLs')
-        return
-
-    working = []
-    nonworking = []
+    working, nonworking = [], []
     for e in candidates:
         (working if check(e['url']) else nonworking).append(e)
 
     append_entries(WORKING, working)
     append_entries(NONWORKING, nonworking)
-    print('WORLDWIDE SONY/STAR + MANUAL NEW:', len(candidates))
-    print('  WORKING:', len(working))
-    print('  NON-WORKING:', len(nonworking))
-    for group in ('Movies', 'Sports', 'Entertainment'):
-        print(' ', group, sum(1 for x in candidates if x['category'] == group))
-    for e in candidates:
-        if e['name'] in {'Utsav Bharat [UK]', 'Utsav Plus [UK]', 'Cricket Gold'}:
-            print(' ', e['name'], '=>', 'WORKING' if e in working else 'NON-WORKING')
+    print('NEW:', len(candidates), 'WORKING:', len(working), 'NONWORKING:', len(nonworking))
 
 
 if __name__ == '__main__':
