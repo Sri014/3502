@@ -30,10 +30,10 @@ Awaaz India TV
 Bansal News
 Bansal News 2
 Bansal News 3
+Bansal News 4
 Bharat Samachar
 Bharat Samachar 2
 Bharat Samachar 3
-Bharat Samachar 4
 Bharat24
 Bharat24 2
 BT TV
@@ -95,7 +95,6 @@ NDTV Rajasthan
 NE News
 News 1 India
 News 1 India 2
-News 1 India 3
 News 11
 News 11 2
 News 11 3
@@ -188,7 +187,6 @@ Zee News 4
 Zee Rajasthan
 Zee Uttar Pradesh/Uttarakhand
 Zee Uttar Pradesh/Uttarakhand 2
-All Time Movies
 B4U Bhojpuri
 B4U Bhojpuri 2
 B4U Kadak
@@ -443,6 +441,7 @@ Sony KAL Hindi
 SVBC 4
 SVBC 4 2
 Taaza TV
+Taaza TV 2
 Tehzeeb TV
 Tehzeeb TV 2
 TV BRICS English
@@ -453,6 +452,7 @@ WeatherSpy
 JK 24x7 News
 Public First
 VIP News
+All Time Movies
 Kabaddi 24x7
 Colors
 
@@ -460,8 +460,9 @@ NON-WORKING CHANNELS
 --------------------
 Aaj Tak
 ABP News
-Bansal News
+Bharat Samachar
 NDTV India
+News 1 India
 Prime News
 Public First 2
 Raj Pariwar
@@ -514,7 +515,6 @@ Rongeen TV
 Rongeen TV 2
 Sansad TV 2
 Sarv Dharam Sangam
-Taaza TV
 Zee Cine Classic
 
 Note: This report is regenerated automatically with every playlist update.

@@ -1,6 +1,6 @@
 {
   "source": "https://raw.githubusercontent.com/Sri014/Garden/main/working.m3u",
-  "repaired": 5,
+  "repaired": 6,
   "channels": [
     {
       "channel": "JK 24x7 News",
@@ -13,6 +13,10 @@
     {
       "channel": "VIP News",
       "url": "https://live.vipnews24x7.co.in/vipnews24x7/d0dbe915091d400bd8ee7f27f0791303.sdp/playlist.m3u8"
+    },
+    {
+      "channel": "All Time Movies",
+      "url": "https://tvsen6.aynaott.com/a2cKGQtB/index.m3u8"
     },
     {
       "channel": "Kabaddi 24x7",
