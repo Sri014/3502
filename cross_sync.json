@@ -1,14 +1,18 @@
 {
   "source": "https://raw.githubusercontent.com/Sri014/Garden/main/working.m3u",
-  "repaired": 6,
+  "repaired": 7,
   "channels": [
     {
       "channel": "JK 24x7 News",
       "url": "https://live.gulistannews.in/hls/jk.m3u8"
     },
     {
-      "channel": "News18 Madhya Pradesh/Chhattisgarh",
-      "url": "https://n18syndication.akamaized.net/bpk-tv/News18_MP_Chhattisgarh_NW18_MOB/output01/master.m3u8"
+      "channel": "News18 Bihar Jharkhand",
+      "url": "https://n18syndication.akamaized.net/bpk-tv/News18_Bihar_Jharkhand_NW18_MOB/output01/master.m3u8"
+    },
+    {
+      "channel": "News18 Rajasthan",
+      "url": "https://n18syndication.akamaized.net/bpk-tv/News18_Rajasthan_NW18_MOB/output01/master.m3u8"
     },
     {
       "channel": "Public First",
