@@ -3,8 +3,8 @@ IPTV PLAYLIST SOURCE REPORT
 
 Source: https://iptv-org.github.io/iptv/index.m3u
 Total Channels: 656
-Working Channels: 551
-Non-Working Channels: 105
+Working Channels: 550
+Non-Working Channels: 106
 Indian Sony + Star Working: 21
 
 WORKING CHANNELS
@@ -82,6 +82,7 @@ Live India
 Live Times
 Live Times 2
 Mirror Now 2
+Nagaland TV
 NDTV 24x7
 NDTV 24x7 2
 NDTV India
@@ -91,6 +92,7 @@ NDTV Rajasthan
 NE News
 News 1 India
 News 1 India 2
+News 1 India 3
 News 11
 News 11 2
 News 11 3
@@ -182,7 +184,6 @@ Zee News 4
 Zee Rajasthan
 Zee Uttar Pradesh/Uttarakhand
 Zee Uttar Pradesh/Uttarakhand 2
-&xplor HD
 All Time Movies
 B4U Bhojpuri
 B4U Bhojpuri 2
@@ -195,11 +196,11 @@ Bhojpuri Cinema
 Bhojpuri Cinema 2
 Bhojpuri Cinema 3
 Colors Cineplex Bollywood
-Colors Cineplex Bollywood 2
 Epic Bhojpuri
 Epic Bhojpuri 2
 Goldmines
 Goldmines 2
+Goldmines 3
 Goldmines Action
 Goldmines Bollywood
 Goldmines Bollywood 2
@@ -222,7 +223,6 @@ Shubh Cinema TV
 Shubh Cinema TV 2
 Sony Max
 Sony Max 2
-Sony Max 3
 Sony Max 2
 Sony Max 2 2
 Sony Wah
@@ -407,7 +407,6 @@ Namdhari TV
 Network 10
 Network 10 2
 Network 10 3
-Network 10 4
 Paras Gold
 Peace of Mind TV
 Raftaar Media
@@ -571,9 +570,7 @@ Bharat Samachar
 India Ahead
 India Voice
 JK 24x7 News
-Nagaland TV
 NDTV India
-News 1 India
 Prime News
 Public First 2
 Raj Pariwar
@@ -581,12 +578,14 @@ Times Now Navbharat 2
 Times Now World
 TV30 India
 VIP News
+&xplor HD
 B4U Kadak
 B4U Movies
-Goldmines
+Colors Cineplex Bollywood
 Goldmines Bollywood
 Goldmines Movies 2
 Romedy Now
+Sony Max
 Sony Max 2
 Sony Wah
 Star Gold 2
@@ -627,6 +626,7 @@ Channel Divya
 Fateh TV
 Jus Hindi
 Jus One
+Network 10
 Punjabi Zindabad TV
 Rongeen TV
 Rongeen TV 2
