@@ -1,0 +1,48 @@
+name: Apply Garden Selected Channels
+
+on:
+  workflow_dispatch:
+    inputs:
+      channels:
+        description: 'Base64 encoded JSON array of Garden M3U entries'
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Apply selected channels
+        env:
+          CHANNELS_B64: ${{ inputs.channels }}
+        run: |
+          python - <<'PY'
+          import os, base64, json
+          p='playlist_working.m3u'
+          with open(p,'r',encoding='utf-8',errors='ignore') as f: text=f.read()
+          try: items=json.loads(base64.b64decode(os.environ['CHANNELS_B64']).decode('utf-8'))
+          except Exception as e: raise SystemExit(f'Invalid selection payload: {e}')
+          existing=set(x.strip() for x in text.replace('\r','').splitlines() if x.strip() and not x.startswith('#'))
+          add=[]
+          for x in items:
+              meta=x.get('meta','').strip(); url=x.get('url','').strip()
+              if not meta or not url or url in existing: continue
+              add += [meta,url]
+              existing.add(url)
+          if add:
+              if text and not text.endswith('\n'): text+='\n'
+              text+='\n'.join(add)+'\n'
+              with open(p,'w',encoding='utf-8') as f: f.write(text)
+          print(f'Added {len(add)//2} selected entries')
+          PY
+      - name: Commit
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add playlist_working.m3u
+          git diff --cached --quiet || git commit -m 'Add selected Garden channels'
+          git push
