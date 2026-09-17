@@ -16,7 +16,6 @@ CATEGORY_ORDER = {
     'Non Jio': 11
 }
 
-# Explicit Indian Sony/Star names only. Do not match generic foreign Sony/Star channels.
 PATTERNS = [
     r'\bSony Entertainment Television\b', r'\bSony SAB\b', r'\bSony Pal\b',
     r'\bSony Max(?: 2)?\b', r'\bSony Wah\b', r'\bSony Pix\b',
@@ -31,6 +30,27 @@ PATTERNS = [
 ]
 RX = re.compile('(?:' + '|'.join(PATTERNS) + ')', re.I)
 
+MANUAL = [
+    {
+        'name': 'Utsav Bharat [UK]',
+        'url': 'http://xown.site/token/stream.php?id=1484530&token=jzVQIX8Sa8Du818wRZdAH2eDDBHwGaqq',
+        'logo': 'http://103.176.90.118/picons/logos/logos/UTSAV-BHARAT.png',
+        'category': 'Entertainment'
+    },
+    {
+        'name': 'Utsav Plus [UK]',
+        'url': 'http://xown.site/token/stream.php?id=1484512&token=jzVQIX8Sa8Du818wRZdAH2eDDBHwGaqq',
+        'logo': 'http://103.176.90.118/picons/logos/logos/UTSAV-PLUS.png',
+        'category': 'Entertainment'
+    },
+    {
+        'name': 'Cricket Gold',
+        'url': 'https://streams2.sofast.tv/scheduler/scheduleMaster/418.m3u8',
+        'logo': 'https://i.imgur.com/UvbHjlx.png',
+        'category': 'Sports'
+    }
+]
+
 
 def clean(s):
     return re.sub(r'\s+', ' ', str(s or '').strip())
@@ -38,16 +58,11 @@ def clean(s):
 
 def category(name):
     n = clean(name).lower()
-    if any(x in n for x in ('star sports', 'sony sports', 'sports khel')):
+    if any(x in n for x in ('star sports', 'sony sports', 'sports khel', 'cricket gold')):
         return 'Sports'
     if any(x in n for x in ('sony max', 'sony wah', 'sony pix', 'star gold', 'star utsav movies')):
         return 'Movies'
     return 'Entertainment'
-
-
-def parse_attr(line, key):
-    m = re.search(r'\b' + re.escape(key) + r'="([^"]*)"', line)
-    return m.group(1) if m else ''
 
 
 def fetch_text(url):
@@ -117,11 +132,12 @@ def main():
         world = parse_m3u(fetch_text(WORLDWIDE_URL))
     except Exception as e:
         print('WORLDWIDE FETCH ERROR:', e)
-        sys.exit(0)
+        world = []
 
     known = existing_urls(WORKING) | existing_urls(NONWORKING)
     candidates = []
     seen = set()
+
     for e in world:
         url = clean(e['url'])
         name = clean(e['extinf'].split(',', 1)[-1])
@@ -129,7 +145,6 @@ def main():
             continue
         seen.add(url)
         group = category(name)
-        # Keep the worldwide entry's metadata, but force the requested category.
         ext = e['extinf']
         if 'group-title=' in ext:
             ext = re.sub(r'group-title="[^"]*"', 'group-title="' + group + '"', ext, count=1)
@@ -137,8 +152,22 @@ def main():
             ext = ext.replace(',', ' group-title="' + group + '",', 1)
         candidates.append({'extinf': ext, 'extra': e['extra'], 'url': url, 'name': name, 'category': group})
 
+    # Explicit requested worldwide/UK entries. Only add if the exact URL is not already present.
+    for m in MANUAL:
+        url = clean(m['url'])
+        if not url or url in known or url in seen:
+            continue
+        seen.add(url)
+        candidates.append({
+            'extinf': f'#EXTINF:-1 tvg-name="{m["name"]}" tvg-logo="{m["logo"]}" group-title="{m["category"]}",{m["name"]}',
+            'extra': [],
+            'url': url,
+            'name': m['name'],
+            'category': m['category']
+        })
+
     if not candidates:
-        print('WORLDWIDE SONY/STAR: no new stream URLs')
+        print('WORLDWIDE SONY/STAR + MANUAL: no new stream URLs')
         return
 
     working = []
@@ -148,11 +177,14 @@ def main():
 
     append_entries(WORKING, working)
     append_entries(NONWORKING, nonworking)
-    print('WORLDWIDE SONY/STAR NEW:', len(candidates))
+    print('WORLDWIDE SONY/STAR + MANUAL NEW:', len(candidates))
     print('  WORKING:', len(working))
     print('  NON-WORKING:', len(nonworking))
     for group in ('Movies', 'Sports', 'Entertainment'):
         print(' ', group, sum(1 for x in candidates if x['category'] == group))
+    for e in candidates:
+        if e['name'] in {'Utsav Bharat [UK]', 'Utsav Plus [UK]', 'Cricket Gold'}:
+            print(' ', e['name'], '=>', 'WORKING' if e in working else 'NON-WORKING')
 
 
 if __name__ == '__main__':
