@@ -4,16 +4,16 @@
     "garden_nonworking": "https://raw.githubusercontent.com/Sri014/Garden/main/non_working.m3u"
   },
   "rule": "Exact stream URL match first; channel name only distinguishes Different URL from Not Found.",
-  "garden_working": 377,
-  "garden_nonworking": 64,
-  "same_url_working": 259,
-  "same_url_nonworking": 25,
+  "garden_working": 380,
+  "garden_nonworking": 61,
+  "same_url_working": 255,
+  "same_url_nonworking": 29,
   "different_url_working": 4,
   "different_url_nonworking": 0,
-  "not_found_working": 115,
-  "not_found_nonworking": 38,
-  "added_to_working": 119,
-  "added_to_nonworking": 38,
+  "not_found_working": 116,
+  "not_found_nonworking": 37,
+  "added_to_working": 120,
+  "added_to_nonworking": 37,
   "added_working_channels": [
     {
       "name": "Sony Sports Ten 1 HD",
@@ -32,6 +32,10 @@
       "url": "https://playhls.media.nic.in/hls/live/lstv/lstv.m3u8"
     },
     {
+      "name": "Sony Sports Ten 5 HD",
+      "url": "https://cloudplay-sonyliv.pages.dev/ten5hd.m3u8"
+    },
+    {
       "name": "Sony Sports Ten 5",
       "url": "https://cloudplay-sonyliv.pages.dev/ten5.m3u8"
     },
@@ -40,8 +44,8 @@
       "url": "https://cloudplay-sonyliv.pages.dev/ten4.m3u8"
     },
     {
-      "name": "Sony Sports Ten 5 HD",
-      "url": "https://cloudplay-sonyliv.pages.dev/ten5hd.m3u8"
+      "name": "T Sports 7",
+      "url": "https://live-us1.thaimomo.com/live-as/chtsport-1/playlist.m3u8"
     },
     {
       "name": "Willow Sports",
@@ -52,16 +56,16 @@
       "url": "https://d36r8jifhgsk5j.cloudfront.net/Willow_TV.m3u8"
     },
     {
-      "name": "T Sports 7",
-      "url": "https://live-us1.thaimomo.com/live-as/chtsport-1/playlist.m3u8"
-    },
-    {
       "name": "Fox Sports 1",
       "url": "http://85.237.89.160:9590/usa-s/FOX-SPORTS-1/index.m3u8"
     },
     {
       "name": "9X Jhakaas",
       "url": "https://amg01281-9xmediapvtltd-9xjhakaas-samsungin-ci2cs.amagi.tv/playlist/amg01281-9xmediapvtltd-9xjhakaas-samsungin/playlist.m3u8"
+    },
+    {
+      "name": "9X Tashan",
+      "url": "https://amg01281-9xmediapvtltd-9xtashan-samsungin-xz1sd.amagi.tv/playlist/amg01281-9xmediapvtltd-9xtashan-samsungin/playlist.m3u8"
     },
     {
       "name": "Cricket Gold",
@@ -72,40 +76,36 @@
       "url": "http://59.103.38.46:8000/play/a126/index.m3u8"
     },
     {
-      "name": "9X Tashan",
-      "url": "https://amg01281-9xmediapvtltd-9xtashan-samsungin-xz1sd.amagi.tv/playlist/amg01281-9xmediapvtltd-9xtashan-samsungin/playlist.m3u8"
-    },
-    {
-      "name": "7S Music",
-      "url": "https://cdn.pishow.tv/ott/live/1257/master.m3u8"
-    },
-    {
-      "name": "Sky Sports Cricket HD",
-      "url": "https://bl.rutube.ru/livestream/7c13a51576b9ff2601f08f5d57dd5169/index.m3u8?s=uiXES2ePt7xTpQnbJxn7Dg&e=2074684474&scheme=https"
-    },
-    {
       "name": "Aastha",
       "url": "https://aasthaott.akamaized.net/110923/smil:aasthatv.smil/index.m3u8"
-    },
-    {
-      "name": "Apna Punjab TV",
-      "url": "https://plus.gigabitcdn.net/live-stream/apna-punjab-H3sE/playlist.m3u8"
     },
     {
       "name": "Aastha Prime 1",
       "url": "https://aasthaott.akamaized.net/110923/smil:aasthaprime1.smil/master.m3u8"
     },
     {
+      "name": "T Sports",
+      "url": "https://tvsen5.aynaott.com/TnMn5kZz8aLm/index.m3u8"
+    },
+    {
+      "name": "7S Music",
+      "url": "https://cdn.pishow.tv/ott/live/1257/master.m3u8"
+    },
+    {
       "name": "Aadinath TV",
       "url": "https://mumt01.tangotv.in/O5aw8Zn3AADINATHTV/index.m3u8"
     },
     {
-      "name": "Ayush TV",
-      "url": "http://d1msejlow1t3l4.cloudfront.net/fta/ayushtv/playlist.m3u8"
+      "name": "Apna Punjab TV",
+      "url": "https://plus.gigabitcdn.net/live-stream/apna-punjab-H3sE/playlist.m3u8"
     },
     {
-      "name": "Anand Wari TV",
-      "url": "https://mumt03.tangotv.in/Dsly5z3HANANDWARITV/index.m3u8"
+      "name": "Sky Sports Cricket HD",
+      "url": "https://bl.rutube.ru/livestream/7c13a51576b9ff2601f08f5d57dd5169/index.m3u8?s=uiXES2ePt7xTpQnbJxn7Dg&e=2074684474&scheme=https"
+    },
+    {
+      "name": "Ayush TV",
+      "url": "http://d1msejlow1t3l4.cloudfront.net/fta/ayushtv/playlist.m3u8"
     },
     {
       "name": "Andy Haryana",
@@ -116,8 +116,8 @@
       "url": "https://live.legitpro.co.in/anandtv/index.m3u8"
     },
     {
-      "name": "Bollywood HD Russia",
-      "url": "https://xykt-fix.github.io/cinerama_edge01/hls/BOLLYWOOD_RU/Movie009.m3u8"
+      "name": "Anand Wari TV",
+      "url": "https://mumt03.tangotv.in/Dsly5z3HANANDWARITV/index.m3u8"
     },
     {
       "name": "Aaryaa TV",
@@ -126,6 +126,10 @@
     {
       "name": "Aryan TV National",
       "url": "https://mumt04.tangotv.in/m18aqlK4ARYANTVNATIONAL/index.m3u8"
+    },
+    {
+      "name": "Bollywood HD Russia",
+      "url": "https://xykt-fix.github.io/cinerama_edge01/hls/BOLLYWOOD_RU/Movie009.m3u8"
     },
     {
       "name": "Awakening TV",
@@ -148,12 +152,12 @@
       "url": "https://d2lk5u59tns74c.cloudfront.net/out/v1/950fc69666474351bde0a32b9600c804/index.m3u8"
     },
     {
-      "name": "Dhoom Music",
-      "url": "https://cdn.pishow.tv/ott/live/1456/master.m3u8"
-    },
-    {
       "name": "Disney Channel",
       "url": "http://202.70.146.135:8000/play/a01q/index.m3u8"
+    },
+    {
+      "name": "Dhoom Music",
+      "url": "https://cdn.pishow.tv/ott/live/1456/master.m3u8"
     },
     {
       "name": "ETV Bal Bharat",
@@ -164,24 +168,24 @@
       "url": "http://cdn12.henico.net:8080/live/gsctv/index.m3u8"
     },
     {
-      "name": "Hungama TV",
-      "url": "http://103.185.24.134:3001/HUNGAMA/index.m3u8"
+      "name": "ETV Beats",
+      "url": "https://jmp2.uk/stvp-IN4900002RV"
     },
     {
       "name": "Hyder TV",
       "url": "https://cdn.live247stream.com/hyder/tv/playlist.m3u8"
     },
     {
-      "name": "Isai Aruvi",
-      "url": "https://segment.yuppcdn.net/140622/isaiaruvi/playlist.m3u8"
+      "name": "Hungama TV",
+      "url": "http://103.185.24.134:3001/HUNGAMA/index.m3u8"
     },
     {
       "name": "INFAST",
       "url": "https://amg00861-terninternation-lifestyle-samsungau-kdlyy.amagi.tv/playlist/amg00861-terninternation-lifestyle-samsungau/playlist.m3u8"
     },
     {
-      "name": "ETV Beats",
-      "url": "https://jmp2.uk/stvp-IN4900002RV"
+      "name": "Isai Aruvi",
+      "url": "https://segment.yuppcdn.net/140622/isaiaruvi/playlist.m3u8"
     },
     {
       "name": "InWonder",
@@ -192,12 +196,12 @@
       "url": "https://mumt03.tangotv.in/Dsly5z3HKAPPATV/index.m3u8"
     },
     {
-      "name": "Ishwar Bhakti TV",
-      "url": "https://6n3yow8pl9ok-hls-live.5centscdn.com/ishwartvlive/tv.stream/playlist.m3u8"
-    },
-    {
       "name": "Kalika TV",
       "url": "http://server.applelive.in/kalikatv/kalikatv.m3u8"
+    },
+    {
+      "name": "Ishwar Bhakti TV",
+      "url": "https://6n3yow8pl9ok-hls-live.5centscdn.com/ishwartvlive/tv.stream/playlist.m3u8"
     },
     {
       "name": "Kanshi TV (720p)",
@@ -216,10 +220,6 @@
       "url": "https://amg00627-amg00627c23-samsung-au-4110.playouts.now.amagi.tv/playlist.m3u8"
     },
     {
-      "name": "NDTV Good Times",
-      "url": "https://amg01448-samsungin-ndtvgoodtimes-samsungin-ad-gp.amagi.tv/playlist/amg01448-samsungin-ndtvgoodtimes-samsungin/playlist.m3u8"
-    },
-    {
       "name": "MTA7 Asia",
       "url": "https://livemtaasia.akamaized.net/hls/live/2039224/mtaasia2/playlist.m3u8"
     },
@@ -228,32 +228,44 @@
       "url": "https://chlivemta1.akamaized.net/hls/live/2008145/mta2/playlist.m3u8"
     },
     {
-      "name": "Peppers TV",
-      "url": "https://cdn.pishow.tv/ott/live/1383/master.m3u8"
+      "name": "NDTV Good Times",
+      "url": "https://amg01448-samsungin-ndtvgoodtimes-samsungin-ad-gp.amagi.tv/playlist/amg01448-samsungin-ndtvgoodtimes-samsungin/playlist.m3u8"
     },
     {
-      "name": "PTC Chakde",
-      "url": "https://cdn.pishow.tv/ott/live/449/master.m3u8"
+      "name": "National Geographic (576p)",
+      "url": "http://main.light-ott.net:80/play/live.php?mac=00:1A:79:17:28:41&stream=373017&extension=ts&play_token=zCaGy5dtla"
+    },
+    {
+      "name": "News State Punjab Haryana Himachal",
+      "url": "https://jmp2.uk/stvp-IN300083R1"
+    },
+    {
+      "name": "News18 Delhi NCR JK",
+      "url": "https://n18syndication.akamaized.net/bpk-tv/News18_JKLH_NW18_MOB/output01/master.m3u8"
     },
     {
       "name": "Public Music",
       "url": "https://mumt04.tangotv.in/m18aqlK4PUBLICMUSIC/index.m3u8"
     },
     {
-      "name": "PTC Music",
-      "url": "https://d2lk5u59tns74c.cloudfront.net/out/v1/f913cf893c594f73b114216e74a2efbc/index.m3u8"
+      "name": "PTC Chakde",
+      "url": "https://cdn.pishow.tv/ott/live/449/master.m3u8"
     },
     {
       "name": "Qello Concerts by Stingray",
       "url": "https://lotus.stingray.com/manifest/qello-qello001-montreal/samsungtvplus/master.m3u8"
     },
     {
-      "name": "Saam TV",
-      "url": "https://cdn.pishow.tv/ott/live/437/master.m3u8"
+      "name": "Peppers TV",
+      "url": "https://cdn.pishow.tv/ott/live/1383/master.m3u8"
     },
     {
-      "name": "News18 Delhi NCR JK",
-      "url": "https://n18syndication.akamaized.net/bpk-tv/News18_JKLH_NW18_MOB/output01/master.m3u8"
+      "name": "PTC Music",
+      "url": "https://d2lk5u59tns74c.cloudfront.net/out/v1/f913cf893c594f73b114216e74a2efbc/index.m3u8"
+    },
+    {
+      "name": "Saam TV",
+      "url": "https://cdn.pishow.tv/ott/live/437/master.m3u8"
     },
     {
       "name": "Sana Plus",
@@ -264,20 +276,20 @@
       "url": "http://103.185.24.134:3001/NICK/index.m3u8"
     },
     {
-      "name": "News State Punjab Haryana Himachal",
-      "url": "https://jmp2.uk/stvp-IN300083R1"
+      "name": "News18 Punjab/Haryana/Himachal",
+      "url": "https://n18syndication.akamaized.net/bpk-tv/News18_Punjab_Haryana_HP_NW18_MOB/output01/master.m3u8"
     },
     {
       "name": "Sony BBC Earth HD",
       "url": "https://cloudplay-sonyliv.pages.dev/bbcearthhd.m3u8"
     },
     {
-      "name": "Sony Pix HD",
-      "url": "https://cloudplay-sonyliv.pages.dev/pixhd.m3u8"
-    },
-    {
       "name": "Sonic",
       "url": "http://103.185.24.134:3001/SONIC/index.m3u8"
+    },
+    {
+      "name": "Sony Pix HD",
+      "url": "https://cloudplay-sonyliv.pages.dev/pixhd.m3u8"
     },
     {
       "name": "Sony Yay!",
@@ -316,10 +328,6 @@
       "url": "http://cdn11.live247stream.com/tag/tv/playlist.m3u8"
     },
     {
-      "name": "News18 Punjab/Haryana/Himachal",
-      "url": "https://n18syndication.akamaized.net/bpk-tv/News18_Punjab_Haryana_HP_NW18_MOB/output01/master.m3u8"
-    },
-    {
       "name": "TBN TV (720p)",
       "url": "https://live.suricloud.com/hls/tbntv/index.m3u8"
     },
@@ -336,6 +344,10 @@
       "url": "https://livetv.tarangplus.in/tarangmusic-origin/live/playlist.m3u8"
     },
     {
+      "name": "Travelxp HD (1080p)",
+      "url": "https://amg00416-amg00416c9-samsung-in-4882.playouts.now.amagi.tv/playlist/amg00416-travelxp-travelxphd-samsungin/playlist.m3u8"
+    },
+    {
       "name": "Utsav Bharat",
       "url": "https://d1taaads3ztvmu.cloudfront.net/120723/smil:lifeokuk.smil/playlist.m3u8?hdnts=st=1735898689~exp=1835898688~acl=*~hmac=f5fe24724fe05481e3841f9eb5ab8efdee0a3dd83645ae9dcf45703f525bab7b"
     },
@@ -348,10 +360,6 @@
       "url": "https://d34z4embz0hjf6.cloudfront.net/out/v1/d55b3323a9f142638f897378f0b526fe/index.m3u8"
     },
     {
-      "name": "Travelxp HD (1080p)",
-      "url": "https://amg00416-amg00416c9-samsung-in-4882.playouts.now.amagi.tv/playlist/amg00416-travelxp-travelxphd-samsungin/playlist.m3u8"
-    },
-    {
       "name": "YET Max",
       "url": "https://live.yettelevision.com:5443/LiveApp/streams/yettv2.m3u8"
     },
@@ -360,20 +368,12 @@
       "url": "https://6n3yope4d9ok-hls-live.5centscdn.com/vaanavil/TV.stream/playlist.m3u8"
     },
     {
-      "name": "Ultimate TV",
-      "url": "https://stream.ottlive.co.in/utvtamil/index.m3u8"
-    },
-    {
-      "name": "ZB Music",
-      "url": "https://server.zillarbarta.com/zbmusic/index.m3u8"
-    },
-    {
-      "name": "ZB Cartoon",
-      "url": "https://server.zillarbarta.com/zbcatun/video.m3u8"
-    },
-    {
       "name": "Zee Delhi NCR Haryana",
       "url": "https://vg-zeefta.akamaized.net/ptnr-yupptv/title-zeedelhincr/v1/master/611d79b11b77e2f571934fd80ca1413453772ac7/cc483a15-1b39-4642-872d-5d08d362ed01/main.m3u8"
+    },
+    {
+      "name": "Ultimate TV",
+      "url": "https://stream.ottlive.co.in/utvtamil/index.m3u8"
     },
     {
       "name": "Asharq Discovery",
@@ -388,24 +388,20 @@
       "url": "http://45.166.93.156:9999/play/a0f3/index.m3u8"
     },
     {
-      "name": "Disney Channel Latin America North",
-      "url": "http://138.121.15.230:9002/DISNEY-CHANNEL/index.m3u8"
+      "name": "Disney Channel Latin America Center",
+      "url": "http://181.78.8.199:8000/play/a0dn/index.m3u8"
     },
     {
-      "name": "Disney Jr. Latin America",
-      "url": "http://190.14.10.19:16000/play/a02d/index.m3u8"
+      "name": "Disney Channel Latin America North",
+      "url": "http://138.121.15.230:9002/DISNEY-CHANNEL/index.m3u8"
     },
     {
       "name": "Disney Channel Latin America Panregional HD",
       "url": "http://45.134.141.161:2200/ARG/Disney_Channel/index.m3u8"
     },
     {
-      "name": "Disney Channel Latin America Center",
-      "url": "http://181.78.8.199:8000/play/a0dn/index.m3u8"
-    },
-    {
-      "name": "HMTV",
-      "url": "https://cdn.pishow.tv/ott/live/280/master.m3u8"
+      "name": "Disney Jr. Latin America",
+      "url": "http://190.14.10.19:16000/play/a02d/index.m3u8"
     },
     {
       "name": "Disney Jr. Latin America South",
@@ -416,36 +412,36 @@
       "url": "http://45.134.141.161:2200/ARG/Disney_Junior/index.m3u8"
     },
     {
-      "name": "MTV Biggest Pop",
-      "url": "https://jmp2.uk/plu-6047fbdbbb776a0007e7f2ff.m3u8"
+      "name": "HMTV",
+      "url": "https://cdn.pishow.tv/ott/live/280/master.m3u8"
     },
     {
       "name": "MTV Live",
       "url": "http://23.237.104.106:8080/USA_MTV_LIVE/index.m3u8"
     },
     {
-      "name": "CNBC Bajar",
-      "url": "https://n18syndication.akamaized.net/bpk-tv/CNBC_Bazaar_NW18_MOB/output01/master.m3u8"
-    },
-    {
       "name": "National Geographic Latin America",
       "url": "http://15.204.246.24:8080/NatGeoHD/index.m3u8"
-    },
-    {
-      "name": "National Geographic HD East",
-      "url": "http://198.58.104.90:8989/natgeo/index.m3u8"
-    },
-    {
-      "name": "MTV Flow Latino",
-      "url": "https://jmp2.uk/plu-62b218fc511d4b00070ddc0c.m3u8"
     },
     {
       "name": "National Geographic Wild HD East",
       "url": "http://198.58.104.90:8989/natgeowild/index.m3u8"
     },
     {
+      "name": "MTV Spankin' New",
+      "url": "https://jmp2.uk/plu-5d14fdb8ca91eedee1633117.m3u8"
+    },
+    {
       "name": "MTV Spankin’ New",
       "url": "https://jmp2.uk/plu-6541010f770cf1000866be98.m3u8"
+    },
+    {
+      "name": "Mirror Now",
+      "url": "https://dai.google.com/linear/hls/event/ClPOullTQky5vGPf7fMZ8g/master.m3u8"
+    },
+    {
+      "name": "CNBC Bajar",
+      "url": "https://n18syndication.akamaized.net/bpk-tv/CNBC_Bazaar_NW18_MOB/output01/master.m3u8"
     },
     {
       "name": "Pluto TV MTV Classic",
@@ -460,36 +456,44 @@
       "url": "https://stmv2.srvif.com/nicktoons/nicktoons/playlist.m3u8"
     },
     {
-      "name": "Mirror Now",
-      "url": "https://dai.google.com/linear/hls/event/ClPOullTQky5vGPf7fMZ8g/master.m3u8"
-    },
-    {
-      "name": "MTV Spankin' New",
-      "url": "https://jmp2.uk/plu-5d14fdb8ca91eedee1633117.m3u8"
+      "name": "Yo! MTV",
+      "url": "https://jmp2.uk/plu-654102ed770cf1000866c307.m3u8"
     },
     {
       "name": "VH1",
       "url": "http://4.30.180.36:8420/vh1/index.m3u8?token=test"
     },
     {
-      "name": "Nickelodeon Pluto TV",
-      "url": "https://jmp2.uk/plu-5ca673e0d0bd6c2689c94ce3.m3u8"
-    },
-    {
-      "name": "Yo! MTV",
-      "url": "https://jmp2.uk/plu-654102ed770cf1000866c307.m3u8"
+      "name": "MTV Flow Latino",
+      "url": "https://jmp2.uk/plu-62b218fc511d4b00070ddc0c.m3u8"
     },
     {
       "name": "FTV",
       "url": "https://stream8.cinerama.uz/1018/playlist.m3u8"
     },
     {
-      "name": "T Sports",
-      "url": "https://tvsen5.aynaott.com/TnMn5kZz8aLm/index.m3u8"
+      "name": "MTV Biggest Pop",
+      "url": "https://jmp2.uk/plu-6047fbdbbb776a0007e7f2ff.m3u8"
+    },
+    {
+      "name": "Nickelodeon Pluto TV",
+      "url": "https://jmp2.uk/plu-5ca673e0d0bd6c2689c94ce3.m3u8"
     },
     {
       "name": "God Stands TV Hindi",
       "url": "https://online.godstands.tv:5443/WebRTCApp/streams/HindiStreaming.m3u8"
+    },
+    {
+      "name": "ZB Cartoon",
+      "url": "https://server.zillarbarta.com/zbcatun/video.m3u8"
+    },
+    {
+      "name": "ZB Music",
+      "url": "https://server.zillarbarta.com/zbmusic/index.m3u8"
+    },
+    {
+      "name": "National Geographic HD East",
+      "url": "http://198.58.104.90:8989/natgeo/index.m3u8"
     }
   ],
   "added_nonworking_channels": [
@@ -498,24 +502,16 @@
       "url": "https://leaf.highfly.dev/m3u/now-sky-sports-cricket/live.m3u8"
     },
     {
-      "name": "ERT Sports 2",
-      "url": "http://hbbtvapp.ert.gr/stream.php/v/vid_ertplay2_mpeg.2ts"
-    },
-    {
       "name": "ERT Sports 1",
       "url": "http://hbbtvapp.ert.gr/stream.php/v/vid_ertsports_mpeg.2ts"
     },
     {
+      "name": "ERT Sports 2",
+      "url": "http://hbbtvapp.ert.gr/stream.php/v/vid_ertplay2_mpeg.2ts"
+    },
+    {
       "name": "PTV Sports",
       "url": "http://103.250.28.74:8000/play/a019/index.m3u8"
-    },
-    {
-      "name": "Aastha Bhajan",
-      "url": "http://103.175.73.12:8080/live/339/master.m3u8"
-    },
-    {
-      "name": "Aastha SD",
-      "url": "http://103.175.73.12:8080/live/338/master.m3u8"
     },
     {
       "name": "ETV Life",
@@ -524,6 +520,14 @@
     {
       "name": "ETV Music",
       "url": "https://mumbai-edge.smartplaytv.in/ETVABHIRUCHI/index.m3u8"
+    },
+    {
+      "name": "Aastha Bhajan",
+      "url": "http://103.175.73.12:8080/live/339/master.m3u8"
+    },
+    {
+      "name": "Aastha SD",
+      "url": "http://103.175.73.12:8080/live/338/master.m3u8"
     },
     {
       "name": "MTV HD",
@@ -546,20 +550,16 @@
       "url": "http://103.175.73.12:8080/live/583/master.m3u8"
     },
     {
-      "name": "National Geographic (576p)",
-      "url": "http://main.light-ott.net:80/play/live.php?mac=00:1A:79:17:28:41&stream=373017&extension=ts&play_token=zCaGy5dtla"
-    },
-    {
       "name": "Dhool TV",
       "url": "https://mumt04.tangotv.in/m18aqlK4SUBHARTITV/index.m3u8"
     },
     {
-      "name": "Star Sports 1 Hindi",
-      "url": "http://103.253.18.58:8000/play/a03o"
-    },
-    {
       "name": "Star Gold Thrills",
       "url": "http://103.253.18.58:8000/play/a00o"
+    },
+    {
+      "name": "Star Sports 1 Hindi",
+      "url": "http://103.253.18.58:8000/play/a03o"
     },
     {
       "name": "Travelxp 4K HDR (2160p)",
@@ -574,14 +574,6 @@
       "url": "https://mumbai-edge.smartplaytv.in/ZeeCinemaluHD/index.m3u8"
     },
     {
-      "name": "Sports Squad Haryana",
-      "url": "http://180.188.254.253/live/SPORTSSQUADHARYANA.m3u8"
-    },
-    {
-      "name": "Star Sports Khel",
-      "url": "http://103.175.73.12:8080/live/151/151_0.m3u8"
-    },
-    {
       "name": "ET Now (720p)",
       "url": "https://dztlhgid9me95.cloudfront.net/live-tv/Vidgyor/etnow/etnow_master.m3u8"
     },
@@ -594,6 +586,14 @@
       "url": "https://fash1043.cloudycdn.services/slive/_definst_/ftv_ftv_midnite_seoul_1_1_1080p_1_hls.smil/playlist.m3u8"
     },
     {
+      "name": "Sports Squad Haryana",
+      "url": "http://180.188.254.253/live/SPORTSSQUADHARYANA.m3u8"
+    },
+    {
+      "name": "Star Sports Khel",
+      "url": "http://103.175.73.12:8080/live/151/151_0.m3u8"
+    },
+    {
       "name": "Disney Jr. Latin America North HD",
       "url": "http://181.78.14.26:4000/play/a073/index.m3u8"
     },
@@ -602,28 +602,28 @@
       "url": "https://cdn-1.pishow.tv/live/1211/master.m3u8"
     },
     {
-      "name": "National Geographic Wild",
-      "url": "https://flash1.bogulus1.cfd/wild/usergenr9qsi5gt.m3u8"
-    },
-    {
       "name": "Disney Jr. (1080p)",
       "url": "https://saran-live.ercdn.net/disneyjunior/index.m3u8"
-    },
-    {
-      "name": "The Q India",
-      "url": "http://103.175.73.12:8080/live/25/25_0.m3u8"
     },
     {
       "name": "National Geographic",
       "url": "https://onyx1.mofta1.cfd/ngeo/usergenrnd84oeigt.m3u8"
     },
     {
-      "name": "NickOnline HD",
-      "url": "https://x1colegal.com/hls/stream.m3u8"
+      "name": "National Geographic Wild",
+      "url": "https://flash1.bogulus1.cfd/wild/usergenr9qsi5gt.m3u8"
     },
     {
       "name": "Tunes 6",
       "url": "https://stream.d6-pro.com/tunes6music/live/video.m3u8"
+    },
+    {
+      "name": "NickOnline HD",
+      "url": "https://x1colegal.com/hls/stream.m3u8"
+    },
+    {
+      "name": "The Q India",
+      "url": "http://103.175.73.12:8080/live/25/25_0.m3u8"
     },
     {
       "name": "TV2",
