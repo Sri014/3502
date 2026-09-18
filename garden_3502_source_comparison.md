@@ -27,13 +27,13 @@
 | Working | Same | Disney Channel | http://202.70.146.135:8000/play/a01q/index.m3u8 | http://202.70.146.135:8000/play/a01q/index.m3u8 |
 | Non-working | Same | Disney Channel HD | http://66.102.126.10:8000/play/a013/index.m3u8 | http://66.102.126.10:8000/play/a013/index.m3u8 |
 | Working | Same | Epic Kids Digital | https://cc-t8lqe1o99pszu.akamaized.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-t8lqe1o99pszu/playlist.m3u8 | https://cc-t8lqe1o99pszu.akamaized.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-t8lqe1o99pszu/playlist.m3u8 |
-| Working | Same | ETV Bal Bharat | http://103.185.24.134:3001/ETV-BAL-BHARAT/index.m3u8 | http://103.185.24.134:3001/ETV-BAL-BHARAT/index.m3u8 |
-| Working | Same | Hungama TV | http://103.185.24.134:3001/HUNGAMA/index.m3u8 | http://103.185.24.134:3001/HUNGAMA/index.m3u8 |
-| Working | Same | Nick Jr. | http://103.185.24.134:3001/NICK-JR/index.m3u8 | http://103.185.24.134:3001/NICK-JR/index.m3u8 |
-| Working | Same | Nickelodeon | http://103.185.24.134:3001/NICK/index.m3u8 | http://103.185.24.134:3001/NICK/index.m3u8 |
+| Non-working | Same | ETV Bal Bharat | http://103.185.24.134:3001/ETV-BAL-BHARAT/index.m3u8 | http://103.185.24.134:3001/ETV-BAL-BHARAT/index.m3u8 |
+| Non-working | Same | Hungama TV | http://103.185.24.134:3001/HUNGAMA/index.m3u8 | http://103.185.24.134:3001/HUNGAMA/index.m3u8 |
+| Non-working | Same | Nick Jr. | http://103.185.24.134:3001/NICK-JR/index.m3u8 | http://103.185.24.134:3001/NICK-JR/index.m3u8 |
+| Non-working | Same | Nickelodeon | http://103.185.24.134:3001/NICK/index.m3u8 | http://103.185.24.134:3001/NICK/index.m3u8 |
 | Working | Same | Sonic | http://103.185.24.134:3001/SONIC/index.m3u8 | http://103.185.24.134:3001/SONIC/index.m3u8 |
 | Working | Same | Sony Yay! | https://cloudplay-sonyliv.pages.dev/yay.m3u8 | https://cloudplay-sonyliv.pages.dev/yay.m3u8 |
-| Working | Same | Super Hungama | http://103.185.24.134:3001/SUPER-HUNGAMA/index.m3u8 | http://103.185.24.134:3001/SUPER-HUNGAMA/index.m3u8 |
+| Non-working | Same | Super Hungama | http://103.185.24.134:3001/SUPER-HUNGAMA/index.m3u8 | http://103.185.24.134:3001/SUPER-HUNGAMA/index.m3u8 |
 | Working | Same | The Jungle Book | https://cc-4bhi5osabejc9.akamaized.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-4bhi5osabejc9/junglebook.m3u8 | https://cc-4bhi5osabejc9.akamaized.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-4bhi5osabejc9/junglebook.m3u8 |
 | Non-working | Same | like Gecko) Chrome/147.0.0.0 Safari/537.36" group-title="Entertainment;Kids",Unique TV | http://103.175.73.12:8080/live/688/master.m3u8 | http://103.175.73.12:8080/live/688/master.m3u8 |
 | Working | Same | WOW Kidz | https://yuppparoriglin.akamaized.net/181224/smil:wowkidzhindi.smil/playlist.m3u8?hdnts=st=1735898689~exp=1835898688~acl=*~hmac=f5fe24724fe05481e3841f9eb5ab8efdee0a3dd83645ae9dcf45703f525bab7b | https://yuppparoriglin.akamaized.net/181224/smil:wowkidzhindi.smil/playlist.m3u8?hdnts=st=1735898689~exp=1835898688~acl=*~hmac=f5fe24724fe05481e3841f9eb5ab8efdee0a3dd83645ae9dcf45703f525bab7b |
@@ -244,7 +244,7 @@
 | Working | Same | &TV HD | http://202.70.146.135:8000/play/a06c/index.m3u8 | http://202.70.146.135:8000/play/a06c/index.m3u8 |
 | Non-working | Same | &TV International | https://amg01117-amg01117c1-amgplt0029.playout.now3.amagi.tv/playlist/amg01117-amg01117c1-amgplt0029/playlist.m3u8 | https://amg01117-amg01117c1-amgplt0029.playout.now3.amagi.tv/playlist/amg01117-amg01117c1-amgplt0029/playlist.m3u8 |
 | Non-working | Same | &xplor HD (1080p) | http://dksmedia.tv/play/live.php?mac=00:1A:79:B6:60:3D&stream=209743&extension=ts&play_token=mR7FwO88sY | http://dksmedia.tv/play/live.php?mac=00:1A:79:B6:60:3D&stream=209743&extension=ts&play_token=mR7FwO88sY |
-| Working | Same | All Time Movies | https://tvsen6.aynaott.com/a2cKGQtB/index.m3u8 | https://tvsen6.aynaott.com/a2cKGQtB/index.m3u8 |
+| Non-working | Same | All Time Movies | https://tvsen6.aynaott.com/a2cKGQtB/index.m3u8 | https://tvsen6.aynaott.com/a2cKGQtB/index.m3u8 |
 | Working | Same | B4U Kadak | https://streams.tangotv.in/B4UKADAK/ORIGIN/index.m3u8 | https://streams.tangotv.in/B4UKADAK/ORIGIN/index.m3u8 |
 | Working | Same | B4U Movies | https://streams.tangotv.in/B4UMOVIES/ORIGIN/index.m3u8 | https://streams.tangotv.in/B4UMOVIES/ORIGIN/index.m3u8 |
 | Working | Same | Bollygold | https://jmp2.uk/stvp-IN4000600Q | https://jmp2.uk/stvp-IN4000600Q |
@@ -252,7 +252,7 @@
 | Working | Same | Bollywood HD Russia | https://xykt-fix.github.io/cinerama_edge01/hls/BOLLYWOOD_RU/Movie009.m3u8 | https://xykt-fix.github.io/cinerama_edge01/hls/BOLLYWOOD_RU/Movie009.m3u8 |
 | Working | Same | Colors Cineplex Bollywood | http://202.70.146.135:8000/play/a058/index.m3u8 | http://202.70.146.135:8000/play/a058/index.m3u8 |
 | Working | Same | Goldmines | https://streams.tangotv.in/GOLDMINES/ORIGIN/index.m3u8 | https://streams.tangotv.in/GOLDMINES/ORIGIN/index.m3u8 |
-| Working | Same | Goldmines 2 | https://mumt03.tangotv.in/Dsly5z3HGOLDMINES2/index.m3u8 | https://mumt03.tangotv.in/Dsly5z3HGOLDMINES2/index.m3u8 |
+| Non-working | Same | Goldmines 2 | https://mumt03.tangotv.in/Dsly5z3HGOLDMINES2/index.m3u8 | https://mumt03.tangotv.in/Dsly5z3HGOLDMINES2/index.m3u8 |
 | Working | Same | Goldmines Action | https://mumt03.tangotv.in/Dsly5z3HGOLDMINESACTION/index.m3u8 | https://mumt03.tangotv.in/Dsly5z3HGOLDMINESACTION/index.m3u8 |
 | Working | Same | Goldmines Bollywood | https://mumt03.tangotv.in/Dsly5z3HGOLDMINESBOLLYWOOD/index.m3u8 | https://mumt03.tangotv.in/Dsly5z3HGOLDMINESBOLLYWOOD/index.m3u8 |
 | Non-working | Same | like Gecko) Chrome/147.0.0.0 Safari/537.36" group-title="Movies",Goldmines Movies | http://103.175.73.12:8080/live/51/51_0.m3u8 | http://103.175.73.12:8080/live/51/51_0.m3u8 |
@@ -273,12 +273,12 @@
 | Working | Same | Sony Pix HD | https://cloudplay-sonyliv.pages.dev/pixhd.m3u8 | https://cloudplay-sonyliv.pages.dev/pixhd.m3u8 |
 | Working | Same | Sony Wah | https://cloudplay-sonyliv.pages.dev/wah.m3u8 | https://cloudplay-sonyliv.pages.dev/wah.m3u8 |
 | Working | Same | South Station | https://cc-yw7ztecy8do3q.akamaized.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-yw7ztecy8do3q/SS_IN.m3u8 | https://cc-yw7ztecy8do3q.akamaized.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-yw7ztecy8do3q/SS_IN.m3u8 |
-| Working | Same | Star Gold 2 | http://107.167.16.138/stargold2/index.m3u8?token=test | http://107.167.16.138/stargold2/index.m3u8?token=test |
+| Non-working | Same | Star Gold 2 | http://107.167.16.138/stargold2/index.m3u8?token=test | http://107.167.16.138/stargold2/index.m3u8?token=test |
 | Non-working | Same | Star Gold 2 HD | http://66.102.126.10:8000/play/a077/index.m3u8 | http://66.102.126.10:8000/play/a077/index.m3u8 |
 | Non-working | Same | like Gecko) Chrome/129.0.0.0 Safari/537.36" group-title="Movies",Star Gold Thrills | http://103.253.18.58:8000/play/a00o | http://103.253.18.58:8000/play/a00o |
 | Working | Same | The Movie Club | https://sis-global.prod.samsungtv.plus/v1/tvpprd/sc-mp2ar4ca425xo.m3u8 | https://sis-global.prod.samsungtv.plus/v1/tvpprd/sc-mp2ar4ca425xo.m3u8 |
 | Working | Same | The Movie Club +2 | https://d3gnyty2vddhsg.cloudfront.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/pb-ytipwjqub3kf8/TMC2_IN.m3u8?ads.ads_cdn=cf&ads.cdn=cf | https://d3gnyty2vddhsg.cloudfront.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/pb-ytipwjqub3kf8/TMC2_IN.m3u8?ads.ads_cdn=cf&ads.cdn=cf |
-| Working | Same | Zee Action | http://107.167.16.138/zeeaction/index.m3u8?token=test | http://107.167.16.138/zeeaction/index.m3u8?token=test |
+| Non-working | Same | Zee Action | http://107.167.16.138/zeeaction/index.m3u8?token=test | http://107.167.16.138/zeeaction/index.m3u8?token=test |
 | Non-working | Same | Zee Cine Classic | https://amg00862-amg00862c8-amgplt0173.playout.now3.amagi.tv/playlist/amg00862-amg00862c8-amgplt0173/playlist.m3u8 | https://amg00862-amg00862c8-amgplt0173.playout.now3.amagi.tv/playlist/amg00862-amg00862c8-amgplt0173/playlist.m3u8 |
 | Working | Same | Zee Cinema | https://d1g8wgjurz8via.cloudfront.net/bpk-tv/NGCHD/default/NGCHD.m3u8 | https://d1g8wgjurz8via.cloudfront.net/bpk-tv/NGCHD/default/NGCHD.m3u8 |
 | Working | Same | Zee Cinema APAC | https://raw.githubusercontent.com/amazeyourself/adaptive-streams/refs/heads/main/streams/sg/YuppTV/ZeeCinemaAPAC.m3u8 | https://raw.githubusercontent.com/amazeyourself/adaptive-streams/refs/heads/main/streams/sg/YuppTV/ZeeCinemaAPAC.m3u8 |
@@ -344,7 +344,7 @@
 | Working | Same | ABP News | https://d1rc86nwwc9fag.cloudfront.net/vglive-sk-472500/abpnews/master.m3u8 | https://d1rc86nwwc9fag.cloudfront.net/vglive-sk-472500/abpnews/master.m3u8 |
 | Working | Same | AmarUjala | https://amarujala.ottlive.co.in/amarujala/index.m3u8 | https://amarujala.ottlive.co.in/amarujala/index.m3u8 |
 | Working | Same | ANB News | https://server.livelegitpro.in:9899/anbnews/anbnews/index.m3u8 | https://server.livelegitpro.in:9899/anbnews/anbnews/index.m3u8 |
-| Working | Same | APN | https://mumt01.tangotv.in/O5aw8Zn3APN/index.m3u8 | https://mumt01.tangotv.in/O5aw8Zn3APN/index.m3u8 |
+| Non-working | Same | APN | https://mumt01.tangotv.in/O5aw8Zn3APN/index.m3u8 | https://mumt01.tangotv.in/O5aw8Zn3APN/index.m3u8 |
 | Working | Same | Argus News | https://mumt05.tangotv.in/87NeALx2ARGUSNEWS/index.m3u8 | https://mumt05.tangotv.in/87NeALx2ARGUSNEWS/index.m3u8 |
 | Working | Same | Asian News | https://stream.ottlive.co.in/asiannews/index.m3u8 | https://stream.ottlive.co.in/asiannews/index.m3u8 |
 | Working | Same | Awaaz India TV (720p) | https://awaazindia.livebox.co.in/AwaazIndaTVhls/Live.m3u8 | https://awaazindia.livebox.co.in/AwaazIndaTVhls/Live.m3u8 |
@@ -417,7 +417,7 @@
 | Working | Same | Sony BBC Earth HD | https://cloudplay-sonyliv.pages.dev/bbcearthhd.m3u8 | https://cloudplay-sonyliv.pages.dev/bbcearthhd.m3u8 |
 | Working | Same | Sudarshan News | https://ott.livelegitpro.in/sudarshannews/sudarshannews/tracks-v1/index.fmp4.m3u8 | https://ott.livelegitpro.in/sudarshannews/sudarshannews/tracks-v1/index.fmp4.m3u8 |
 | Working | Same | Swadesh News | https://cdn.pishow.tv/ott/live/465/master.m3u8 | https://cdn.pishow.tv/ott/live/465/master.m3u8 |
-| Working | Same | Swaraj Express SMBC | https://mumt04.tangotv.in/m18aqlK4SWARAJEXPRESS/index.m3u8 | https://mumt04.tangotv.in/m18aqlK4SWARAJEXPRESS/index.m3u8 |
+| Non-working | Same | Swaraj Express SMBC | https://mumt04.tangotv.in/m18aqlK4SWARAJEXPRESS/index.m3u8 | https://mumt04.tangotv.in/m18aqlK4SWARAJEXPRESS/index.m3u8 |
 | Working | Same | The Voice TV | https://legitpro.co.in/thevoicetv/thevoicetv/index.m3u8 | https://legitpro.co.in/thevoicetv/thevoicetv/index.m3u8 |
 | Non-working | Same | Times Now (720p) | https://dztlhgid9me95.cloudfront.net/live-tv/Vidgyor/timesnow/timesnow_master.m3u8 | https://dztlhgid9me95.cloudfront.net/live-tv/Vidgyor/timesnow/timesnow_master.m3u8 |
 | Working | Same | Times Now Navbharat | https://raw.githubusercontent.com/amazeyourself/adaptive-streams/refs/heads/main/streams/in/YuppTV/TimesNowNavbharat.m3u8 | https://raw.githubusercontent.com/amazeyourself/adaptive-streams/refs/heads/main/streams/in/YuppTV/TimesNowNavbharat.m3u8 |
