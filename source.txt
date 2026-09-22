@@ -3,8 +3,8 @@ IPTV PLAYLIST SOURCE REPORT
 
 Source: https://iptv-org.github.io/iptv/index.m3u
 Total Channels: 722
-Working Channels: 630
-Non-Working Channels: 92
+Working Channels: 629
+Non-Working Channels: 93
 Indian Sony + Star Working: 21
 
 WORKING CHANNELS
@@ -33,9 +33,11 @@ Awaaz India TV
 Bansal News
 Bansal News 2
 Bansal News 3
+Bansal News 4
 Bharat Samachar
 Bharat Samachar 2
 Bharat Samachar 3
+Bharat Samachar 4
 Bharat24
 Bharat24 2
 Bharat24 3
@@ -72,7 +74,6 @@ India TV 2
 India TV Speed News
 India TV Speed News 2
 India Voice
-India Voice 2
 INH 24x7
 INH 24x7 2
 Janta TV
@@ -90,7 +91,6 @@ Khabrain Abhi Tak 2
 Live Times
 Live Times 2
 Mirror Now 2
-Nagaland TV
 Nation News
 NDTV 24x7
 NDTV 24x7 2
@@ -102,6 +102,7 @@ NDTV Rajasthan
 NE News
 News 1 India
 News 1 India 2
+News 1 India 3
 News 11
 News 11 2
 News 11 3
@@ -127,11 +128,11 @@ News18 Uttar Pradesh Uttarakhand
 News9Live
 News9Live 2
 News9Live 3
-News9Live 4
 NewsX
 NewsX World
 Northeast Live
 NSC9 News
+Only Bharat
 Prime News
 Prime News 2
 Prudent Media
@@ -268,7 +269,6 @@ B4U Music 4
 Balle Balle
 Balle Balle 2
 Balle Balle 3
-Balle Balle 4
 Boogle Bollywood
 Deewana HD
 Dhamaal
@@ -306,12 +306,10 @@ Colors MENA
 Dangal 2
 Dangal 2 2
 Dangal 2 3
-Dangal 2 4
 Dangal TV
 Dangal TV 2
 Dangal TV 3
 Dangal TV 4
-Dangal TV 5
 E 24
 Epic Bharat
 Epic Bharat 2
@@ -332,12 +330,12 @@ MH One Dil Se 2
 Pasand TV
 Pasand TV 2
 Q TV
+Q TV 2
 Shemaroo TV
 Shemaroo TV 2
 Shemaroo TV 3
 Shemaroo TV 4
 Shemaroo TV 5
-Shemaroo TV 6
 Shemaroo Umang
 Shemaroo Umang 2
 Shemaroo Umang 3
@@ -349,7 +347,6 @@ Sony Pal 2
 Sony SAB
 StarPlus
 Unique TV
-Zee TV
 BVG
 DocuBay TV
 Epic Crimes
@@ -357,6 +354,7 @@ Food Food
 Gyandarshan
 Gyandarshan 2
 India TV Aap Ki Adalat
+Vyas Channel
 MediBizTV
 Disney International HD
 Epic Kids
@@ -488,6 +486,7 @@ SVBC 4
 SVBC 4 2
 Swastik TV
 Taaza TV
+Taaza TV 2
 Tehzeeb TV
 Tehzeeb TV 2
 TV BRICS English
@@ -644,14 +643,13 @@ NON-WORKING CHANNELS
 --------------------
 Aaj Tak
 ABP News
-Bansal News
-Bharat Samachar
 Hindi Khabar
+India Voice
 K News India
-News 1 India
+Nagaland TV
 News 24
+News9Live
 NewsX
-Only Bharat
 VIP News
 Vistaar News
 &xplor HD
@@ -669,6 +667,7 @@ Zee South Flix
 9XM
 B4U Music
 B4U Music 2
+Balle Balle
 Dhamaal
 Epic Music
 Mastiii
@@ -680,15 +679,17 @@ Kabaddi 24x7
 &TV 2
 Captain
 Colors
+Dangal 2
+Dangal TV
 Manoranjan TV
-Q TV
+Shemaroo TV
 StarPlus
 StarPlus 2
 Zee Comedy Nation
 Zee Dil Se
 Zee Horror Nights
+Zee TV
 Food Food
-Vyas Channel
 Aradana TV
 Hosanna TV
 Jus Hindi
@@ -696,7 +697,6 @@ Jus One
 Network 10
 Peace of Mind TV
 Sansad TV 1
-Taaza TV
 Zee Cine Classic
 Sansad TV 1
 Sky Sports Cricket (Ireland)
