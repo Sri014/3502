@@ -72,6 +72,7 @@ India TV 2
 India TV Speed News
 India TV Speed News 2
 India Voice
+India Voice 2
 INH 24x7
 INH 24x7 2
 Janta TV
@@ -89,6 +90,7 @@ Khabrain Abhi Tak 2
 Live Times
 Live Times 2
 Mirror Now 2
+Nagaland TV
 Nation News
 NDTV 24x7
 NDTV 24x7 2
@@ -132,6 +134,7 @@ Northeast Live
 NSC9 News
 Prime News
 Prime News 2
+Prudent Media
 Republic Bharat
 Republic Bharat 2
 Republic Bharat 3
@@ -194,7 +197,6 @@ Zee News 4
 Zee Rajasthan
 Zee Uttar Pradesh/Uttarakhand
 Zee Uttar Pradesh/Uttarakhand 2
-&xplor HD
 B4U Bhojpuri
 B4U Bhojpuri 2
 B4U Bhojpuri 3
@@ -211,13 +213,11 @@ Bhojpuri Cinema 3
 Bhojpuri Cinema 4
 Bollygold
 Colors Cineplex Bollywood
-Colors Cineplex Bollywood 2
 Epic Bhojpuri
 Epic Bhojpuri 2
 Goldmines
 Goldmines 2
 Goldmines 3
-Goldmines 4
 Goldmines 2
 Goldmines Action
 Goldmines Bollywood
@@ -244,7 +244,6 @@ Shubh Cinema TV
 Shubh Cinema TV 2
 Sony Max
 Sony Max 2
-Sony Max 3
 Sony Max 2
 Sony Max 2 2
 Sony Wah
@@ -291,6 +290,7 @@ YRF Music
 Zing!
 Zoom
 Zoom 2
+Zoom 3
 Sony Sports Ten 1
 Sony Sports Ten 2
 Sony Sports Ten 2 2
@@ -327,7 +327,6 @@ Manoranjan Prime 2
 Manoranjan TV
 Manoranjan TV 2
 Manoranjan TV 3
-Manoranjan TV 4
 MH One Dil Se
 MH One Dil Se 2
 Pasand TV
@@ -342,6 +341,7 @@ Shemaroo TV 6
 Shemaroo Umang
 Shemaroo Umang 2
 Shemaroo Umang 3
+Shemaroo Umang 4
 Sony Entertainment Television
 Sony Entertainment Television 2
 Sony Pal
@@ -647,21 +647,22 @@ ABP News
 Bansal News
 Bharat Samachar
 Hindi Khabar
-India Voice
 K News India
-Nagaland TV
 News 1 India
 News 24
 NewsX
 Only Bharat
-Prudent Media
 VIP News
 Vistaar News
+&xplor HD
 All Time Movies
 B4U Kadak
 B4U Movies
+Colors Cineplex Bollywood
+Goldmines
 Goldmines Bollywood
 Goldmines Movies 2
+Sony Max
 Sony Max 2
 Sony Wah
 Zee South Flix
@@ -674,14 +675,13 @@ Mastiii
 Music India
 Shemaroo Filmi Gaane
 YRF Music
-Zoom
 Kabaddi 24x7
 &TV
 &TV 2
 Captain
 Colors
+Manoranjan TV
 Q TV
-Shemaroo Umang
 StarPlus
 StarPlus 2
 Zee Comedy Nation
