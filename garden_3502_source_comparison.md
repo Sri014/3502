@@ -86,7 +86,7 @@
 | Working | Same | Satsang Web TV | https://d1ji7e9jbzm5g8.cloudfront.net/out/v1/769f22f64d80442889306b9c4abea63c/index.m3u8 | https://d1ji7e9jbzm5g8.cloudfront.net/out/v1/769f22f64d80442889306b9c4abea63c/index.m3u8 |
 | Working | Same | Shubhsandesh TV | https://mumt03.tangotv.in/Dsly5z3HSHUBHSANDESH/index.m3u8 | https://mumt03.tangotv.in/Dsly5z3HSHUBHSANDESH/index.m3u8 |
 | Working | Same | Soham TV | https://mumt03.tangotv.in/Dsly5z3HSOHAMTV/index.m3u8 | https://mumt03.tangotv.in/Dsly5z3HSOHAMTV/index.m3u8 |
-| Non-working | Same | SVBC 4 | https://player.mslivestream.net/mslive/13a2927187b9700ae7ea82d7841d5b68.sdp/playlist.m3u8 | https://player.mslivestream.net/mslive/13a2927187b9700ae7ea82d7841d5b68.sdp/playlist.m3u8 |
+| Working | Same | SVBC 4 | https://player.mslivestream.net/mslive/13a2927187b9700ae7ea82d7841d5b68.sdp/playlist.m3u8 | https://player.mslivestream.net/mslive/13a2927187b9700ae7ea82d7841d5b68.sdp/playlist.m3u8 |
 | Working | Same | Swastik TV | https://server.playontv.in/swastiktv/index.m3u8 | https://server.playontv.in/swastiktv/index.m3u8 |
 | Working | Same | Total Bhakti | https://d34z4embz0hjf6.cloudfront.net/out/v1/d55b3323a9f142638f897378f0b526fe/index.m3u8 | https://d34z4embz0hjf6.cloudfront.net/out/v1/d55b3323a9f142638f897378f0b526fe/index.m3u8 |
 | Working | Same | Vedic | https://mumt05.tangotv.in/87NeALx2VEDIC/index.m3u8 | https://mumt05.tangotv.in/87NeALx2VEDIC/index.m3u8 |
@@ -97,7 +97,7 @@
 |---|---|---|---|---|
 | Working | Same | Anjan TV | https://anjan.vstream.online/anjanorg/ngrp:anjan_hdall/playlist.m3u8 | https://anjan.vstream.online/anjanorg/ngrp:anjan_hdall/playlist.m3u8 |
 | Working | Same | Apna Punjab TV | https://plus.gigabitcdn.net/live-stream/apna-punjab-H3sE/playlist.m3u8 | https://plus.gigabitcdn.net/live-stream/apna-punjab-H3sE/playlist.m3u8 |
-| Working | Same | Aryan TV National | https://mumt04.tangotv.in/m18aqlK4ARYANTVNATIONAL/index.m3u8 | https://mumt04.tangotv.in/m18aqlK4ARYANTVNATIONAL/index.m3u8 |
+| Non-working | Same | Aryan TV National | https://mumt04.tangotv.in/m18aqlK4ARYANTVNATIONAL/index.m3u8 | https://mumt04.tangotv.in/m18aqlK4ARYANTVNATIONAL/index.m3u8 |
 | Working | Same | BVG | https://mumt05.tangotv.in/87NeALx2BVG/index.m3u8 | https://mumt05.tangotv.in/87NeALx2BVG/index.m3u8 |
 | Non-working | Same | Colors HD | http://66.102.126.10:8000/play/a00a/index.m3u8 | http://66.102.126.10:8000/play/a00a/index.m3u8 |
 | Working | Same | Colors MENA HD | https://da86m1sqpm3o0.cloudfront.net/28072023/smil:colorsme.smil/playlist.m3u8 | https://da86m1sqpm3o0.cloudfront.net/28072023/smil:colorsme.smil/playlist.m3u8 |
@@ -115,7 +115,7 @@
 | Working | Same | DD Kisan | https://mumbai-edge.smartplaytv.in/DDKisan/index.m3u8 | https://mumbai-edge.smartplaytv.in/DDKisan/index.m3u8 |
 | Working | Same | DD Madhya Pradesh | https://mumbai-edge.smartplaytv.in/ddmadhyapradesh/index.m3u8 | https://mumbai-edge.smartplaytv.in/ddmadhyapradesh/index.m3u8 |
 | Working | Same | DD Manipur | https://d2lk5u59tns74c.cloudfront.net/out/v1/8b75afc6576f450e8f554b6c877681d2/index.m3u8 | https://d2lk5u59tns74c.cloudfront.net/out/v1/8b75afc6576f450e8f554b6c877681d2/index.m3u8 |
-| Working | Same | DD National | http://107.167.16.138/ddnational/index.m3u8?token=test | http://107.167.16.138/ddnational/index.m3u8?token=test |
+| Non-working | Same | DD National | http://107.167.16.138/ddnational/index.m3u8?token=test | http://107.167.16.138/ddnational/index.m3u8?token=test |
 | Working | Same | DD National HD | https://mumbai-edge.smartplaytv.in/DDNational/index.m3u8 | https://mumbai-edge.smartplaytv.in/DDNational/index.m3u8 |
 | Working | Same | DD Rajasthan | https://cdn.pishow.tv/ott/live/34/master.m3u8 | https://cdn.pishow.tv/ott/live/34/master.m3u8 |
 | Working | Same | DD Uttar Pradesh | https://cdn.pishow.tv/ott/live/36/master.m3u8 | https://cdn.pishow.tv/ott/live/36/master.m3u8 |
@@ -139,7 +139,7 @@
 | Working | Same | Gangaur TV | https://pbgangaur.wiseplayout.com/Gangaur/master.m3u8 | https://pbgangaur.wiseplayout.com/Gangaur/master.m3u8 |
 | Working | Same | Gyandarshan | https://cdn.pishow.tv/ott/live/14/master.m3u8 | https://cdn.pishow.tv/ott/live/14/master.m3u8 |
 | Working | Same | Gyandarshan HD | https://mumt05.tangotv.in/87NeALx2GYANDARSHAN/index.m3u8 | https://mumt05.tangotv.in/87NeALx2GYANDARSHAN/index.m3u8 |
-| Non-working | Same | HSTV | https://live.castmaxcloud.com/live/hstv.m3u8 | https://live.castmaxcloud.com/live/hstv.m3u8 |
+| Working | Same | HSTV | https://live.castmaxcloud.com/live/hstv.m3u8 | https://live.castmaxcloud.com/live/hstv.m3u8 |
 | Working | Same | Hyder TV | https://cdn.live247stream.com/hyder/tv/playlist.m3u8 | https://cdn.live247stream.com/hyder/tv/playlist.m3u8 |
 | Working | Same | Jan TV | https://d1msejlow1t3l4.cloudfront.net/fta/jantv/playlist.m3u8 | https://d1msejlow1t3l4.cloudfront.net/fta/jantv/playlist.m3u8 |
 | Non-working | Same | Jus Hindi | http://103.154.3.101:5001/live/960.m3u8 | http://103.154.3.101:5001/live/960.m3u8 |
@@ -150,7 +150,7 @@
 | Working | Same | Mh 1 Prime | https://streams.tangotv.in/MHONE/ORIGIN/index.m3u8 | https://streams.tangotv.in/MHONE/ORIGIN/index.m3u8 |
 | Working | Same | MH One Dil Se | https://streams.tangotv.in/MHONEDILSE/ORIGIN/index.m3u8 | https://streams.tangotv.in/MHONEDILSE/ORIGIN/index.m3u8 |
 | Working | Same | Network 10 | https://mumbai-edge.smartplaytv.in/Network10/index.m3u8 | https://mumbai-edge.smartplaytv.in/Network10/index.m3u8 |
-| Non-working | Same | Prarthana Bhawan TV | https://mumt03.tangotv.in/Dsly5z3HPRATHANABHAWAN/index.m3u8 | https://mumt03.tangotv.in/Dsly5z3HPRATHANABHAWAN/index.m3u8 |
+| Working | Same | Prarthana Bhawan TV | https://mumt03.tangotv.in/Dsly5z3HPRATHANABHAWAN/index.m3u8 | https://mumt03.tangotv.in/Dsly5z3HPRATHANABHAWAN/index.m3u8 |
 | Working | Same | Q TV | https://mumt05.tangotv.in/87NeALx2THEQ/index.m3u8 | https://mumt05.tangotv.in/87NeALx2THEQ/index.m3u8 |
 | Working | Same | Raftaar Media | https://mumt04.tangotv.in/m18aqlK4RAFTAARMEDIA/index.m3u8 | https://mumt04.tangotv.in/m18aqlK4RAFTAARMEDIA/index.m3u8 |
 | Working | Same | Rongeen TV | https://server.thelegitpro.in/rongeentv/rongeentv/index.m3u8 | https://server.thelegitpro.in/rongeentv/rongeentv/index.m3u8 |
@@ -168,7 +168,7 @@
 | Working | Same | Sony Entertainment Television HD | http://38.96.178.205/SONYHD/index.m3u8 | http://38.96.178.205/SONYHD/index.m3u8 |
 | Working | Same | Sony KAL Hindi | https://wurlsonypicturestv.global.transmit.live/hls/68deeb1c0238cda82df543dd/v1/spt_sonykal_1/lg_us/latest/main/hls/playlist.m3u8 | https://wurlsonypicturestv.global.transmit.live/hls/68deeb1c0238cda82df543dd/v1/spt_sonykal_1/lg_us/latest/main/hls/playlist.m3u8 |
 | Working | Same | Sony Pal | https://cloudplay-sonyliv.pages.dev/pal.m3u8 | https://cloudplay-sonyliv.pages.dev/pal.m3u8 |
-| Working | Same | Sony SAB HD | https://cloudplay-sonyliv.pages.dev/sabhd.m3u8 | https://cloudplay-sonyliv.pages.dev/sabhd.m3u8 |
+| Non-working | Same | Sony SAB HD | https://cloudplay-sonyliv.pages.dev/sabhd.m3u8 | https://cloudplay-sonyliv.pages.dev/sabhd.m3u8 |
 | Working | Same | StarPlus HD (1080i) | http://202.70.146.135:8000/play/a009/index.m3u8 | http://202.70.146.135:8000/play/a009/index.m3u8 |
 | Working | Same | Taaza TV | https://live.we2live.in/taazatv/live/playlist.m3u8 | https://live.we2live.in/taazatv/live/playlist.m3u8 |
 | Working | Same | TAG TV (1080p) | http://cdn11.live247stream.com/tag/tv/playlist.m3u8 | http://cdn11.live247stream.com/tag/tv/playlist.m3u8 |
@@ -235,7 +235,7 @@
 | Working | Same | South Station | https://cc-yw7ztecy8do3q.akamaized.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-yw7ztecy8do3q/SS_IN.m3u8 | https://cc-yw7ztecy8do3q.akamaized.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-yw7ztecy8do3q/SS_IN.m3u8 |
 | Working | Same | The Movie Club | https://sis-global.prod.samsungtv.plus/v1/tvpprd/sc-mp2ar4ca425xo.m3u8 | https://sis-global.prod.samsungtv.plus/v1/tvpprd/sc-mp2ar4ca425xo.m3u8 |
 | Working | Same | The Movie Club +2 | https://d3gnyty2vddhsg.cloudfront.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/pb-ytipwjqub3kf8/TMC2_IN.m3u8?ads.ads_cdn=cf&ads.cdn=cf | https://d3gnyty2vddhsg.cloudfront.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/pb-ytipwjqub3kf8/TMC2_IN.m3u8?ads.ads_cdn=cf&ads.cdn=cf |
-| Working | Same | Zee Action | http://107.167.16.138/zeeaction/index.m3u8?token=test | http://107.167.16.138/zeeaction/index.m3u8?token=test |
+| Non-working | Same | Zee Action | http://107.167.16.138/zeeaction/index.m3u8?token=test | http://107.167.16.138/zeeaction/index.m3u8?token=test |
 | Non-working | Same | Zee Cine Classic | https://amg00862-amg00862c8-amgplt0173.playout.now3.amagi.tv/playlist/amg00862-amg00862c8-amgplt0173/playlist.m3u8 | https://amg00862-amg00862c8-amgplt0173.playout.now3.amagi.tv/playlist/amg00862-amg00862c8-amgplt0173/playlist.m3u8 |
 | Working | Same | Zee Cinema | https://d1g8wgjurz8via.cloudfront.net/bpk-tv/NGCHD/default/NGCHD.m3u8 | https://d1g8wgjurz8via.cloudfront.net/bpk-tv/NGCHD/default/NGCHD.m3u8 |
 | Working | Same | Zee Cinema APAC | https://raw.githubusercontent.com/amazeyourself/adaptive-streams/refs/heads/main/streams/sg/YuppTV/ZeeCinemaAPAC.m3u8 | https://raw.githubusercontent.com/amazeyourself/adaptive-streams/refs/heads/main/streams/sg/YuppTV/ZeeCinemaAPAC.m3u8 |
@@ -254,7 +254,7 @@
 |---|---|---|---|---|
 | Working | Same | 9X Jalwa | https://wiselp.wiseplayout.com/9X_Jalwa/master.m3u8 | https://wiselp.wiseplayout.com/9X_Jalwa/master.m3u8 |
 | Working | Same | 9XM | https://9xjio.wiseplayout.com/9XM/master.m3u8 | https://9xjio.wiseplayout.com/9XM/master.m3u8 |
-| Non-working | Same | Andy Haryana | https://mumt03.tangotv.in/Dsly5z3HANDYHARYANA/index.m3u8 | https://mumt03.tangotv.in/Dsly5z3HANDYHARYANA/index.m3u8 |
+| Working | Same | Andy Haryana | https://mumt03.tangotv.in/Dsly5z3HANDYHARYANA/index.m3u8 | https://mumt03.tangotv.in/Dsly5z3HANDYHARYANA/index.m3u8 |
 | Working | Same | B4U Music | https://cdn.pishow.tv/ott/live/415/master.m3u8 | https://cdn.pishow.tv/ott/live/415/master.m3u8 |
 | Working | Same | Balle Balle | https://streams.tangotv.in/BALLEBALLE/ORIGIN/index.m3u8 | https://streams.tangotv.in/BALLEBALLE/ORIGIN/index.m3u8 |
 | Working | Same | Balle Balle HD | https://mcncdndigital.com/balleballetv/index.m3u8 | https://mcncdndigital.com/balleballetv/index.m3u8 |
@@ -272,7 +272,7 @@
 | Working | Same | Songdew TV | https://yuppnimrestreammum.akamaized.net/181224/smil:songdewtv.smil/playlist.m3u8?hdnts=st=1735898689~exp=1835898688~acl=*~hmac=f5fe24724fe05481e3841f9eb5ab8efdee0a3dd83645ae9dcf45703f525bab7b | https://yuppnimrestreammum.akamaized.net/181224/smil:songdewtv.smil/playlist.m3u8?hdnts=st=1735898689~exp=1835898688~acl=*~hmac=f5fe24724fe05481e3841f9eb5ab8efdee0a3dd83645ae9dcf45703f525bab7b |
 | Working | Same | Steelbird Music (720p) | https://cdn2.in/SteelbirdMusicTVhls/live.m3u8 | https://cdn2.in/SteelbirdMusicTVhls/live.m3u8 |
 | Working | Same | YRF Music | https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg01412-xiaomiasia-yrfmusic-xiaomi/playlist.m3u8 | https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg01412-xiaomiasia-yrfmusic-xiaomi/playlist.m3u8 |
-| Working | Same | Zing! | http://107.167.16.138/zing/index.m3u8?token=test | http://107.167.16.138/zing/index.m3u8?token=test |
+| Non-working | Same | Zing! | http://107.167.16.138/zing/index.m3u8?token=test | http://107.167.16.138/zing/index.m3u8?token=test |
 | Working | Same | Zoom (India) | https://dai.google.com/linear/hls/event/JCAm25qkRXiKcK1AJMlvKQ/master.m3u8 | https://dai.google.com/linear/hls/event/JCAm25qkRXiKcK1AJMlvKQ/master.m3u8 |
 | Working | Same | Sangeet Bhojpuri | https://mumt01.tangotv.in/O5aw8Zn3SANGEETBHOJPURI/index.m3u8 | https://mumt01.tangotv.in/O5aw8Zn3SANGEETBHOJPURI/index.m3u8 |
 | Working | Same | 7S Music | https://cdn.pishow.tv/ott/live/1257/master.m3u8 | https://cdn.pishow.tv/ott/live/1257/master.m3u8 |
@@ -284,7 +284,7 @@
 | Working | Same | PTC Music | https://d2lk5u59tns74c.cloudfront.net/out/v1/f913cf893c594f73b114216e74a2efbc/index.m3u8 | https://d2lk5u59tns74c.cloudfront.net/out/v1/f913cf893c594f73b114216e74a2efbc/index.m3u8 |
 | Working | Same | Public Music | https://mumt04.tangotv.in/m18aqlK4PUBLICMUSIC/index.m3u8 | https://mumt04.tangotv.in/m18aqlK4PUBLICMUSIC/index.m3u8 |
 | Working | Same | Tarang Music | https://livetv.tarangplus.in/tarangmusic-origin/live/playlist.m3u8 | https://livetv.tarangplus.in/tarangmusic-origin/live/playlist.m3u8 |
-| Working | Same | ZB Music | https://server.zillarbarta.com/zbmusic/index.m3u8 | https://server.zillarbarta.com/zbmusic/index.m3u8 |
+| Non-working | Same | ZB Music | https://server.zillarbarta.com/zbmusic/index.m3u8 | https://server.zillarbarta.com/zbmusic/index.m3u8 |
 
 ## News
 
