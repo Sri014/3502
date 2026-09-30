@@ -101,7 +101,7 @@
 | Working | Same | BVG | https://mumt05.tangotv.in/87NeALx2BVG/index.m3u8 | https://mumt05.tangotv.in/87NeALx2BVG/index.m3u8 |
 | Non-working | Same | Colors HD | http://66.102.126.10:8000/play/a00a/index.m3u8 | http://66.102.126.10:8000/play/a00a/index.m3u8 |
 | Working | Same | Colors MENA HD | https://da86m1sqpm3o0.cloudfront.net/28072023/smil:colorsme.smil/playlist.m3u8 | https://da86m1sqpm3o0.cloudfront.net/28072023/smil:colorsme.smil/playlist.m3u8 |
-| Non-working | Same | Colors Rishtey Americas | https://manatv.akamaized.net/090823/smil:ristheyamerica.smil/playlist.m3u8 | https://manatv.akamaized.net/090823/smil:ristheyamerica.smil/playlist.m3u8 |
+| Working | Same | Colors Rishtey Americas | https://manatv.akamaized.net/090823/smil:ristheyamerica.smil/playlist.m3u8 | https://manatv.akamaized.net/090823/smil:ristheyamerica.smil/playlist.m3u8 |
 | Working | Same | Dangal 2 | https://live-dangal2.akamaized.net/liveabr/playlist.m3u8 | https://live-dangal2.akamaized.net/liveabr/playlist.m3u8 |
 | Working | Same | Dangal TV | https://live-dangal.akamaized.net/liveabr/playlist.m3u8 | https://live-dangal.akamaized.net/liveabr/playlist.m3u8 |
 | Working | Same | DD Arun Prabha | https://d2lk5u59tns74c.cloudfront.net/out/v1/308556d9fd1246adb479ef012a39bbfe/index.m3u8 | https://d2lk5u59tns74c.cloudfront.net/out/v1/308556d9fd1246adb479ef012a39bbfe/index.m3u8 |
@@ -206,7 +206,7 @@
 | Working | Same | &TV HD | http://202.70.146.135:8000/play/a06c/index.m3u8 | http://202.70.146.135:8000/play/a06c/index.m3u8 |
 | Non-working | Same | &TV International | https://amg01117-amg01117c1-amgplt0029.playout.now3.amagi.tv/playlist/amg01117-amg01117c1-amgplt0029/playlist.m3u8 | https://amg01117-amg01117c1-amgplt0029.playout.now3.amagi.tv/playlist/amg01117-amg01117c1-amgplt0029/playlist.m3u8 |
 | Non-working | Same | &xplor HD (1080p) | http://dksmedia.tv/play/live.php?mac=00:1A:79:B6:60:3D&stream=209743&extension=ts&play_token=mR7FwO88sY | http://dksmedia.tv/play/live.php?mac=00:1A:79:B6:60:3D&stream=209743&extension=ts&play_token=mR7FwO88sY |
-| Non-working | Same | All Time Movies | https://tvsen6.aynaott.com/a2cKGQtB/index.m3u8 | https://tvsen6.aynaott.com/a2cKGQtB/index.m3u8 |
+| Working | Same | All Time Movies | https://tvsen6.aynaott.com/a2cKGQtB/index.m3u8 | https://tvsen6.aynaott.com/a2cKGQtB/index.m3u8 |
 | Working | Same | B4U Kadak | https://streams.tangotv.in/B4UKADAK/ORIGIN/index.m3u8 | https://streams.tangotv.in/B4UKADAK/ORIGIN/index.m3u8 |
 | Working | Same | B4U Movies | https://streams.tangotv.in/B4UMOVIES/ORIGIN/index.m3u8 | https://streams.tangotv.in/B4UMOVIES/ORIGIN/index.m3u8 |
 | Working | Same | Bollygold | https://jmp2.uk/stvp-IN4000600Q | https://jmp2.uk/stvp-IN4000600Q |
@@ -235,12 +235,12 @@
 | Working | Same | South Station | https://cc-yw7ztecy8do3q.akamaized.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-yw7ztecy8do3q/SS_IN.m3u8 | https://cc-yw7ztecy8do3q.akamaized.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-yw7ztecy8do3q/SS_IN.m3u8 |
 | Working | Same | The Movie Club | https://sis-global.prod.samsungtv.plus/v1/tvpprd/sc-mp2ar4ca425xo.m3u8 | https://sis-global.prod.samsungtv.plus/v1/tvpprd/sc-mp2ar4ca425xo.m3u8 |
 | Working | Same | The Movie Club +2 | https://d3gnyty2vddhsg.cloudfront.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/pb-ytipwjqub3kf8/TMC2_IN.m3u8?ads.ads_cdn=cf&ads.cdn=cf | https://d3gnyty2vddhsg.cloudfront.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/pb-ytipwjqub3kf8/TMC2_IN.m3u8?ads.ads_cdn=cf&ads.cdn=cf |
-| Working | Same | Zee Action | http://107.167.16.138/zeeaction/index.m3u8?token=test | http://107.167.16.138/zeeaction/index.m3u8?token=test |
+| Non-working | Same | Zee Action | http://107.167.16.138/zeeaction/index.m3u8?token=test | http://107.167.16.138/zeeaction/index.m3u8?token=test |
 | Non-working | Same | Zee Cine Classic | https://amg00862-amg00862c8-amgplt0173.playout.now3.amagi.tv/playlist/amg00862-amg00862c8-amgplt0173/playlist.m3u8 | https://amg00862-amg00862c8-amgplt0173.playout.now3.amagi.tv/playlist/amg00862-amg00862c8-amgplt0173/playlist.m3u8 |
 | Working | Same | Zee Cinema | https://d1g8wgjurz8via.cloudfront.net/bpk-tv/NGCHD/default/NGCHD.m3u8 | https://d1g8wgjurz8via.cloudfront.net/bpk-tv/NGCHD/default/NGCHD.m3u8 |
 | Working | Same | Zee Cinema APAC | https://raw.githubusercontent.com/amazeyourself/adaptive-streams/refs/heads/main/streams/sg/YuppTV/ZeeCinemaAPAC.m3u8 | https://raw.githubusercontent.com/amazeyourself/adaptive-streams/refs/heads/main/streams/sg/YuppTV/ZeeCinemaAPAC.m3u8 |
 | Non-working | Same | Zee Cinemalu HD | https://mumbai-edge.smartplaytv.in/ZeeCinemaluHD/index.m3u8 | https://mumbai-edge.smartplaytv.in/ZeeCinemaluHD/index.m3u8 |
-| Non-working | Same | Zee Classic | http://107.167.16.138/zeeclassic/index.m3u8?token=test | http://107.167.16.138/zeeclassic/index.m3u8?token=test |
+| Working | Same | Zee Classic | http://107.167.16.138/zeeclassic/index.m3u8?token=test | http://107.167.16.138/zeeclassic/index.m3u8?token=test |
 | Non-working | Same | Zee South Flix | https://amg00862-amg00862c9-amgplt0173.playout.now3.amagi.tv/playlist/amg00862-amg00862c9-amgplt0173/playlist.m3u8 | https://amg00862-amg00862c9-amgplt0173.playout.now3.amagi.tv/playlist/amg00862-amg00862c9-amgplt0173/playlist.m3u8 |
 | Working | Same | B4U Bhojpuri | https://cdnb4u.wiseplayout.com/B4U_Bhojpuri/master.m3u8 | https://cdnb4u.wiseplayout.com/B4U_Bhojpuri/master.m3u8 |
 | Working | Same | Bhojpuri Cinema | https://live-bhojpuri.akamaized.net/liveabr/playlist.m3u8 | https://live-bhojpuri.akamaized.net/liveabr/playlist.m3u8 |
