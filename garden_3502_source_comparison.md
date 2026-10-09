@@ -144,7 +144,7 @@
 | Working | Same | Gangaur TV | https://pbgangaur.wiseplayout.com/Gangaur/master.m3u8 | https://pbgangaur.wiseplayout.com/Gangaur/master.m3u8 |
 | Working | Same | Gyandarshan | https://cdn.pishow.tv/ott/live/14/master.m3u8 | https://cdn.pishow.tv/ott/live/14/master.m3u8 |
 | Working | Same | Gyandarshan HD | https://mumt05.tangotv.in/87NeALx2GYANDARSHAN/index.m3u8 | https://mumt05.tangotv.in/87NeALx2GYANDARSHAN/index.m3u8 |
-| Working | Same | HSTV | https://live.castmaxcloud.com/live/hstv.m3u8 | https://live.castmaxcloud.com/live/hstv.m3u8 |
+| Non-working | Same | HSTV | https://live.castmaxcloud.com/live/hstv.m3u8 | https://live.castmaxcloud.com/live/hstv.m3u8 |
 | Working | Same | Hyder TV | https://cdn.live247stream.com/hyder/tv/playlist.m3u8 | https://cdn.live247stream.com/hyder/tv/playlist.m3u8 |
 | Working | Same | Jan TV | https://d1msejlow1t3l4.cloudfront.net/fta/jantv/playlist.m3u8 | https://d1msejlow1t3l4.cloudfront.net/fta/jantv/playlist.m3u8 |
 | Non-working | Same | Jus Hindi | http://103.154.3.101:5001/live/960.m3u8 | http://103.154.3.101:5001/live/960.m3u8 |
@@ -166,7 +166,7 @@
 | Working | Same | Sansad TV 2 HD | https://d2lk5u59tns74c.cloudfront.net/out/v1/e4182054dce340da9e0ff38b6b3658a4/index.m3u8 | https://d2lk5u59tns74c.cloudfront.net/out/v1/e4182054dce340da9e0ff38b6b3658a4/index.m3u8 |
 | Non-working | Same | Santvani Channel | http://51.75.127.199:3141/santvani/index.m3u8 | http://51.75.127.199:3141/santvani/index.m3u8 |
 | Working | Same | Sarv Dharm Sangam | https://mumt01.tangotv.in/O5aw8Zn3SARAVDHARAMSANGAM/index.m3u8 | https://mumt01.tangotv.in/O5aw8Zn3SARAVDHARAMSANGAM/index.m3u8 |
-| Working | Same | Sharnam TV | https://mumt06.tangotv.in/qYyB8fXVSHARNAMTV/index.m3u8 | https://mumt06.tangotv.in/qYyB8fXVSHARNAMTV/index.m3u8 |
+| Non-working | Same | Sharnam TV | https://mumt06.tangotv.in/qYyB8fXVSHARNAMTV/index.m3u8 | https://mumt06.tangotv.in/qYyB8fXVSHARNAMTV/index.m3u8 |
 | Working | Same | Shemaroo TV | https://airtelapp.shemaroo.com/shemarootv/smil:shemarootvadp.smil/playlist.m3u8 | https://airtelapp.shemaroo.com/shemarootv/smil:shemarootvadp.smil/playlist.m3u8 |
 | Working | Same | Shemaroo Umang | https://airtelapp.shemaroo.com/shemarooumang/smil:shemarooumangadp.smil/playlist.m3u8 | https://airtelapp.shemaroo.com/shemarooumang/smil:shemarooumangadp.smil/playlist.m3u8 |
 | Working | Same | Shubh TV | https://d2g1vdc6ozl2o8.cloudfront.net/out/v1/0a0dc7d7911b4fddbb4dfc963fdd4b9e/index.m3u8 | https://d2g1vdc6ozl2o8.cloudfront.net/out/v1/0a0dc7d7911b4fddbb4dfc963fdd4b9e/index.m3u8 |
@@ -306,7 +306,7 @@
 | Working | Same | Songdew TV | https://yuppnimrestreammum.akamaized.net/181224/smil:songdewtv.smil/playlist.m3u8?hdnts=st=1735898689~exp=1835898688~acl=*~hmac=f5fe24724fe05481e3841f9eb5ab8efdee0a3dd83645ae9dcf45703f525bab7b | https://yuppnimrestreammum.akamaized.net/181224/smil:songdewtv.smil/playlist.m3u8?hdnts=st=1735898689~exp=1835898688~acl=*~hmac=f5fe24724fe05481e3841f9eb5ab8efdee0a3dd83645ae9dcf45703f525bab7b |
 | Working | Same | Steelbird Music (720p) | https://cdn2.in/SteelbirdMusicTVhls/live.m3u8 | https://cdn2.in/SteelbirdMusicTVhls/live.m3u8 |
 | Working | Same | YRF Music | https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg01412-xiaomiasia-yrfmusic-xiaomi/playlist.m3u8 | https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg01412-xiaomiasia-yrfmusic-xiaomi/playlist.m3u8 |
-| Working | Same | Zing! | http://107.167.16.138/zing/index.m3u8?token=test | http://107.167.16.138/zing/index.m3u8?token=test |
+| Non-working | Same | Zing! | http://107.167.16.138/zing/index.m3u8?token=test | http://107.167.16.138/zing/index.m3u8?token=test |
 | Working | Same | Zoom (India) | https://dai.google.com/linear/hls/event/JCAm25qkRXiKcK1AJMlvKQ/master.m3u8 | https://dai.google.com/linear/hls/event/JCAm25qkRXiKcK1AJMlvKQ/master.m3u8 |
 | Working | Same | Sangeet Bhojpuri | https://mumt01.tangotv.in/O5aw8Zn3SANGEETBHOJPURI/index.m3u8 | https://mumt01.tangotv.in/O5aw8Zn3SANGEETBHOJPURI/index.m3u8 |
 | Working | Same | 7S Music | https://cdn.pishow.tv/ott/live/1257/master.m3u8 | https://cdn.pishow.tv/ott/live/1257/master.m3u8 |
@@ -431,7 +431,7 @@
 | Working | Same | TV9 Bharatvarsh | https://dyjmyiv3bp2ez.cloudfront.net/pub-iotv9hinjzgtpe/liveabr/playlist.m3u8 | https://dyjmyiv3bp2ez.cloudfront.net/pub-iotv9hinjzgtpe/liveabr/playlist.m3u8 |
 | Non-working | Same | TV 24 | http://51.75.127.199:3141/tv24/index.m3u8 | http://51.75.127.199:3141/tv24/index.m3u8 |
 | Non-working | Same | TV27 News | http://51.75.127.199:3141/tv27news/index.m3u8 | http://51.75.127.199:3141/tv27news/index.m3u8 |
-| Working | Same | TV30 India | https://stream.tv30bharat.com/hls/shree/bhattji.m3u8 | https://stream.tv30bharat.com/hls/shree/bhattji.m3u8 |
+| Non-working | Same | TV30 India | https://stream.tv30bharat.com/hls/shree/bhattji.m3u8 | https://stream.tv30bharat.com/hls/shree/bhattji.m3u8 |
 | Working | Same | TV45 | https://server.livelegitpro.in/bnews24/bnews24/video.m3u8 | https://server.livelegitpro.in/bnews24/bnews24/video.m3u8 |
 | Working | Same | UP NOW | http://45.122.122.61:8080/UPNOW/video.m3u8 | http://45.122.122.61:8080/UPNOW/video.m3u8 |
 | Non-working | Same | VIP News | https://live.vipnews24x7.co.in/vipnews24x7/d0dbe915091d400bd8ee7f27f0791303.sdp/playlist.m3u8 | https://live.vipnews24x7.co.in/vipnews24x7/d0dbe915091d400bd8ee7f27f0791303.sdp/playlist.m3u8 |
