@@ -6,8 +6,8 @@
   "rule": "Exact stream URL match first; channel name only distinguishes Different URL from Not Found.",
   "garden_working": 442,
   "garden_nonworking": 64,
-  "same_url_working": 259,
-  "same_url_nonworking": 38,
+  "same_url_working": 260,
+  "same_url_nonworking": 37,
   "different_url_working": 5,
   "different_url_nonworking": 0,
   "not_found_working": 171,
@@ -56,20 +56,16 @@
       "url": "https://streams2.sofast.tv/ptnr-yupptv/title-cricketgold/v1/master/611d79b11b77e2f571934fd80ca1413453772ac7/b2048bb8-1686-4432-aa50-647245383e0c/manifest.m3u8"
     },
     {
-      "name": "9X Tashan",
-      "url": "https://amg01281-9xmediapvtltd-9xtashan-samsungin-xz1sd.amagi.tv/playlist/amg01281-9xmediapvtltd-9xtashan-samsungin/playlist.m3u8"
+      "name": "9X Jhakaas",
+      "url": "https://amg01281-9xmediapvtltd-9xjhakaas-samsungin-ci2cs.amagi.tv/playlist/amg01281-9xmediapvtltd-9xjhakaas-samsungin/playlist.m3u8"
     },
     {
       "name": "Sony Sports Ten 5",
       "url": "http://103.151.60.162:2122/play/a028/index.m3u8?hls"
     },
     {
-      "name": "9X Jhakaas",
-      "url": "https://amg01281-9xmediapvtltd-9xjhakaas-samsungin-ci2cs.amagi.tv/playlist/amg01281-9xmediapvtltd-9xjhakaas-samsungin/playlist.m3u8"
-    },
-    {
-      "name": "Fox Sports News",
-      "url": "https://skynewsau-live-premium.akamaized.net/hls/live/2105307/foxsportsnews/live_1080p.m3u8"
+      "name": "9X Tashan",
+      "url": "https://amg01281-9xmediapvtltd-9xtashan-samsungin-xz1sd.amagi.tv/playlist/amg01281-9xmediapvtltd-9xtashan-samsungin/playlist.m3u8"
     },
     {
       "name": "Aastha Prime 1",
@@ -84,20 +80,28 @@
       "url": "https://cdn.pishow.tv/ott/live/1257/master.m3u8"
     },
     {
+      "name": "Fox Sports News",
+      "url": "https://skynewsau-live-premium.akamaized.net/hls/live/2105307/foxsportsnews/live_1080p.m3u8"
+    },
+    {
       "name": "Aaryaa TV",
       "url": "https://stream.ottlive.co.in/aryatvtamil/index.m3u8"
+    },
+    {
+      "name": "Fox Sports",
+      "url": "http://138.59.227.20:8000/play/a085/index.m3u8"
     },
     {
       "name": "Animal Planet (India)",
       "url": "https://drk6xq0vhn.gpcdn.net/live/animal_planet_sd_abr/index.m3u8"
     },
     {
-      "name": "Star Sports 2 Telugu HD",
-      "url": "https://real-vk.proxy.nellaiiptv.com/SDMEDIA/index.m3u8"
-    },
-    {
       "name": "Animal Planet (India) HD",
       "url": "https://drk6xq0vhn.gpcdn.net/live/animal_planet_hd_abr/index.m3u8"
+    },
+    {
+      "name": "Star Sports 2 Telugu HD",
+      "url": "https://real-vk.proxy.nellaiiptv.com/SDMEDIA/index.m3u8"
     },
     {
       "name": "Apna Punjab TV",
@@ -108,16 +112,16 @@
       "url": "https://mumt01.tangotv.in/O5aw8Zn3AADINATHTV/index.m3u8"
     },
     {
-      "name": "Fox Sports",
-      "url": "http://138.59.227.20:8000/play/a085/index.m3u8"
+      "name": "Anand Wari TV",
+      "url": "https://mumt03.tangotv.in/Dsly5z3HANANDWARITV/index.m3u8"
+    },
+    {
+      "name": "Ayush TV",
+      "url": "http://d1msejlow1t3l4.cloudfront.net/fta/ayushtv/playlist.m3u8"
     },
     {
       "name": "Andy Haryana",
       "url": "https://mumt03.tangotv.in/Dsly5z3HANDYHARYANA/index.m3u8"
-    },
-    {
-      "name": "Anand Wari TV",
-      "url": "https://mumt03.tangotv.in/Dsly5z3HANANDWARITV/index.m3u8"
     },
     {
       "name": "Anand TV (India)",
@@ -140,10 +144,6 @@
       "url": "https://drk6xq0vhn.gpcdn.net/live/cn_hd_abr/index.m3u8"
     },
     {
-      "name": "Aryan TV National",
-      "url": "https://mumt04.tangotv.in/m18aqlK4ARYANTVNATIONAL/index.m3u8"
-    },
-    {
       "name": "CVR Health",
       "url": "https://mumbai-edge.smartplaytv.in/CVRHealth/index.m3u8"
     },
@@ -152,36 +152,32 @@
       "url": "https://mumt05.tangotv.in/87NeALx2DARSHAN24/index.m3u8"
     },
     {
-      "name": "Bhakti Sagar",
-      "url": "https://mumt05.tangotv.in/87NeALx2BHAKTISAGAR/index.m3u8"
-    },
-    {
       "name": "DD Haryana",
       "url": "https://d2lk5u59tns74c.cloudfront.net/out/v1/950fc69666474351bde0a32b9600c804/index.m3u8"
     },
     {
-      "name": "Discovery Kids",
-      "url": "https://drk6xq0vhn.gpcdn.net/live/discovery_kids_abr/index.m3u8"
+      "name": "Bhakti Sagar",
+      "url": "https://mumt05.tangotv.in/87NeALx2BHAKTISAGAR/index.m3u8"
+    },
+    {
+      "name": "Dhool TV",
+      "url": "https://d1msejlow1t3l4.cloudfront.net/fta/subhartitv/playlist.m3u8"
     },
     {
       "name": "Discovery Channel (India)",
       "url": "https://drk6xq0vhn.gpcdn.net/live/discovery_sd_abr/index.m3u8"
     },
     {
-      "name": "ETV Bal Bharat",
-      "url": "http://103.185.24.134:3001/ETV-BAL-BHARAT/index.m3u8"
-    },
-    {
-      "name": "Ayush TV",
-      "url": "http://d1msejlow1t3l4.cloudfront.net/fta/ayushtv/playlist.m3u8"
+      "name": "Discovery Kids",
+      "url": "https://drk6xq0vhn.gpcdn.net/live/discovery_kids_abr/index.m3u8"
     },
     {
       "name": "Disney Junior (India)",
       "url": "http://103.151.60.162:2122/play/a016/index.m3u8?hls"
     },
     {
-      "name": "Dhool TV",
-      "url": "https://d1msejlow1t3l4.cloudfront.net/fta/subhartitv/playlist.m3u8"
+      "name": "ETV Bal Bharat",
+      "url": "http://103.185.24.134:3001/ETV-BAL-BHARAT/index.m3u8"
     },
     {
       "name": "Dhoom Music",
@@ -196,16 +192,8 @@
       "url": "https://cdn.live247stream.com/hyder/tv/playlist.m3u8"
     },
     {
-      "name": "God Stands TV Hindi",
-      "url": "https://online.godstands.tv:5443/WebRTCApp/streams/HindiStreaming.m3u8"
-    },
-    {
       "name": "Hungama TV",
       "url": "http://103.185.24.134:3001/HUNGAMA/index.m3u8"
-    },
-    {
-      "name": "INFAST",
-      "url": "https://amg00861-terninternation-lifestyle-samsungau-kdlyy.amagi.tv/playlist/amg00861-terninternation-lifestyle-samsungau/playlist.m3u8"
     },
     {
       "name": "History TV18",
@@ -220,16 +208,16 @@
       "url": "https://amg00861-terninternation-inwonder-samsungau-1k63k.amagi.tv/playlist/amg00861-terninternation-inwonder-samsungau/playlist.m3u8"
     },
     {
-      "name": "ETV Beats",
-      "url": "https://jmp2.uk/stvp-IN4900002RV"
+      "name": "INFAST",
+      "url": "https://amg00861-terninternation-lifestyle-samsungau-kdlyy.amagi.tv/playlist/amg00861-terninternation-lifestyle-samsungau/playlist.m3u8"
     },
     {
       "name": "Kappa TV",
       "url": "https://mumt03.tangotv.in/Dsly5z3HKAPPATV/index.m3u8"
     },
     {
-      "name": "Kanshi TV (720p)",
-      "url": "https://live.kanshitv.co.uk/mobile/kanshitvkey.m3u8"
+      "name": "ETV Beats",
+      "url": "https://jmp2.uk/stvp-IN4900002RV"
     },
     {
       "name": "Kalika TV",
@@ -240,20 +228,20 @@
       "url": "https://6n3yow8pl9ok-hls-live.5centscdn.com/ishwartvlive/tv.stream/playlist.m3u8"
     },
     {
-      "name": "Mr Bean Animated",
-      "url": "https://amg00627-amg00627c23-samsung-au-4110.playouts.now.amagi.tv/playlist.m3u8"
+      "name": "Kanshi TV (720p)",
+      "url": "https://live.kanshitv.co.uk/mobile/kanshitvkey.m3u8"
     },
     {
-      "name": "MTA2 Europe",
-      "url": "https://chlivemta1.akamaized.net/hls/live/2008145/mta2/playlist.m3u8"
+      "name": "Mr Bean Animated",
+      "url": "https://amg00627-amg00627c23-samsung-au-4110.playouts.now.amagi.tv/playlist.m3u8"
     },
     {
       "name": "Mh 1 Music",
       "url": "https://livestream.jswk.online/playlisttest/live/playlist.m3u8"
     },
     {
-      "name": "MTA7 Asia",
-      "url": "https://livemtaasia.akamaized.net/hls/live/2039224/mtaasia2/playlist.m3u8"
+      "name": "MTA2 Europe",
+      "url": "https://chlivemta1.akamaized.net/hls/live/2008145/mta2/playlist.m3u8"
     },
     {
       "name": "National Geographic (India) HD",
@@ -264,6 +252,10 @@
       "url": "https://amg01448-samsungin-ndtvgoodtimes-samsungin-ad-gp.amagi.tv/playlist/amg01448-samsungin-ndtvgoodtimes-samsungin/playlist.m3u8"
     },
     {
+      "name": "MTA7 Asia",
+      "url": "https://livemtaasia.akamaized.net/hls/live/2039224/mtaasia2/playlist.m3u8"
+    },
+    {
       "name": "National Geographic Wild (India) HD",
       "url": "http://103.185.24.134:3001/NATGEO-WILD-HD/index.m3u8"
     },
@@ -272,32 +264,32 @@
       "url": "https://n18syndication.akamaized.net/bpk-tv/News18_JKLH_NW18_MOB/output01/master.m3u8"
     },
     {
-      "name": "Nickelodeon (India)",
-      "url": "http://103.185.24.134:3001/NICK/index.m3u8"
-    },
-    {
       "name": "News18 Punjab/Haryana/Himachal",
       "url": "https://n18syndication.akamaized.net/bpk-tv/News18_Punjab_Haryana_HP_NW18_MOB/output01/master.m3u8"
+    },
+    {
+      "name": "Nickelodeon (India)",
+      "url": "http://103.185.24.134:3001/NICK/index.m3u8"
     },
     {
       "name": "Peppers TV",
       "url": "https://cdn.pishow.tv/ott/live/1383/master.m3u8"
     },
     {
-      "name": "Qello Concerts by Stingray",
-      "url": "https://lotus.stingray.com/manifest/qello-qello001-montreal/samsungtvplus/master.m3u8"
-    },
-    {
       "name": "PTC Chakde",
       "url": "https://cdn.pishow.tv/ott/live/449/master.m3u8"
     },
     {
-      "name": "Public Music",
-      "url": "https://mumt04.tangotv.in/m18aqlK4PUBLICMUSIC/index.m3u8"
+      "name": "Qello Concerts by Stingray",
+      "url": "https://lotus.stingray.com/manifest/qello-qello001-montreal/samsungtvplus/master.m3u8"
     },
     {
       "name": "PTC Music",
       "url": "https://d2lk5u59tns74c.cloudfront.net/out/v1/f913cf893c594f73b114216e74a2efbc/index.m3u8"
+    },
+    {
+      "name": "Public Music",
+      "url": "https://mumt04.tangotv.in/m18aqlK4PUBLICMUSIC/index.m3u8"
     },
     {
       "name": "Saam TV",
@@ -316,20 +308,28 @@
       "url": "http://103.185.24.134:3001/SONIC/index.m3u8"
     },
     {
-      "name": "Sony BBC Earth HD",
-      "url": "http://103.185.24.134:3001/SONY-BBC/index.m3u8"
-    },
-    {
       "name": "Star Bharat",
       "url": "https://raw.githubusercontent.com/amazeyourself/adaptive-streams/refs/heads/main/streams/gb/YuppTV/UtsavBharat.m3u8"
+    },
+    {
+      "name": "Sony BBC Earth HD",
+      "url": "http://103.185.24.134:3001/SONY-BBC/index.m3u8"
     },
     {
       "name": "StarPlus (United Kingdom)",
       "url": "https://d1rc86nwwc9fag.cloudfront.net/260723/starplusuk_2500/chunks.m3u8"
     },
     {
+      "name": "Star Movies (India) HD",
+      "url": "http://103.185.24.134:3001/Star-Movies/index.m3u8"
+    },
+    {
       "name": "Stingray DJAZZ",
       "url": "https://lotus.stingray.com/manifest/djazz-djaads-montreal/samsungtvplus/master.m3u8"
+    },
+    {
+      "name": "Stingray Naturescape",
+      "url": "https://lotus.stingray.com/manifest/naturescape-a003-montreal/samsungtvplus/master.m3u8"
     },
     {
       "name": "Stingray Easy Listening",
@@ -338,10 +338,6 @@
     {
       "name": "Stingray The Spa",
       "url": "https://lotus.stingray.com/manifest/ose-122ads-montreal/samsungtvplus/master.m3u8"
-    },
-    {
-      "name": "Stingray Naturescape",
-      "url": "https://lotus.stingray.com/manifest/naturescape-a003-montreal/samsungtvplus/master.m3u8"
     },
     {
       "name": "Stingray Today's K-Pop",
@@ -356,24 +352,28 @@
       "url": "http://cdn11.live247stream.com/tag/tv/playlist.m3u8"
     },
     {
-      "name": "Star Movies (India) HD",
-      "url": "http://103.185.24.134:3001/Star-Movies/index.m3u8"
+      "name": "Star Sports 2",
+      "url": "http://103.151.60.162:2122/play/a00v/index.m3u8?hls"
     },
     {
       "name": "Super Hungama",
       "url": "http://103.185.24.134:3001/SUPER-HUNGAMA/index.m3u8"
     },
     {
-      "name": "Star Sports 2",
-      "url": "http://103.151.60.162:2122/play/a00v/index.m3u8?hls"
-    },
-    {
       "name": "Tabbar Hits",
       "url": "https://vglivessai.akamaized.net/sg/v1/master/611d79b11b77e2f571934fd80ca1413453772ac7/e11b0319-52e8-4190-ab03-3931cc68eac9/index.m3u8"
     },
     {
+      "name": "Total TV Haryana",
+      "url": "https://cdn.pishow.tv/ott/live/1522/master.m3u8"
+    },
+    {
       "name": "Total Bhakti",
       "url": "https://d34z4embz0hjf6.cloudfront.net/out/v1/d55b3323a9f142638f897378f0b526fe/index.m3u8"
+    },
+    {
+      "name": "Ultimate TV",
+      "url": "https://stream.ottlive.co.in/utvtamil/index.m3u8"
     },
     {
       "name": "Trishul Broadcasting Network (720p)",
@@ -384,10 +384,6 @@
       "url": "https://raw.githubusercontent.com/amazeyourself/adaptive-streams/refs/heads/main/streams/gb/YuppTV/UtsavPlus.m3u8"
     },
     {
-      "name": "Total TV Haryana",
-      "url": "https://cdn.pishow.tv/ott/live/1522/master.m3u8"
-    },
-    {
       "name": "Utsav Bharat",
       "url": "https://d1taaads3ztvmu.cloudfront.net/120723/smil:lifeokuk.smil/playlist.m3u8?hdnts=st=1735898689~exp=1835898688~acl=*~hmac=f5fe24724fe05481e3841f9eb5ab8efdee0a3dd83645ae9dcf45703f525bab7b"
     },
@@ -396,24 +392,24 @@
       "url": "https://livetv.tarangplus.in/tarangmusic-origin/live/playlist.m3u8"
     },
     {
-      "name": "Travelxp HD",
-      "url": "http://103.151.60.162:2122/play/a01s/index.m3u8?hls"
-    },
-    {
       "name": "Vaanavil TV",
       "url": "https://6n3yope4d9ok-hls-live.5centscdn.com/vaanavil/TV.stream/playlist.m3u8"
     },
     {
-      "name": "Animal Planet (United States)",
-      "url": "http://23.239.31.26:8989/animalplanet/index.m3u8"
+      "name": "Zee Delhi NCR Haryana",
+      "url": "https://vg-zeefta.akamaized.net/ptnr-yupptv/title-zeedelhincr/v1/master/611d79b11b77e2f571934fd80ca1413453772ac7/cc483a15-1b39-4642-872d-5d08d362ed01/main.m3u8"
     },
     {
       "name": "Animal Planet Latin America HD (720p)",
       "url": "http://15.204.246.24:8080/AnimalPlanetHD/index.m3u8"
     },
     {
-      "name": "Ultimate TV",
-      "url": "https://stream.ottlive.co.in/utvtamil/index.m3u8"
+      "name": "Animal Planet (United States)",
+      "url": "http://23.239.31.26:8989/animalplanet/index.m3u8"
+    },
+    {
+      "name": "ZB Cartoon",
+      "url": "https://server.zillarbarta.com/zbcatun/video.m3u8"
     },
     {
       "name": "Cartoon Network Latin America Brazil (720p)",
@@ -424,48 +420,40 @@
       "url": "http://stream.mcquack.net/114/index.m3u8"
     },
     {
-      "name": "Cartoon Network CEE Czech Republic",
-      "url": "http://88.212.15.17/live/test_cartoon_network_tizen/playlist.m3u8"
-    },
-    {
       "name": "Animal Planet Latin America",
       "url": "http://190.128.214.97:64333/play/a01n/index.m3u8"
-    },
-    {
-      "name": "Cartoon Network CEE Poland",
-      "url": "http://57.128.231.171:8080/293/index.m3u8"
-    },
-    {
-      "name": "Zee Delhi NCR Haryana",
-      "url": "https://vg-zeefta.akamaized.net/ptnr-yupptv/title-zeedelhincr/v1/master/611d79b11b77e2f571934fd80ca1413453772ac7/cc483a15-1b39-4642-872d-5d08d362ed01/main.m3u8"
     },
     {
       "name": "Asharq Discovery",
       "url": "https://svs.itworkscdn.net/asharqdiscoverylive/asharqd.smil/playlist_dvr.m3u8"
     },
     {
-      "name": "Cartoon Network CEE Ukraine",
-      "url": "http://45.132.87.69:8080/cartoon_network/index.m3u8"
+      "name": "Cartoon Network CEE Czech Republic",
+      "url": "http://88.212.15.17/live/test_cartoon_network_tizen/playlist.m3u8"
     },
     {
-      "name": "Disney Channel Latin America",
-      "url": "http://15.204.246.24:8080/DisneyHD/index.m3u8"
-    },
-    {
-      "name": "Discovery Historia",
-      "url": "http://57.128.231.171:8080/281/index.m3u8"
+      "name": "Cartoon Network CEE Poland",
+      "url": "http://57.128.231.171:8080/293/index.m3u8"
     },
     {
       "name": "ZB Music",
       "url": "https://server.zillarbarta.com/zbmusic/index.m3u8"
     },
     {
-      "name": "Cartoon Network Latin America South Atlantic",
-      "url": "http://158.172.217.18:8000/play/a03a/index.m3u8"
+      "name": "Disney Channel Latin America",
+      "url": "http://15.204.246.24:8080/DisneyHD/index.m3u8"
     },
     {
-      "name": "Disney Channel Latin America Mexico",
-      "url": "http://45.166.93.156:9999/play/a0f3/index.m3u8"
+      "name": "Cartoon Network CEE Ukraine",
+      "url": "http://45.132.87.69:8080/cartoon_network/index.m3u8"
+    },
+    {
+      "name": "Discovery Historia",
+      "url": "http://57.128.231.171:8080/281/index.m3u8"
+    },
+    {
+      "name": "Cartoon Network Latin America South Atlantic",
+      "url": "http://158.172.217.18:8000/play/a03a/index.m3u8"
     },
     {
       "name": "Disney Channel Latin America North",
@@ -480,164 +468,160 @@
       "url": "http://181.78.14.26:4000/play/a073/index.m3u8"
     },
     {
-      "name": "Disney Jr. Latin America",
-      "url": "http://190.14.10.19:16000/play/a02d/index.m3u8"
-    },
-    {
-      "name": "Disney Jr. Latin America South",
-      "url": "http://45.185.163.75:8000/play/a016/index.m3u8"
-    },
-    {
-      "name": "Disney Channel Latin America Center",
-      "url": "http://181.78.8.199:8000/play/a0dn/index.m3u8"
-    },
-    {
-      "name": "Investigation Discovery (Hungary)",
-      "url": "http://88.212.15.17/live/id_hun/index.m3u8"
-    },
-    {
-      "name": "Investigation Discovery (Poland)",
-      "url": "http://57.128.231.171:8080/239/index.m3u8"
+      "name": "CNBC Bajar",
+      "url": "https://n18syndication.akamaized.net/bpk-tv/CNBC_Bazaar_NW18_MOB/output01/master.m3u8"
     },
     {
       "name": "HMTV (India)",
       "url": "https://cdn.pishow.tv/ott/live/280/master.m3u8"
     },
     {
-      "name": "CNBC Bajar",
-      "url": "https://n18syndication.akamaized.net/bpk-tv/CNBC_Bazaar_NW18_MOB/output01/master.m3u8"
+      "name": "Disney Jr. Latin America",
+      "url": "http://190.14.10.19:16000/play/a02d/index.m3u8"
     },
     {
       "name": "Cartoon Network Latin America",
       "url": "https://bantel-cdn1.iptvperu.tv:1936/btnscrtn/cartoonnetwork.stream/chunks.m3u8"
     },
     {
-      "name": "Investigation Discovery (Russia)",
-      "url": "http://stream.mcquack.net/205/index.m3u8"
-    },
-    {
-      "name": "Investigation Discovery Latin America South",
-      "url": "http://38.65.175.84:8000/play/a0ch/index.m3u8"
+      "name": "Investigation Discovery (Hungary)",
+      "url": "http://88.212.15.17/live/id_hun/index.m3u8"
     },
     {
       "name": "Disney Channel Latin America South",
       "url": "https://bantel-cdn1.iptvperu.tv:1936/btnscrtn/disney-channel-key/chunks.m3u8"
     },
     {
-      "name": "MTV Classic CA",
-      "url": "https://jmp2.uk/plu-654100b4bdf3cf0008aa49c7.m3u8"
+      "name": "Investigation Discovery (Poland)",
+      "url": "http://57.128.231.171:8080/239/index.m3u8"
     },
     {
-      "name": "MTV Live",
-      "url": "http://23.237.104.106:8080/USA_MTV_LIVE/index.m3u8"
+      "name": "Investigation Discovery Latin America South",
+      "url": "http://38.65.175.84:8000/play/a0ch/index.m3u8"
     },
     {
-      "name": "Mirror Now",
-      "url": "https://dai.google.com/linear/hls/event/ClPOullTQky5vGPf7fMZ8g/master.m3u8"
-    },
-    {
-      "name": "MTV Flow Latino",
-      "url": "https://jmp2.uk/plu-5d3609cd6a6c78d7672f2a81.m3u8"
-    },
-    {
-      "name": "MTV Spankin' New CA",
-      "url": "https://jmp2.uk/plu-6541010f770cf1000866be98.m3u8"
-    },
-    {
-      "name": "Investigation Discovery (United States) (1080p)",
-      "url": "http://212.5.144.156:8080/id/index.m3u8"
-    },
-    {
-      "name": "National Geographic (Mexico)",
-      "url": "http://138.121.15.230:9002/NAT-GEO/index.m3u8"
-    },
-    {
-      "name": "Disney Jr. Latin America South HD",
-      "url": "http://bantel-cdn1.iptvperu.tv:1935/btnscrtn/disney_jr.stream/playlist.m3u8"
-    },
-    {
-      "name": "National Geographic (Croatia)",
-      "url": "http://176.61.157.250/NationalGeographic/index.m3u8"
-    },
-    {
-      "name": "National Geographic (Poland) (576i)",
-      "url": "http://92.114.85.87:8006/play/a00a/index.m3u8"
-    },
-    {
-      "name": "National Geographic (United States)",
-      "url": "http://212.5.144.156:8080/natgeo/index.m3u8"
-    },
-    {
-      "name": "National Geographic Latin America",
-      "url": "http://15.204.246.24:8080/NatGeoHD/index.m3u8"
-    },
-    {
-      "name": "National Geographic (United States) HD East",
-      "url": "http://198.58.104.90:8989/natgeo/index.m3u8"
-    },
-    {
-      "name": "MTV Biggest Pop",
-      "url": "https://jmp2.uk/plu-5d14fd1a252d35decbc4080c.m3u8"
-    },
-    {
-      "name": "MTV Biggest Pop BR",
-      "url": "https://jmp2.uk/plu-6047fbdbbb776a0007e7f2ff.m3u8"
-    },
-    {
-      "name": "MTV Biggest Pop CA",
-      "url": "https://jmp2.uk/plu-65410176770cf1000866bf31.m3u8"
-    },
-    {
-      "name": "MTV Biggest Pop LatAm",
-      "url": "https://jmp2.uk/plu-6047fabfce6e8e00070bcc9f.m3u8"
-    },
-    {
-      "name": "MTV Classic BR",
-      "url": "https://jmp2.uk/plu-66a01dcb8561260008b0a41d.m3u8"
+      "name": "Investigation Discovery (Russia)",
+      "url": "http://stream.mcquack.net/205/index.m3u8"
     },
     {
       "name": "MTV Classic LatAm",
       "url": "https://jmp2.uk/plu-66a11a21a79dea0008aa90ca.m3u8"
     },
     {
-      "name": "National Geographic Wild (United States) HD East",
-      "url": "http://198.58.104.90:8989/natgeowild/index.m3u8"
+      "name": "MTV Classic BR",
+      "url": "https://jmp2.uk/plu-66a01dcb8561260008b0a41d.m3u8"
     },
     {
-      "name": "MTV Spankin' New",
-      "url": "https://jmp2.uk/plu-5d14fdb8ca91eedee1633117.m3u8"
+      "name": "Investigation Discovery (United States) (1080p)",
+      "url": "http://212.5.144.156:8080/id/index.m3u8"
     },
     {
-      "name": "MTV Flow Latino LatAm",
-      "url": "https://jmp2.uk/plu-62b218fc511d4b00070ddc0c.m3u8"
+      "name": "MTV Live",
+      "url": "http://23.237.104.106:8080/USA_MTV_LIVE/index.m3u8"
+    },
+    {
+      "name": "Disney Jr. Latin America South HD",
+      "url": "http://bantel-cdn1.iptvperu.tv:1935/btnscrtn/disney_jr.stream/playlist.m3u8"
+    },
+    {
+      "name": "Mirror Now",
+      "url": "https://dai.google.com/linear/hls/event/ClPOullTQky5vGPf7fMZ8g/master.m3u8"
+    },
+    {
+      "name": "National Geographic (Croatia)",
+      "url": "http://176.61.157.250/NationalGeographic/index.m3u8"
     },
     {
       "name": "Cartoon Network Asia",
       "url": "https://cdn4.skygo.mn/live/disk1/Cartoon_Network/HLSv3-FTA/Cartoon_Network.m3u8"
     },
     {
-      "name": "Nickelodeon Pluto TV",
-      "url": "https://jmp2.uk/plu-5ca673e0d0bd6c2689c94ce3.m3u8"
+      "name": "National Geographic (Mexico)",
+      "url": "http://138.121.15.230:9002/NAT-GEO/index.m3u8"
+    },
+    {
+      "name": "FTV (Uzbekistan)",
+      "url": "https://stream8.cinerama.uz/1018/playlist.m3u8"
+    },
+    {
+      "name": "MTV Biggest Pop BR",
+      "url": "https://jmp2.uk/plu-6047fbdbbb776a0007e7f2ff.m3u8"
+    },
+    {
+      "name": "MTV Biggest Pop",
+      "url": "https://jmp2.uk/plu-5d14fd1a252d35decbc4080c.m3u8"
+    },
+    {
+      "name": "MTV Classic CA",
+      "url": "https://jmp2.uk/plu-654100b4bdf3cf0008aa49c7.m3u8"
+    },
+    {
+      "name": "MTV Biggest Pop CA",
+      "url": "https://jmp2.uk/plu-65410176770cf1000866bf31.m3u8"
+    },
+    {
+      "name": "National Geographic Latin America",
+      "url": "http://15.204.246.24:8080/NatGeoHD/index.m3u8"
+    },
+    {
+      "name": "MTV Biggest Pop LatAm",
+      "url": "https://jmp2.uk/plu-6047fabfce6e8e00070bcc9f.m3u8"
+    },
+    {
+      "name": "MTV Flow Latino",
+      "url": "https://jmp2.uk/plu-5d3609cd6a6c78d7672f2a81.m3u8"
+    },
+    {
+      "name": "MTV Flow Latino LatAm",
+      "url": "https://jmp2.uk/plu-62b218fc511d4b00070ddc0c.m3u8"
+    },
+    {
+      "name": "National Geographic (United States) HD East",
+      "url": "http://198.58.104.90:8989/natgeo/index.m3u8"
+    },
+    {
+      "name": "National Geographic (United States)",
+      "url": "http://212.5.144.156:8080/natgeo/index.m3u8"
+    },
+    {
+      "name": "National Geographic (Poland) (576i)",
+      "url": "http://92.114.85.87:8006/play/a00a/index.m3u8"
+    },
+    {
+      "name": "MTV Spankin' New",
+      "url": "https://jmp2.uk/plu-5d14fdb8ca91eedee1633117.m3u8"
+    },
+    {
+      "name": "MTV Spankin' New CA",
+      "url": "https://jmp2.uk/plu-6541010f770cf1000866be98.m3u8"
     },
     {
       "name": "National Geographic Wild (Czech Republic)",
       "url": "http://88.212.15.29/live/test_ngw/playlist.m3u8"
     },
     {
-      "name": "Yo! MTV",
-      "url": "https://jmp2.uk/plu-5d14fc31252d35decbc4080b.m3u8"
-    },
-    {
       "name": "National Geographic Wild (Poland) (576i)",
       "url": "http://92.114.85.87:8010/play/a005/index.m3u8"
+    },
+    {
+      "name": "Nickelodeon Pluto TV",
+      "url": "https://jmp2.uk/plu-5ca673e0d0bd6c2689c94ce3.m3u8"
+    },
+    {
+      "name": "National Geographic Wild (United States) HD East",
+      "url": "http://198.58.104.90:8989/natgeowild/index.m3u8"
+    },
+    {
+      "name": "Yo! MTV",
+      "url": "https://jmp2.uk/plu-5d14fc31252d35decbc4080b.m3u8"
     },
     {
       "name": "Yo! MTV CA",
       "url": "https://jmp2.uk/plu-654102ed770cf1000866c307.m3u8"
     },
     {
-      "name": "FTV (Uzbekistan)",
-      "url": "https://stream8.cinerama.uz/1018/playlist.m3u8"
+      "name": "Disney Jr. Latin America South",
+      "url": "http://45.185.163.75:8000/play/a016/index.m3u8"
     },
     {
       "name": "Cartoon Network Latin America South Pacific",
@@ -652,6 +636,14 @@
       "url": "https://tvsen5.aynaott.com/TnMn5kZz8aLm/index.m3u8"
     },
     {
+      "name": "Aryan TV National",
+      "url": "https://mumt04.tangotv.in/m18aqlK4ARYANTVNATIONAL/index.m3u8"
+    },
+    {
+      "name": "God Stands TV Hindi",
+      "url": "https://online.godstands.tv:5443/WebRTCApp/streams/HindiStreaming.m3u8"
+    },
+    {
       "name": "Disney Channel (India) HD",
       "url": "http://51.75.127.199:3141/disneychannel/index.m3u8"
     },
@@ -664,6 +656,10 @@
       "url": "https://pubads.g.doubleclick.net/ssai/event/1mR1QUQ3Tg-VuKfiyjwNuA/master.m3u8"
     },
     {
+      "name": "Travelxp HD",
+      "url": "http://103.151.60.162:2122/play/a01s/index.m3u8?hls"
+    },
+    {
       "name": "Zee Cinemalu HD",
       "url": "http://51.75.127.199:3141/zeecinemaluhd/index.m3u8"
     },
@@ -672,16 +668,12 @@
       "url": "https://cloudplay-sonyliv.pages.dev/yay.m3u8"
     },
     {
-      "name": "ZB Cartoon",
-      "url": "https://server.zillarbarta.com/zbcatun/video.m3u8"
+      "name": "National Geographic (Czech Republic)",
+      "url": "http://88.212.15.19/live/test_ngc/playlist.m3u8"
     },
     {
       "name": "National Geographic (Netherlands)",
       "url": "https://lb.iptvnetwork.net/ls28/10016/playlist.m3u8"
-    },
-    {
-      "name": "National Geographic (Czech Republic)",
-      "url": "http://88.212.15.19/live/test_ngc/playlist.m3u8"
     },
     {
       "name": "National Geographic (Hungary)",
@@ -712,6 +704,14 @@
       "url": "http://38.252.238.18:8000/play/a053/index.m3u8"
     },
     {
+      "name": "Disney Channel Latin America Center",
+      "url": "http://181.78.8.199:8000/play/a0dn/index.m3u8"
+    },
+    {
+      "name": "Disney Channel Latin America Mexico",
+      "url": "http://45.166.93.156:9999/play/a0f3/index.m3u8"
+    },
+    {
       "name": "National Geographic (Bulgaria)",
       "url": "http://hls127.freeott.top:8080/BG_Nat_Geo_HD/video.m3u8"
     },
@@ -722,12 +722,12 @@
   ],
   "added_nonworking_channels": [
     {
-      "name": "ERT Sports 2",
-      "url": "http://hbbtvapp.ert.gr/stream.php/v/vid_ertplay2_mpeg.2ts"
-    },
-    {
       "name": "ERT Sports 1",
       "url": "http://hbbtvapp.ert.gr/stream.php/v/vid_ertsports_mpeg.2ts"
+    },
+    {
+      "name": "ERT Sports 2",
+      "url": "http://hbbtvapp.ert.gr/stream.php/v/vid_ertplay2_mpeg.2ts"
     },
     {
       "name": "PTV Sports",
@@ -818,12 +818,12 @@
       "url": "https://onyx1.mofta1.cfd/ngeo/usergenrnd84oeigt.m3u8"
     },
     {
-      "name": "National Geographic Wild (Romania)",
-      "url": "https://flash1.bogulus1.cfd/wild/usergenr9qsi5gt.m3u8"
-    },
-    {
       "name": "National Geographic Wild (Turkiye)",
       "url": "https://nord.ayakkabiparti.lol/natgeowild/index.m3u8"
+    },
+    {
+      "name": "National Geographic Wild (Romania)",
+      "url": "https://flash1.bogulus1.cfd/wild/usergenr9qsi5gt.m3u8"
     },
     {
       "name": "NickOnline HD",
@@ -834,12 +834,12 @@
       "url": "https://live-fi.tvkaista.net/national-geographic/live.m3u8?hd=true"
     },
     {
-      "name": "National Geographic Wild (Ukraine)",
-      "url": "http://dtv.vol.net.ua:80/Nat-Geo-Wild_HD/index.m3u8"
-    },
-    {
       "name": "NickOnline Bob Esponja (720p)",
       "url": "https://bob.x1colegal.com/hls/stream.m3u8"
+    },
+    {
+      "name": "National Geographic Wild (Ukraine)",
+      "url": "http://dtv.vol.net.ua:80/Nat-Geo-Wild_HD/index.m3u8"
     },
     {
       "name": "CND Film Discovery Channel",
