@@ -1,11 +1,11 @@
 # Garden vs 3502 — Actual Source Comparison
 
-- Garden actual source entries after Garden filters: **425**
+- Garden actual source entries after Garden filters: **433**
 - 3502 actual source: **https://iptv-org.github.io/iptv/index.m3u**
 - Matching rule: **exact stream URL**
 - Different/Not Found rule: channel name is used only after exact URL is absent.
 
-- Same: **425**
+- Same: **433**
 - Different URL: **0**
 - Not Found: **0**
 
@@ -30,7 +30,6 @@
 | Non-working | Same | Disney Channel (India) HD | http://66.102.126.10:8000/play/a013/index.m3u8 | http://66.102.126.10:8000/play/a013/index.m3u8 |
 | Non-working | Same | Disney Junior (India) | http://103.151.60.162:2122/play/a016/index.m3u8?hls | http://103.151.60.162:2122/play/a016/index.m3u8?hls |
 | Working | Same | Epic Kids Digital | https://cc-t8lqe1o99pszu.akamaized.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-t8lqe1o99pszu/playlist.m3u8 | https://cc-t8lqe1o99pszu.akamaized.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-t8lqe1o99pszu/playlist.m3u8 |
-| Non-working | Same | ETV Bal Bharat | http://103.185.24.134:3001/ETV-BAL-BHARAT/index.m3u8 | http://103.185.24.134:3001/ETV-BAL-BHARAT/index.m3u8 |
 | Working | Same | Green Gold TV | https://cc-szrmqvu8zkg16.akamaized.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-szrmqvu8zkg16/greengold/stream/grngld/playlist.m3u8 | https://cc-szrmqvu8zkg16.akamaized.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-szrmqvu8zkg16/greengold/stream/grngld/playlist.m3u8 |
 | Non-working | Same | Hungama TV | http://66.102.126.10:8000/play/a023/index.m3u8 | http://66.102.126.10:8000/play/a023/index.m3u8 |
 | Non-working | Same | Nick Jr. (India) | http://103.185.24.134:3001/NICK-JR/index.m3u8 | http://103.185.24.134:3001/NICK-JR/index.m3u8 |
@@ -53,7 +52,7 @@
 | Working | Same | like Gecko) Chrome/147.0.0.0 Safari/537.36" group-title="Religious",Aastha | http://103.175.73.12:8080/live/338/master.m3u8 | http://103.175.73.12:8080/live/338/master.m3u8 |
 | Working | Same | Aastha HD | https://aasthaott.akamaized.net/110923/smil:aasthatv.smil/index.m3u8 | https://aasthaott.akamaized.net/110923/smil:aasthatv.smil/index.m3u8 |
 | Working | Same | like Gecko) Chrome/147.0.0.0 Safari/537.36" group-title="Religious",Aastha Bhajan | http://103.175.73.12:8080/live/339/master.m3u8 | http://103.175.73.12:8080/live/339/master.m3u8 |
-| Working | Same | Aastha Prime 1 | https://aasthaott.akamaized.net/110923/smil:aasthaprime1.smil/master.m3u8 | https://aasthaott.akamaized.net/110923/smil:aasthaprime1.smil/master.m3u8 |
+| Non-working | Same | Aastha Prime 1 | https://aasthaott.akamaized.net/110923/smil:aasthaprime1.smil/master.m3u8 | https://aasthaott.akamaized.net/110923/smil:aasthaprime1.smil/master.m3u8 |
 | Working | Same | ABN TV India | https://mediaserver.abnvideos.com/streams/abntvindia.m3u8 | https://mediaserver.abnvideos.com/streams/abntvindia.m3u8 |
 | Working | Same | Adhyatm TV | https://mumbai-edge.smartplaytv.in/AdhyatmTV/index.m3u8 | https://mumbai-edge.smartplaytv.in/AdhyatmTV/index.m3u8 |
 | Working | Same | Anand TV (India) | https://live.legitpro.co.in/anandtv/index.m3u8 | https://live.legitpro.co.in/anandtv/index.m3u8 |
@@ -96,7 +95,7 @@
 | Working | Same | Sindh TV (India) | https://samitaorigin.tangotv.in/SINDHTV/SAMITAORIGIN/index.m3u8 | https://samitaorigin.tangotv.in/SINDHTV/SAMITAORIGIN/index.m3u8 |
 | Non-working | Same | Soham TV | https://mumt03.tangotv.in/Dsly5z3HSOHAMTV/index.m3u8 | https://mumt03.tangotv.in/Dsly5z3HSOHAMTV/index.m3u8 |
 | Working | Same | SVBC 4 | https://player.mslivestream.net/mslive/13a2927187b9700ae7ea82d7841d5b68.sdp/playlist.m3u8 | https://player.mslivestream.net/mslive/13a2927187b9700ae7ea82d7841d5b68.sdp/playlist.m3u8 |
-| Working | Same | Swastik TV | https://server.playontv.in/swastiktv/index.m3u8 | https://server.playontv.in/swastiktv/index.m3u8 |
+| Non-working | Same | Swastik TV | https://server.playontv.in/swastiktv/index.m3u8 | https://server.playontv.in/swastiktv/index.m3u8 |
 | Working | Same | Total Bhakti | https://d34z4embz0hjf6.cloudfront.net/out/v1/d55b3323a9f142638f897378f0b526fe/index.m3u8 | https://d34z4embz0hjf6.cloudfront.net/out/v1/d55b3323a9f142638f897378f0b526fe/index.m3u8 |
 | Working | Same | Vedic | https://mumt05.tangotv.in/87NeALx2VEDIC/index.m3u8 | https://mumt05.tangotv.in/87NeALx2VEDIC/index.m3u8 |
 
@@ -113,20 +112,20 @@
 | Working | Same | Colors | https://raw.githubusercontent.com/amazeyourself/adaptive-streams/refs/heads/main/streams/sg/YuppTV/ColorsAPAC.m3u8 | https://raw.githubusercontent.com/amazeyourself/adaptive-streams/refs/heads/main/streams/sg/YuppTV/ColorsAPAC.m3u8 |
 | Non-working | Same | Colors HD | http://103.151.60.162:2122/play/a02q/index.m3u8?hls | http://103.151.60.162:2122/play/a02q/index.m3u8?hls |
 | Working | Same | Colors MENA HD | https://da86m1sqpm3o0.cloudfront.net/28072023/smil:colorsme.smil/playlist.m3u8 | https://da86m1sqpm3o0.cloudfront.net/28072023/smil:colorsme.smil/playlist.m3u8 |
-| Non-working | Same | Colors Rishtey Americas | https://manatv.akamaized.net/090823/smil:ristheyamerica.smil/playlist.m3u8 | https://manatv.akamaized.net/090823/smil:ristheyamerica.smil/playlist.m3u8 |
+| Working | Same | Colors Rishtey Americas | https://manatv.akamaized.net/090823/smil:ristheyamerica.smil/playlist.m3u8 | https://manatv.akamaized.net/090823/smil:ristheyamerica.smil/playlist.m3u8 |
 | Working | Same | Dangal 2 | https://live-dangal2.akamaized.net/liveabr/playlist.m3u8 | https://live-dangal2.akamaized.net/liveabr/playlist.m3u8 |
 | Working | Same | Dangal TV | https://live-dangal.akamaized.net/liveabr/playlist.m3u8 | https://live-dangal.akamaized.net/liveabr/playlist.m3u8 |
-| Working | Same | DD Arun Prabha | https://d2lk5u59tns74c.cloudfront.net/out/v1/308556d9fd1246adb479ef012a39bbfe/index.m3u8 | https://d2lk5u59tns74c.cloudfront.net/out/v1/308556d9fd1246adb479ef012a39bbfe/index.m3u8 |
+| Working | Same | like Gecko) Chrome/147.0.0.0 Safari/537.36" group-title="General",DD Arun Prabha | https://fta.ektv.in/live/203/master.m3u8 | https://fta.ektv.in/live/203/master.m3u8 |
 | Working | Same | DD Bharati | https://cdn.pishow.tv/ott/live/10/master.m3u8 | https://cdn.pishow.tv/ott/live/10/master.m3u8 |
 | Working | Same | DD Bihar | https://cdn.pishow.tv/ott/live/35/master.m3u8 | https://cdn.pishow.tv/ott/live/35/master.m3u8 |
 | Working | Same | DD Chhattisgarh | https://cdn.pishow.tv/ott/live/15/master.m3u8 | https://cdn.pishow.tv/ott/live/15/master.m3u8 |
-| Working | Same | DD Haryana | https://d2lk5u59tns74c.cloudfront.net/out/v1/950fc69666474351bde0a32b9600c804/index.m3u8 | https://d2lk5u59tns74c.cloudfront.net/out/v1/950fc69666474351bde0a32b9600c804/index.m3u8 |
-| Working | Same | DD Himachal Pradesh | https://d3qs3d2rkhfqrt.cloudfront.net/out/v1/afd2e335b0ba40eb9bdf1096118c6ede/index.m3u8 | https://d3qs3d2rkhfqrt.cloudfront.net/out/v1/afd2e335b0ba40eb9bdf1096118c6ede/index.m3u8 |
-| Working | Same | DD Jharkhand | https://d3qs3d2rkhfqrt.cloudfront.net/out/v1/e8c3741f8c154d3185831f4e31777fb2/index.m3u8 | https://d3qs3d2rkhfqrt.cloudfront.net/out/v1/e8c3741f8c154d3185831f4e31777fb2/index.m3u8 |
-| Working | Same | DD Kashir | https://d3qs3d2rkhfqrt.cloudfront.net/out/v1/8a59a828e80c49d0958925950cec0204/index.m3u8 | https://d3qs3d2rkhfqrt.cloudfront.net/out/v1/8a59a828e80c49d0958925950cec0204/index.m3u8 |
+| Working | Same | like Gecko) Chrome/147.0.0.0 Safari/537.36" group-title="General",DD Haryana | https://fta.ektv.in/live/580/master.m3u8 | https://fta.ektv.in/live/580/master.m3u8 |
+| Working | Same | like Gecko) Chrome/147.0.0.0 Safari/537.36" group-title="General",DD Himachal Pradesh | https://fta.ektv.in/live/575/master.m3u8 | https://fta.ektv.in/live/575/master.m3u8 |
+| Working | Same | like Gecko) Chrome/147.0.0.0 Safari/537.36" group-title="General",DD Jharkhand | https://fta.ektv.in/live/573/master.m3u8 | https://fta.ektv.in/live/573/master.m3u8 |
+| Working | Same | like Gecko) Chrome/147.0.0.0 Safari/537.36" group-title="General",DD Kashir | https://fta.ektv.in/live/248/master.m3u8 | https://fta.ektv.in/live/248/master.m3u8 |
 | Working | Same | DD Kisan | https://mumbai-edge.smartplaytv.in/DDKisan/index.m3u8 | https://mumbai-edge.smartplaytv.in/DDKisan/index.m3u8 |
 | Working | Same | DD Madhya Pradesh | https://mumbai-edge.smartplaytv.in/ddmadhyapradesh/index.m3u8 | https://mumbai-edge.smartplaytv.in/ddmadhyapradesh/index.m3u8 |
-| Working | Same | DD Manipur | https://d2lk5u59tns74c.cloudfront.net/out/v1/8b75afc6576f450e8f554b6c877681d2/index.m3u8 | https://d2lk5u59tns74c.cloudfront.net/out/v1/8b75afc6576f450e8f554b6c877681d2/index.m3u8 |
+| Non-working | Same | like Gecko) Chrome/147.0.0.0 Safari/537.36" group-title="General",DD Manipur | https://fta.ektv.in/live/671/master.m3u8 | https://fta.ektv.in/live/671/master.m3u8 |
 | Working | Same | DD National | https://cdn.pishow.tv/ott/live/11/master.m3u8 | https://cdn.pishow.tv/ott/live/11/master.m3u8 |
 | Working | Same | DD National HD | https://mumbai-edge.smartplaytv.in/DDNational/index.m3u8 | https://mumbai-edge.smartplaytv.in/DDNational/index.m3u8 |
 | Working | Same | DD Rajasthan | https://cdn.pishow.tv/ott/live/34/master.m3u8 | https://cdn.pishow.tv/ott/live/34/master.m3u8 |
@@ -194,6 +193,7 @@
 | Working | Same | Total TV Haryana | https://mumt04.tangotv.in/m18aqlK4TOTALTV/index.m3u8 | https://mumt04.tangotv.in/m18aqlK4TOTALTV/index.m3u8 |
 | Working | Same | Trishul Broadcasting Network (720p) | https://live.suricloud.com/hls/tbntv/index.m3u8 | https://live.suricloud.com/hls/tbntv/index.m3u8 |
 | Non-working | Same | TV2 (Malaysia) | https://live.mana2.my/Tv2/index.m3u8?auth_key=1745177833-e4f0090e3d3b4ed1b2b4f5df87a24d34-0-d43f8be1101f9bb00363d62de6514e4d&token=1745177833-e4f0090e3d3b4ed1b2b4f5df87a24d34-0-d43f8be1101f9bb00363d62de6514e4d | https://live.mana2.my/Tv2/index.m3u8?auth_key=1745177833-e4f0090e3d3b4ed1b2b4f5df87a24d34-0-d43f8be1101f9bb00363d62de6514e4d&token=1745177833-e4f0090e3d3b4ed1b2b4f5df87a24d34-0-d43f8be1101f9bb00363d62de6514e4d |
+| Working | Same | like Gecko) Chrome/147.0.0.0 Safari/537.36" group-title="Undefined",TV 100 (India) | https://fta.ektv.in/live/310/master.m3u8 | https://fta.ektv.in/live/310/master.m3u8 |
 | Working | Same | Utsav Bharat | https://d1taaads3ztvmu.cloudfront.net/120723/smil:lifeokuk.smil/playlist.m3u8?hdnts=st=1735898689~exp=1835898688~acl=*~hmac=f5fe24724fe05481e3841f9eb5ab8efdee0a3dd83645ae9dcf45703f525bab7b | https://d1taaads3ztvmu.cloudfront.net/120723/smil:lifeokuk.smil/playlist.m3u8?hdnts=st=1735898689~exp=1835898688~acl=*~hmac=f5fe24724fe05481e3841f9eb5ab8efdee0a3dd83645ae9dcf45703f525bab7b |
 | Working | Same | Utsav Plus | https://raw.githubusercontent.com/amazeyourself/adaptive-streams/refs/heads/main/streams/gb/YuppTV/UtsavPlus.m3u8 | https://raw.githubusercontent.com/amazeyourself/adaptive-streams/refs/heads/main/streams/gb/YuppTV/UtsavPlus.m3u8 |
 | Working | Same | VTU | https://lbgo.bozztv.com/ssh101/ssh101/afghantheatretv/playlist.m3u8 | https://lbgo.bozztv.com/ssh101/ssh101/afghantheatretv/playlist.m3u8 |
@@ -226,7 +226,9 @@
 |---|---|---|---|---|
 | Working | Same | &TV | https://drk6xq0vhn.gpcdn.net/live/and_tv_hd_abr/index.m3u8 | https://drk6xq0vhn.gpcdn.net/live/and_tv_hd_abr/index.m3u8 |
 | Non-working | Same | &TV International | https://amg01117-amg01117c1-amgplt0029.playout.now3.amagi.tv/playlist/amg01117-amg01117c1-amgplt0029/playlist.m3u8 | https://amg01117-amg01117c1-amgplt0029.playout.now3.amagi.tv/playlist/amg01117-amg01117c1-amgplt0029/playlist.m3u8 |
-| Working | Same | All Time Movies | https://tvsen6.aynaott.com/a2cKGQtB/index.m3u8 | https://tvsen6.aynaott.com/a2cKGQtB/index.m3u8 |
+| Non-working | Same | All Time Movies | https://tvsen6.aynaott.com/a2cKGQtB/index.m3u8 | https://tvsen6.aynaott.com/a2cKGQtB/index.m3u8 |
+| Non-working | Same | like Gecko) Chrome/147.0.0.0 Safari/537.36" group-title="Movies",Anmol Cinema 2 | https://fta.ektv.in/live/257/master.m3u8 | https://fta.ektv.in/live/257/master.m3u8 |
+| Non-working | Same | like Gecko) Chrome/147.0.0.0 Safari/537.36" group-title="Movies",Anmol Cinema | https://fta.ektv.in/live/271/master.m3u8 | https://fta.ektv.in/live/271/master.m3u8 |
 | Working | Same | B4U Kadak | https://streams.tangotv.in/B4UKADAK/ORIGIN/index.m3u8 | https://streams.tangotv.in/B4UKADAK/ORIGIN/index.m3u8 |
 | Working | Same | B4U Movies | https://streams.tangotv.in/B4UMOVIES/ORIGIN/index.m3u8 | https://streams.tangotv.in/B4UMOVIES/ORIGIN/index.m3u8 |
 | Working | Same | Bollygold | https://jmp2.uk/stvp-IN4000600Q | https://jmp2.uk/stvp-IN4000600Q |
@@ -240,7 +242,7 @@
 | Working | Same | Goldmines Bollywood | https://mumt03.tangotv.in/Dsly5z3HGOLDMINESBOLLYWOOD/index.m3u8 | https://mumt03.tangotv.in/Dsly5z3HGOLDMINESBOLLYWOOD/index.m3u8 |
 | Working | Same | like Gecko) Chrome/147.0.0.0 Safari/537.36" group-title="Movies",Goldmines Movies | http://103.175.73.12:8080/live/51/51_0.m3u8 | http://103.175.73.12:8080/live/51/51_0.m3u8 |
 | Working | Same | India Talkies | https://samitaorigin.tangotv.in/INDIATALKIES/SAMITAORIGIN/index.m3u8 | https://samitaorigin.tangotv.in/INDIATALKIES/SAMITAORIGIN/index.m3u8 |
-| Working | Same | Maha Movie | https://cdn.pishow.tv/ott/live/10007/master.m3u8 | https://cdn.pishow.tv/ott/live/10007/master.m3u8 |
+| Working | Same | like Gecko) Chrome/147.0.0.0 Safari/537.36" group-title="Movies",Maha Movie | https://fta.ektv.in/live/48/48_0.m3u8 | https://fta.ektv.in/live/48/48_0.m3u8 |
 | Working | Same | Manoranjan Grand | https://cdn.pishow.tv/ott/live/1011/master.m3u8 | https://cdn.pishow.tv/ott/live/1011/master.m3u8 |
 | Working | Same | MBC Bollywood (1080p) | https://shd-gcp-live.edgenextcdn.net/live/bitmovin-mbc-bollywood/546eb40d7dcf9a209255dd2496903764/index.m3u8 | https://shd-gcp-live.edgenextcdn.net/live/bitmovin-mbc-bollywood/546eb40d7dcf9a209255dd2496903764/index.m3u8 |
 | Working | Same | MH One Movies | https://mumt03.tangotv.in/Dsly5z3HMHONEMOVIE/index.m3u8 | https://mumt03.tangotv.in/Dsly5z3HMHONEMOVIE/index.m3u8 |
@@ -259,6 +261,7 @@
 | Non-working | Same | Star Movies (India) HD | http://103.151.60.162:2122/play/a02k/index.m3u8?hls | http://103.151.60.162:2122/play/a02k/index.m3u8?hls |
 | Working | Same | The Movie Club | https://sis-global.prod.samsungtv.plus/v1/tvpprd/sc-mp2ar4ca425xo.m3u8 | https://sis-global.prod.samsungtv.plus/v1/tvpprd/sc-mp2ar4ca425xo.m3u8 |
 | Working | Same | The Movie Club +2 | https://d3gnyty2vddhsg.cloudfront.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/pb-ytipwjqub3kf8/TMC2_IN.m3u8?ads.ads_cdn=cf&ads.cdn=cf | https://d3gnyty2vddhsg.cloudfront.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/pb-ytipwjqub3kf8/TMC2_IN.m3u8?ads.ads_cdn=cf&ads.cdn=cf |
+| Non-working | Same | like Gecko) Chrome/147.0.0.0 Safari/537.36" group-title="Movies",Zee Action | https://fta.ektv.in/live/270/master.m3u8 | https://fta.ektv.in/live/270/master.m3u8 |
 | Non-working | Same | Zee Cine Classic | https://amg00862-amg00862c8-amgplt0173.playout.now3.amagi.tv/playlist/amg00862-amg00862c8-amgplt0173/playlist.m3u8 | https://amg00862-amg00862c8-amgplt0173.playout.now3.amagi.tv/playlist/amg00862-amg00862c8-amgplt0173/playlist.m3u8 |
 | Working | Same | Zee Cinema | https://d1g8wgjurz8via.cloudfront.net/bpk-tv/NGCHD/default/NGCHD.m3u8 | https://d1g8wgjurz8via.cloudfront.net/bpk-tv/NGCHD/default/NGCHD.m3u8 |
 | Working | Same | Zee Cinema APAC | https://raw.githubusercontent.com/amazeyourself/adaptive-streams/refs/heads/main/streams/sg/YuppTV/ZeeCinemaAPAC.m3u8 | https://raw.githubusercontent.com/amazeyourself/adaptive-streams/refs/heads/main/streams/sg/YuppTV/ZeeCinemaAPAC.m3u8 |
@@ -339,7 +342,7 @@
 | Working | Same | BSTV (India) | https://samitaorigin.tangotv.in/BSTV/SAMITAORIGIN/index.m3u8 | https://samitaorigin.tangotv.in/BSTV/SAMITAORIGIN/index.m3u8 |
 | Working | Same | Cnews Bharat | https://legitpro.co.in/cnews/cnews/index.fmp4.m3u8 | https://legitpro.co.in/cnews/cnews/index.fmp4.m3u8 |
 | Working | Same | DD News | https://mumbai-edge.smartplaytv.in/DDNews/index.m3u8 | https://mumbai-edge.smartplaytv.in/DDNews/index.m3u8 |
-| Working | Same | DD News HD | https://d3qs3d2rkhfqrt.cloudfront.net/out/v1/0811cd8c37ca4c409d5385a6cd2fa18b/index.m3u8 | https://d3qs3d2rkhfqrt.cloudfront.net/out/v1/0811cd8c37ca4c409d5385a6cd2fa18b/index.m3u8 |
+| Working | Same | like Gecko) Chrome/147.0.0.0 Safari/537.36" group-title="News",DD News HD | https://fta.ektv.in/live/117/117_0.m3u8 | https://fta.ektv.in/live/117/117_0.m3u8 |
 | Working | Same | DNN | https://samitaorigin.tangotv.in/DNN/SAMITAORIGIN/index.m3u8 | https://samitaorigin.tangotv.in/DNN/SAMITAORIGIN/index.m3u8 |
 | Working | Same | First India News | https://mumt03.tangotv.in/Dsly5z3H1STINDIANEWS/index.m3u8 | https://mumt03.tangotv.in/Dsly5z3H1STINDIANEWS/index.m3u8 |
 | Working | Same | Global India | https://server.livelegitpro.in/globalindiatv/globalindiatv/video.m3u8 | https://server.livelegitpro.in/globalindiatv/globalindiatv/video.m3u8 |
@@ -350,10 +353,14 @@
 | Working | Same | Ind 24 | https://livestream.jswk.online/ind24/live/index.m3u8 | https://livestream.jswk.online/ind24/live/index.m3u8 |
 | Working | Same | India Daily Live | https://indiadaily.ottlive.co.in/indiadailylive/index.m3u8 | https://indiadaily.ottlive.co.in/indiadailylive/index.m3u8 |
 | Working | Same | India News | https://mumt03.tangotv.in/Dsly5z3HINDIANEWS/index.m3u8 | https://mumt03.tangotv.in/Dsly5z3HINDIANEWS/index.m3u8 |
+| Working | Same | like Gecko) Chrome/147.0.0.0 Safari/537.36" group-title="News",India News Haryana | https://fta.ektv.in/live/590/master.m3u8 | https://fta.ektv.in/live/590/master.m3u8 |
+| Working | Same | like Gecko) Chrome/147.0.0.0 Safari/537.36" group-title="News",India News Madhya Pradesh/Chhattisgarh | https://fta.ektv.in/live/600/master.m3u8 | https://fta.ektv.in/live/600/master.m3u8 |
+| Working | Same | like Gecko) Chrome/147.0.0.0 Safari/537.36" group-title="News",India News Rajasthan | https://fta.ektv.in/live/601/master.m3u8 | https://fta.ektv.in/live/601/master.m3u8 |
+| Working | Same | like Gecko) Chrome/147.0.0.0 Safari/537.36" group-title="News",India News Uttar Pradesh | https://fta.ektv.in/live/304/master.m3u8 | https://fta.ektv.in/live/304/master.m3u8 |
 | Working | Same | India TV | https://pl-indiatvnews.akamaized.net/out/v1/db79179b608641ceaa5a4d0dd0dca8da/index.m3u8 | https://pl-indiatvnews.akamaized.net/out/v1/db79179b608641ceaa5a4d0dd0dca8da/index.m3u8 |
 | Working | Same | India TV Speed News | https://cc-lyf4c0hwzg5dd.akamaized.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-lyf4c0hwzg5dd/v1/vglive-sk-479089/main.m3u8 | https://cc-lyf4c0hwzg5dd.akamaized.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-lyf4c0hwzg5dd/v1/vglive-sk-479089/main.m3u8 |
 | Working | Same | India Voice | https://d1msejlow1t3l4.cloudfront.net/fta/indiavoice/playlist.m3u8 | https://d1msejlow1t3l4.cloudfront.net/fta/indiavoice/playlist.m3u8 |
-| Working | Same | INH 24x7 | https://d1msejlow1t3l4.cloudfront.net/fta/inh24x7/playlist.m3u8 | https://d1msejlow1t3l4.cloudfront.net/fta/inh24x7/playlist.m3u8 |
+| Working | Same | like Gecko) Chrome/147.0.0.0 Safari/537.36" group-title="News",INH 24x7 | https://fta.ektv.in/live/99/99_0.m3u8 | https://fta.ektv.in/live/99/99_0.m3u8 |
 | Working | Same | Janta TV | https://live.jswk.online/IK_RTPM/live/index.m3u8 | https://live.jswk.online/IK_RTPM/live/index.m3u8 |
 | Working | Same | Jantantra TV | https://mumt05.tangotv.in/87NeALx2JANTANTRA/index.m3u8 | https://mumt05.tangotv.in/87NeALx2JANTANTRA/index.m3u8 |
 | Non-working | Same | K News India | https://legitpro.co.in/knews/index.m3u8 | https://legitpro.co.in/knews/index.m3u8 |
@@ -405,13 +412,14 @@
 | Working | Same | Sahana News | https://mumt03.tangotv.in/Dsly5z3HSAHANANEWS/index.m3u8 | https://mumt03.tangotv.in/Dsly5z3HSAHANANEWS/index.m3u8 |
 | Working | Same | Samachar Plus 24x7 | https://mumt05.tangotv.in/87NeALx2VERTENTSAMACHARPLUS/index.m3u8 | https://mumt05.tangotv.in/87NeALx2VERTENTSAMACHARPLUS/index.m3u8 |
 | Non-working | Same | Sony BBC Earth HD | http://103.185.24.134:3001/SONY-BBC/index.m3u8 | http://103.185.24.134:3001/SONY-BBC/index.m3u8 |
+| Non-working | Same | like Gecko) Chrome/147.0.0.0 Safari/537.36" group-title="News",STV Haryana News | https://fta.ektv.in/live/607/master.m3u8 | https://fta.ektv.in/live/607/master.m3u8 |
 | Working | Same | Sudarshan News | https://ott.livelegitpro.in/sudarshannews/sudarshannews/tracks-v1/index.fmp4.m3u8 | https://ott.livelegitpro.in/sudarshannews/sudarshannews/tracks-v1/index.fmp4.m3u8 |
 | Working | Same | Swadesh News | https://cdn.pishow.tv/ott/live/465/master.m3u8 | https://cdn.pishow.tv/ott/live/465/master.m3u8 |
 | Working | Same | Swaraj Express SMBC | https://d1msejlow1t3l4.cloudfront.net/fta/swarajexpresssmbc/playlist.m3u8 | https://d1msejlow1t3l4.cloudfront.net/fta/swarajexpresssmbc/playlist.m3u8 |
 | Working | Same | The Voice TV | https://legitpro.co.in/thevoicetv/thevoicetv/index.m3u8 | https://legitpro.co.in/thevoicetv/thevoicetv/index.m3u8 |
 | Non-working | Same | Times Now (720p) | https://dztlhgid9me95.cloudfront.net/live-tv/Vidgyor/timesnow/timesnow_master.m3u8 | https://dztlhgid9me95.cloudfront.net/live-tv/Vidgyor/timesnow/timesnow_master.m3u8 |
 | Working | Same | Times Now Navbharat | https://raw.githubusercontent.com/amazeyourself/adaptive-streams/refs/heads/main/streams/in/YuppTV/TimesNowNavbharat.m3u8 | https://raw.githubusercontent.com/amazeyourself/adaptive-streams/refs/heads/main/streams/in/YuppTV/TimesNowNavbharat.m3u8 |
-| Working | Same | Times Now Navbharat HD | https://yupprestreamliveus.akamaized.net/v1/vglive-sk-717514/main.m3u8 | https://yupprestreamliveus.akamaized.net/v1/vglive-sk-717514/main.m3u8 |
+| Non-working | Same | Times Now Navbharat HD | https://yupprestreamliveus.akamaized.net/v1/vglive-sk-717514/main.m3u8 | https://yupprestreamliveus.akamaized.net/v1/vglive-sk-717514/main.m3u8 |
 | Working | Same | TNP News | https://server.thelegitpro.in/tnpnews/tnpnews/index.m3u8 | https://server.thelegitpro.in/tnpnews/tnpnews/index.m3u8 |
 | Working | Same | TTN24 | https://stream.joytvindia.com/stream/hls/ttn24/index.m3u8 | https://stream.joytvindia.com/stream/hls/ttn24/index.m3u8 |
 | Working | Same | TV7 Bharat | https://stream.ottlive.co.in/tv7bharat/index.m3u8 | https://stream.ottlive.co.in/tv7bharat/index.m3u8 |
