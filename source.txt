@@ -3,9 +3,9 @@ IPTV PLAYLIST SOURCE REPORT
 
 Source: https://iptv-org.github.io/iptv/index.m3u
 Total Channels: 883
-Working Channels: 750
-Non-Working Channels: 133
-Indian Sony + Star Working: 11
+Working Channels: 753
+Non-Working Channels: 130
+Indian Sony + Star Working: 12
 
 WORKING CHANNELS
 -----------------
@@ -41,6 +41,7 @@ Bharat AtoZ
 Bharat Samachar
 Bharat Samachar 3
 Bharat Samachar 4
+Bharat Samachar 5
 Bharat Update
 Bharat24
 Bharat24 3
@@ -136,9 +137,10 @@ News 11
 News 11 3
 News 11 4
 News 24
-News 24 3
+News 24 2
 News 24 4
 News 24 5
+News 24 6
 News 24 MP & Chhattisgarh 2
 News Daily 24
 News Daily 24 3
@@ -257,6 +259,7 @@ B4U Bhojpuri 5
 B4U Kadak
 B4U Kadak 3
 B4U Kadak 4
+B4U Kadak 5
 B4U Movies
 B4U Movies 3
 B4U Movies 4
@@ -277,10 +280,10 @@ Goldmines Action 2
 Goldmines Bollywood 2
 Goldmines Bollywood 3
 Goldmines Bollywood 4
+Goldmines Bollywood 5
 Goldmines Movies 2
 Goldmines Movies 4
 Goldmines Movies 5
-India Talkies
 Indywood TV
 Maha Movie
 Mahua Play
@@ -306,12 +309,9 @@ Zee Cinema 2
 7X Music
 9X Jalwa 2
 9X Jalwa 3
-9X Jalwa 4
 9XM
 9XM 3
 9XM 4
-9XM 5
-9XM 6
 B4U Music
 B4U Music 2
 B4U Music 3
@@ -322,7 +322,6 @@ Balle Balle
 Balle Balle 3
 Balle Balle 4
 Balle Balle 5
-Balle Balle 6
 Boogle Bollywood
 Deewana HD
 Epic Music
@@ -345,8 +344,10 @@ YRF Music 2
 Zoom
 Zoom 2
 Zoom 3
+Zoom 4
 Eurosport
 Kabaddi 24x7
+Star Sports Select 2
 &TV
 &TV 2
 Alright! TV
@@ -366,6 +367,7 @@ Dangal TV
 Dangal TV 3
 Dangal TV 4
 Dangal TV 5
+Dangal TV 6
 E 24 2
 Epic Bharat
 Epic Bharat 2
@@ -388,6 +390,7 @@ Pasand TV
 Pasand TV 3
 Q TV 2
 Q TV 3
+Q TV 4
 Shemaroo TV
 Shemaroo TV 2
 Shemaroo TV 4
@@ -508,7 +511,6 @@ Kaumudy TV
 Kaumudy TV 2
 LLBN TV South Asia
 Mahotsav TV
-Mangalmay TV
 Mercy TV
 Mercy TV 3
 Mercy TV 4
@@ -520,6 +522,7 @@ Network 10
 Network 10 3
 Network 10 4
 Network 10 5
+Network 10 6
 Padharo SA
 Paras Gold 2
 Peace of Mind TV 2
@@ -765,7 +768,6 @@ NON-WORKING CHANNELS
 Aaj Tak
 AmarUjala
 Bansal News
-Bharat Samachar
 Good News Today
 Hindi Khabar
 Ind 24
@@ -773,17 +775,15 @@ K News India
 Kadak
 Nagaland TV
 News 24
-News 24 2
 News Nation 81
 NewsX
 Only Bharat
 VIP News
 Vistaar News
-B4U Kadak
 B4U Movies
 Colors Cineplex
-Goldmines Bollywood
 Goldmines Movies
+India Talkies
 NH BollyGold
 Sony Max
 Sony Wah
@@ -793,33 +793,33 @@ Star Gold 2
 Zee Cinema
 Zee Cinema 2
 Zee South Flix
+9X Jalwa
 9XM
 9XM 2
+9XM 3
+9XM 4
 B4U Music
 B4U Music 2
+Balle Balle
 Dhamaal
 Epic Music
 Mastiii
 Music India
 Shemaroo Filmi Gaane
 YRF Music
-Zoom
 Sony Sports Ten 1
 Sony Sports Ten 2
 Sony Sports Ten 3 Hindi
 Star Sports 2 Hindi
 Star Sports Select 2
-Star Sports Select 2 2
 Ten Cricket
 Unite8 Sports 2
 &TV
-Captain
+Captain 2
 Colors
 Colors Infinity
-Dangal TV
 Epic Parivar
 Manoranjan TV
-Q TV
 Shemaroo TV
 Sony Entertainment Television
 Sony Entertainment Television 2
@@ -846,7 +846,7 @@ Hosanna TV
 HSTV
 Jus Hindi
 Jus One
-Network 10
+Mangalmay TV
 Prarthana Bhawan TV 2
 Sansad TV 1
 Superhitz
@@ -898,6 +898,7 @@ Utsav Plus [UK]
 
 INDIAN SONY + STAR WORKING
 --------------------------
+Star Sports Select 2
 Sony Entertainment Television
 Sony SAB
 Star Bharat
