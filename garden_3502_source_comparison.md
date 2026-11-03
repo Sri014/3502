@@ -39,7 +39,7 @@
 | Working | Same | Unique TV | https://mumt05.tangotv.in/87NeALx2UNIQUETV/index.m3u8 | https://mumt05.tangotv.in/87NeALx2UNIQUETV/index.m3u8 |
 | Working | Same | WOW Kidz | https://yuppparoriglin.akamaized.net/181224/smil:wowkidzhindi.smil/playlist.m3u8?hdnts=st=1735898689~exp=1835898688~acl=*~hmac=f5fe24724fe05481e3841f9eb5ab8efdee0a3dd83645ae9dcf45703f525bab7b | https://yuppparoriglin.akamaized.net/181224/smil:wowkidzhindi.smil/playlist.m3u8?hdnts=st=1735898689~exp=1835898688~acl=*~hmac=f5fe24724fe05481e3841f9eb5ab8efdee0a3dd83645ae9dcf45703f525bab7b |
 | Non-working | Same | Disney International HD | http://103.151.60.162:2122/play/a018/index.m3u8?hls | http://103.151.60.162:2122/play/a018/index.m3u8?hls |
-| Working | Same | ZB Cartoon | https://server.zillarbarta.com/zbcatun/video.m3u8 | https://server.zillarbarta.com/zbcatun/video.m3u8 |
+| Non-working | Same | ZB Cartoon | https://server.zillarbarta.com/zbcatun/video.m3u8 | https://server.zillarbarta.com/zbcatun/video.m3u8 |
 
 ## Devotional
 
@@ -47,7 +47,7 @@
 |---|---|---|---|---|
 | Non-working | Same | Aadinath TV | https://mumt01.tangotv.in/O5aw8Zn3AADINATHTV/index.m3u8 | https://mumt01.tangotv.in/O5aw8Zn3AADINATHTV/index.m3u8 |
 | Working | Same | like Gecko) Chrome/147.0.0.0 Safari/537.36" group-title="Religious",Aastha | http://103.175.73.12:8080/live/338/master.m3u8 | http://103.175.73.12:8080/live/338/master.m3u8 |
-| Non-working | Same | Aastha HD | https://aasthaott.akamaized.net/110923/smil:aasthatv.smil/index.m3u8 | https://aasthaott.akamaized.net/110923/smil:aasthatv.smil/index.m3u8 |
+| Working | Same | Aastha HD | https://aasthaott.akamaized.net/110923/smil:aasthatv.smil/index.m3u8 | https://aasthaott.akamaized.net/110923/smil:aasthatv.smil/index.m3u8 |
 | Working | Same | like Gecko) Chrome/147.0.0.0 Safari/537.36" group-title="Religious",Aastha Bhajan | http://103.175.73.12:8080/live/339/master.m3u8 | http://103.175.73.12:8080/live/339/master.m3u8 |
 | Working | Same | Aastha Prime 1 | https://aasthaott.akamaized.net/110923/smil:aasthaprime1.smil/master.m3u8 | https://aasthaott.akamaized.net/110923/smil:aasthaprime1.smil/master.m3u8 |
 | Working | Same | ABN TV India | https://mediaserver.abnvideos.com/streams/abntvindia.m3u8 | https://mediaserver.abnvideos.com/streams/abntvindia.m3u8 |
@@ -224,7 +224,7 @@
 |---|---|---|---|---|
 | Working | Same | &TV | https://drk6xq0vhn.gpcdn.net/live/and_tv_hd_abr/index.m3u8 | https://drk6xq0vhn.gpcdn.net/live/and_tv_hd_abr/index.m3u8 |
 | Non-working | Same | &TV International | https://amg01117-amg01117c1-amgplt0029.playout.now3.amagi.tv/playlist/amg01117-amg01117c1-amgplt0029/playlist.m3u8 | https://amg01117-amg01117c1-amgplt0029.playout.now3.amagi.tv/playlist/amg01117-amg01117c1-amgplt0029/playlist.m3u8 |
-| Working | Same | All Time Movies | https://tvsen6.aynaott.com/a2cKGQtB/index.m3u8 | https://tvsen6.aynaott.com/a2cKGQtB/index.m3u8 |
+| Non-working | Same | All Time Movies | https://tvsen6.aynaott.com/a2cKGQtB/index.m3u8 | https://tvsen6.aynaott.com/a2cKGQtB/index.m3u8 |
 | Working | Same | B4U Kadak | https://streams.tangotv.in/B4UKADAK/ORIGIN/index.m3u8 | https://streams.tangotv.in/B4UKADAK/ORIGIN/index.m3u8 |
 | Working | Same | B4U Movies | https://streams.tangotv.in/B4UMOVIES/ORIGIN/index.m3u8 | https://streams.tangotv.in/B4UMOVIES/ORIGIN/index.m3u8 |
 | Working | Same | Bollygold | https://jmp2.uk/stvp-IN4000600Q | https://jmp2.uk/stvp-IN4000600Q |
@@ -391,7 +391,7 @@
 | Working | Same | News Hour | https://mumt07.tangotv.in/zHjX9OFlNEWSHOUR/index.m3u8 | https://mumt07.tangotv.in/zHjX9OFlNEWSHOUR/index.m3u8 |
 | Working | Same | News India 24x7 | https://samitaorigin.tangotv.in/NEWSINDIA24X7/SAMITAORIGIN/index.m3u8 | https://samitaorigin.tangotv.in/NEWSINDIA24X7/SAMITAORIGIN/index.m3u8 |
 | Working | Same | News Leader | https://stream.ottlive.co.in/newsleader/index.m3u8 | https://stream.ottlive.co.in/newsleader/index.m3u8 |
-| Non-working | Same | News Nation 81 | https://live.newsnation81.com/newsnation81/newsnation81/index.m3u8 | https://live.newsnation81.com/newsnation81/newsnation81/index.m3u8 |
+| Working | Same | News Nation 81 | https://live.newsnation81.com/newsnation81/newsnation81/index.m3u8 | https://live.newsnation81.com/newsnation81/newsnation81/index.m3u8 |
 | Working | Same | News Nation | https://d3qs3d2rkhfqrt.cloudfront.net/out/v1/6cd2f649739a45ca9de1daf81cc7d0f2/index.m3u8 | https://d3qs3d2rkhfqrt.cloudfront.net/out/v1/6cd2f649739a45ca9de1daf81cc7d0f2/index.m3u8 |
 | Working | Same | News State MP & CHG | https://jmp2.uk/stvp-IN4000012ML | https://jmp2.uk/stvp-IN4000012ML |
 | Working | Same | News State Punjab Haryana Himachal | https://jmp2.uk/stvp-IN300083R1 | https://jmp2.uk/stvp-IN300083R1 |
