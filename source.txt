@@ -3,9 +3,9 @@ IPTV PLAYLIST SOURCE REPORT
 
 Source: https://iptv-org.github.io/iptv/index.m3u
 Total Channels: 884
-Working Channels: 709
-Non-Working Channels: 175
-Indian Sony + Star Working: 10
+Working Channels: 703
+Non-Working Channels: 181
+Indian Sony + Star Working: 9
 
 WORKING CHANNELS
 -----------------
@@ -36,9 +36,11 @@ Awaaz India TV
 Bansal News
 Bansal News 2
 Bansal News 3
+Bansal News 4
 Bharat AtoZ
 Bharat Samachar
 Bharat Samachar 3
+Bharat Samachar 4
 Bharat Update
 Bharat24
 BSTV
@@ -120,6 +122,7 @@ NDTV Rajasthan 3
 NE News 2
 News 1 India
 News 1 India 3
+News 1 India 4
 News 11
 News 11 3
 News 11 4
@@ -175,7 +178,7 @@ RT India 2
 Sach Bedhadak
 Sadhna News Madhya Pradesh/Chhattisgarh
 Sadhna Plus News
-Samachar Plus 24x7 2
+Samachar Plus 24x7
 Shubhsandesh TV
 Shubhsandesh TV 2
 Sudarshan News
@@ -210,7 +213,6 @@ WION 5
 WION 6
 WION 7
 WION 8
-WION 9
 Zee Bharat
 Zee Bihar Jharkhand
 Zee Bihar Jharkhand 2
@@ -223,14 +225,13 @@ Zee Rajasthan
 Zee Uttar Pradesh/Uttarakhand
 Zee Uttar Pradesh/Uttarakhand 2
 All Time Movies 2
+All Time Movies 3
 B4U Bhojpuri
 B4U Bhojpuri 2
 B4U Bhojpuri 4
 B4U Bhojpuri 5
 B4U Kadak
 B4U Kadak 3
-B4U Kadak 4
-B4U Kadak 5
 B4U Movies
 B4U Movies 3
 B4U Movies 4
@@ -244,7 +245,9 @@ Epic Bhojpuri
 Goldmines
 Goldmines 3
 Goldmines 4
+Goldmines 5
 Goldmines Bollywood 2
+Goldmines Bollywood 3
 Goldmines Movies 2
 Goldmines Movies 4
 Goldmines Movies 5
@@ -287,8 +290,6 @@ B4U Music 7
 Balle Balle
 Balle Balle 3
 Balle Balle 4
-Balle Balle 5
-Balle Balle 6
 Boogle Bollywood
 Deewana HD
 Epic Music
@@ -314,18 +315,17 @@ Zoom 4
 Eurosport
 Kabaddi 24x7
 &TV
-&TV 2
 Alright! TV
 Anjan TV
 Anjan TV 2
 Anjan TV 4
-Anmol TV
 Colors
 Colors 2
 Colors MENA
 Dangal 2
 Dangal 2 3
 Dangal 2 4
+Dangal 2 5
 Dangal TV
 Dangal TV 3
 Dangal TV 4
@@ -361,13 +361,10 @@ Shemaroo Umang
 Shemaroo Umang 3
 Shemaroo Umang 4
 Sony Entertainment Television
-Sony SAB
 Unique TV
-Zee TV
 Zingabad
 BVG
 Discovery Turbo
-DocuBay TV
 Epic Crimes
 Food Food
 Gyandarshan
@@ -459,11 +456,9 @@ Hare Krsna TV 2
 Hare Krsna TV 5
 Hare Krsna TV 6
 Hare Krsna TV 7
-Harvest USA
 Hope Channel India
 Hosanna TV
 Hosanna TV 2
-HSTV
 Jan TV
 Jan TV 2
 Jinvani Channel
@@ -484,8 +479,7 @@ Padharo SA
 Paras Gold 2
 Peace of Mind TV 2
 Peace of Mind TV 3
-Raftaar Media
-Raftaar Media 3
+Raftaar Media 2
 Rongeen TV 2
 Rongeen TV 3
 Rongeen TV 4
@@ -513,170 +507,169 @@ SVBC 4 2
 SVBC 4 3
 Swastik TV
 Taaza TV 2
-Taaza TV 3
 Tehzeeb TV
 Tehzeeb TV 3
-TV BRICS English
 Vedic
 Vedic 3
+VTU
 WeatherSpy
-DD Himachal Pradesh
-DD Arun Prabha
-DD Jharkhand
 DD Kashir
-DD Sports HD
+DD Jharkhand
+DD Arun Prabha
+DD Himachal Pradesh
 DD News HD
+DD Sports HD
 INH 24x7
 Maha Movie
 Northeast Live
 Sansad TV 1
 Unite8 Sports 2
 Dhamaal (576p)
+T Sports 7
 Fox Sports 1
 TNT Sports (Chile)
-Fox Sports
-Cricket Gold
-Willow Sports
 Fox Sports News
+Fox Sports
+Willow
+Cricket Gold
 TNT Sports (Argentina)
 Fox Sports HD
-Star Sports 2 Telugu HD
 9X Jhakaas
-Fox Sports 2
+Star Sports 2 Telugu HD
 9X Tashan
+Fox Sports 2
+Aastha HD
 Aaryaa TV
-Aastha Prime 1
 7S Music
-Aastha Bhajan
+Aastha Prime 1
 Aastha
+Aastha Bhajan
 Animal Planet (India)
 Animal Planet (India) HD
 Apna Punjab TV
-Anand TV (India)
 Ayush TV
+Anand TV (India)
 Bollywood HD Russia
 Cartoon Network (India)
 CVR Health
-Darshan 24
 Bhakti Sagar
+Darshan 24
+Bhakti Dhara
 DD Haryana
 Dhoom Music
+Dhool TV
 Discovery Channel (India)
 Discovery Channel (India) HD
-Dhool TV
 Discovery Kids
 Dharm Sandesh
 Goldmines Movies
 GurSikh Sabha TV (720p)
 God Stands TV Hindi
-ETV Beats
-Hyder TV
-India News Haryana
-India News Madhya Pradesh/Chhattisgarh
-India News Rajasthan
 History TV18 HD (1080p)
+Hyder TV
+India News Madhya Pradesh/Chhattisgarh
+India News Haryana
+India News Rajasthan
 India News Uttar Pradesh
 Isai Aruvi
-Ishwar Bhakti TV
 INFAST
+ETV Beats
 InWonder
 Mh 1 Music
-Kalika TV
 Kanshi TV (720p)
-TNT Sports (Argentina) SD
 Mr Bean Animated
 MTA2 Europe
+TNT Sports (Argentina) SD
+Ishwar Bhakti TV
+MTV (India)
 TNT Sports Premium ArgentinaHD
 NDTV Good Times
 MTA7 Asia
-MTV (India)
 News18 Delhi NCR JK
 News18 Punjab/Haryana/Himachal
 Peppers TV
-Qello Concerts by Stingray
-Public Music
-News State Punjab Haryana Himachal
 PTC Chakde
+Public Music
 PTC Music
+Qello Concerts by Stingray
 Saam TV
 Sana Plus
 Pankh
+News State Punjab Haryana Himachal
 Star Bharat
 Stingray DJAZZ
-StarPlus (United Kingdom)
 Stingray Easy Listening
 Stingray Naturescape
+StarPlus (United Kingdom)
 Stingray The Spa
 Stingray Today's K-Pop
 TAG TV (1080p)
-The Q India
-Total TV Haryana
-Trishul Broadcasting Network (720p)
-Ultimate TV
 Tarang Music
+Total TV Haryana
+The Q India
 Utsav Plus
+Trishul Broadcasting Network (720p)
 Utsav Bharat
 Vision Beats
 Total Bhakti
 TV 100 (India)
-Animal Planet (United States)
-Tunes 6
-Zee Delhi NCR Haryana
-Animal Planet Latin America HD (720p)
 Vaanavil TV
-Cartoon Network (Turkiye)
+Tunes 6
+Tabbar Hits
+Animal Planet Latin America HD (720p)
 Animal Planet (Russia)
+Ultimate TV
+Animal Planet Latin America
+Cartoon Network (Turkiye)
 Asharq Discovery
 Cartoon Network (United States) (720p)
 Cartoon Network Arabic
-Animal Planet Latin America
+ZB Cartoon
+CNBC Bajar
 Cartoon Network CEE Czech Republic
-ZB Music
-Cartoon Network CEE Ukraine
+Disney Channel Latin America
+Zee Delhi NCR Haryana
 Cartoon Network Latin America Brazil
 Cartoon Network Latin America South Atlantic
-Disney Channel Latin America
-CNBC Bajar
+Cartoon Network CEE Ukraine
 Disney Channel Latin America Mexico
-Cartoon Network (Pakistan)
 Disney Channel Latin America North
 Disney Jr. Latin America
-Tabbar Hits
+Disney Channel Latin America Panregional HD
+Cartoon Network (Pakistan)
 Disney Jr. Latin America North HD
+Disney Channel Latin America Center
 Disney Jr. Latin America South
 Investigation Discovery (Hungary)
 Investigation Discovery (Russia)
-HMTV (India)
 Investigation Discovery (United States) (1080p)
-Mirror Now
 MTV Live
+Mirror Now
 Cartoon Network Asia
-Disney Channel Latin America Center
+HMTV (India)
 National Geographic (Hungary)
 National Geographic (Czech Republic)
-MTV Biggest Pop LatAm
 National Geographic (Mexico)
-FTV (Uzbekistan)
-MTV Classic BR
-MTV Biggest Pop
-National Geographic (United States)
-National Geographic (United States) HD East
-MTV Classic LatAm
-MTV Biggest Pop CA
-National Geographic (Poland) (576i)
-National Geographic Latin America
-MTV Biggest Pop BR
 MTV Classic CA
-MTV Spankin' New
+MTV Classic BR
+MTV Classic LatAm
+MTV Biggest Pop LatAm
+MTV Biggest Pop
+MTV Biggest Pop CA
+National Geographic Latin America
+FTV (Uzbekistan)
 MTV Flow Latino
+MTV Biggest Pop BR
+National Geographic (United States)
 MTV Flow Latino LatAm
-National Geographic Wild (United States) HD East
 National Geographic Wild (Czech Republic)
 National Geographic Wild (Hungary)
+MTV Spankin' New
 MTV Spankin' New CA
 National Geographic Wild (Poland) (576i)
-Nickelodeon Pluto TV
 Yo! MTV
+Nickelodeon Pluto TV
+National Geographic (Poland) (576i)
 Yo! MTV CA
 Cartoon Network CEE
 Cartoon Network CEE Poland
@@ -686,36 +679,37 @@ National Geographic Wild (Bulgaria)
 Sony Sports Ten 5
 T Sports
 Aadinath TV
-Andy Haryana
 Anand Wari TV
+Andy Haryana
 Aryan TV National
 Awakening TV
 Disney Junior (India)
-Bhakti Dhara
 Kappa TV
-T Sports 7
+Kalika TV
 Disney Channel (India) HD
 Pogo
-Star Sports 2
-Sony Pix HD
 Star Sports 3
+Sony Pix HD
+Star Sports 2
 Times Now (720p)
 Travelxp HD
 Nickelodeon (India)
 Animal Planet (United Kingdom)
-ZB Cartoon
+ZB Music
 Sonic
 Sony BBC Earth HD
 Discovery History
-Disney Channel Latin America Panregional HD
-Cartoon Network Latin America
 Disney Channel Latin America South
-National Geographic (Croatia)
+Cartoon Network Latin America
 National Geographic (Netherlands)
+National Geographic (Croatia)
 National Geographic Wild (Russia) HD
 National Geographic (Russia)
+Animal Planet (United States)
 Cartoon Network Latin America North Atlantic
 Investigation Discovery Latin America South
+National Geographic (United States) HD East
+National Geographic Wild (United States) HD East
 Star Sports Khel
 Cricket Gold
 
@@ -724,9 +718,7 @@ NON-WORKING CHANNELS
 Aaj Tak
 AmarUjala
 APN
-Bansal News
 Bharat Samachar
-Bharat Samachar 2
 Bharat24
 Bharat24 2
 CVR English 2
@@ -742,7 +734,6 @@ Live Times
 Nagaland TV
 NDTV India
 NDTV Rajasthan
-News 1 India
 News 24
 News 24 2
 News 24 3
@@ -763,17 +754,17 @@ Swadesh News
 Times Now Navbharat 2
 VIP News
 Vistaar News
+WION
 Zee Bharat 2
-All Time Movies
+B4U Kadak
+B4U Kadak 2
 B4U Movies
 Colors Cineplex
 Epic Bhojpuri
-Goldmines
 Goldmines 2
 Goldmines Action
 Goldmines Bollywood
 Goldmines Bollywood 2
-Goldmines Bollywood 3
 MH One Movies
 Shubh Cinema TV
 Sony Max
@@ -789,6 +780,8 @@ Zee South Flix
 9XM 2
 B4U Music
 B4U Music 2
+Balle Balle
+Balle Balle 2
 Dhamaal
 Epic Music
 Mastiii
@@ -805,11 +798,12 @@ Star Sports Select 2 2
 Ten Cricket
 Unite8 Sports 2
 &TV
+&TV 2
+Anmol TV
 Captain 2
 Colors
 Colors Infinity
 Dangal 2
-Dangal 2 2
 Epic Parivar
 Hi Dost!
 MH One Dil Se
@@ -818,6 +812,7 @@ Sony Entertainment Television
 Sony Entertainment Television 2
 Sony Pal
 Sony SAB
+Sony SAB 2
 StarPlus
 StarPlus 2
 StarPlus 3
@@ -825,6 +820,8 @@ Zee Comedy Nation
 Zee Dil Se
 Zee Horror Nights
 Zee TV
+Zee TV 2
+DocuBay TV
 Food Food
 Food Food 2
 Disney International HD
@@ -835,8 +832,10 @@ ET Now Swadesh
 DD National
 Aradana TV
 Diya TV
+Harvest USA
 Hope Channel India
 Hosanna TV
+HSTV
 Jan TV
 Jinvani Channel
 Jus Hindi
@@ -847,26 +846,27 @@ MH One Shraddha
 Network 10
 Peace of Mind TV
 Prarthana Bhawan TV
+Raftaar Media
 Sansad TV 1
 Sarv Dharm Sangam
 Shubh TV
 Soham TV
 Superhitz
-VTU
+Taaza TV
+TV BRICS English
 Zee Cine Classic
 Sony Sports Ten 1 HD
 TNT Sports 1
 TNT Sports 2
-TNT Sports 4
 TNT Sports 3
-Aastha HD
+TNT Sports 4
 PTV Sports
 ETV Life
 ETV Music
 Foodxp
 MTV (India) HD
-Star Sports Select 1 HD
 Star Sports 2 HD
+Star Sports Select 1 HD
 Travelxp 4K HDR (2160p)
 STV Haryana News
 TV2 (Malaysia)
@@ -875,16 +875,16 @@ Animal Planet
 ET Now (720p)
 Fashion TV
 FashionTV (India)
-Disney Jr. (Turkiye) (1080p)
 Disney Jr. Latin America South HD
+Disney Jr. (Turkiye) (1080p)
 National Geographic (Turkiye)
+National Geographic (Romania)
 National Geographic Wild (Turkiye)
 National Geographic Wild (Romania)
 NickOnline HD
 National Geographic Wild (Ukraine)
 National Geographic Wild (Russia)
 CND Film Discovery Channel
-National Geographic (Romania)
 National Geographic (Finland) (720p)
 National Geographic (Netherlands) HD
 Sony Sports Ten 1 HD
@@ -900,13 +900,12 @@ Utsav Plus [UK]
 INDIAN SONY + STAR WORKING
 --------------------------
 Sony Entertainment Television
-Sony SAB
 Star Bharat
 StarPlus (United Kingdom)
 Sony Sports Ten 5
-Star Sports 2
-Sony Pix HD
 Star Sports 3
+Sony Pix HD
+Star Sports 2
 Sony BBC Earth HD
 Star Sports Khel
 
