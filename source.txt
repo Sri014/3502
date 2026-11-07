@@ -2,10 +2,10 @@ IPTV PLAYLIST SOURCE REPORT
 ===========================
 
 Source: https://iptv-org.github.io/iptv/index.m3u
-Total Channels: 916
-Working Channels: 737
-Non-Working Channels: 179
-Indian Sony + Star Working: 10
+Total Channels: 990
+Working Channels: 806
+Non-Working Channels: 184
+Indian Sony + Star Working: 21
 
 WORKING CHANNELS
 -----------------
@@ -14,22 +14,28 @@ Aagaaz Times
 Aaj Ki Khabar
 Aaj Ki Khabar 2
 Aaj Ki Khabar 3
+Aaj Ki Khabar 4
 Aaj Tak
 Aaj Tak 2
 Aaj Tak 3
 Aaj Tak 4
 Aaj Tak 6
 ABP Ganga
+ABP Ganga 3
 ABP News
 ABP News 2
 ABP News 3
-ABP News 5
+ABP News 4
 ABP News 6
-ANB News 2
+ABP News 7
+ANB News
 ANB News 3
+ANB News 4
+ANB News 5
 APN
 Argus News
 Argus News 2
+Argus News 3
 Asian News 2
 ATN Samachar
 Awaaz India TV
@@ -43,28 +49,33 @@ Bharat Update
 Bharat24
 Bharat24 3
 Bharat24 4
+Bharat24 5
 BSTV
 BSTV 2
 BT TV
 Cnews Bharat
+CNN News 18
 CVR English
 CVR English 3
 CVR English 4
 DD Mizoram
 DNN 2
+DNN 3
 First India News 2
 Global India
 Good News Today
+Good News Today 2
 GoodNews TV
 GoodNews TV 2
 Hindi Khabar
 Hindi Khabar 2
 Hindi Khabar 4
 Hindi Khabar 5
+Hindi Khabar 6
 HNN 24x7
 Hornbill TV
 Hornbill TV 2
-IBC 24 2
+IBC 24
 IBC 24 3
 Ind 24 2
 India Ahead
@@ -72,6 +83,7 @@ India Ahead 2
 India Daily Live
 India Daily Live 2
 India Daily Live 3
+India Daily Live 4
 India Today
 India Today 2
 India Today 3
@@ -94,8 +106,10 @@ Kashish News
 Kashish News 2
 Kashish News 4
 KBC News
-Khabar Fast 2
+KBP Times
+Khabar Fast
 Khabar Fast 3
+Khabar Fast 4
 Khabrain Abhi Tak
 Khabrain Abhi Tak 3
 Live Times
@@ -113,24 +127,28 @@ NDTV India 4
 NDTV Madhya Pradesh Chhattisgarh
 NDTV Madhya Pradesh Chhattisgarh 2
 NDTV Madhya Pradesh Chhattisgarh 3
+NDTV Madhya Pradesh Chhattisgarh 4
 NDTV Rajasthan
 NDTV Rajasthan 2
 NDTV Rajasthan 3
+NDTV Rajasthan 4
 NE News 2
 News 1 India
 News 1 India 3
-News 1 India 4
 News 11
 News 11 3
 News 11 4
 News 24
-News 24 3
+News 24 2
 News 24 4
+News 24 5
+News 24 6
 News 24 MP & Chhattisgarh 2
 News Daily 24
 News Hour
 News India 24x7
 News India 24x7 3
+News India 24x7 4
 News Leader
 News Nation
 News Nation 2
@@ -138,11 +156,11 @@ News Nation 3
 News Nation 5
 News Nation 6
 News Nation 7
-News Nation 81
 News State MP & CHG 2
 News State UP & UK 2
 News18 Bihar Jharkhand
 News18 India
+News18 Madhya Pradesh/Chhattisgarh
 News18 Rajasthan
 News18 Uttar Pradesh Uttarakhand
 News9Live
@@ -157,13 +175,15 @@ Only Bharat
 Prime News
 Prime News 2
 Prime News 3
+Prime News 4
 Prudent Media
 Public First
 Republic Bharat
-Republic Bharat 3
+Republic Bharat 2
 Republic Bharat 4
 Republic Bharat 5
 Republic Bharat 6
+Republic Bharat 7
 Republic TV
 Republic TV 2
 Republic TV 4
@@ -182,6 +202,7 @@ Sudarshan News
 Sudarshan News 2
 Sudarshan News 3
 Sudarshan News 4
+Surya Samachar
 Swadesh News
 Swaraj Express SMBC
 Swaraj Express SMBC 2
@@ -191,15 +212,20 @@ Times Now Navbharat 3
 Times Now Navbharat 4
 Times Now Navbharat 5
 TNP News
+TNP News 2
 TOI Global
 TTN24
 TV27 News
+TV27 News 2
 TV30 India
 TV45
+TV45 2
 TV7 Bharat
+TV7 National
 TV9 Bharatvarsh
-TV9 Bharatvarsh 3
+TV9 Bharatvarsh 2
 TV9 Bharatvarsh 4
+TV9 Bharatvarsh 5
 UP NOW
 Vistaar News 2
 WION
@@ -222,40 +248,55 @@ Zee News 5
 Zee Rajasthan
 Zee Uttar Pradesh/Uttarakhand
 Zee Uttar Pradesh/Uttarakhand 2
+&pictures
+All Time Movies 2
 B4U Bhojpuri
 B4U Bhojpuri 2
-B4U Bhojpuri 4
+B4U Bhojpuri 3
 B4U Bhojpuri 5
+B4U Bhojpuri 6
 B4U Kadak
+B4U Kadak 2
 B4U Kadak 3
-B4U Kadak 4
 B4U Kadak 5
+B4U Kadak 6
+B4U Kadak 7
 B4U Movies
+B4U Movies 2
 B4U Movies 3
 B4U Movies 4
+B4U Movies 6
+B4U Movies 7
 Bhojpuri Cinema
 Bhojpuri Cinema 3
 Bhojpuri Cinema 4
 Bhojpuri Cinema 5
 Bollygold
 Colors Cineplex
+Colors Cineplex 2
+Colors Cineplex Bollywood
+Colors Cineplex Superhits
 Epic Bhojpuri
 Goldmines
-Goldmines 3
+Goldmines 2
 Goldmines 4
 Goldmines 5
-Goldmines Bollywood 2
+Goldmines Bollywood
+Goldmines Bollywood 3
+Goldmines Bollywood 4
 Goldmines Movies 2
-Goldmines Movies 4
+Goldmines Movies 3
 Goldmines Movies 5
 Goldmines Movies 6
+Goldmines Movies 7
 India Talkies
 Indywood TV
 Maha Movie
 Mahua Play
 Manoranjan Grand
-Manoranjan Grand 3
+Manoranjan Grand 2
 Manoranjan Grand 4
+Manoranjan Grand 5
 MBC Bollywood
 NH BollyFlix
 Oscar Movies Bhojpuri
@@ -264,11 +305,19 @@ Pocket Films
 Shemaroo Josh
 Shemaroo Josh 3
 Shubh Cinema TV
+Sony Max
+Sony Wah
 South Station
+Star Gold
+Star Gold 2
+Star Gold Select
+Star Utsav Movies
 The Movie Club
 The Movie Club 2
 The Movie Club 3
 Zee Cinema
+Zee Cinema 2
+Zee Cinema 3
 7X Music
 9X Jalwa 2
 9X Jalwa 3
@@ -280,9 +329,10 @@ Zee Cinema
 B4U Music
 B4U Music 2
 B4U Music 3
-B4U Music 5
+B4U Music 4
 B4U Music 6
 B4U Music 7
+B4U Music 8
 Balle Balle
 Balle Balle 3
 Balle Balle 4
@@ -294,6 +344,7 @@ Epic Music
 Epic Music 3
 Epic Music 4
 Hindi Hits
+Hindi Hits 2
 Insync
 Insync 3
 Mastiii
@@ -311,7 +362,8 @@ Zoom 2
 Zoom 3
 Zoom 4
 Eurosport
-Kabaddi 24x7
+Eurosport 2
+Star Sports Select 2
 &TV
 Alright! TV
 Anjan TV
@@ -319,49 +371,61 @@ Anjan TV 2
 Anjan TV 4
 Colors
 Colors 2
+Colors 3
 Colors MENA
+Colors Rishtey
 Dangal 2
-Dangal 2 3
+Dangal 2 2
 Dangal 2 4
 Dangal 2 5
+Dangal 2 6
 Dangal TV
-Dangal TV 3
+Dangal TV 2
 Dangal TV 4
 Dangal TV 5
 Dangal TV 6
 E 24 2
 Epic Bharat
 Epic Bharat 2
-Epic Bharat 4
+Epic Bharat 3
+Epic Bharat 5
 Epic TV
+Epic TV 2
 Gangaur TV
 Gangaur TV 3
-Gangaur TV 4
 Hi Dost!
 Mango
 Manoranjan Prime
 Manoranjan Prime 3
 Manoranjan TV
-Manoranjan TV 3
+Manoranjan TV 2
 Manoranjan TV 4
 Manoranjan TV 5
+Manoranjan TV 6
 MH One Dil Se 2
 Pasand TV
-Q TV 2
+Q TV
 Q TV 3
 Q TV 4
 Shemaroo TV
 Shemaroo TV 2
 Shemaroo TV 4
 Shemaroo TV 5
-Shemaroo TV 6
 Shemaroo Umang
 Shemaroo Umang 3
 Shemaroo Umang 4
 Sony Entertainment Television
+Sony Pal
 Sony SAB
-Unique TV 2
+SRK TV
+Star Bharat
+Star Utsav
+StarPlus
+StarPlus 2
+Unique TV
+Unique TV 3
 Zee TV
+Zee TV 2
 Zingabad
 BVG
 Discovery Turbo
@@ -378,8 +442,11 @@ Vyas Channel
 Astroscience
 Discovery Science
 MediBizTV
+Doraemon
 Epic Kids
 Green Gold TV
+Nick Jr.
+Shin-chan
 The Jungle Book
 WOW Kidz
 CNBC Awaaz
@@ -390,6 +457,7 @@ NDTV Profit 2
 NDTV Profit 3
 Zee Business
 Zee Business 2
+Zee Business 3
 DD Arun Prabha
 DD Arun Prabha 2
 DD Bharati
@@ -422,11 +490,13 @@ DD Meghalaya
 DD Nagaland
 DD National
 DD National 2
-DD National 4
+DD National 3
 DD National 5
+DD National 6
 DD News
-DD News 3
+DD News 2
 DD News 4
+DD News 5
 DD Rajasthan
 DD Rajasthan 2
 DD Rajasthan 3
@@ -457,7 +527,6 @@ Hare Krsna TV 2
 Hare Krsna TV 5
 Hare Krsna TV 6
 Hare Krsna TV 7
-Harvest USA
 Hope Channel India
 Hosanna TV
 Hosanna TV 2
@@ -487,6 +556,7 @@ Raftaar Media 3
 Rongeen TV 2
 Rongeen TV 3
 Rongeen TV 4
+Rongeen TV 5
 Sadhna
 Sadhna TV
 Salvation TV
@@ -513,7 +583,6 @@ Taaza TV 2
 Taaza TV 3
 Tehzeeb TV
 Tehzeeb TV 3
-TV BRICS English
 Vedic
 Vedic 3
 VTU
@@ -533,6 +602,7 @@ Goldmines Bollywood
 IBC 24
 India News
 INH 24x7
+Khabar Fast
 Khabrain Abhi Tak
 Maha Movie
 MH One Dil Se
@@ -545,8 +615,11 @@ News Daily 24
 Northeast Live
 Peace of Mind TV
 Prarthana Bhawan TV
+Q TV
 Raftaar Media
+Star Bharat
 Sansad TV 1
+Unique TV
 Vedic
 DD India
 Epic Bhojpuri
@@ -606,7 +679,6 @@ INFAST
 InWonder
 India News Uttar Pradesh
 Kappa TV
-Khabar Fast
 Kanshi TV (720p)
 Mh 1 Music
 Ishwar Bhakti TV
@@ -623,7 +695,6 @@ Paras Gold
 Peppers TV
 PTC Chakde
 Public Music
-Q TV
 Qello Concerts by Stingray
 PTC Music
 Saam TV
@@ -631,7 +702,6 @@ Sana Plus
 Samachar Plus 24x7
 Pankh
 News State Punjab Haryana Himachal
-Star Bharat
 Stingray DJAZZ
 Stingray Easy Listening
 Stingray Naturescape
@@ -646,7 +716,6 @@ TV 100 (India)
 Utsav Plus
 Vision Beats
 Utsav Bharat
-Unique TV
 Total Bhakti
 Animal Planet (United States)
 Tunes 6
@@ -755,29 +824,28 @@ APN
 Bansal News
 Bharat AtoZ
 Bharat Samachar
-CNN News 18
 CVR English
 First India News
 Good News Today
 Hindi Khabar
 Hornbill TV
 IBC 24
+IBC 24 2
 Ind 24
 India News
 K News India
-KBP Times
 Live Times
 Nagaland TV
 Nation News
 NDTV India
 NDTV Rajasthan
+News 1 India
 News 24
 News 24 2
-News 24 3
 News Daily 24
 News Nation
+News Nation 81
 News State MP & CHG
-News18 Madhya Pradesh/Chhattisgarh
 News9Live
 NewsX
 NewsX 2
@@ -793,15 +861,15 @@ VIP News
 Vistaar News
 Zee Bharat 2
 All Time Movies
-All Time Movies 2
 B4U Movies
 Colors Cineplex
 Epic Bhojpuri
+Goldmines
+Goldmines 2
 Goldmines 2
 Goldmines Action
 Goldmines Bollywood
 Goldmines Bollywood 2
-Goldmines Bollywood 3
 MH One Movies
 Shubh Cinema TV
 Sony Max
@@ -825,25 +893,24 @@ Music India
 Sangeet Bhojpuri
 Shemaroo Filmi Gaane
 YRF Music
-Sony Sports Ten 1
-Sony Sports Ten 2
+Kabaddi 24x7
 Sony Sports Ten 3 Hindi
-Star Sports 2 Hindi
-Star Sports Select 2
-Star Sports Select 2 2
-Ten Cricket
 Unite8 Sports 2
 &TV
-&TV 2
 Anmol TV
 Captain 2
 Colors
 Colors Infinity
 Dangal 2
+Dangal TV
 Epic Parivar
+Gangaur TV
 Hi Dost!
 MH One Dil Se
 Pasand TV
+Q TV
+Shemaroo TV
+Shemaroo TV 2
 Sony Entertainment Television
 Sony Entertainment Television 2
 Sony Pal
@@ -865,6 +932,7 @@ ET Now Swadesh
 DD National
 Aradana TV
 Diya TV
+Harvest USA
 Hope Channel India
 Hosanna TV
 Jan TV
@@ -883,14 +951,19 @@ Shubh TV
 Soham TV
 Superhitz
 Swastik TV
+Taaza TV
+TV BRICS English
 Zee Cine Classic
-Sony Sports Ten 1 HD
 TNT Sports 2
 TNT Sports 3
 TNT Sports 1
 TNT Sports 4
+Sony Sports Ten 1
+Ten Cricket
+Sony Sports Ten 2
 Aastha HD
 PTV Sports
+Sony Sports Ten 1 HD
 ETV Life
 ETV Music
 Foodxp
@@ -899,6 +972,7 @@ TNT Sports (Argentina) SD
 STV Haryana News
 Star Sports 2 HD
 Travelxp 4K HDR (2160p)
+Star Sports 2 Hindi
 Star Sports Select 1 HD
 TV2 (Malaysia)
 Zee Action
@@ -931,8 +1005,19 @@ Utsav Plus [UK]
 
 INDIAN SONY + STAR WORKING
 --------------------------
+Sony Max
+Sony Wah
+Star Gold
+Star Gold 2
+Star Gold Select
+Star Utsav Movies
+Star Sports Select 2
 Sony Entertainment Television
+Sony Pal
 Sony SAB
+Star Bharat
+Star Utsav
+StarPlus
 Star Bharat
 Sony Sports Ten 5
 Sony Pix HD

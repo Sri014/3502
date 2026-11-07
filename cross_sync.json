@@ -7,13 +7,13 @@
   "garden_working": 459,
   "garden_nonworking": 80,
   "same_url_working": 229,
-  "same_url_nonworking": 47,
-  "different_url_working": 34,
-  "different_url_nonworking": 1,
-  "not_found_working": 193,
-  "not_found_nonworking": 35,
+  "same_url_nonworking": 43,
+  "different_url_working": 38,
+  "different_url_nonworking": 0,
+  "not_found_working": 189,
+  "not_found_nonworking": 40,
   "added_to_working": 227,
-  "added_to_nonworking": 36,
+  "added_to_nonworking": 40,
   "added_working_channels": [
     {
       "name": "All Time Movies",
@@ -76,6 +76,10 @@
       "url": "https://fta.ektv.in/live/99/99_0.m3u8"
     },
     {
+      "name": "Khabar Fast",
+      "url": "https://fta.ektv.in/live/740/master.m3u8"
+    },
+    {
       "name": "Khabrain Abhi Tak",
       "url": "https://fta.ektv.in/live/308/master.m3u8"
     },
@@ -124,12 +128,24 @@
       "url": "https://fta.ektv.in/live/623/master.m3u8"
     },
     {
+      "name": "Q TV",
+      "url": "https://fta.ektv.in/live/25/master.m3u8"
+    },
+    {
       "name": "Raftaar Media",
       "url": "https://fta.ektv.in/live/306/master.m3u8"
     },
     {
+      "name": "Star Bharat",
+      "url": "https://raw.githubusercontent.com/amazeyourself/adaptive-streams/refs/heads/main/streams/gb/YuppTV/UtsavBharat.m3u8"
+    },
+    {
       "name": "Sansad TV 1",
       "url": "https://playhls.media.nic.in/hls/live/lstv/lstv.m3u8"
+    },
+    {
+      "name": "Unique TV",
+      "url": "https://fta.ektv.in/live/688/master.m3u8"
     },
     {
       "name": "Vedic",
@@ -372,10 +388,6 @@
       "url": "https://d1msejlow1t3l4.cloudfront.net/fta/kappatv/playlist.m3u8"
     },
     {
-      "name": "Khabar Fast",
-      "url": "https://fta.ektv.in/live/740/master.m3u8"
-    },
-    {
       "name": "Kanshi TV (720p)",
       "url": "https://live.kanshitv.co.uk/mobile/kanshitvkey.m3u8"
     },
@@ -440,10 +452,6 @@
       "url": "https://fta.ektv.in/live/240/master.m3u8"
     },
     {
-      "name": "Q TV",
-      "url": "https://fta.ektv.in/live/25/master.m3u8"
-    },
-    {
       "name": "Qello Concerts by Stingray",
       "url": "https://lotus.stingray.com/manifest/qello-qello001-montreal/samsungtvplus/master.m3u8"
     },
@@ -470,10 +478,6 @@
     {
       "name": "News State Punjab Haryana Himachal",
       "url": "https://jmp2.uk/stvp-IN300083R1"
-    },
-    {
-      "name": "Star Bharat",
-      "url": "https://raw.githubusercontent.com/amazeyourself/adaptive-streams/refs/heads/main/streams/gb/YuppTV/UtsavBharat.m3u8"
     },
     {
       "name": "Stingray DJAZZ",
@@ -530,10 +534,6 @@
     {
       "name": "Utsav Bharat",
       "url": "https://d1taaads3ztvmu.cloudfront.net/120723/smil:lifeokuk.smil/playlist.m3u8?hdnts=st=1735898689~exp=1835898688~acl=*~hmac=f5fe24724fe05481e3841f9eb5ab8efdee0a3dd83645ae9dcf45703f525bab7b"
-    },
-    {
-      "name": "Unique TV",
-      "url": "https://fta.ektv.in/live/688/master.m3u8"
     },
     {
       "name": "Total Bhakti",
@@ -926,10 +926,6 @@
   ],
   "added_nonworking_channels": [
     {
-      "name": "Sony Sports Ten 1 HD",
-      "url": "http://103.185.24.134:3001/SonyTenSports1/index.m3u8"
-    },
-    {
       "name": "TNT Sports 2",
       "url": "http://37.49.224.5/stream/2/index.m3u8"
     },
@@ -946,12 +942,28 @@
       "url": "http://37.49.224.5/stream/4/index.m3u8"
     },
     {
+      "name": "Sony Sports Ten 1",
+      "url": "http://103.151.60.162:2122/play/a01c/index.m3u8?hls"
+    },
+    {
+      "name": "Ten Cricket",
+      "url": "http://103.151.60.162:2122/play/a0fj/index.m3u8?hls"
+    },
+    {
+      "name": "Sony Sports Ten 2",
+      "url": "http://103.151.60.162:2122/play/a01b/index.m3u8?hls"
+    },
+    {
       "name": "Aastha HD",
       "url": "https://aasthaott.akamaized.net/110923/smil:aasthatv.smil/index.m3u8"
     },
     {
       "name": "PTV Sports",
       "url": "http://103.250.28.74:8000/play/a019/index.m3u8"
+    },
+    {
+      "name": "Sony Sports Ten 1 HD",
+      "url": "http://103.185.24.134:3001/SonyTenSports1/index.m3u8"
     },
     {
       "name": "ETV Life",
@@ -984,6 +996,10 @@
     {
       "name": "Travelxp 4K HDR (2160p)",
       "url": "https://deltatesttatasky.akamaized.net/out/i/968284.m3u8"
+    },
+    {
+      "name": "Star Sports 2 Hindi",
+      "url": "https://tvsen5.aynaott.com/cXPB2LKkErN9/index.m3u8"
     },
     {
       "name": "Star Sports Select 1 HD",
