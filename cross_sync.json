@@ -6,15 +6,19 @@
   "rule": "Exact stream URL match first; channel name only distinguishes Different URL from Not Found.",
   "garden_working": 467,
   "garden_nonworking": 76,
-  "same_url_working": 235,
-  "same_url_nonworking": 45,
-  "different_url_working": 28,
+  "same_url_working": 238,
+  "same_url_nonworking": 34,
+  "different_url_working": 29,
   "different_url_nonworking": 0,
-  "not_found_working": 202,
-  "not_found_nonworking": 33,
+  "not_found_working": 201,
+  "not_found_nonworking": 41,
   "added_to_working": 230,
-  "added_to_nonworking": 33,
+  "added_to_nonworking": 41,
   "added_working_channels": [
+    {
+      "name": "All Time Movies",
+      "url": "https://fta.ektv.in/live/54/54_0.m3u8"
+    },
     {
       "name": "Bharat Samachar",
       "url": "https://fta.ektv.in/live/97/97_0.m3u8"
@@ -46,10 +50,6 @@
     {
       "name": "Epic Bharat",
       "url": "https://fta.ektv.in/live/471/master.m3u8"
-    },
-    {
-      "name": "India News",
-      "url": "https://fta.ektv.in/live/297/master.m3u8"
     },
     {
       "name": "INH 24x7",
@@ -102,6 +102,10 @@
     {
       "name": "Raftaar Media",
       "url": "https://fta.ektv.in/live/306/master.m3u8"
+    },
+    {
+      "name": "Samachar Plus 24x7",
+      "url": "https://fta.ektv.in/live/589/master.m3u8"
     },
     {
       "name": "Sansad TV 1",
@@ -216,10 +220,6 @@
       "url": "https://plus.gigabitcdn.net/live-stream/apna-punjab-H3sE/playlist.m3u8"
     },
     {
-      "name": "All Time Movies",
-      "url": "https://fta.ektv.in/live/54/54_0.m3u8"
-    },
-    {
       "name": "Anand TV (India)",
       "url": "https://live.legitpro.co.in/anandtv/index.m3u8"
     },
@@ -302,6 +302,10 @@
     {
       "name": "History TV18 HD (1080p)",
       "url": "https://amg01448-amg01448c16-samsung-in-3495.playouts.now.amagi.tv/playlist/amg01448-samsungindia-historychannelenglish-samsungin/playlist.m3u8"
+    },
+    {
+      "name": "India News",
+      "url": "https://fta.ektv.in/live/297/master.m3u8"
     },
     {
       "name": "India News Haryana",
@@ -442,10 +446,6 @@
     {
       "name": "Pankh",
       "url": "https://samitaorigin.tangotv.in/PANKH/SAMITAORIGIN/index.m3u8"
-    },
-    {
-      "name": "Samachar Plus 24x7",
-      "url": "https://fta.ektv.in/live/589/master.m3u8"
     },
     {
       "name": "Sana Plus",
@@ -954,8 +954,16 @@
       "url": "http://37.49.224.5/stream/3/index.m3u8"
     },
     {
+      "name": "Eurosport (India)",
+      "url": "https://drk6xq0vhn.gpcdn.net/live/euro_sports_hd_abr/index.m3u8"
+    },
+    {
       "name": "Animal Planet (India) HD",
       "url": "https://drk6xq0vhn.gpcdn.net/live/animal_planet_hd_abr/index.m3u8"
+    },
+    {
+      "name": "Anmol TV",
+      "url": "https://drk6xq0vhn.gpcdn.net/live/zee_anmol_abr/index.m3u8"
     },
     {
       "name": "PTV Sports",
@@ -964,6 +972,10 @@
     {
       "name": "Discovery Channel (India) HD",
       "url": "http://103.135.253.32:8080/DISCOVERY/index.m3u8"
+    },
+    {
+      "name": "Discovery Science",
+      "url": "https://drk6xq0vhn.gpcdn.net/live/discovery_science_abr/index.m3u8"
     },
     {
       "name": "ETV Life",
@@ -978,6 +990,10 @@
       "url": "https://techtraveleat.in/stream.m3u8?id=foodxp"
     },
     {
+      "name": "Investigation Discovery (India)",
+      "url": "https://drk6xq0vhn.gpcdn.net/live/id_hd_abr/index.m3u8"
+    },
+    {
       "name": "MTV (India) HD",
       "url": "https://maamusic.keralive.workers.dev/out/v1/a797c00cba954265ba781f92a57e2cf5/index.m3u8"
     },
@@ -986,8 +1002,20 @@
       "url": "https://fta.ektv.in/live/237/master.m3u8"
     },
     {
+      "name": "Sony SAB",
+      "url": "https://drk6xq0vhn.gpcdn.net/live/sub_hd_abr/index.m3u8"
+    },
+    {
       "name": "STV Haryana News",
       "url": "https://fta.ektv.in/live/607/master.m3u8"
+    },
+    {
+      "name": "TLC (India)",
+      "url": "https://drk6xq0vhn.gpcdn.net/live/tlc_sd_abr/index.m3u8"
+    },
+    {
+      "name": "TLC (India) HD",
+      "url": "https://drk6xq0vhn.gpcdn.net/live/tlc_hd_abr/index.m3u8"
     },
     {
       "name": "Travelxp 4K HDR (2160p)",
@@ -1004,6 +1032,10 @@
     {
       "name": "Discovery Channel",
       "url": "https://cdn-1.pishow.tv/live/1211/master.m3u8"
+    },
+    {
+      "name": "Discovery Turbo (India)",
+      "url": "https://drk6xq0vhn.gpcdn.net/live/discovery_turbo_abr/index.m3u8"
     },
     {
       "name": "ET Now (720p)",
