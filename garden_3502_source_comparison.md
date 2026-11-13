@@ -74,7 +74,7 @@
 | Working | Same | Kanshi TV (720p) | https://live.kanshitv.co.uk/mobile/kanshitvkey.m3u8 | https://live.kanshitv.co.uk/mobile/kanshitvkey.m3u8 |
 | Working | Same | LLBN TV South Asia | https://brightstar-southasia-pull-secure.akamaized.net/brightstarsouthasia/stream.m3u8 | https://brightstar-southasia-pull-secure.akamaized.net/brightstarsouthasia/stream.m3u8 |
 | Working | Same | Mahotsav TV | https://livetv.mahotsavtv.com/mahotsavtv/playout/index.m3u8 | https://livetv.mahotsavtv.com/mahotsavtv/playout/index.m3u8 |
-| Non-working | Same | Mangalmay TV | https://yupplivegcpusa.yuppcdn.net/100823/mangalmay_1800/playlist.m3u8?hdnts=st=1735898689~exp=1835898688~acl=*~hmac=f5fe24724fe05481e3841f9eb5ab8efdee0a3dd83645ae9dcf45703f525bab7b | https://yupplivegcpusa.yuppcdn.net/100823/mangalmay_1800/playlist.m3u8?hdnts=st=1735898689~exp=1835898688~acl=*~hmac=f5fe24724fe05481e3841f9eb5ab8efdee0a3dd83645ae9dcf45703f525bab7b |
+| Working | Same | Mangalmay TV | https://yupplivegcpusa.yuppcdn.net/100823/mangalmay_1800/playlist.m3u8?hdnts=st=1735898689~exp=1835898688~acl=*~hmac=f5fe24724fe05481e3841f9eb5ab8efdee0a3dd83645ae9dcf45703f525bab7b | https://yupplivegcpusa.yuppcdn.net/100823/mangalmay_1800/playlist.m3u8?hdnts=st=1735898689~exp=1835898688~acl=*~hmac=f5fe24724fe05481e3841f9eb5ab8efdee0a3dd83645ae9dcf45703f525bab7b |
 | Working | Same | Mercy TV (India) | https://5dd3981940faa.streamlock.net/mercytv/mercytv/playlist.m3u8 | https://5dd3981940faa.streamlock.net/mercytv/mercytv/playlist.m3u8 |
 | Working | Same | like Gecko) Chrome/147.0.0.0 Safari/537.36" group-title="Religious",MH One Shraddha | https://fta.ektv.in/live/344/master.m3u8 | https://fta.ektv.in/live/344/master.m3u8 |
 | Working | Same | MTA2 Europe | https://chlivemta1.akamaized.net/hls/live/2008145/mta2/playlist.m3u8 | https://chlivemta1.akamaized.net/hls/live/2008145/mta2/playlist.m3u8 |
@@ -132,7 +132,7 @@
 | Working | Same | DD Uttar Pradesh | https://cdn.pishow.tv/ott/live/36/master.m3u8 | https://cdn.pishow.tv/ott/live/36/master.m3u8 |
 | Working | Same | DD Uttarakhand | https://cdn.pishow.tv/ott/live/17/master.m3u8 | https://cdn.pishow.tv/ott/live/17/master.m3u8 |
 | Working | Same | Disha TV | https://d1msejlow1t3l4.cloudfront.net/fta/dishatv/playlist.m3u8 | https://d1msejlow1t3l4.cloudfront.net/fta/dishatv/playlist.m3u8 |
-| Non-working | Same | Diya TV | https://stream.diyatvinc.com/diya.m3u8 | https://stream.diyatvinc.com/diya.m3u8 |
+| Working | Same | Diya TV | https://stream.diyatvinc.com/diya.m3u8 | https://stream.diyatvinc.com/diya.m3u8 |
 | Working | Same | like Gecko) Chrome/147.0.0.0 Safari/537.36" group-title="Entertainment",E 24 | https://fta.ektv.in/live/159/master.m3u8 | https://fta.ektv.in/live/159/master.m3u8 |
 | Working | Same | like Gecko) Chrome/147.0.0.0 Safari/537.36" group-title="Entertainment",Epic Bharat | https://fta.ektv.in/live/471/master.m3u8 | https://fta.ektv.in/live/471/master.m3u8 |
 | Working | Same | Epic Bharat Digital | https://cc-p1izg43bk7sj5.akamaized.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-p1izg43bk7sj5/DIYC/PMSL/IN10/Nazara_IN_B/Nazara_IN_B.m3u8 | https://cc-p1izg43bk7sj5.akamaized.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-p1izg43bk7sj5/DIYC/PMSL/IN10/Nazara_IN_B/Nazara_IN_B.m3u8 |
@@ -467,7 +467,7 @@
 | Working | Same | TNT Sports (Argentina) SD | http://181.78.79.131:8000/play/a0mo | http://181.78.79.131:8000/play/a0mo |
 | Working | Same | TNT Sports (Chile) | http://209.45.101.130:8040/play/a03s/index.m3u8 | http://209.45.101.130:8040/play/a03s/index.m3u8 |
 | Working | Same | TNT Sports Premium ArgentinaHD | http://181.78.79.131:8000/play/a0q9 | http://181.78.79.131:8000/play/a0q9 |
-| Non-working | Same | TNT Sports Premium HD | https://play-fulltv.com.ar/playtvpre/tntsportschile.m3u8 | https://play-fulltv.com.ar/playtvpre/tntsportschile.m3u8 |
+| Working | Same | TNT Sports Premium HD | https://play-fulltv.com.ar/playtvpre/tntsportschile.m3u8 | https://play-fulltv.com.ar/playtvpre/tntsportschile.m3u8 |
 | Non-working | Same | Willow | http://tvsen5.aynascope.net/willowhd/index.m3u8 | http://tvsen5.aynascope.net/willowhd/index.m3u8 |
 | Working | Same | Willow Sports | https://d36r8jifhgsk5j.cloudfront.net/Willow_TV.m3u8 | https://d36r8jifhgsk5j.cloudfront.net/Willow_TV.m3u8 |
 
