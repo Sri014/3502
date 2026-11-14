@@ -2,9 +2,9 @@ IPTV PLAYLIST SOURCE REPORT
 ===========================
 
 Source: https://iptv-org.github.io/iptv/index.m3u
-Total Channels: 988
-Working Channels: 843
-Non-Working Channels: 145
+Total Channels: 987
+Working Channels: 837
+Non-Working Channels: 150
 Indian Sony + Star Working: 10
 
 WORKING CHANNELS
@@ -105,7 +105,6 @@ India TV 5
 India TV Speed News
 India TV Speed News 2
 India Voice
-India Voice 3
 INH 24x7
 INH 24x7 2
 Janta TV 2
@@ -213,7 +212,6 @@ Prime News 2
 Prime News 3
 Prime News 4
 Prudent Media
-Public First
 Republic Bharat
 Republic Bharat 2
 Republic Bharat 3
@@ -291,6 +289,7 @@ Zee Rajasthan
 Zee Uttar Pradesh/Uttarakhand
 Zee Uttar Pradesh/Uttarakhand 2
 All Time Movies 2
+All Time Movies 3
 B4U Bhojpuri
 B4U Bhojpuri 2
 B4U Bhojpuri 3
@@ -322,7 +321,6 @@ Goldmines
 Goldmines 2
 Goldmines 3
 Goldmines 4
-Goldmines 5
 Goldmines Bollywood
 Goldmines Bollywood 2
 Goldmines Movies
@@ -434,7 +432,6 @@ Manoranjan TV
 Manoranjan TV 2
 Manoranjan TV 4
 Manoranjan TV 5
-Manoranjan TV 6
 MH One Dil Se 2
 MH One Dil Se 3
 Pasand TV
@@ -442,12 +439,10 @@ Pasand TV 3
 Q TV
 Q TV 3
 Q TV 4
-Q TV 5
 Shemaroo TV
 Shemaroo TV 2
 Shemaroo TV 4
 Shemaroo TV 5
-Shemaroo TV 6
 Shemaroo Umang
 Shemaroo Umang 3
 Shemaroo Umang 4
@@ -476,7 +471,6 @@ Epic Kids
 Green Gold TV
 The Jungle Book
 WOW Kidz
-CNBC Awaaz
 CNBC TV18
 CNBC TV18 Prime HD
 NDTV Profit
@@ -558,6 +552,7 @@ Hare Krsna TV 2
 Hare Krsna TV 5
 Hare Krsna TV 6
 Hare Krsna TV 7
+Harvest USA
 Hope Channel India
 Hope Channel India 3
 Hosanna TV
@@ -570,7 +565,6 @@ Kaumudy TV
 Kaumudy TV 2
 LLBN TV South Asia
 Mahotsav TV
-Mangalmay TV
 Mercy TV
 Mercy TV 3
 Mh 1 Prime
@@ -630,7 +624,6 @@ Vedic 4
 WeatherSpy
 Goldmines 2
 Goldmines Bollywood
-All Time Movies
 Bharat Samachar
 DD Himachal Pradesh
 DD News HD
@@ -680,6 +673,7 @@ Aastha
 Fox Sports
 Apna Punjab TV
 Star Sports 2 Telugu HD
+All Time Movies
 Ayush TV
 Awakening TV
 Bollywood HD Russia
@@ -867,6 +861,7 @@ Hindi Khabar
 IBC 24
 Ind 24
 India News
+India Voice
 K News India
 Nagaland TV
 NDTV India
@@ -877,6 +872,7 @@ News Nation
 NewsX
 NewsX World
 Pratham News
+Public First 2
 Raj Pariwar
 Sadhna Plus News
 Sahana News
@@ -887,10 +883,9 @@ VIP News
 Vistaar News
 Zee Bharat 2
 Zee News
-All Time Movies
 B4U Kadak
 B4U Movies
-B4U Movies 2
+Goldmines
 Goldmines 2
 Goldmines Action
 Goldmines Bollywood
@@ -898,7 +893,6 @@ Goldmines Bollywood 2
 Goldmines Movies
 MH One Movies
 Shubh Cinema TV
-Sony Max 1
 Sony Wah
 Zee South Flix
 9X Jalwa
@@ -913,7 +907,6 @@ Mastiii
 Music India
 Shemaroo Filmi Gaane
 YRF Music
-Star Sports Select 2
 &TV
 Captain 2
 Colors
@@ -921,7 +914,10 @@ Dangal 2
 Dangal 2 2
 Dangal TV
 Hi Dost!
+Manoranjan TV
+Q TV
 Shemaroo TV
+Shemaroo TV 2
 Sony Pal
 Star Bharat
 StarPlus
@@ -939,15 +935,16 @@ Nick Jr.
 Nick Jr. 2
 Nick Jr. 3
 Shin-chan
+CNBC Awaaz
 ET Now Swadesh
 DD National
 Aradana TV
-Harvest USA
 Hosanna TV
 Jan TV
 Jinvani Channel
 Jus Hindi
 Jus One
+Mangalmay TV
 Mercy TV
 Peace of Mind TV
 Prarthana Bhawan TV
@@ -958,7 +955,6 @@ Taaza TV
 Taaza TV 2
 VTU
 Zee Cine Classic
-Public First
 TNT Sports 1
 TNT Sports 2
 TNT Sports 4
@@ -966,12 +962,15 @@ TNT Sports 3
 Aastha HD
 Anmol TV
 PTV Sports
+Star Sports Select 2 HD
 ETV Life
 ETV Music
 Foodxp
 MTV (India) HD
+Public First
 STV Haryana News
 Travelxp 4K HDR (2160p)
+Sony Max 1
 Zee Action
 Animal Planet
 ET Now (720p)
