@@ -59,7 +59,7 @@
 | Working | Same | Awakening TV | https://d2gvyg6lvauoko.cloudfront.net/230226/awakeningtv/playlist.m3u8?hdnts=st=1735898689~exp=1835898688~acl=*~hmac=f5fe24724fe05481e3841f9eb5ab8efdee0a3dd83645ae9dcf45703f525bab7b | https://d2gvyg6lvauoko.cloudfront.net/230226/awakeningtv/playlist.m3u8?hdnts=st=1735898689~exp=1835898688~acl=*~hmac=f5fe24724fe05481e3841f9eb5ab8efdee0a3dd83645ae9dcf45703f525bab7b |
 | Working | Same | Bhakti Dhara | https://newsliveindia.com:4433/bhaktidhara/index.m3u8 | https://newsliveindia.com:4433/bhaktidhara/index.m3u8 |
 | Working | Same | Bhakti Sagar | https://mumt05.tangotv.in/87NeALx2BHAKTISAGAR/index.m3u8 | https://mumt05.tangotv.in/87NeALx2BHAKTISAGAR/index.m3u8 |
-| Working | Same | Channel Divya | https://vg-pitaaratvlive.akamaized.net/v1/vglive-sk-906482/playlist.m3u8 | https://vg-pitaaratvlive.akamaized.net/v1/vglive-sk-906482/playlist.m3u8 |
+| Non-working | Same | Channel Divya | https://vg-pitaaratvlive.akamaized.net/v1/vglive-sk-906482/playlist.m3u8 | https://vg-pitaaratvlive.akamaized.net/v1/vglive-sk-906482/playlist.m3u8 |
 | Working | Same | Darshan 24 | https://mumt05.tangotv.in/87NeALx2DARSHAN24/index.m3u8 | https://mumt05.tangotv.in/87NeALx2DARSHAN24/index.m3u8 |
 | Working | Same | Dharm Sandesh | https://d2lk5u59tns74c.cloudfront.net/out/v1/aed713462c734923aac946a547265288/index.m3u8 | https://d2lk5u59tns74c.cloudfront.net/out/v1/aed713462c734923aac946a547265288/index.m3u8 |
 | Working | Same | Dheeran TV | https://live.we2live.in/dheerantv/dheerantv/playlist.m3u8 | https://live.we2live.in/dheerantv/dheerantv/playlist.m3u8 |
@@ -67,7 +67,7 @@
 | Working | Same | FGN Channel | https://samitaorigin.tangotv.in/FGNCHANNEL/SAMITAORIGIN/index.m3u8 | https://samitaorigin.tangotv.in/FGNCHANNEL/SAMITAORIGIN/index.m3u8 |
 | Working | Same | God Stands TV Hindi | https://online.godstands.tv:5443/WebRTCApp/streams/HindiStreaming.m3u8 | https://online.godstands.tv:5443/WebRTCApp/streams/HindiStreaming.m3u8 |
 | Working | Same | GurSikh Sabha TV (720p) | http://cdn12.henico.net:8080/live/gsctv/index.m3u8 | http://cdn12.henico.net:8080/live/gsctv/index.m3u8 |
-| Working | Same | Hare Krsna TV | https://hktv.harekrsnatv.com/HKTV/HKWebApp/manifest.mpd | https://hktv.harekrsnatv.com/HKTV/HKWebApp/manifest.mpd |
+| Non-working | Same | Hare Krsna TV | https://hktv.harekrsnatv.com/HKTV/HKWebApp/manifest.mpd | https://hktv.harekrsnatv.com/HKTV/HKWebApp/manifest.mpd |
 | Non-working | Same | Hosanna TV Hindi | https://mumbai-edge.smartplaytv.in/HosannaTV/index.m3u8 | https://mumbai-edge.smartplaytv.in/HosannaTV/index.m3u8 |
 | Working | Same | Ishwar Bhakti TV | https://6n3yow8pl9ok-hls-live.5centscdn.com/ishwartvlive/tv.stream/playlist.m3u8 | https://6n3yow8pl9ok-hls-live.5centscdn.com/ishwartvlive/tv.stream/playlist.m3u8 |
 | Working | Same | Jinvani Channel | https://cdn.pishow.tv/ott/live/989/master.m3u8 | https://cdn.pishow.tv/ott/live/989/master.m3u8 |
@@ -106,7 +106,7 @@
 | Working | Same | Anjan TV | https://anjan.vstream.online/anjanorg/ngrp:anjan_hdall/playlist.m3u8 | https://anjan.vstream.online/anjanorg/ngrp:anjan_hdall/playlist.m3u8 |
 | Non-working | Same | like Gecko) Chrome/147.0.0.0 Safari/537.36" group-title="Entertainment",Anmol TV | https://fta.ektv.in/live/256/master.m3u8 | https://fta.ektv.in/live/256/master.m3u8 |
 | Working | Same | Apna Punjab TV | https://plus.gigabitcdn.net/live-stream/apna-punjab-H3sE/playlist.m3u8 | https://plus.gigabitcdn.net/live-stream/apna-punjab-H3sE/playlist.m3u8 |
-| Working | Same | Aryan TV National | https://mumt04.tangotv.in/m18aqlK4ARYANTVNATIONAL/index.m3u8 | https://mumt04.tangotv.in/m18aqlK4ARYANTVNATIONAL/index.m3u8 |
+| Non-working | Same | Aryan TV National | https://mumt04.tangotv.in/m18aqlK4ARYANTVNATIONAL/index.m3u8 | https://mumt04.tangotv.in/m18aqlK4ARYANTVNATIONAL/index.m3u8 |
 | Working | Same | BVG | https://mumt05.tangotv.in/87NeALx2BVG/index.m3u8 | https://mumt05.tangotv.in/87NeALx2BVG/index.m3u8 |
 | Working | Same | Colors | https://raw.githubusercontent.com/amazeyourself/adaptive-streams/refs/heads/main/streams/sg/YuppTV/ColorsAPAC.m3u8 | https://raw.githubusercontent.com/amazeyourself/adaptive-streams/refs/heads/main/streams/sg/YuppTV/ColorsAPAC.m3u8 |
 | Non-working | Same | Colors HD | http://103.135.253.32:8080/Color-HD/index.m3u8 | http://103.135.253.32:8080/Color-HD/index.m3u8 |
@@ -401,7 +401,7 @@
 | Working | Same | The Voice TV | https://legitpro.co.in/thevoicetv/thevoicetv/index.m3u8 | https://legitpro.co.in/thevoicetv/thevoicetv/index.m3u8 |
 | Non-working | Same | Times Now (720p) | https://dztlhgid9me95.cloudfront.net/live-tv/Vidgyor/timesnow/timesnow_master.m3u8 | https://dztlhgid9me95.cloudfront.net/live-tv/Vidgyor/timesnow/timesnow_master.m3u8 |
 | Working | Same | Times Now Navbharat | https://d3qs3d2rkhfqrt.cloudfront.net/out/v1/a5ee7c4e7a2a4b15a22a3bcf523b9776/index.m3u8 | https://d3qs3d2rkhfqrt.cloudfront.net/out/v1/a5ee7c4e7a2a4b15a22a3bcf523b9776/index.m3u8 |
-| Working | Same | Times Now Navbharat HD | https://yupprestreamliveus.akamaized.net/v1/vglive-sk-717514/main.m3u8 | https://yupprestreamliveus.akamaized.net/v1/vglive-sk-717514/main.m3u8 |
+| Non-working | Same | Times Now Navbharat HD | https://yupprestreamliveus.akamaized.net/v1/vglive-sk-717514/main.m3u8 | https://yupprestreamliveus.akamaized.net/v1/vglive-sk-717514/main.m3u8 |
 | Working | Same | TNP News | https://server.thelegitpro.in/tnpnews/tnpnews/index.m3u8 | https://server.thelegitpro.in/tnpnews/tnpnews/index.m3u8 |
 | Working | Same | TTN24 | https://stream.joytvindia.com/stream/hls/ttn24/index.m3u8 | https://stream.joytvindia.com/stream/hls/ttn24/index.m3u8 |
 | Working | Same | TV7 Bharat | https://vglivessai.akamaized.net/sg/v1/master/611d79b11b77e2f571934fd80ca1413453772ac7/797fcff8-10d6-4c9c-a409-8d0c4fa5c8dd/index.m3u8 | https://vglivessai.akamaized.net/sg/v1/master/611d79b11b77e2f571934fd80ca1413453772ac7/797fcff8-10d6-4c9c-a409-8d0c4fa5c8dd/index.m3u8 |
