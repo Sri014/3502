@@ -6,15 +6,19 @@
   "rule": "Exact stream URL match first; channel name only distinguishes Different URL from Not Found.",
   "garden_working": 464,
   "garden_nonworking": 62,
-  "same_url_working": 240,
-  "same_url_nonworking": 32,
-  "different_url_working": 27,
+  "same_url_working": 239,
+  "same_url_nonworking": 33,
+  "different_url_working": 28,
   "different_url_nonworking": 0,
-  "not_found_working": 196,
+  "not_found_working": 195,
   "not_found_nonworking": 31,
   "added_to_working": 223,
   "added_to_nonworking": 31,
   "added_working_channels": [
+    {
+      "name": "All Time Movies",
+      "url": "https://fta.ektv.in/live/54/54_0.m3u8"
+    },
     {
       "name": "Bharat Samachar",
       "url": "https://fta.ektv.in/live/97/97_0.m3u8"
@@ -210,10 +214,6 @@
     {
       "name": "Apna Punjab TV",
       "url": "https://plus.gigabitcdn.net/live-stream/apna-punjab-H3sE/playlist.m3u8"
-    },
-    {
-      "name": "All Time Movies",
-      "url": "https://fta.ektv.in/live/54/54_0.m3u8"
     },
     {
       "name": "Anand TV (India)",
