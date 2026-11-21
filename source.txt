@@ -2,10 +2,10 @@ IPTV PLAYLIST SOURCE REPORT
 ===========================
 
 Source: https://iptv-org.github.io/iptv/index.m3u
-Total Channels: 1003
-Working Channels: 868
-Non-Working Channels: 135
-Indian Sony + Star Working: 13
+Total Channels: 1041
+Working Channels: 904
+Non-Working Channels: 137
+Indian Sony + Star Working: 22
 
 WORKING CHANNELS
 -----------------
@@ -31,6 +31,7 @@ ABP News 8
 ANB News
 ANB News 3
 ANB News 4
+ANB News 5
 APN
 APN 3
 APN 4
@@ -56,6 +57,7 @@ Bharat24 6
 BSTV
 BSTV 2
 BT TV
+C-10
 Cnews Bharat
 CNN News 18
 CVR English
@@ -78,6 +80,7 @@ Hindi Khabar 4
 Hindi Khabar 5
 Hindi Khabar 6
 HNN 24x7
+HNN 24x7 2
 Hornbill TV
 Hornbill TV 2
 Hornbill TV 4
@@ -91,6 +94,7 @@ India Daily Live
 India Daily Live 2
 India Daily Live 3
 India Daily Live 4
+India News 2
 India Today
 India Today 2
 India Today 3
@@ -106,6 +110,7 @@ India Voice
 India Voice 3
 INH 24x7
 INH 24x7 2
+INH 24x7 4
 Janta TV 2
 Jantantra TV
 Jantantra TV 2
@@ -142,6 +147,7 @@ NDTV India 2
 NDTV India 3
 NDTV India 4
 NDTV India 5
+NDTV India 6
 NDTV Madhya Pradesh Chhattisgarh
 NDTV Madhya Pradesh Chhattisgarh 2
 NDTV Madhya Pradesh Chhattisgarh 3
@@ -150,6 +156,7 @@ NDTV Rajasthan
 NDTV Rajasthan 2
 NDTV Rajasthan 3
 NDTV Rajasthan 4
+NDTV Rajasthan 5
 NE News 2
 News 1 India
 News 1 India 3
@@ -183,6 +190,7 @@ News State MP & CHG 3
 News State MP & CHG 4
 News State UP & UK 2
 News State UP & UK 3
+News State UP & UK 4
 News TV India
 News18 Bihar Jharkhand
 News18 India
@@ -199,6 +207,7 @@ News9Live 7
 NewsX
 NewsX 3
 NewsX World
+NewsX World 3
 Non Stop Bharat
 Non Stop Bharat 2
 Northeast Live 2
@@ -287,7 +296,6 @@ Zee Uttar Pradesh/Uttarakhand 2
 &pictures
 &xplor HD
 All Time Movies 2
-All Time Movies 3
 B4U Bhojpuri
 B4U Bhojpuri 2
 B4U Bhojpuri 3
@@ -320,14 +328,15 @@ Goldmines
 Goldmines 2
 Goldmines 3
 Goldmines 4
-Goldmines 5
+Goldmines 2
+Goldmines Action 2
 Goldmines Bollywood
 Goldmines Bollywood 2
+Goldmines Bollywood 3
 Goldmines Movies
 Goldmines Movies 2
 Goldmines Movies 3
 Goldmines Movies 4
-Goldmines Movies 5
 India Talkies
 Indywood TV
 Maha Movie
@@ -337,6 +346,7 @@ Manoranjan Grand 2
 Manoranjan Grand 4
 Manoranjan Grand 5
 MBC Bollywood
+MH One Movies 2
 MNX
 MNX 2
 NH BollyFlix
@@ -346,15 +356,21 @@ Pocket Films
 Shemaroo Josh
 Shemaroo Josh 3
 Shubh Cinema TV
+Shubh Cinema TV 3
 Sony Max
 Sony Max 2
 Sony Wah
 South Station
+Star Gold
+Star Gold 2
+Star Gold Romance
+Star Gold Select
 Star Utsav Movies
 The Movie Club
 The Movie Club 2
 The Movie Club 3
 Zee Cinema
+Zee Classic
 7X Music
 9X Jalwa 2
 9X Jalwa 3
@@ -381,6 +397,7 @@ Epic Music 4
 Hare Krsna Music
 Hindi Hits
 Hindi Hits 2
+Hindi Hits 3
 Insync
 Insync 3
 Mastiii
@@ -401,7 +418,12 @@ Zoom 3
 Eurosport
 Kabaddi 24x7
 Pickleball Now
+Sony Sports Ten 1
+Sony Sports Ten 2
 Sony Sports Ten 3 Hindi
+Unite8 Sports 1
+Unite8 Sports 1 2
+Unite8 Sports 2
 &TV
 &TV 2
 Alright! TV
@@ -433,6 +455,7 @@ Gangaur TV
 Gangaur TV 3
 Gangaur TV 4
 Hi Dost!
+Hi Dost! 3
 Mango
 Manoranjan Prime
 Manoranjan Prime 3
@@ -447,7 +470,6 @@ Pasand TV 3
 Q TV
 Q TV 3
 Q TV 4
-Q TV 5
 Shemaroo TV
 Shemaroo TV 2
 Shemaroo TV 4
@@ -460,12 +482,16 @@ Shemaroo Umang 4
 Sony Entertainment Television
 Sony Entertainment Television 2
 Sony Pal
+Sony SAB
 SRK TV
+Star Bharat
 Star Utsav
+StarPlus
 Swastik Stories
 Unique TV
 Unique TV 3
 Zee TV
+Zee TV 2
 Zingabad
 Ayush Next Communication Network
 BVG
@@ -474,10 +500,12 @@ DocuBay TV
 Epic Crimes
 Food Food
 Food Food 2
+Food Food 4
 Gyandarshan
 Gyandarshan 2
 India TV Aap Ki Adalat
 Investigation Discovery
+TLC
 Vyas Channel
 Astroscience
 Discovery Science
@@ -558,12 +586,15 @@ Channel Divya 4
 Channel Divya 5
 Colors Rishtey Americas
 Dharm Sandesh
+Dharm Sandesh 3
 Dheeran TV
 Disha TV
 Diya TV
 Fateh TV
 Fateh TV 3
 Fateh TV 4
+Fateh TV 5
+Fateh TV 6
 FGN Channel
 Grace TV
 Hare Krsna Pravachan
@@ -583,6 +614,7 @@ HSTV
 Jan TV
 Jan TV 2
 Jinvani Channel
+Jinvani Channel 3
 Kaumudy TV
 Kaumudy TV 2
 LLBN TV South Asia
@@ -590,6 +622,7 @@ Mahotsav TV
 Mangalmay TV
 Mercy TV
 Mercy TV 3
+Mercy TV 4
 Mh 1 Prime
 Mh 1 Prime 2
 MH One Shraddha 2
@@ -605,6 +638,7 @@ Paras Gold 2
 Parvasi TV
 Peace of Mind TV 2
 Peace of Mind TV 3
+Peace of Mind TV 4
 Raftaar Media
 Raftaar Media 3
 Rongeen TV 2
@@ -633,9 +667,11 @@ Satsang Web TV
 Sharnam TV
 Sharnam TV 2
 Shubh TV
+Shubh TV 3
 Sindh TV
 Sony KAL Hindi
 SVBC 4 2
+SVBC 4 3
 Swastik TV
 Taaza TV 2
 Taaza TV 3
@@ -649,6 +685,7 @@ Vii MEDIA
 Vii MEDIA 2
 WeatherSpy
 Goldmines 2
+All Time Movies
 DD Himachal Pradesh
 DD National HD
 DD News HD
@@ -691,7 +728,6 @@ Aastha International
 Aastha Bhajan
 Aadinath TV
 Apna Punjab TV
-All Time Movies
 Awakening TV
 Ayush TV
 Anand TV (India)
@@ -882,7 +918,6 @@ NON-WORKING CHANNELS
 --------------------
 22Scope News
 Aagaaz Times
-ANB News
 Bansal News
 Bharat Samachar
 CVR English
@@ -913,11 +948,14 @@ Vistaar News
 WION
 Zee Bharat 2
 Zee News
+All Time Movies
 B4U Movies
+Goldmines
 Goldmines 2
 Goldmines Action
 Goldmines Bollywood
 Goldmines Bollywood 2
+Goldmines Movies
 MH One Movies
 Shubh Cinema TV
 Sony Wah
@@ -943,6 +981,7 @@ Dangal 2 2
 Dangal TV
 Hi Dost!
 Manoranjan TV
+Q TV
 Sony Pal
 Star Bharat
 StarPlus
@@ -974,7 +1013,6 @@ Sansad TV 1
 Shubh TV
 Sikh Ratnavali
 Soham TV
-SVBC 4
 Taaza TV
 VTU
 Zee Cine Classic
@@ -1021,10 +1059,19 @@ INDIAN SONY + STAR WORKING
 Sony Max
 Sony Max 2
 Sony Wah
+Star Gold
+Star Gold 2
+Star Gold Romance
+Star Gold Select
 Star Utsav Movies
+Sony Sports Ten 1
+Sony Sports Ten 2
 Sony Entertainment Television
 Sony Pal
+Sony SAB
+Star Bharat
 Star Utsav
+StarPlus
 Star Bharat (United Kingdom)
 StarPlus (United Kingdom)
 Sony Yay!

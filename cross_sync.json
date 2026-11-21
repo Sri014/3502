@@ -6,15 +6,19 @@
   "rule": "Exact stream URL match first; channel name only distinguishes Different URL from Not Found.",
   "garden_working": 492,
   "garden_nonworking": 57,
-  "same_url_working": 266,
-  "same_url_nonworking": 28,
-  "different_url_working": 24,
+  "same_url_working": 267,
+  "same_url_nonworking": 27,
+  "different_url_working": 25,
   "different_url_nonworking": 0,
-  "not_found_working": 203,
+  "not_found_working": 202,
   "not_found_nonworking": 28,
   "added_to_working": 227,
   "added_to_nonworking": 28,
   "added_working_channels": [
+    {
+      "name": "All Time Movies",
+      "url": "https://fta.ektv.in/live/54/54_0.m3u8"
+    },
     {
       "name": "DD Himachal Pradesh",
       "url": "https://fta.ektv.in/live/575/master.m3u8"
@@ -186,10 +190,6 @@
     {
       "name": "Apna Punjab TV",
       "url": "https://plus.gigabitcdn.net/live-stream/apna-punjab-H3sE/playlist.m3u8"
-    },
-    {
-      "name": "All Time Movies",
-      "url": "https://fta.ektv.in/live/54/54_0.m3u8"
     },
     {
       "name": "Awakening TV",
