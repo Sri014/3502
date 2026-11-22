@@ -33,10 +33,10 @@ http://163.61.226.31:9981/stream/channelid/894286890?profile=pass
 http://116.90.120.149:8000/play/a11w/index.m3u8
 #EXTINF:-1 tvg-logo="https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/LIVETV_LIVETVCHANNEL_SONY_SPORTS_TEN_1/images/LOGO_HD/image.png" group-title="Sports" tvg-language="Sports",Sony Sports Ten 1 HD
 http://116.90.120.149:8000/play/a11t/index.m3u8
-#EXTINF:-1 tvg-logo="https://i.imgur.com/E5jjKHI.png" group-title="Non Jio" tvg-language="Sports",Star Sports 1 HD
-http://116.90.120.149:8000/play/a11x/index.m3u8
 #EXTINF:-1 tvg-logo="https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/LIVETV_LIVETVCHANNEL_SONY_SPORTS_TEN_5/images/LOGO_HD/image.png" group-title="Sports" tvg-language="Sports",Sony Sports Ten 5
 http://116.90.120.149:8000/play/a117/index.m3u8
+#EXTINF:-1 tvg-logo="https://i.imgur.com/E5jjKHI.png" group-title="Non Jio" tvg-language="Sports",Star Sports 1 HD
+http://116.90.120.149:8000/play/a11x/index.m3u8
 #EXTINF:-1 tvg-logo="https://i.imgur.com/Q8ajPij.png" group-title="Non Jio" tvg-language="Hindi",Star Bharat (United Kingdom)
 https://raw.githubusercontent.com/amazeyourself/adaptive-streams/refs/heads/main/streams/gb/YuppTV/UtsavBharat.m3u8
 #EXTINF:-1 tvg-logo="https://dtil.tmsimg.com/assets/s143800_ld_h15_aa.png?lock=720x540" group-title="Non Jio" tvg-language="Hindi",Sony BBC Earth HD
