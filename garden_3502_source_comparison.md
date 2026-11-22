@@ -27,8 +27,8 @@
 | Status | Match | Channel | Garden URL | 3502 URL |
 |---|---|---|---|---|
 | Non-working | Same | Cartoon Network HD+ | http://103.135.253.32:8080/CN-NETWORK/index.m3u8 | http://103.135.253.32:8080/CN-NETWORK/index.m3u8 |
-| Working | Same | Disney Channel (India) | http://116.90.120.149:8000/play/a124/index.m3u8 | http://116.90.120.149:8000/play/a124/index.m3u8 |
-| Working | Same | Disney Channel (India) HD | http://116.90.120.149:8000/play/a11r/index.m3u8 | http://116.90.120.149:8000/play/a11r/index.m3u8 |
+| Non-working | Same | Disney Channel (India) | http://116.90.120.149:8000/play/a124/index.m3u8 | http://116.90.120.149:8000/play/a124/index.m3u8 |
+| Non-working | Same | Disney Channel (India) HD | http://116.90.120.149:8000/play/a11r/index.m3u8 | http://116.90.120.149:8000/play/a11r/index.m3u8 |
 | Non-working | Same | Doraemon | https://live20.bozztv.com/giatvplayout7/giatv-209902/tracks-v1a1/mono.ts.m3u8 | https://live20.bozztv.com/giatvplayout7/giatv-209902/tracks-v1a1/mono.ts.m3u8 |
 | Working | Same | Epic Kids Digital | https://cc-t8lqe1o99pszu.akamaized.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-t8lqe1o99pszu/playlist.m3u8 | https://cc-t8lqe1o99pszu.akamaized.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-t8lqe1o99pszu/playlist.m3u8 |
 | Working | Same | Green Gold TV | https://cc-szrmqvu8zkg16.akamaized.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-szrmqvu8zkg16/greengold/stream/grngld/playlist.m3u8 | https://cc-szrmqvu8zkg16.akamaized.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-szrmqvu8zkg16/greengold/stream/grngld/playlist.m3u8 |
@@ -41,7 +41,7 @@
 | Working | Same | The Jungle Book | https://cc-4bhi5osabejc9.akamaized.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-4bhi5osabejc9/junglebook.m3u8 | https://cc-4bhi5osabejc9.akamaized.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-4bhi5osabejc9/junglebook.m3u8 |
 | Working | Same | Unique TV | http://163.61.226.31:9981/stream/channelid/1687023184?profile=pass | http://163.61.226.31:9981/stream/channelid/1687023184?profile=pass |
 | Working | Same | WOW Kidz | https://yuppparoriglin.akamaized.net/181224/smil:wowkidzhindi.smil/playlist.m3u8?hdnts=st=1735898689~exp=1835898688~acl=*~hmac=f5fe24724fe05481e3841f9eb5ab8efdee0a3dd83645ae9dcf45703f525bab7b | https://yuppparoriglin.akamaized.net/181224/smil:wowkidzhindi.smil/playlist.m3u8?hdnts=st=1735898689~exp=1835898688~acl=*~hmac=f5fe24724fe05481e3841f9eb5ab8efdee0a3dd83645ae9dcf45703f525bab7b |
-| Working | Same | Nick HD+ | http://116.90.120.149:8000/play/a11j/index.m3u8 | http://116.90.120.149:8000/play/a11j/index.m3u8 |
+| Non-working | Same | Nick HD+ | http://116.90.120.149:8000/play/a11j/index.m3u8 | http://116.90.120.149:8000/play/a11j/index.m3u8 |
 | Working | Same | ZB Cartoon | https://server.zillarbarta.com/zbcatun/video.m3u8 | https://server.zillarbarta.com/zbcatun/video.m3u8 |
 
 ## Devotional
@@ -178,7 +178,7 @@
 | Working | Same | Sony Entertainment Television HD | http://38.96.178.205/SONYHD/index.m3u8 | http://38.96.178.205/SONYHD/index.m3u8 |
 | Working | Same | Sony KAL Hindi | https://wurlsonypicturestv.global.transmit.live/hls/68deeb1c0238cda82df543dd/v1/spt_sonykal_1/lg_us/latest/main/hls/playlist.m3u8 | https://wurlsonypicturestv.global.transmit.live/hls/68deeb1c0238cda82df543dd/v1/spt_sonykal_1/lg_us/latest/main/hls/playlist.m3u8 |
 | Non-working | Same | Sony Pal | http://59.103.38.46:8000/play/a0ac/index.m3u8 | http://59.103.38.46:8000/play/a0ac/index.m3u8 |
-| Working | Same | Sony SAB HD | http://116.90.120.149:8000/play/a128/index.m3u8 | http://116.90.120.149:8000/play/a128/index.m3u8 |
+| Non-working | Same | Sony SAB HD | http://116.90.120.149:8000/play/a128/index.m3u8 | http://116.90.120.149:8000/play/a128/index.m3u8 |
 | Working | Same | SRK TV | https://srknowapp.ncare.live/srktvhlswodrm/srktv.stream/playlist.m3u8 | https://srknowapp.ncare.live/srktvhlswodrm/srktv.stream/playlist.m3u8 |
 | Working | Same | Star Bharat (United Kingdom) | https://raw.githubusercontent.com/amazeyourself/adaptive-streams/refs/heads/main/streams/gb/YuppTV/UtsavBharat.m3u8 | https://raw.githubusercontent.com/amazeyourself/adaptive-streams/refs/heads/main/streams/gb/YuppTV/UtsavBharat.m3u8 |
 | Working | Same | Star Utsav | http://163.61.226.31:9981/stream/channelid/894286890?profile=pass | http://163.61.226.31:9981/stream/channelid/894286890?profile=pass |
@@ -215,7 +215,7 @@
 | Working | Same | Ayush Next Communication Network | https://d2lk5u59tns74c.cloudfront.net/out/v1/60ab07b02a2942498cdd81f045a625a1/index.m3u8 | https://d2lk5u59tns74c.cloudfront.net/out/v1/60ab07b02a2942498cdd81f045a625a1/index.m3u8 |
 | Working | Same | Food Food | https://d2lk5u59tns74c.cloudfront.net/out/v1/ffc601b3dc8d41c5b09115702538d75a/index.m3u8 | https://d2lk5u59tns74c.cloudfront.net/out/v1/ffc601b3dc8d41c5b09115702538d75a/index.m3u8 |
 | Non-working | Same | Foodxp | https://techtraveleat.in/stream.m3u8?id=foodxp | https://techtraveleat.in/stream.m3u8?id=foodxp |
-| Working | Same | TLC (India) HD | http://116.90.120.149:8000/play/a11g/index.m3u8 | http://116.90.120.149:8000/play/a11g/index.m3u8 |
+| Non-working | Same | TLC (India) HD | http://116.90.120.149:8000/play/a11g/index.m3u8 | http://116.90.120.149:8000/play/a11g/index.m3u8 |
 | Non-working | Same | Travelxp 4K HDR (2160p) | https://deltatesttatasky.akamaized.net/out/i/968284.m3u8 | https://deltatesttatasky.akamaized.net/out/i/968284.m3u8 |
 | Working | Same | Travelxp HD (1080p) | https://amg00416-amg00416c9-samsung-in-4882.playouts.now.amagi.tv/playlist/amg00416-travelxp-travelxphd-samsungin/playlist.m3u8 | https://amg00416-amg00416c9-samsung-in-4882.playouts.now.amagi.tv/playlist/amg00416-travelxp-travelxphd-samsungin/playlist.m3u8 |
 
@@ -224,9 +224,9 @@
 | Status | Match | Channel | Garden URL | 3502 URL |
 |---|---|---|---|---|
 | Working | Same | &TV International | https://3f56f997.wurl.com/master/f36d25e7e52f1ba8d7e56eb859c636563214f541/U2Ftc3VuZy1nYl9BbmRUVl9ITFM/playlist.m3u8 | https://3f56f997.wurl.com/master/f36d25e7e52f1ba8d7e56eb859c636563214f541/U2Ftc3VuZy1nYl9BbmRUVl9ITFM/playlist.m3u8 |
-| Working | Same | &pictures HD | http://116.90.120.149:8000/play/a132/index.m3u8 | http://116.90.120.149:8000/play/a132/index.m3u8 |
-| Working | Same | &TV HD | http://116.90.120.149:8000/play/a133/index.m3u8 | http://116.90.120.149:8000/play/a133/index.m3u8 |
-| Working | Same | &xplor HD | http://116.90.120.149:8000/play/a11o/index.m3u8 | http://116.90.120.149:8000/play/a11o/index.m3u8 |
+| Non-working | Same | &pictures HD | http://116.90.120.149:8000/play/a132/index.m3u8 | http://116.90.120.149:8000/play/a132/index.m3u8 |
+| Non-working | Same | &TV HD | http://116.90.120.149:8000/play/a133/index.m3u8 | http://116.90.120.149:8000/play/a133/index.m3u8 |
+| Non-working | Same | &xplor HD | http://116.90.120.149:8000/play/a11o/index.m3u8 | http://116.90.120.149:8000/play/a11o/index.m3u8 |
 | Working | Same | like Gecko) Chrome/147.0.0.0 Safari/537.36" group-title="Movies",All Time Movies | https://fta.ektv.in/live/54/54_0.m3u8 | https://fta.ektv.in/live/54/54_0.m3u8 |
 | Working | Same | B4U Kadak | https://amg00877-b4unew-amg00877c4-xiaomi-in-5473.playouts.now.amagi.tv/playlist.m3u8 | https://amg00877-b4unew-amg00877c4-xiaomi-in-5473.playouts.now.amagi.tv/playlist.m3u8 |
 | Working | Same | B4U Movies | https://amg00877-b4unew-amg00877c2-xiaomi-in-5489.playouts.now.amagi.tv/playlist.m3u8 | https://amg00877-b4unew-amg00877c2-xiaomi-in-5489.playouts.now.amagi.tv/playlist.m3u8 |
@@ -252,22 +252,22 @@
 | Working | Same | Shemaroo Josh | https://cdn.pishow.tv/ott/live/337/master.m3u8 | https://cdn.pishow.tv/ott/live/337/master.m3u8 |
 | Working | Same | Shubh Cinema TV | https://d393sxaxig6bax.cloudfront.net/out/v1/589cf2cf44bf42bb941e817a2240d62e/index.m3u8 | https://d393sxaxig6bax.cloudfront.net/out/v1/589cf2cf44bf42bb941e817a2240d62e/index.m3u8 |
 | Working | Same | Sony Max | https://drk6xq0vhn.gpcdn.net/hls/set_max_m4fb8dz2wp6kr9s_720/index.m3u8 | https://drk6xq0vhn.gpcdn.net/hls/set_max_m4fb8dz2wp6kr9s_720/index.m3u8 |
-| Working | Same | Sony Max HD | http://116.90.120.149:8000/play/a123/index.m3u8 | http://116.90.120.149:8000/play/a123/index.m3u8 |
-| Working | Same | Sony Pix HD | http://116.90.120.149:8000/play/a138/index.m3u8 | http://116.90.120.149:8000/play/a138/index.m3u8 |
+| Non-working | Same | Sony Max HD | http://116.90.120.149:8000/play/a123/index.m3u8 | http://116.90.120.149:8000/play/a123/index.m3u8 |
+| Non-working | Same | Sony Pix HD | http://116.90.120.149:8000/play/a138/index.m3u8 | http://116.90.120.149:8000/play/a138/index.m3u8 |
 | Working | Same | Sony Wah | http://163.61.226.31:9981/stream/channelid/1743466790?profile=pass | http://163.61.226.31:9981/stream/channelid/1743466790?profile=pass |
 | Working | Same | South Station | https://cc-yw7ztecy8do3q.akamaized.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-yw7ztecy8do3q/SS_IN.m3u8 | https://cc-yw7ztecy8do3q.akamaized.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-yw7ztecy8do3q/SS_IN.m3u8 |
-| Working | Same | Star Gold 2 | http://116.90.120.149:8000/play/a12b/index.m3u8 | http://116.90.120.149:8000/play/a12b/index.m3u8 |
-| Working | Same | Star Gold HD | http://116.90.120.149:8000/play/a12a/index.m3u8 | http://116.90.120.149:8000/play/a12a/index.m3u8 |
-| Working | Same | Star Gold Romance | http://116.90.120.149:8000/play/a12c/index.m3u8 | http://116.90.120.149:8000/play/a12c/index.m3u8 |
-| Working | Same | Star Gold Select HD | http://116.90.120.149:8000/play/a131/index.m3u8 | http://116.90.120.149:8000/play/a131/index.m3u8 |
-| Working | Same | Star Movies (India) HD | http://116.90.120.149:8000/play/a13a/index.m3u8 | http://116.90.120.149:8000/play/a13a/index.m3u8 |
-| Working | Same | Star Movies Select HD | http://116.90.120.149:8000/play/a139/index.m3u8 | http://116.90.120.149:8000/play/a139/index.m3u8 |
+| Non-working | Same | Star Gold 2 | http://116.90.120.149:8000/play/a12b/index.m3u8 | http://116.90.120.149:8000/play/a12b/index.m3u8 |
+| Non-working | Same | Star Gold HD | http://116.90.120.149:8000/play/a12a/index.m3u8 | http://116.90.120.149:8000/play/a12a/index.m3u8 |
+| Non-working | Same | Star Gold Romance | http://116.90.120.149:8000/play/a12c/index.m3u8 | http://116.90.120.149:8000/play/a12c/index.m3u8 |
+| Non-working | Same | Star Gold Select HD | http://116.90.120.149:8000/play/a131/index.m3u8 | http://116.90.120.149:8000/play/a131/index.m3u8 |
+| Non-working | Same | Star Movies (India) HD | http://116.90.120.149:8000/play/a13a/index.m3u8 | http://116.90.120.149:8000/play/a13a/index.m3u8 |
+| Non-working | Same | Star Movies Select HD | http://116.90.120.149:8000/play/a139/index.m3u8 | http://116.90.120.149:8000/play/a139/index.m3u8 |
 | Working | Same | Star Utsav Movies | http://163.61.226.31:9981/stream/channelid/1225596390?profile=pass | http://163.61.226.31:9981/stream/channelid/1225596390?profile=pass |
 | Working | Same | The Movie Club | https://mumbai-edge.smartplaytv.in/TheMovieClub/index.m3u8 | https://mumbai-edge.smartplaytv.in/TheMovieClub/index.m3u8 |
 | Working | Same | The Movie Club +2 | https://d3gnyty2vddhsg.cloudfront.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/pb-ytipwjqub3kf8/TMC2_IN.m3u8?ads.ads_cdn=cf&ads.cdn=cf | https://d3gnyty2vddhsg.cloudfront.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/pb-ytipwjqub3kf8/TMC2_IN.m3u8?ads.ads_cdn=cf&ads.cdn=cf |
 | Non-working | Same | Zee Cine Classic | https://amg00862-amg00862c8-amgplt0173.playout.now3.amagi.tv/playlist/amg00862-amg00862c8-amgplt0173/playlist.m3u8 | https://amg00862-amg00862c8-amgplt0173.playout.now3.amagi.tv/playlist/amg00862-amg00862c8-amgplt0173/playlist.m3u8 |
 | Working | Same | Zee Cinema APAC | https://raw.githubusercontent.com/amazeyourself/adaptive-streams/refs/heads/main/streams/sg/YuppTV/ZeeCinemaAPAC.m3u8 | https://raw.githubusercontent.com/amazeyourself/adaptive-streams/refs/heads/main/streams/sg/YuppTV/ZeeCinemaAPAC.m3u8 |
-| Working | Same | Zee Classic | http://116.90.120.149:8000/play/a121/index.m3u8 | http://116.90.120.149:8000/play/a121/index.m3u8 |
+| Non-working | Same | Zee Classic | http://116.90.120.149:8000/play/a121/index.m3u8 | http://116.90.120.149:8000/play/a121/index.m3u8 |
 | Non-working | Same | Zee South Flix | https://amg00862-amg00862c9-amgplt0173.playout.now3.amagi.tv/playlist/amg00862-amg00862c9-amgplt0173/playlist.m3u8 | https://amg00862-amg00862c9-amgplt0173.playout.now3.amagi.tv/playlist/amg00862-amg00862c9-amgplt0173/playlist.m3u8 |
 | Working | Same | B4U Bhojpuri | https://cdnb4u.wiseplayout.com/B4U_Bhojpuri/master.m3u8 | https://cdnb4u.wiseplayout.com/B4U_Bhojpuri/master.m3u8 |
 | Working | Same | B4U Bhojpuri Plus | https://cc-t2mudtkmuz4wb.akamaized.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-t2mudtkmuz4wb/B4U_Bhojpuri/master.m3u8 | https://cc-t2mudtkmuz4wb.akamaized.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-t2mudtkmuz4wb/B4U_Bhojpuri/master.m3u8 |
@@ -281,7 +281,7 @@
 
 | Status | Match | Channel | Garden URL | 3502 URL |
 |---|---|---|---|---|
-| Working | Same | 7X Music | https://7xshreeshyam.akamaized.net/7XPunjabi/index.m3u8 | https://7xshreeshyam.akamaized.net/7XPunjabi/index.m3u8 |
+| Non-working | Same | 7X Music | https://7xshreeshyam.akamaized.net/7XPunjabi/index.m3u8 | https://7xshreeshyam.akamaized.net/7XPunjabi/index.m3u8 |
 | Working | Same | 9X Jalwa | https://wiselp.wiseplayout.com/9X_Jalwa/master.m3u8 | https://wiselp.wiseplayout.com/9X_Jalwa/master.m3u8 |
 | Non-working | Same | 9XM | https://9xjio.wiseplayout.com/9XM/master.m3u8 | https://9xjio.wiseplayout.com/9XM/master.m3u8 |
 | Non-working | Same | Andy Haryana | https://mumt03.tangotv.in/Dsly5z3HANDYHARYANA/index.m3u8 | https://mumt03.tangotv.in/Dsly5z3HANDYHARYANA/index.m3u8 |
@@ -298,7 +298,7 @@
 | Working | Same | Insync | https://d1msejlow1t3l4.cloudfront.net/fta/insync/playlist.m3u8 | https://d1msejlow1t3l4.cloudfront.net/fta/insync/playlist.m3u8 |
 | Working | Same | Mastiii | https://mumbai-edge.smartplaytv.in/MastiMusic/index.m3u8 | https://mumbai-edge.smartplaytv.in/MastiMusic/index.m3u8 |
 | Non-working | Same | like Gecko) Chrome/154.0.0.0 Safari/537.36" group-title="Entertainment",MTV (India) | https://yupp-music.keralive.workers.dev/out/v1/a797c00cba954265ba781f92a57e2cf5/index.m3u8 | https://yupp-music.keralive.workers.dev/out/v1/a797c00cba954265ba781f92a57e2cf5/index.m3u8 |
-| Working | Same | MTV (India) HD | http://116.90.120.149:8000/play/a136/index.m3u8 | http://116.90.120.149:8000/play/a136/index.m3u8 |
+| Non-working | Same | MTV (India) HD | http://116.90.120.149:8000/play/a136/index.m3u8 | http://116.90.120.149:8000/play/a136/index.m3u8 |
 | Working | Same | like Gecko) Chrome/147.0.0.0 Safari/537.36" group-title="Music",Music India | https://fta.ektv.in/live/158/master.m3u8 | https://fta.ektv.in/live/158/master.m3u8 |
 | Working | Same | NH BollyRaga | https://jmp2.uk/stvp-IN460001373 | https://jmp2.uk/stvp-IN460001373 |
 | Working | Same | Songdew TV | https://yuppnimrestreammum.akamaized.net/181224/smil:songdewtv.smil/playlist.m3u8?hdnts=st=1735898689~exp=1835898688~acl=*~hmac=f5fe24724fe05481e3841f9eb5ab8efdee0a3dd83645ae9dcf45703f525bab7b | https://yuppnimrestreammum.akamaized.net/181224/smil:songdewtv.smil/playlist.m3u8?hdnts=st=1735898689~exp=1835898688~acl=*~hmac=f5fe24724fe05481e3841f9eb5ab8efdee0a3dd83645ae9dcf45703f525bab7b |
@@ -418,7 +418,7 @@
 | Working | Same | Sadhna Plus News | https://6n3yow8pl9ok-hls-live.5centscdn.com/sadhananewstv/live.stream/playlist.m3u8 | https://6n3yow8pl9ok-hls-live.5centscdn.com/sadhananewstv/live.stream/playlist.m3u8 |
 | Non-working | Same | Sahana News | https://mumt03.tangotv.in/Dsly5z3HSAHANANEWS/index.m3u8 | https://mumt03.tangotv.in/Dsly5z3HSAHANANEWS/index.m3u8 |
 | Working | Same | like Gecko) Chrome/147.0.0.0 Safari/537.36" group-title="News",Samachar Plus 24x7 | https://fta.ektv.in/live/589/master.m3u8 | https://fta.ektv.in/live/589/master.m3u8 |
-| Working | Same | Sony BBC Earth HD | http://116.90.120.149:8000/play/a130/index.m3u8 | http://116.90.120.149:8000/play/a130/index.m3u8 |
+| Non-working | Same | Sony BBC Earth HD | http://116.90.120.149:8000/play/a130/index.m3u8 | http://116.90.120.149:8000/play/a130/index.m3u8 |
 | Non-working | Same | Star Bharat (India) HD | http://103.135.253.32:8080/STAR-BHARAT/index.m3u8 | http://103.135.253.32:8080/STAR-BHARAT/index.m3u8 |
 | Non-working | Same | like Gecko) Chrome/147.0.0.0 Safari/537.36" group-title="News",STV Haryana News | https://fta.ektv.in/live/607/master.m3u8 | https://fta.ektv.in/live/607/master.m3u8 |
 | Working | Same | Sudarshan News | https://ott.livelegitpro.in/sudarshannews/sudarshannews/tracks-v1/index.fmp4.m3u8 | https://ott.livelegitpro.in/sudarshannews/sudarshannews/tracks-v1/index.fmp4.m3u8 |
@@ -428,7 +428,7 @@
 | Working | Same | The Voice TV | https://legitpro.co.in/thevoicetv/thevoicetv/index.m3u8 | https://legitpro.co.in/thevoicetv/thevoicetv/index.m3u8 |
 | Non-working | Same | Times Now (720p) | https://dztlhgid9me95.cloudfront.net/live-tv/Vidgyor/timesnow/timesnow_master.m3u8 | https://dztlhgid9me95.cloudfront.net/live-tv/Vidgyor/timesnow/timesnow_master.m3u8 |
 | Working | Same | Times Now Navbharat | https://d3qs3d2rkhfqrt.cloudfront.net/out/v1/a5ee7c4e7a2a4b15a22a3bcf523b9776/index.m3u8 | https://d3qs3d2rkhfqrt.cloudfront.net/out/v1/a5ee7c4e7a2a4b15a22a3bcf523b9776/index.m3u8 |
-| Working | Same | Times Now Navbharat HD | https://yupprestreamliveus.akamaized.net/v1/vglive-sk-717514/main.m3u8 | https://yupprestreamliveus.akamaized.net/v1/vglive-sk-717514/main.m3u8 |
+| Non-working | Same | Times Now Navbharat HD | https://yupprestreamliveus.akamaized.net/v1/vglive-sk-717514/main.m3u8 | https://yupprestreamliveus.akamaized.net/v1/vglive-sk-717514/main.m3u8 |
 | Working | Same | TNP News | https://server.thelegitpro.in/tnpnews/tnpnews/index.m3u8 | https://server.thelegitpro.in/tnpnews/tnpnews/index.m3u8 |
 | Working | Same | TTN24 | https://stream.joytvindia.com/stream/hls/ttn24/index.m3u8 | https://stream.joytvindia.com/stream/hls/ttn24/index.m3u8 |
 | Working | Same | TV7 Bharat | https://vglivessai.akamaized.net/sg/v1/master/611d79b11b77e2f571934fd80ca1413453772ac7/797fcff8-10d6-4c9c-a409-8d0c4fa5c8dd/index.m3u8 | https://vglivessai.akamaized.net/sg/v1/master/611d79b11b77e2f571934fd80ca1413453772ac7/797fcff8-10d6-4c9c-a409-8d0c4fa5c8dd/index.m3u8 |
@@ -464,12 +464,12 @@
 |---|---|---|---|---|
 | Working | Same | Astroscience | https://yuppnimrestreammum.akamaized.net/181224/smil:astrotech.smil/playlist.m3u8?hdnts=st=1735898689~exp=1835898688~acl=*~hmac=f5fe24724fe05481e3841f9eb5ab8efdee0a3dd83645ae9dcf45703f525bab7b | https://yuppnimrestreammum.akamaized.net/181224/smil:astrotech.smil/playlist.m3u8?hdnts=st=1735898689~exp=1835898688~acl=*~hmac=f5fe24724fe05481e3841f9eb5ab8efdee0a3dd83645ae9dcf45703f525bab7b |
 | Non-working | Same | Discovery Channel (India) HD | http://103.135.253.32:8080/DISCOVERY/index.m3u8 | http://103.135.253.32:8080/DISCOVERY/index.m3u8 |
-| Working | Same | Discovery Science | http://116.90.120.149:8000/play/a11b/index.m3u8 | http://116.90.120.149:8000/play/a11b/index.m3u8 |
-| Working | Same | History TV18 HD | http://116.90.120.149:8000/play/a12z/index.m3u8 | http://116.90.120.149:8000/play/a12z/index.m3u8 |
-| Working | Same | Investigation Discovery (India) | http://116.90.120.149:8000/play/a119/index.m3u8 | http://116.90.120.149:8000/play/a119/index.m3u8 |
-| Working | Same | National Geographic (India) HD | http://116.90.120.149:8000/play/a115/index.m3u8 | http://116.90.120.149:8000/play/a115/index.m3u8 |
-| Working | Same | National Geographic Wild (India) HD | http://116.90.120.149:8000/play/a11h/index.m3u8 | http://116.90.120.149:8000/play/a11h/index.m3u8 |
-| Working | Same | Discovery Turbo (India) | http://116.90.120.149:8000/play/a11d/index.m3u8 | http://116.90.120.149:8000/play/a11d/index.m3u8 |
+| Non-working | Same | Discovery Science | http://116.90.120.149:8000/play/a11b/index.m3u8 | http://116.90.120.149:8000/play/a11b/index.m3u8 |
+| Non-working | Same | History TV18 HD | http://116.90.120.149:8000/play/a12z/index.m3u8 | http://116.90.120.149:8000/play/a12z/index.m3u8 |
+| Non-working | Same | Investigation Discovery (India) | http://116.90.120.149:8000/play/a119/index.m3u8 | http://116.90.120.149:8000/play/a119/index.m3u8 |
+| Non-working | Same | National Geographic (India) HD | http://116.90.120.149:8000/play/a115/index.m3u8 | http://116.90.120.149:8000/play/a115/index.m3u8 |
+| Non-working | Same | National Geographic Wild (India) HD | http://116.90.120.149:8000/play/a11h/index.m3u8 | http://116.90.120.149:8000/play/a11h/index.m3u8 |
+| Non-working | Same | Discovery Turbo (India) | http://116.90.120.149:8000/play/a11d/index.m3u8 | http://116.90.120.149:8000/play/a11d/index.m3u8 |
 
 ## Sports
 
@@ -479,12 +479,12 @@
 | Working | Same | DD Sports HD | https://cdn.pishow.tv/ott/live/1161/master.m3u8 | https://cdn.pishow.tv/ott/live/1161/master.m3u8 |
 | Working | Same | Kabaddi 24x7 | https://samitaorigin.tangotv.in/KABADDI24X7/SAMITAORIGIN/index.m3u8 | https://samitaorigin.tangotv.in/KABADDI24X7/SAMITAORIGIN/index.m3u8 |
 | Working | Same | Sony Sports Ten 3 Hindi | https://r2.amml.in/sony-ten-3-hd/live.m3u8 | https://r2.amml.in/sony-ten-3-hd/live.m3u8 |
-| Working | Same | Star Sports 1 Hindi HD | http://116.90.120.149:8000/play/a122/index.m3u8 | http://116.90.120.149:8000/play/a122/index.m3u8 |
-| Working | Same | Star Sports 2 HD | http://116.90.120.149:8000/play/a120/index.m3u8 | http://116.90.120.149:8000/play/a120/index.m3u8 |
-| Working | Same | Unite8 Sports 1 | http://116.90.120.149:8000/play/a11l/index.m3u8 | http://116.90.120.149:8000/play/a11l/index.m3u8 |
-| Working | Same | Unite8 Sports 1 HD | http://116.90.120.149:8000/play/a125/index.m3u8 | http://116.90.120.149:8000/play/a125/index.m3u8 |
-| Working | Same | Star Sports 1 HD | http://116.90.120.149:8000/play/a11x/index.m3u8 | http://116.90.120.149:8000/play/a11x/index.m3u8 |
-| Working | Same | Unite8 Sports 2 HD | http://116.90.120.149:8000/play/a129/index.m3u8 | http://116.90.120.149:8000/play/a129/index.m3u8 |
+| Non-working | Same | Star Sports 1 Hindi HD | http://116.90.120.149:8000/play/a122/index.m3u8 | http://116.90.120.149:8000/play/a122/index.m3u8 |
+| Non-working | Same | Star Sports 2 HD | http://116.90.120.149:8000/play/a120/index.m3u8 | http://116.90.120.149:8000/play/a120/index.m3u8 |
+| Non-working | Same | Unite8 Sports 1 | http://116.90.120.149:8000/play/a11l/index.m3u8 | http://116.90.120.149:8000/play/a11l/index.m3u8 |
+| Non-working | Same | Unite8 Sports 1 HD | http://116.90.120.149:8000/play/a125/index.m3u8 | http://116.90.120.149:8000/play/a125/index.m3u8 |
+| Non-working | Same | Star Sports 1 HD | http://116.90.120.149:8000/play/a11x/index.m3u8 | http://116.90.120.149:8000/play/a11x/index.m3u8 |
+| Non-working | Same | Unite8 Sports 2 HD | http://116.90.120.149:8000/play/a129/index.m3u8 | http://116.90.120.149:8000/play/a129/index.m3u8 |
 | Non-working | Same | T Sports | https://tvsen5.aynaott.com/TnMn5kZz8aLm/index.m3u8 | https://tvsen5.aynaott.com/TnMn5kZz8aLm/index.m3u8 |
 | Working | Same | Cricket Gold | https://streams2.sofast.tv/ptnr-yupptv/title-cricketgold/v1/master/611d79b11b77e2f571934fd80ca1413453772ac7/b2048bb8-1686-4432-aa50-647245383e0c/manifest.m3u8 | https://streams2.sofast.tv/ptnr-yupptv/title-cricketgold/v1/master/611d79b11b77e2f571934fd80ca1413453772ac7/b2048bb8-1686-4432-aa50-647245383e0c/manifest.m3u8 |
 | Working | Same | Fox Sports 1 | http://85.237.89.160:9590/usa-s/FOX-SPORTS-1/index.m3u8 | http://85.237.89.160:9590/usa-s/FOX-SPORTS-1/index.m3u8 |
