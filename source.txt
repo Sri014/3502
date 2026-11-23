@@ -2,9 +2,9 @@ IPTV PLAYLIST SOURCE REPORT
 ===========================
 
 Source: https://iptv-org.github.io/iptv/index.m3u
-Total Channels: 1051
-Working Channels: 880
-Non-Working Channels: 171
+Total Channels: 1044
+Working Channels: 874
+Non-Working Channels: 170
 Indian Sony + Star Working: 16
 
 WORKING CHANNELS
@@ -48,7 +48,6 @@ Bansal News 4
 Bharat AtoZ
 Bharat Samachar
 Bharat Samachar 2
-Bharat Samachar 3
 Bharat24
 Bharat24 2
 Bharat24 4
@@ -56,6 +55,7 @@ Bharat24 5
 Bharat24 6
 BSTV
 BSTV 2
+BSTV 3
 BT TV
 C-10
 Cnews Bharat
@@ -159,7 +159,6 @@ NDTV Rajasthan 5
 NE News 2
 News 1 India
 News 1 India 3
-News 1 India 4
 News 11
 News 11 3
 News 11 4
@@ -217,6 +216,8 @@ Prime News
 Prime News 2
 Prime News 3
 Prime News 4
+Prudent Media
+Public First
 Republic Bharat
 Republic Bharat 2
 Republic Bharat 3
@@ -293,7 +294,6 @@ Zee Rajasthan
 Zee Uttar Pradesh/Uttarakhand
 Zee Uttar Pradesh/Uttarakhand 2
 All Time Movies 2
-All Time Movies 3
 B4U Bhojpuri
 B4U Bhojpuri 2
 B4U Bhojpuri 3
@@ -305,7 +305,6 @@ B4U Kadak 3
 B4U Kadak 4
 B4U Kadak 6
 B4U Kadak 7
-B4U Kadak 8
 B4U Movies
 B4U Movies 2
 B4U Movies 3
@@ -326,7 +325,6 @@ Goldmines
 Goldmines 2
 Goldmines 3
 Goldmines 4
-Goldmines 5
 Goldmines 2
 Goldmines Action 2
 Goldmines Bollywood
@@ -336,7 +334,6 @@ Goldmines Movies
 Goldmines Movies 2
 Goldmines Movies 3
 Goldmines Movies 4
-Goldmines Movies 5
 India Talkies
 Indywood TV
 Maha Movie
@@ -400,6 +397,7 @@ NH BollyRaga
 Sangeet Bhojpuri
 Sangeet Bhojpuri 3
 Songdew TV
+Steelbird Music
 YRF Music
 YRF Music 2
 Zoom
@@ -426,7 +424,6 @@ Dangal TV 2
 Dangal TV 4
 Dangal TV 5
 Dangal TV 6
-Dangal TV 7
 E 24 2
 Epic Bharat
 Epic Bharat 2
@@ -446,7 +443,6 @@ Manoranjan TV
 Manoranjan TV 2
 Manoranjan TV 4
 Manoranjan TV 5
-Manoranjan TV 6
 MH One Dil Se 2
 MH One Dil Se 3
 Pasand TV
@@ -454,13 +450,10 @@ Pasand TV 3
 Q TV
 Q TV 3
 Q TV 4
-Q TV 5
 Shemaroo TV
 Shemaroo TV 2
 Shemaroo TV 4
 Shemaroo TV 5
-Shemaroo TV 6
-Shemaroo TV 7
 Shemaroo Umang
 Shemaroo Umang 3
 Shemaroo Umang 4
@@ -471,6 +464,7 @@ Star Utsav
 Swastik Stories
 Unique TV
 Unique TV 3
+Zee TV
 Zingabad
 Ayush Next Communication Network
 BVG
@@ -560,7 +554,6 @@ Channel Divya 5
 Colors Rishtey Americas
 Dharm Sandesh
 Dharm Sandesh 3
-Dheeran TV
 Disha TV
 Diya TV
 Fateh TV
@@ -641,7 +634,8 @@ Shubh TV
 Shubh TV 3
 Sindh TV
 Sony KAL Hindi
-SVBC 4
+SVBC 4 2
+SVBC 4 3
 Swastik TV
 Taaza TV 2
 Tehzeeb TV
@@ -654,6 +648,7 @@ Vii MEDIA
 Vii MEDIA 2
 WeatherSpy
 Goldmines 2
+All Time Movies
 DD Himachal Pradesh
 DD National HD
 DD Sports HD
@@ -676,7 +671,6 @@ Raftaar Media
 Sansad TV 1
 DD India
 Epic Bhojpuri
-Sony Sports Ten 1
 Bharat Samachar
 Dhamaal (576p)
 Cricket Gold
@@ -695,7 +689,6 @@ Aastha HD
 Aastha International
 Aastha Bhajan
 Aadinath TV
-All Time Movies
 Anand TV (India)
 Apna Punjab TV (Canada)
 Ayush TV
@@ -846,6 +839,7 @@ Aastha UK
 Anand Wari TV
 Andy Haryana
 Fox Sports 2
+Sony Sports Ten 1
 Sony Sports Ten 5
 Star Sports 1 HD
 Cartoon Network HD+
@@ -896,6 +890,7 @@ NON-WORKING CHANNELS
 Aagaaz Times
 Bansal News
 Bharat Samachar
+Bharat Samachar 2
 CVR English
 First India News
 Good News Today
@@ -905,6 +900,7 @@ India News
 Kashish News
 NDTV India
 NDTV Rajasthan
+News 1 India
 News 24
 News 24 2
 News India 24x7
@@ -912,8 +908,6 @@ News Nation
 NewsX
 NewsX World
 Pratham News
-Prudent Media
-Public First 2
 Raj Pariwar
 Sadhna Plus News
 Sahana News
@@ -925,24 +919,18 @@ Vistaar News
 WION
 Zee Bharat 2
 Zee News
-&pictures
-&xplor HD
+All Time Movies
+B4U Kadak
 B4U Movies
+Goldmines
 Goldmines 2
 Goldmines Action
 Goldmines Bollywood
 Goldmines Bollywood 2
+Goldmines Movies
 MH One Movies
-MNX
-MNX 2
 Shubh Cinema TV
-Sony Max
 Sony Wah
-Star Gold
-Star Gold 2
-Star Gold Romance
-Star Gold Select
-Zee Classic
 Zee South Flix
 9X Jalwa
 9XM
@@ -953,26 +941,21 @@ Deewana HD
 Dhamaal
 Epic Music
 Mastiii
-MTV
 Music India
 Shemaroo Filmi Gaane
-Steelbird Music
 YRF Music
-Eurosport
-Eurosport 2
-Sony Sports Ten 1
-Sony Sports Ten 2
-Unite8 Sports 1
-Unite8 Sports 1 2
-Unite8 Sports 2
-&TV
 Captain 2
 Colors
 Colors 2
 Colors 3
 Dangal 2
 Dangal 2 2
+Dangal TV
 Hi Dost!
+Manoranjan TV
+Q TV
+Shemaroo TV
+Shemaroo TV 2
 Sony Entertainment Television
 Sony Pal
 Sony SAB
@@ -988,22 +971,14 @@ Zee Dil Se
 Zee Horror Nights
 Zee TV
 Zee TV 2
-Zee TV 3
-Discovery Turbo
 Food Food
 Food Food 2
-Investigation Discovery
-TLC
-Discovery Science
 Doraemon
 Nick HD+
-Nick Jr.
-Nick Jr. 2
-Nick Jr. 3
-Nick Jr. 4
 Shin-chan
 ET Now Swadesh
 Aradana TV
+Dheeran TV
 Harvest USA
 Hosanna TV
 Jan TV
@@ -1018,36 +993,54 @@ Sansad TV 1
 Shubh TV
 Sikh Ratnavali
 Soham TV
-SVBC 4 2
 Taaza TV
 Taaza TV 2
 VTU
 Zee Cine Classic
+Public First
+Sony Max HD
 TNT Sports 2
 TNT Sports 1
 Fox Sports
 TNT Sports 4
 TNT Sports 3
 Anmol TV
+Eurosport (India) HD
 PTV Sports
+Sony Sports Ten 2 HD
+Unite8 Sports 2 HD
+&pictures HD
+&xplor HD
 Foodxp
+Discovery Science
 Disney Channel (India) HD
 MTV (India)
-Public First
+Investigation Discovery (India)
+Nick Jr. (India)
+MTV (India) HD
 STV Haryana News
 Travelxp 4K HDR (2160p)
+Star Gold 2
+Star Gold HD
+Star Gold Romance
+Star Gold Select HD
 Animal Planet
+TLC (India) HD
 ET Now (720p)
 Fashion TV
 Disney Jr. (Turkiye) (1080p)
 Disney Jr. Latin America South HD
+Unite8 Sports 1
+Unite8 Sports 1 HD
 National Geographic (United Kingdom)
+Zee Classic
 National Geographic Wild (Romania)
 National Geographic Wild (Russia) HD
 National Geographic Wild (Ukraine)
 NickOnline Bob Esponja
 NickOnline HD
 CND Film Discovery Channel
+Discovery Turbo (India)
 Captain
 National Geographic (Finland) (720p)
 National Geographic (Netherlands) HD
@@ -1072,10 +1065,10 @@ Star Utsav Movies
 Sony Entertainment Television
 Sony Pal
 Star Utsav
-Sony Sports Ten 1
 Star Bharat (United Kingdom)
 StarPlus (United Kingdom)
 Sony Yay!
+Sony Sports Ten 1
 Sony Sports Ten 5
 Star Sports 1 HD
 Sony BBC Earth HD
