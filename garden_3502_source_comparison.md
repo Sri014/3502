@@ -43,7 +43,7 @@
 |---|---|---|---|---|
 | Working | Same | Aadinath TV | https://cdn.pishow.tv/ott/live/252/master.m3u8 | https://cdn.pishow.tv/ott/live/252/master.m3u8 |
 | Working | Same | Aastha | http://163.61.226.31:9981/stream/channelid/565086134?profile=pass | http://163.61.226.31:9981/stream/channelid/565086134?profile=pass |
-| Non-working | Same | Aastha HD | https://aasthaott.akamaized.net/110923/smil:aasthatv.smil/index.m3u8 | https://aasthaott.akamaized.net/110923/smil:aasthatv.smil/index.m3u8 |
+| Working | Same | Aastha HD | https://aasthaott.akamaized.net/110923/smil:aasthatv.smil/index.m3u8 | https://aasthaott.akamaized.net/110923/smil:aasthatv.smil/index.m3u8 |
 | Working | Same | Aastha UK | https://aasthaott.akamaized.net/110923/smil:aasthauk.smil/playlist.m3u8 | https://aasthaott.akamaized.net/110923/smil:aasthauk.smil/playlist.m3u8 |
 | Working | Same | Aastha Bhajan | https://d2lk5u59tns74c.cloudfront.net/out/v1/218f9e64bdce42369500e93cff50572f/index.m3u8 | https://d2lk5u59tns74c.cloudfront.net/out/v1/218f9e64bdce42369500e93cff50572f/index.m3u8 |
 | Working | Same | Aastha International | https://aasthaott.akamaized.net/110923/smil:aasthausa.smil/playlist.m3u8 | https://aasthaott.akamaized.net/110923/smil:aasthausa.smil/playlist.m3u8 |
@@ -112,7 +112,7 @@
 | Non-working | Same | Colors HD | http://103.135.253.32:8080/Color-HD/index.m3u8 | http://103.135.253.32:8080/Color-HD/index.m3u8 |
 | Working | Same | Colors MENA HD | https://da86m1sqpm3o0.cloudfront.net/28072023/smil:colorsme.smil/playlist.m3u8 | https://da86m1sqpm3o0.cloudfront.net/28072023/smil:colorsme.smil/playlist.m3u8 |
 | Working | Same | Colors Rishtey | http://163.61.226.31:9981/stream/channelid/297962113?profile=pass | http://163.61.226.31:9981/stream/channelid/297962113?profile=pass |
-| Non-working | Same | Colors Rishtey Americas | https://manatv.akamaized.net/090823/smil:ristheyamerica.smil/playlist.m3u8 | https://manatv.akamaized.net/090823/smil:ristheyamerica.smil/playlist.m3u8 |
+| Working | Same | Colors Rishtey Americas | https://manatv.akamaized.net/090823/smil:ristheyamerica.smil/playlist.m3u8 | https://manatv.akamaized.net/090823/smil:ristheyamerica.smil/playlist.m3u8 |
 | Working | Same | Dangal 2 | https://live-dangal2.akamaized.net/liveabr/playlist.m3u8 | https://live-dangal2.akamaized.net/liveabr/playlist.m3u8 |
 | Working | Same | Dangal TV | https://live-dangal.akamaized.net/liveabr/playlist.m3u8 | https://live-dangal.akamaized.net/liveabr/playlist.m3u8 |
 | Working | Same | DD Arun Prabha | https://cdn.pishow.tv/ott/live/32/master.m3u8 | https://cdn.pishow.tv/ott/live/32/master.m3u8 |
@@ -217,8 +217,8 @@
 |---|---|---|---|---|
 | Working | Same | &TV International | https://3f56f997.wurl.com/master/f36d25e7e52f1ba8d7e56eb859c636563214f541/U2Ftc3VuZy1nYl9BbmRUVl9ITFM/playlist.m3u8 | https://3f56f997.wurl.com/master/f36d25e7e52f1ba8d7e56eb859c636563214f541/U2Ftc3VuZy1nYl9BbmRUVl9ITFM/playlist.m3u8 |
 | Working | Same | like Gecko) Chrome/147.0.0.0 Safari/537.36" group-title="Movies",All Time Movies | https://fta.ektv.in/live/54/54_0.m3u8 | https://fta.ektv.in/live/54/54_0.m3u8 |
-| Working | Same | B4U Kadak | https://amg00877-b4unew-amg00877c4-xiaomi-in-5473.playouts.now.amagi.tv/playlist.m3u8 | https://amg00877-b4unew-amg00877c4-xiaomi-in-5473.playouts.now.amagi.tv/playlist.m3u8 |
-| Working | Same | B4U Movies | https://amg00877-b4unew-amg00877c2-xiaomi-in-5489.playouts.now.amagi.tv/playlist.m3u8 | https://amg00877-b4unew-amg00877c2-xiaomi-in-5489.playouts.now.amagi.tv/playlist.m3u8 |
+| Non-working | Same | B4U Kadak | https://amg00877-b4unew-amg00877c4-xiaomi-in-5473.playouts.now.amagi.tv/playlist.m3u8 | https://amg00877-b4unew-amg00877c4-xiaomi-in-5473.playouts.now.amagi.tv/playlist.m3u8 |
+| Non-working | Same | B4U Movies | https://amg00877-b4unew-amg00877c2-xiaomi-in-5489.playouts.now.amagi.tv/playlist.m3u8 | https://amg00877-b4unew-amg00877c2-xiaomi-in-5489.playouts.now.amagi.tv/playlist.m3u8 |
 | Working | Same | Bollygold | https://jmp2.uk/stvp-IN4000600Q | https://jmp2.uk/stvp-IN4000600Q |
 | Working | Same | Bollywood Classic Romania | https://hls02ns.antenaplay.ro/hls/bollywood-sd/index.m3u8 | https://hls02ns.antenaplay.ro/hls/bollywood-sd/index.m3u8 |
 | Working | Same | Bollywood HD Russia | https://xykt-fix.github.io/cinerama_edge01/hls/BOLLYWOOD_RU/Movie009.m3u8 | https://xykt-fix.github.io/cinerama_edge01/hls/BOLLYWOOD_RU/Movie009.m3u8 |
@@ -266,7 +266,7 @@
 | Working | Same | 9X Jalwa | https://wiselp.wiseplayout.com/9X_Jalwa/master.m3u8 | https://wiselp.wiseplayout.com/9X_Jalwa/master.m3u8 |
 | Non-working | Same | 9XM | https://9xjio.wiseplayout.com/9XM/master.m3u8 | https://9xjio.wiseplayout.com/9XM/master.m3u8 |
 | Non-working | Same | Andy Haryana | https://mumt03.tangotv.in/Dsly5z3HANDYHARYANA/index.m3u8 | https://mumt03.tangotv.in/Dsly5z3HANDYHARYANA/index.m3u8 |
-| Working | Same | B4U Music | https://amg00877-b4unew-amg00877c3-xiaomi-in-5474.playouts.now.amagi.tv/720p/index.m3u8 | https://amg00877-b4unew-amg00877c3-xiaomi-in-5474.playouts.now.amagi.tv/720p/index.m3u8 |
+| Non-working | Same | B4U Music | https://amg00877-b4unew-amg00877c3-xiaomi-in-5474.playouts.now.amagi.tv/720p/index.m3u8 | https://amg00877-b4unew-amg00877c3-xiaomi-in-5474.playouts.now.amagi.tv/720p/index.m3u8 |
 | Working | Same | Balle Balle | https://mcncdndigital.com/worldpunjabitv/index.m3u8 | https://mcncdndigital.com/worldpunjabitv/index.m3u8 |
 | Working | Same | Balle Balle HD | https://mcncdndigital.com/balleballetv/index.m3u8 | https://mcncdndigital.com/balleballetv/index.m3u8 |
 | Working | Same | Boogle Bollywood | https://yuppnimrestreammum.akamaized.net/181224/smil:bogglebollywood.smil/playlist.m3u8?hdnts=st=1735898689~exp=1835898688~acl=*~hmac=f5fe24724fe05481e3841f9eb5ab8efdee0a3dd83645ae9dcf45703f525bab7b | https://yuppnimrestreammum.akamaized.net/181224/smil:bogglebollywood.smil/playlist.m3u8?hdnts=st=1735898689~exp=1835898688~acl=*~hmac=f5fe24724fe05481e3841f9eb5ab8efdee0a3dd83645ae9dcf45703f525bab7b |
@@ -284,7 +284,7 @@
 | Working | Same | NH BollyRaga | https://jmp2.uk/stvp-IN460001373 | https://jmp2.uk/stvp-IN460001373 |
 | Working | Same | Songdew TV | https://yuppnimrestreammum.akamaized.net/181224/smil:songdewtv.smil/playlist.m3u8?hdnts=st=1735898689~exp=1835898688~acl=*~hmac=f5fe24724fe05481e3841f9eb5ab8efdee0a3dd83645ae9dcf45703f525bab7b | https://yuppnimrestreammum.akamaized.net/181224/smil:songdewtv.smil/playlist.m3u8?hdnts=st=1735898689~exp=1835898688~acl=*~hmac=f5fe24724fe05481e3841f9eb5ab8efdee0a3dd83645ae9dcf45703f525bab7b |
 | Working | Same | Steelbird Music (720p) | https://cdn2.in/SteelbirdMusicTVhls/live.m3u8 | https://cdn2.in/SteelbirdMusicTVhls/live.m3u8 |
-| Non-working | Same | Vision Beats | http://a-edge.bliscdn.com/Visionbeats/index.m3u8 | http://a-edge.bliscdn.com/Visionbeats/index.m3u8 |
+| Working | Same | Vision Beats | http://a-edge.bliscdn.com/Visionbeats/index.m3u8 | http://a-edge.bliscdn.com/Visionbeats/index.m3u8 |
 | Working | Same | YRF Music | https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg01412-xiaomiasia-yrfmusic-xiaomi/playlist.m3u8 | https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg01412-xiaomiasia-yrfmusic-xiaomi/playlist.m3u8 |
 | Working | Same | YRF Music Nepal | https://vidaa.kableone.com/hls/live/2111218/YrfMusic/1.m3u8 | https://vidaa.kableone.com/hls/live/2111218/YrfMusic/1.m3u8 |
 | Working | Same | Zoom (India) | https://dai.google.com/linear/hls/event/JCAm25qkRXiKcK1AJMlvKQ/master.m3u8 | https://dai.google.com/linear/hls/event/JCAm25qkRXiKcK1AJMlvKQ/master.m3u8 |

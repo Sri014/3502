@@ -17,17 +17,5 @@ https://raw.githubusercontent.com/amazeyourself/adaptive-streams/refs/heads/main
 https://d1rc86nwwc9fag.cloudfront.net/260723/starplusuk_2500/chunks.m3u8
 #EXTINF:-1 tvg-logo="https://dtil.tmsimg.com/assets/s159100_ld_h15_aa.png?lock=720x540" group-title="Non Jio" tvg-language="Hindi",Sony Yay!
 https://r2.amml.in/sony-yay/live.m3u8
-#EXTINF:-1 tvg-logo="https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/LIVETV_LIVETVCHANNEL_SONY_SPORTS_TEN_1/images/LOGO_HD/image.png" group-title="Sports" tvg-language="Sports",Sony Sports Ten 1
-http://116.90.120.149:8000/play/a11t/index.m3u8
-#EXTINF:-1 tvg-logo="https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/LIVETV_LIVETVCHANNEL_SONY_SPORTS_TEN_5/images/LOGO_HD/image.png" group-title="Sports" tvg-language="Sports",Sony Sports Ten 5
-http://116.90.120.149:8000/play/a117/index.m3u8
-#EXTINF:-1 tvg-logo="https://i.imgur.com/E5jjKHI.png" group-title="Non Jio" tvg-language="Sports",Star Sports 1 HD
-http://116.90.120.149:8000/play/a11x/index.m3u8
-#EXTINF:-1 tvg-logo="https://dtil.tmsimg.com/assets/s143800_ld_h15_aa.png?lock=720x540" group-title="Non Jio" tvg-language="Hindi",Sony BBC Earth HD
-http://116.90.120.149:8000/play/a130/index.m3u8
-#EXTINF:-1 tvg-logo="https://i.postimg.cc/Z5G8j67L/PIX-HD-WHITE.png" group-title="Non Jio" tvg-language="Hindi",Sony Pix HD
-http://116.90.120.149:8000/play/a138/index.m3u8
-#EXTINF:-1 tvg-logo="https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/LIVETV_LIVETVCHANNEL_STAR_SPORTS_2/images/LOGO_HD/image.png" group-title="Non Jio" tvg-language="Hindi",Star Sports 2 HD
-http://116.90.120.149:8000/play/a120/index.m3u8
 #EXTINF:-1 tvg-name="Star Sports Khel" tvg-logo="https://i.imgur.com/FtRT73R.png" group-title="Sports",Star Sports Khel
 http://103.175.73.12:8080/live/151/151_0.m3u8
