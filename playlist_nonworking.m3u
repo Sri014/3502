@@ -3,8 +3,8 @@
 https://8yzmq2gbdvax-hls-live.wmncdn.net/bansalnewstv1/live1.stream/playlist.m3u8
 #EXTINF:-1 tvg-id="BharatSamachar.in" tvg-name="Bharat Samachar" tvg-logo="https://ltsk-cdn.s3.eu-west-1.amazonaws.com/jumpstart/Temp_Live/cdn/HLS/Channel/transparentImages/9ff26e4cd19e2f6c3ad7de6b58c0326d.jpg" group-title="News",Bharat Samachar
 https://mumt03.tangotv.in/Dsly5z3HBHARATSAMACHAR/index.m3u8
-#EXTINF:-1 tvg-id="BharatSamachar.in" tvg-name="Bharat Samachar 2" tvg-logo="https://ltsk-cdn.s3.eu-west-1.amazonaws.com/jumpstart/Temp_Live/cdn/HLS/Channel/transparentImages/9ff26e4cd19e2f6c3ad7de6b58c0326d.jpg" group-title="News",Bharat Samachar 2
-https://tvsen3.aynaott.com/m94BZDYb/index.m3u8
+#EXTINF:-1 tvg-id="CNNNews18.in" tvg-name="CNN News 18" tvg-logo="https://ltsk-cdn.s3.eu-west-1.amazonaws.com/jumpstart/Temp_Live/cdn/HLS/Channel/transparentImages/CNN%20News18.png" group-title="News",CNN News 18
+https://n18syndication.akamaized.net/bpk-tv/CNN_News18_NW18_MOB/output01/master.m3u8
 #EXTINF:-1 tvg-id="CVREnglish.in" tvg-name="CVR English" tvg-logo="https://i.imgur.com/k0WTQKi.png" group-title="News",CVR English
 https://mumt03.tangotv.in/Dsly5z3HCVRNEWSENGLISH/index.m3u8
 #EXTINF:-1 tvg-id="FirstIndiaNews.in" tvg-name="First India News" tvg-logo="https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/LIVETV_LIVETVCHANNEL_FIRST_INDIA_NEWS_RAJASTHAN/images/LOGO_HD/image.png" group-title="News",First India News
@@ -15,6 +15,8 @@ https://aajtaklive.vgcdn.net/v1/master/611d79b11b77e2f571934fd80ca1413453772ac7/
 https://tvsen7.aynaott.com/HindiKhabar/index.m3u8
 #EXTINF:-1 tvg-id="IBC24.in" tvg-name="IBC 24" tvg-logo="https://dtil.tmsimg.com/assets/s143156_ld_h6_aa.png?lock=720x540" group-title="News",IBC 24
 https://mumt03.tangotv.in/Dsly5z3HC10/index.m3u8
+#EXTINF:-1 tvg-id="IBC24.in" tvg-name="IBC 24 2" tvg-logo="https://dtil.tmsimg.com/assets/s143156_ld_h6_aa.png?lock=720x540" group-title="News",IBC 24 2
+https://ott-prasar.ibc24.in/livestream.m3u8
 #EXTINF:-1 tvg-id="IndiaNews.in" tvg-name="India News" tvg-logo="https://ltsk-cdn.s3.eu-west-1.amazonaws.com/jumpstart/Temp_Live/cdn/HLS/Channel/transparentImages/India%20News.png" group-title="News",India News
 https://mumt03.tangotv.in/Dsly5z3HINDIANEWS/index.m3u8
 #EXTINF:-1 tvg-id="NDTVIndia.in" tvg-name="NDTV India" tvg-logo="https://dtil.tmsimg.com/assets/s157588_ld_h15_aa.png?lock=720x540" group-title="News",NDTV India
@@ -41,8 +43,6 @@ https://mumt03.tangotv.in/Dsly5z3HSHUBHSANDESH/index.m3u8
 https://mumt03.tangotv.in/Dsly5z3HSWADESHNEWS/index.m3u8
 #EXTINF:-1 tvg-id="TimesNowNavbharat.in" tvg-name="Times Now Navbharat 2" tvg-logo="https://ltsk-cdn.s3.eu-west-1.amazonaws.com/jumpstart/Temp_Live/cdn/HLS/Channel/transparentImages/NAV-BHARAT-HD-Transpatrnt.png" group-title="News",Times Now Navbharat 2
 https://mumt03.tangotv.in/Dsly5z3HTIMESNOWNAVBHARAT/index.m3u8
-#EXTINF:-1 tvg-id="TV7National.in" tvg-name="TV7 National" tvg-logo="https://d3jnkp3lrs2hd5.cloudfront.net/images/100x100/52ac91e7-2c9d-415b-a63f-fb41413105ff.jpg" group-title="News",TV7 National
-https://stream.ottlive.co.in/tv7national/index.m3u8
 #EXTINF:-1 tvg-id="VistaarNews.in" tvg-name="Vistaar News" tvg-logo="https://ltsk-cdn.s3.eu-west-1.amazonaws.com/jumpstart/Temp_Live/cdn/HLS/Channel/transparentImages/Vistaar-Logo_2000_X_1125_Transpharent.png" group-title="News",Vistaar News
 https://vistaarnews.com/livetv-stream/test.m3u8
 #EXTINF:-1 tvg-id="WION.in" tvg-name="WION" tvg-logo="https://xstreamcp-assets-msp.streamready.in/assets/ZEEDIGITAL/LIVECHANNEL/67ed357bd88a5f7a856b6fbb/images/LOGO/LOGO_14l9kmNae_WION-(2).png" group-title="News",WION
@@ -51,8 +51,6 @@ https://wion-klowdtv.amagi.tv/playlist.m3u8
 https://mumt03.tangotv.in/Dsly5z3HZEEBHARAT/index.m3u8
 #EXTINF:-1 tvg-id="ZeeNews.in" tvg-name="Zee News" tvg-logo="https://image.airtel.tv/grandslam/content/2025_06_17/LOGO_X99oIa_Fm_Znews_logo-for-larg.png" group-title="News",Zee News
 https://mumt07.tangotv.in/zHjX9OFlZEENEWS/index.m3u8
-#EXTINF:-1 tvg-id="AllTimeMovies.in" tvg-name="All Time Movies" tvg-logo="https://yt3.googleusercontent.com/U4INXhwmEUOABHoemQBpI6C9t4jb9iBmDvZ3ZT3lAb9Au_jVl32NL8XDpy-9cBjRJ2LP69Ovzg=s900-c-k-c0x00ffffff-no-rj" group-title="Movies",All Time Movies
-https://tvsen6.aynaott.com/a2cKGQtB/index.m3u8
 #EXTINF:-1 tvg-id="B4UKadak.in" tvg-name="B4U Kadak" tvg-logo="https://ltsk-cdn.s3.eu-west-1.amazonaws.com/jumpstart/Temp_Live/cdn/HLS/Channel/transparentImages/B4U-Kadak-BLACK-transparent.png" group-title="Movies",B4U Kadak
 https://amg00877-b4unew-amg00877c4-xiaomi-in-5473.playouts.now.amagi.tv/playlist.m3u8
 #EXTINF:-1 tvg-id="B4UMovies.in" tvg-name="B4U Movies" tvg-logo="https://dtil.tmsimg.com/assets/s140063_ld_h9_aa.png?lock=720x540" group-title="Movies",B4U Movies
@@ -84,6 +82,8 @@ https://amg00877-b4unew-amg00877c3-xiaomi-in-5474.playouts.now.amagi.tv/playlist
 #EXTINF:-1 tvg-id="B4UMusic.in" tvg-name="B4U Music 3" tvg-logo="https://dtil.tmsimg.com/assets/s158141_ld_h15_aa.png?lock=720x540" group-title="Music",B4U Music 3
 https://mumt04.tangotv.in/m18aqlK4B4UMUSIC/index.m3u8
 #EXTINF:-1 tvg-id="B4UMusic.in" tvg-name="B4U Music 4" tvg-logo="https://dtil.tmsimg.com/assets/s158141_ld_h15_aa.png?lock=720x540" group-title="Music",B4U Music 4
+https://streams.tangotv.in/B4UMUSIC/ORIGIN/index.m3u8
+#EXTINF:-1 tvg-id="B4UMusic.in" tvg-name="B4U Music 5" tvg-logo="https://dtil.tmsimg.com/assets/s158141_ld_h15_aa.png?lock=720x540" group-title="Music",B4U Music 5
 https://tvsen3.aynaott.com/8m7Vmh3K/index.m3u8
 #EXTINF:-1 tvg-id="Mastiii.in" tvg-name="Mastiii" tvg-logo="https://i.imgur.com/lxgXHx4.png" group-title="Music",Mastiii
 https://tvsen3.aynaott.com/er7jmpVF/index.m3u8
@@ -95,8 +95,6 @@ https://prod-runn.cdn.runn.tv/shemaroo/stream/smrfgn/playlist.m3u8
 https://d14c63magvk61v.cloudfront.net/strm/channels/yrfmusic/master.m3u8
 #EXTINF:-1 tvg-id="Dangal2.in" tvg-name="Dangal 2" tvg-logo="https://i.imgur.com/BEr1r7L.png" group-title="Entertainment",Dangal 2
 https://mumt03.tangotv.in/Dsly5z3HDANGAL2/index.m3u8
-#EXTINF:-1 tvg-id="Dangal2.in" tvg-name="Dangal 2 2" tvg-logo="https://i.imgur.com/BEr1r7L.png" group-title="Entertainment",Dangal 2 2
-https://tvsen3.aynaott.com/8KfZvBYS/index.m3u8
 #EXTINF:-1 tvg-id="HiDost.in" tvg-name="Hi Dost!" tvg-logo="https://i.imgur.com/bnST6y5.png" group-title="Entertainment",Hi Dost!
 https://mumt03.tangotv.in/Dsly5z3HHIDOST/index.m3u8
 #EXTINF:-1 tvg-id="ZeeComedyNation.in" tvg-name="Zee Comedy Nation" tvg-logo="https://tvpnlogopus.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/IN2100002GD_20260325T012327SQUARE.png" group-title="Entertainment",Zee Comedy Nation
@@ -129,11 +127,13 @@ https://mumt03.tangotv.in/Dsly5z3HJINVANI/index.m3u8
 http://103.154.3.101:5001/live/960.m3u8
 #EXTINF:-1 tvg-id="JusOne.us" tvg-name="Jus One" tvg-logo="https://i.imgur.com/8NutGr2.png" group-title="Non Jio",Jus One
 http://103.154.3.101:5001/live/961.m3u8
+#EXTINF:-1 tvg-id="MangalmayTV.in" tvg-name="Mangalmay TV" tvg-logo="https://jiotvimages.cdn.jio.com/dare_images/images/Mangalmaylive.png" group-title="Non Jio",Mangalmay TV
+https://yupplivegcpusa.yuppcdn.net/100823/mangalmay_1800/playlist.m3u8?hdnts=st=1735898689~exp=1835898688~acl=*~hmac=f5fe24724fe05481e3841f9eb5ab8efdee0a3dd83645ae9dcf45703f525bab7b
 #EXTINF:-1 tvg-id="MercyTV.in" tvg-name="Mercy TV" tvg-logo="https://i.imgur.com/klNH4tV.png" group-title="Non Jio",Mercy TV
-https://5dd3981940faa.streamlock.net/mercytv/mercytv/playlist.m3u8
-#EXTINF:-1 tvg-id="MercyTV.in" tvg-name="Mercy TV 2" tvg-logo="https://i.imgur.com/klNH4tV.png" group-title="Non Jio",Mercy TV 2
 https://mumt03.tangotv.in/Dsly5z3HMERCYTV/index.m3u8
 #EXTINF:-1 tvg-id="PeaceofMindTV.in" tvg-name="Peace of Mind TV" tvg-logo="https://dtil.tmsimg.com/assets/s143646_ld_h15_aa.png?lock=720x540" group-title="Non Jio",Peace of Mind TV
+https://mumbai-edge.smartplaytv.in/PeaceOfMind/index.m3u8
+#EXTINF:-1 tvg-id="PeaceofMindTV.in" tvg-name="Peace of Mind TV 2" tvg-logo="https://dtil.tmsimg.com/assets/s143646_ld_h15_aa.png?lock=720x540" group-title="Non Jio",Peace of Mind TV 2
 https://mumt03.tangotv.in/Dsly5z3HPEACEOFMIND/index.m3u8
 #EXTINF:-1 tvg-id="PrarthanaBhawanTV.in" tvg-name="Prarthana Bhawan TV" tvg-logo="https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/LIVETV_LIVETVCHANNEL_PRARTHANA_BHAWAN/images/LOGO_HD/image.png" group-title="Non Jio",Prarthana Bhawan TV
 https://mumt03.tangotv.in/Dsly5z3HPRATHANABHAWAN/index.m3u8
@@ -145,56 +145,40 @@ https://mumt03.tangotv.in/Dsly5z3HSHUBHTV/index.m3u8
 https://livetv.kableone.com/hls/live/2111218/SikhRatnavali/master.m3u8
 #EXTINF:-1 tvg-id="SohamTV.in" tvg-name="Soham TV" tvg-logo="https://i.imgur.com/cpedJ0L.png" group-title="Non Jio",Soham TV
 https://mumt03.tangotv.in/Dsly5z3HSOHAMTV/index.m3u8
+#EXTINF:-1 tvg-id="SwastikTV.in" tvg-name="Swastik TV" tvg-logo="https://jiotvimages.cdn.jio.com/dare_images/images/swastiktv.png" group-title="Non Jio",Swastik TV
+https://server.playontv.in/swastiktv/index.m3u8
 #EXTINF:-1 tvg-id="TaazaTV.in" tvg-name="Taaza TV" tvg-logo="https://i.imgur.com/4nTpQLC.png" group-title="Non Jio",Taaza TV
-https://tvsen3.aynaott.com/yRMLky2j/index.m3u8
-#EXTINF:-1 tvg-id="TaazaTV.in" tvg-name="Taaza TV 2" tvg-logo="https://i.imgur.com/4nTpQLC.png" group-title="Non Jio",Taaza TV 2
 https://tvsen7.aynaott.com/TaazaTV/index.m3u8
+#EXTINF:-1 tvg-id="ViiMEDIA.in" tvg-name="Vii MEDIA" tvg-logo="https://yt3.googleusercontent.com/UYTVPDOHTs9b-v1h2pAUHC_e8I_QRTUITTutft_5hOGC2YLL2-jtgD0xaSWZGOfWjmXKjL3AexE=s1200" group-title="Non Jio",Vii MEDIA
+https://viimediacdn.wiseplayout.com/viimedia/master.m3u8
 #EXTINF:-1 tvg-id="VTU.in" tvg-name="VTU" tvg-logo="https://i.imgur.com/zMwZRGJ.png" group-title="Non Jio",VTU
 https://lbgo.bozztv.com/ssh101/ssh101/afghantheatretv/playlist.m3u8
 #EXTINF:-1 tvg-id="ZeeCineClassic.in" tvg-name="Zee Cine Classic" tvg-logo="https://tvpnlogopus.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/IN21000014R_20260325T012324SQUARE.png" group-title="Non Jio",Zee Cine Classic
 https://amg00862-amg00862c8-amgplt0173.playout.now3.amagi.tv/playlist/amg00862-amg00862c8-amgplt0173/playlist.m3u8
-#EXTINF:-1 tvg-logo="https://i.imgur.com/M8uCJ0D.png" group-title="Entertainment" tvg-language="Hindi",Colors HD
-http://103.135.253.32:8080/Color-HD/index.m3u8
 #EXTINF:-1 tvg-logo="https://github.com/tv-logo/tv-logos/blob/main/countries/united-kingdom/tnt-sports-1-uk.png?raw=true" group-title="Non Jio" tvg-language="Sports",TNT Sports 1
 http://37.49.224.5/stream/1/index.m3u8
+#EXTINF:-1 tvg-logo="https://github.com/tv-logo/tv-logos/blob/main/countries/united-kingdom/tnt-sports-3-uk.png?raw=true" group-title="Non Jio" tvg-language="Sports",TNT Sports 3
+http://37.49.224.5/stream/3/index.m3u8
 #EXTINF:-1 tvg-logo="https://github.com/tv-logo/tv-logos/blob/main/countries/united-kingdom/tnt-sports-2-uk.png?raw=true" group-title="Non Jio" tvg-language="Sports",TNT Sports 2
 http://37.49.224.5/stream/2/index.m3u8
 #EXTINF:-1 tvg-logo="https://github.com/tv-logo/tv-logos/blob/main/countries/united-kingdom/tnt-sports-4-uk.png?raw=true" group-title="Non Jio" tvg-language="Sports",TNT Sports 4
 http://37.49.224.5/stream/4/index.m3u8
-#EXTINF:-1 tvg-logo="https://github.com/tv-logo/tv-logos/blob/main/countries/united-kingdom/tnt-sports-3-uk.png?raw=true" group-title="Non Jio" tvg-language="Sports",TNT Sports 3
-http://37.49.224.5/stream/3/index.m3u8
-#EXTINF:-1 tvg-logo="https://jiotvimages.cdn.jio.com/dare_images/images/22Scope_News.png" group-title="Non Jio" tvg-language="Hindi",22Scope News
-https://thelegitpro.in/HDlive/22scope/index.fmp4.m3u8
-#EXTINF:-1 tvg-logo="https://jiotvimages.cdn.jio.com/dare_images/images/aagaaztimes.png" group-title="Non Jio" tvg-language="Hindi",Aagaaz Times
-https://live1.ottlive.co.in/aagaaztimes/index.m3u8
-#EXTINF:-1 tvg-logo="https://dtil.tmsimg.com/assets/GNLZZGG00260HWS.png?lock=720x540" group-title="Non Jio" tvg-language="Hindi",Anmol TV
-https://fta.ektv.in/live/256/master.m3u8
-#EXTINF:-1 tvg-logo="https://i.imgur.com/xIYITQ9.png" group-title="Non Jio" tvg-language="Hindi",Deewana HD
-https://live20.bozztv.com/giatvplayout7/giatv-209592/index.m3u8
+#EXTINF:-1 tvg-logo="https://i.imgur.com/IqgrV92.png" group-title="Non Jio" tvg-language="Hindi",Aastha HD
+https://aasthaott.akamaized.net/110923/smil:aasthatv.smil/index.m3u8
 #EXTINF:-1 tvg-logo="https://i.imgur.com/CPm6GHA.png" group-title="Non Jio" tvg-language="Sports",PTV Sports
 http://103.250.28.74:8000/play/a019/index.m3u8
 #EXTINF:-1 tvg-logo="https://i.imgur.com/zOWog5j.png" group-title="Non Jio" tvg-language="Hindi",Foodxp
 https://techtraveleat.in/stream.m3u8?id=foodxp
 #EXTINF:-1 tvg-logo="https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/LIVETV_LIVETVCHANNEL_MTV/images/LOGO_HD/image.png" group-title="Non Jio" tvg-language="Hindi",MTV (India) HD
 https://maamusic.keralive.workers.dev/out/v1/a797c00cba954265ba781f92a57e2cf5/index.m3u8
-#EXTINF:-1 tvg-logo="https://i.imgur.com/Q8ajPij.png" group-title="Non Jio" tvg-language="Hindi",Star Bharat (India) HD
-http://103.135.253.32:8080/STAR-BHARAT/index.m3u8
-#EXTINF:-1 tvg-logo="https://i.imgur.com/TJRZo9e.png" group-title="Non Jio" tvg-language="Hindi",STV Haryana News
-https://fta.ektv.in/live/607/master.m3u8
 #EXTINF:-1 tvg-logo="https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/LIVETV_LIVETVCHANNEL_TRAVELXP/images/LOGO_HD/image.png" group-title="Non Jio" tvg-language="Hindi",Travelxp 4K HDR (2160p)
 https://deltatesttatasky.akamaized.net/out/i/968284.m3u8
-#EXTINF:-1 tvg-logo="https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/LIVETV_LIVETVCHANNEL_VIP_NEWS/images/LOGO_HD/image.png" group-title="Non Jio" tvg-language="Hindi",VIP News
-https://live.vipnews24x7.co.in/vipnews24x7/d0dbe915091d400bd8ee7f27f0791303.sdp/playlist.m3u8
 #EXTINF:-1 tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/2018_Animal_Planet_logo.svg/512px-2018_Animal_Planet_logo.svg.png" group-title="Non Jio" tvg-language="English",Animal Planet
 https://cdn-1.pishow.tv/live/1211/master.m3u8
-#EXTINF:-1 tvg-logo="https://dtil.tmsimg.com/assets/s159099_ld_h15_ab.png?lock=720x540" group-title="Non Jio" tvg-language="Hindi",Sony SAB HD
-http://116.90.120.149:8000/play/a128/index.m3u8
 #EXTINF:-1 tvg-logo="https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/LIVETV_LIVETVCHANNEL_ET_NOW/images/LOGO_HD/image.png" group-title="Non Jio" tvg-language="English",ET Now (720p)
 https://dztlhgid9me95.cloudfront.net/live-tv/Vidgyor/etnow/etnow_master.m3u8
 #EXTINF:-1 tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Fashion_TV_logo.svg/512px-Fashion_TV_logo.svg.png" group-title="Non Jio" tvg-language="English",Fashion TV
 https://fash1043.cloudycdn.services/slive/_definst_/ftv_ftv_midnite_seoul_1_1_1080p_1_hls.smil/playlist.m3u8
-#EXTINF:-1 tvg-logo="https://i.imgur.com/xWxNy3L.png" group-title="Non Jio" tvg-language="Hindi",StarPlus (India) HD
-http://66.102.126.10:8000/play/a008/index.m3u8
 #EXTINF:-1 tvg-logo="https://www.dsmart.com.tr/api/v1/public/images/kanallar/disneyjr.png" group-title="Non Jio" tvg-language="English",Disney Jr. (Turkiye) (1080p)
 https://saran-live.ercdn.net/disneyjunior/index.m3u8
 #EXTINF:-1 tvg-logo="https://upload.wikimedia.org/wikipedia/commons/e/e3/2024_Disney_Jr._Logo.svg" group-title="Non Jio" tvg-language="English",Disney Jr. Latin America South HD
@@ -207,18 +191,14 @@ https://flash1.bogulus1.cfd/wild/usergenr9qsi5gt.m3u8
 http://dtv.vol.net.ua/Nat-Geo-Wild_HD/index.m3u8
 #EXTINF:-1 tvg-logo="https://x1colegal.com/logo.png" group-title="Non Jio" tvg-language="English",NickOnline HD
 https://x1colegal.com/hls/stream.m3u8
-#EXTINF:-1 tvg-logo="https://x1colegal.com/nickonlinebobesponja.png" group-title="Non Jio" tvg-language="English",NickOnline Bob Esponja
-https://bob.x1colegal.com/hls/stream.m3u8
 #EXTINF:-1 tvg-logo="https://i.imgur.com/2FJfPDx.png" group-title="Non Jio" tvg-language="English",CND Film Discovery Channel
 http://125.210.152.18:9090/live/FXZL_750.m3u8
-#EXTINF:-1 tvg-logo="https://dtil.tmsimg.com/assets/GNLZZGG0029CNNM.png?lock=720x540" group-title="Non Jio" tvg-language="Bhojpuri",Captain
-https://fta.ektv.in/live/173/master.m3u8
+#EXTINF:-1 tvg-logo="https://x1colegal.com/nickonlinebobesponja.png" group-title="Non Jio" tvg-language="English",NickOnline Bob Esponja
+https://bob.x1colegal.com/hls/stream.m3u8
 #EXTINF:-1 tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Natgeologo.svg/960px-Natgeologo.svg.png" group-title="Non Jio" tvg-language="English",National Geographic (Finland) (720p)
 https://live-fi.tvkaista.net/national-geographic/live.m3u8?hd=true
 #EXTINF:-1 tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Natgeologo.svg/960px-Natgeologo.svg.png" group-title="Non Jio" tvg-language="English",National Geographic (Netherlands) HD
 http://46.32.176.50/NationalGeographicHD/index.m3u8
-#EXTINF:-1 tvg-logo="https://dtil.tmsimg.com/assets/s159121_ld_h15_aa.png?lock=720x540" group-title="Non Jio" tvg-language="English",Nick HD+
-http://116.90.120.149:8000/play/a11j/index.m3u8
 #EXTINF:-1 tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Natgeologo.svg/960px-Natgeologo.svg.png" group-title="Non Jio" tvg-language="English",National Geographic (Turkiye)
 https://nord.ayakkabiparti.lol/natgeo/index.m3u8
 #EXTINF:-1 tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/National_Geographic_Wild_logo.svg/960px-National_Geographic_Wild_logo.svg.png" group-title="Non Jio" tvg-language="English",National Geographic Wild (Turkiye)
